@@ -11,7 +11,7 @@ if(role == null){
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Executive Ledger Login</title>
+<title>Login Page</title>
 
 <!-- Tailwind CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
