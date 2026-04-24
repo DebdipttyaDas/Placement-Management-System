@@ -3,6 +3,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.annotation.WebServlet;
+
+@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -18,6 +22,9 @@ public class LoginServlet extends HttpServlet {
         if ("admin".equals(role)) {
 
             if ("admin".equals(email) && "admin".equals(password)) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", email);
+                session.setAttribute("role", role);
                 response.sendRedirect("admin_dashboard.jsp");
             } else {
                 request.setAttribute("error", "Invalid admin credentials");
@@ -32,6 +39,9 @@ public class LoginServlet extends HttpServlet {
         else if ("student".equals(role)) {
 
             if (isValidStudent(email, password)) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", email);
+                session.setAttribute("role", role);
                 response.sendRedirect("student_dashboard.jsp");
             } else {
                 request.setAttribute("error", "Invalid student credentials");
@@ -45,6 +55,9 @@ public class LoginServlet extends HttpServlet {
         else if ("company".equals(role)) {
 
             if (isValidCompany(email, password)) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", email);
+                session.setAttribute("role", role);
                 response.sendRedirect("company_dashboard.jsp");
             } else {
                 request.setAttribute("error", "Invalid company credentials");
