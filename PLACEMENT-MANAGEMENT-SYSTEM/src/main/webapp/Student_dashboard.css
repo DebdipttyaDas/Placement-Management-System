@@ -1,0 +1,186 @@
+/* ===== RESET ===== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+}
+
+/* ===== DASHBOARD LAYOUT ===== */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===== SIDEBAR LEFT===== */
+.sidebar {
+  width: 220px;
+  background: #52739f;
+  color: white;
+  padding: 15px;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 10px;
+  margin: 10px 0;
+  background: rgba(255,255,255,0.08);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebar ul li:hover {
+  background: rgba(11, 0, 0, 0.2);
+}
+/* ===== MAIN AREA ===== */
+.main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== TOP BAR ===== */
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 20px;
+  background: #173a5e;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* ===== BODY CONTENT ===== */
+.content {
+  padding: 20px;
+}
+
+/* ===== WELCOME BOX ===== */
+.welcome-box {
+  background: #b5dbddf3;
+  padding: 8px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 3px 10px rgba(105, 100, 100, 0.894);
+}
+
+/* ===== STATS CARDS ===== */
+.stats {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  flex: 1;
+  background: #b5dbddf3;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  border: 5px solid #197bbded;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(105, 100, 100, 0.894);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* three cards with different colors */
+.card:nth-child(1) { background: #0b2660; }
+.card:nth-child(2) { background: #0b2660; }
+.card:nth-child(3) { background: #0b2660; }
+
+/* COMPANY INSIGHTS SECTION */
+.insights-container {
+    background-color: #b5dbddf3; 
+    border-radius: 15px;
+    width: 91%;
+    padding:50px 50px;
+    margin: 30px auto;
+    font-family: sans-serif;
+}
+
+.section-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: hsl(0, 0%, 0%);
+}
+
+/* Grid to put cards side-by-side */
+ .insights-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 20px;   
+    column-gap: 20px;
+}
+
+
+/* Individual Card */
+.company-card {
+    margin-bottom: 20px;
+    background-color: #110447e0;
+    border-radius: 12px;
+    padding: 10px;
+    flex: 3;
+    min-width: 100px;
+    max-height: 200px;
+    display: flex;
+    align-items: center;
+    border: 5px solid #197bbded;
+}
+
+/* COMPANY ICON */
+.company-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    margin-right: 15px;
+    font-size: 20px;
+    flex-shrink: 0; 
+}
+
+/* 4 COMPANY ICON COLORS */
+.color-google { background-color: #cbcb13; }
+.color-microsoft { background-color: #00A4EF; }
+.color-amazon { background-color: #ff9900; }
+.color-Deloitte { background-color: #22e145; }
+
+/* Text Styles */
+.company-header {
+    margin: 0;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.detail-text {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+/* ===== LIST BOX ===== */
+.list-box {
+  margin-top: 20px;
+  background: #b5dbddf3;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgb(100, 97, 97);
+}
+
+.list-box ul {
+  padding-left: 20px;
+}
