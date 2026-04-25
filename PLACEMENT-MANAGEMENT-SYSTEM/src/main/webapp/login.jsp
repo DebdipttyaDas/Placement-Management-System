@@ -10,6 +10,7 @@
 <!-- External CSS -->
 <link rel="stylesheet" href="B.css">
 
+
 </head>
 
 <body class="h-screen flex flex-col relative">
@@ -78,7 +79,8 @@
 
       <!-- Button -->
 <button class="w-full mt-3 py-2 rounded-lg bg-blue-900 text-white hover:scale-105 transition">
-  Access Portal â†’
+  ACCESS PORTAL &#8594;
+  †’
 </button>
 
       <!-- Footer -->
