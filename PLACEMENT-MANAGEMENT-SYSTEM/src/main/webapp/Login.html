@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>User Login</title>
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- External CSS -->
+<link rel="stylesheet" href="Login.css">
+
+</head>
+
+<body class="h-screen flex flex-col relative">
+
+<div class="min-h-screen bg-[#cefad0]">
+  <div class="relative z-10 flex flex-col h-full">
+
+<!-- Navbar -->
+<header class="flex justify-between items-center px-10 py-4 bg-[#06473e]">
+
+  <!-- Logo -->
+  <h1 class="text-3xl font-bold text-[#ffffff] tracking-wide transition duration-300 hover:scale-105 hover:text-[#ffffff]">
+    CampusConnect
+  </h1>
+
+  <!-- Nav Links -->
+  <nav class="flex space-x-5 text-sm items-center">
+    <a href="#" class="text-[#ffffff] hover:text-[#ffffff]">About</a>
+    <a href="#" class="text-[#ffffff] hover:text-[#ffffff]">Contact</a>
+    <a href="#" class="bg-[#688783] text-white px-3 py-1 rounded-md hover:bg-[#5a7571]">
+      Admin
+    </a>
+  </nav>
+
+</header>
+
+<!-- Main -->
+<main class="flex-1 flex justify-center items-center">
+  <div class="text-center">
+
+    <h1 class="text-3xl font-bold text-[#000208] mb-2">Welcome Back !</h1>
+<p class="text-[#000208] text-sm mb-6">
+  <b>Unlock Your Potential, Where Dreams Meet Their Destination.</b>
+</p>
+
+
+    <!-- Card -->
+<div class="glass-card w-90 p-6 rounded-2xl">
+      <!-- Tabs -->
+      <div class="flex justify-around border-b border-white-200 mb-4 text-sm">
+        <button class="text-white hover:text-white pb-2"><b>Student</b></button>
+        <button class="text-white hover:text-white pb-2"><b>Company</b></button>
+      </div>
+
+      <!-- Username -->
+      <div class="text-left mb-3">
+        <label class="text-xs text-white">USERNAME OR EMAIL</label>
+        <input type="text" style="color: white;" placeholder="Enter your username or email"
+          class="w-full mt-1 p-2 rounded-md bg-white/10 border border-black-200 text-white placeholder-white-400 focus:outline-none focus:ring-2 focus:ring-white-400">
+      </div>
+
+     
+	<!-- Password -->
+	<div class="text-left mb-3">
+	<div class="flex justify-between text-xs text-white">
+    	<label>PASSWORD</label>
+    	<a href="#" class="text-white hover:underline">Forgot?</a>
+  	</div>
+
+  <input 
+    type="password"
+    style="color: white;"
+    placeholder="Enter your password"
+    class="w-full mt-1 p-2 rounded-md bg-white/10 border border-black-200 text-white placeholder-white-400 focus:outline-none focus:ring-2 focus:ring-white-400">
+
+
+</div>
+
+      <!-- Button -->
+<button class="w-full mt-3 py-2 rounded-lg bg-[#063831] text-white hover:scale-105 transition">
+  Access Portal
+</button>
+
+       <!-- Footer -->
+      <div class="mt-3 text-xs text-white">
+      <span style="color: white;">New student?</span>  <a href="Register.html" class="text-white">Create new Account</a>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+</div>
+
+</body>
+</html>
