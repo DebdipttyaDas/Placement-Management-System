@@ -14,7 +14,7 @@ body {
 /* ===== SIDEBAR LEFT===== */
 .sidebar {
   width: 220px;
-  background: #52739f;
+  background: #06473e;
   color: white;
   padding: 15px;
 }
@@ -52,8 +52,8 @@ body {
   display: flex;
   justify-content: flex-end;
   padding: 15px 20px;
-  background: #173a5e;
-  color: white;
+  background: #06473e;
+  color: #ffffff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
@@ -64,7 +64,7 @@ body {
 
 /* ===== WELCOME BOX ===== */
 .welcome-box {
-  background: #b5dbddf3;
+  background: #cefad0;
   padding: 8px;
   border-radius: 10px;
   margin-bottom: 15px;
@@ -79,11 +79,11 @@ body {
 
 .card {
   flex: 1;
-  background: #b5dbddf3;
-  color: white;
+  background: #06473e;
+  color: #ffffff;
   padding: 20px;
   border-radius: 10px;
-  border: 5px solid #197bbded;
+  border: 5px solid #00291aed;
   text-align: center;
   box-shadow: 0 4px 10px rgba(105, 100, 100, 0.894);
   transition: 0.3s;
@@ -94,13 +94,13 @@ body {
 }
 
 /* three cards with different colors */
-.card:nth-child(1) { background: #0b2660; }
-.card:nth-child(2) { background: #0b2660; }
-.card:nth-child(3) { background: #0b2660; }
+.card:nth-child(1) { background: #06473e; }
+.card:nth-child(2) { background: #06473e; }
+.card:nth-child(3) { background: #06473e; }
 
 /* COMPANY INSIGHTS SECTION */
 .insights-container {
-    background-color: #b5dbddf3; 
+    background-color: #cefad0; 
     border-radius: 15px;
     width: 91%;
     padding:50px 50px;
@@ -127,7 +127,7 @@ body {
 /* Individual Card */
 .company-card {
     margin-bottom: 20px;
-    background-color: #110447e0;
+    background-color: #06473e;
     border-radius: 12px;
     padding: 10px;
     flex: 3;
@@ -135,7 +135,7 @@ body {
     max-height: 200px;
     display: flex;
     align-items: center;
-    border: 5px solid #197bbded;
+    border: 5px solid #00291aed;
 }
 
 /* COMPANY ICON */
@@ -175,7 +175,7 @@ body {
 /* ===== LIST BOX ===== */
 .list-box {
   margin-top: 20px;
-  background: #b5dbddf3;
+  background: #cefad0;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 3px 10px rgb(100, 97, 97);
