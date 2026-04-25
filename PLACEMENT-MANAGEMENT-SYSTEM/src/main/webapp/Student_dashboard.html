@@ -2,114 +2,122 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Your profile</title>
-<link rel="stylesheet" href="Student_dashboard.css">
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="Student_dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
-  <div>
+  <!-- DASHBOARD CONTAINER -->
+  <div class="dashboard-container">
 
-    <!-- Sidebar -->
-    <div>
-      <h2>Student Portal</h2>
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar">
+      <h2>Student Dashboard</h2>
 
       <ul>
         <li>Dashboard</li>
-        <li>Jobs</li>
-        <li>Applications</li>
-        <li>Profile</li>
-        <li>Schedule</li>
+        <li>Placements</li>
+        <li>My Applications</li>
       </ul>
-      <center>
-        <br>
-        <br>
-        <br>
-        <button>Logout</button>
-      </center>
     </div>
 
-    <!-- Main Content -->
-    <div>
+    <!-- MAIN AREA -->
+    <div class="main-area">
 
-      <!-- Header -->
-      <div class="header">
-        <div>
-          <h1>Profile Settings</h1>
-        </div>
+      <!-- TOP BAR -->
 
-        <div class="btn-group">
-  <button>Discard Changes</button>
-  <button>Save Profile</button>
-</div>
-      </div>
-
-      <!-- Avatar + Personal Info -->
-      <div>
-
-        <!-- Avatar -->
-        <div>
-          <div><h1><b>Avatar</b></h1></div>
-          <p>JPG or PNG. Max size 2MB</p>
-        </div>
-
-        <!-- Personal Info -->
-        <div>
-          <h2> 👤 Personal Information</h2>
-
-          <input type="text" placeholder="Your name">
-          <input type="text" placeholder="Your email">
-
-          <input type="password" placeholder="Your password">
-          <input type="password" placeholder="Confirm password">
-        </div>
-
-      </div>
-
-      <!-- Academic + Languages -->
-      <div>
-
-        <!-- Academic -->
-        <div>
-          <h2> 📚 Academic Records</h2>
-
-          <input type="text" placeholder="Department">
-          <input type="text" placeholder="CGPA">
-        </div>
-
-        <!-- Languages -->
-        <div>
-          <h2> 🌐 Languages Known</h2>
-
-          <input type="text" placeholder="English, Bengali, Hindi">
-        </div>
-
-      </div>
-
-      <!-- Professional Skills -->
-      <div>
-        <h2> 💡Professional Skills</h2>
-
-        <input type="text" placeholder="Programming languages (e.g: Python, Java, C++)">
-        <input type="text" placeholder="Web development (e.g: HTML, CSS, JavaScript)">
-        <input type="text" placeholder="Databases (e.g: SQL, MongoDB)">
-        <input type="text" placeholder="Tools and technologies (e.g: Github, VS Code)">
-        <input type="text" placeholder="Other skills (e.g: Problem Solving, Teamwork)">
-      </div>
-
-      <!-- Achievements -->
-      <div>
-        <h2> 🏆 Achievements</h2>
-
-        <input type="text" placeholder="Achievement 1">
-        <input type="text" placeholder="Achievement 2">
-        <input type="text" placeholder="Achievement 3">
-        <input type="text" placeholder="Role / Position">
-      </div>
-
-    </div>
-
+      <div style="display:flex; justify-content:flex-end; padding:15px; background:#173a5e; color:white;">
+  <div style="display:flex; align-items:center; gap:30px;">
+    <i class="fa fa-user-circle" style="font-size:25px;"></i>
+    <i class="fa fa-bell" style="font-size:25px;"></i>
   </div>
+</div>
 
+      <!-- BODY CONTENT -->
+      <div class="content">
+
+        <!-- WELCOME BOX -->
+        <div class="welcome-box">
+          <h1>WELCOME BACK !</h1>
+         <p>Explore placements, apply for jobs, and build your career</p>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats">
+
+          <div class="card"><b>Applied Jobs:</b> 5</div>
+          <div class="card"><b>Shortlisted:</b> 2</div>
+          <div class="card"><b>Open Jobs:</b> 12</div>
+
+        </div>
+
+<!--/*COMPANY INSIGHTS SECTION*/-->
+
+<section class="insights-container">
+    <h1>COMPANY INSIGHTS</h1>
+    
+    <!--/*GOOGLE CARD*/-->
+
+    <div class="insights-grid">
+        <div class="company-card">
+            <div class="company-icon color-google">G</div>
+            <div class="company-info">
+                <h3 class="company-header">Google: 25+ LPA</h3>
+                <p class="detail-text"><strong>Focus:</strong> Algorithms & Systems</p>
+            </div>
+        </div>
+
+        <!--/*MICROSOFT CARD*/-->
+
+        <div class="company-card">
+            <div class="company-icon color-microsoft">M</div>
+            <div class="company-info">
+                <h3 class="company-header">Microsoft: 22+ LPA</h3>
+                <p class="detail-text"><strong>Focus:</strong> Project Experience</p>
+            </div>
+        </div>
+    </div>
+
+ <!--/*AMAZON CARD*/-->
+
+<div class="insights-grid">
+        <div class="company-card">
+            <div class="company-icon color-amazon">A</div>
+            <div class="company-info">
+                <h3 class="company-header">Amazon: 20+ LPA</h3>
+                <p class="detail-text"><strong>Focus:</strong> Problem Solving</p>
+            </div>
+        </div>
+
+        <!--/*DELOITTE CARD*/-->
+
+        <div class="company-card">
+            <div class="company-icon color-Deloitte">D</div>
+            <div class="company-info">
+                <h3 class="company-header">Deloitte: 18+ LPA</h3>
+                <p class="detail-text"><strong>Focus:</strong> Problem Solving</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- LIST OF PLACEMENT OPPORTUNITIES -->
+        <div class="list-box">
+          <h1>LATEST PLACEMENTS OPPORTUNITIES</h1>
+          <ul>
+            <li>TCS - Software Engineer</li>
+            <li>Infosys - Analyst</li>
+            <li>Wipro - Developer</li>
+            <li>Accenture - Consultant</li>
+            <li>Cognizant - Engineer</li>
+            <li>HCL - Specialist</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 </body>
 </html>
