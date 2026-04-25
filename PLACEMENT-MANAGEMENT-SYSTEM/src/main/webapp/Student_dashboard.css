@@ -1,183 +1,186 @@
 /* ===== RESET ===== */
-* {
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
   font-family: Arial, sans-serif;
+  background: #f4f6f9;
 }
 
-/* ===== BODY ===== */
-body {
-  background: #111827;
+/* ===== DASHBOARD LAYOUT ===== */
+.dashboard-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
 }
 
-/* ===== MAIN CONTAINER ===== */
-body > div {
-  width: 1100px;
-  background: #f3f4f6;
-  border-radius: 16px;
-  padding: 25px;
+/* ===== SIDEBAR LEFT===== */
+.sidebar {
+  width: 220px;
+  background: #52739f;
+  color: white;
+  padding: 15px;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 10px;
+  margin: 10px 0;
+  background: rgba(255,255,255,0.08);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebar ul li:hover {
+  background: rgba(11, 0, 0, 0.2);
+}
+/* ===== MAIN AREA ===== */
+.main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== TOP BAR ===== */
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 20px;
+  background: #173a5e;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* ===== BODY CONTENT ===== */
+.content {
+  padding: 20px;
+}
+
+/* ===== WELCOME BOX ===== */
+.welcome-box {
+  background: #b5dbddf3;
+  padding: 8px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 3px 10px rgba(105, 100, 100, 0.894);
+}
+
+/* ===== STATS CARDS ===== */
+.stats {
   display: flex;
   gap: 20px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-
-  animation: fadeUp 0.7s ease;
 }
 
-/* ===== SIDEBAR ===== */
-body > div > div:first-child {
-  width: 25%;
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  transition: 0.3s;
-}
-
-body > div > div:first-child:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-}
-
-/* ===== MENU ===== */
-ul {
-  list-style: none;
-  margin-top: 15px;
-}
-
-ul li {
-  padding: 10px;
-  border-radius: 6px;
-  color: #4b5563;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-ul li:hover {
-  background: #f3f4f6;
-  transform: translateX(5px);
-}
-
-/* ===== BUTTONS ===== */
-button {
-  padding: 10px 15px;
-  border-radius: 8px;
-  border: none;
-  background: #075a4f;
+.card {
+  flex: 1;
+  background: #b5dbddf3;
   color: white;
-  cursor: pointer;
-  height: 60px;
-  width: 120px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 5px solid #197bbded;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(105, 100, 100, 0.894);
   transition: 0.3s;
 }
 
-button:hover {
-  background: #075a4f;
-  transform: translateY(-2px) scale(1.03);
+.card:hover {
+  transform: translateY(-5px);
 }
 
-.btn-group {
-  display: flex;
-  justify-content: flex-end;  /* move to right */
-  gap: 15px;
+/* three cards with different colors */
+.card:nth-child(1) { background: #0b2660; }
+.card:nth-child(2) { background: #0b2660; }
+.card:nth-child(3) { background: #0b2660; }
+
+/* COMPANY INSIGHTS SECTION */
+.insights-container {
+    background-color: #b5dbddf3; 
+    border-radius: 15px;
+    width: 91%;
+    padding:50px 50px;
+    margin: 30px auto;
+    font-family: sans-serif;
 }
 
-/* ===== MAIN CONTENT ===== */
-body > div > div:last-child {
-  width: 100%;
+.section-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: hsl(0, 0%, 0%);
 }
 
-/* ===== HEADER ===== */
-h1 {
-  font-size: 28px;
-  font-weight: 700;
-  color: #1e293b;
-  letter-spacing: 0.5px;
-  position: relative;
-  transition: all 0.3s ease;
+/* Grid to put cards side-by-side */
+ .insights-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 20px;   
+    column-gap: 20px;
 }
 
-/* subtle glow + slide effect */
-h1:hover {
-  color: #0b5a23c5;
-  transform: translateX(5px) scale(1.05);
-  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+/* Individual Card */
+.company-card {
+    margin-bottom: 20px;
+    background-color: #110447e0;
+    border-radius: 12px;
+    padding: 10px;
+    flex: 3;
+    min-width: 100px;
+    max-height: 200px;
+    display: flex;
+    align-items: center;
+    border: 5px solid #197bbded;
 }
 
-p {
-  color: #6b7280;
-  font-size: 14px;
+/* COMPANY ICON */
+.company-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    margin-right: 15px;
+    font-size: 20px;
+    flex-shrink: 0; 
 }
 
-/* ===== SECTIONS ===== */
-body > div > div:last-child > div {
+/* 4 COMPANY ICON COLORS */
+.color-google { background-color: #cbcb13; }
+.color-microsoft { background-color: #00A4EF; }
+.color-amazon { background-color: #ff9900; }
+.color-Deloitte { background-color: #22e145; }
+
+/* Text Styles */
+.company-header {
+    margin: 0;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.detail-text {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+/* ===== LIST BOX ===== */
+.list-box {
   margin-top: 20px;
+  background: #b5dbddf3;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgb(100, 97, 97);
 }
 
-/* ===== CARD STYLE ===== */
-body > div > div:last-child > div > div,
-body > div > div:last-child > div {
-  background: rgb(212, 243, 229);
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-
-  transition: 0.3s;
-}
-
-body > div > div:last-child > div > div:hover,
-body > div > div:last-child > div:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-}
-
-/* ===== GRID ===== */
-body > div > div:last-child > div:first-of-type {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 15px;
-}
-
-body > div > div:last-child > div:nth-of-type(2) {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-}
-
-/* ===== INPUT ===== */
-input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  transition: 0.25s;
-}
-
-input:focus {
-  outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 8px rgba(37,99,235,0.4);
-  transform: scale(1.03);
-}
-
-/* ===== SMALL BOX (Achievements) ===== */
-body > div > div:last-child input {
-  margin-bottom: 10px;
-}
-
-/* ===== ANIMATION ===== */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.list-box ul {
+  padding-left: 20px;
 }
