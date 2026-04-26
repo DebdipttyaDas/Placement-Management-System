@@ -1,0 +1,111 @@
+/* Page Background */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #cefad0;
+}
+
+/* Navbar */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: #06473e;
+    color: white;
+}
+
+header h2 {
+    margin: 0;
+}
+
+header nav a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+header nav a:last-child {
+    background-color: #92b0ac;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Center Content */
+center {
+    margin-top: 50px;
+}
+
+/* Glass Card */
+form {
+    background: rgba(6, 71, 62, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: left;
+    font-size: 16px;
+    width: 400px;
+    backdrop-filter: blur(10px);
+}
+
+/* Labels */
+label {
+    font-size: 14px;
+    text-align: left;
+    color: white;
+}
+
+/* Inputs */
+input {
+    width: 90%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: none;
+    outline: 2px solid black;
+    background: rgb(231, 250, 247);
+    color: black;
+}
+
+/* Placeholder */
+input::placeholder {
+    color: #908888;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    display: block;
+    border: none;
+    border-radius: 8px;
+    background-color: #063831;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.terms {
+  text-align: center;
+  font-size: 16px;
+  color: white;
+  margin-top: 15px;
+}
+
+.terms {
+  text-align: center;
+  font-size: 16px;
+  color: white;
+  margin-top: 15px;
+}
+
+.terms a {
+  color: white;
+  text-decoration: underline;
+}

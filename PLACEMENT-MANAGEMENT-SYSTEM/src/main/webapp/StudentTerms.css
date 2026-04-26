@@ -1,0 +1,42 @@
+/* Page Background */
+body {
+  background-color: #cefad0; /* light green */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 30px;
+}
+
+/* Main Title */
+h1 {
+  text-align: left;
+  color: black;
+  margin-bottom: 30px;
+}
+
+/* Section Headings */
+h2 {
+  color: black;  /* 🔥 main headings in black */
+  margin-top: 25px;
+}
+
+/* Sub Headings */
+h3 {
+  color: #06473e; /* dark green */
+  margin-top: 15px;
+}
+
+/* Paragraphs */
+p {
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Back Link */
+a {
+  color: #06473e;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
