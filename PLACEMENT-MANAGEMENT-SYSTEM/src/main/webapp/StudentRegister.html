@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration</title>
+  <link rel="stylesheet" href="StudentRegister.css">
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <h2>CampusConnect</h2>
+  <div>
+    <span>Already have an account?</span>
+    <a href="Login.html">
+    <button>Login</button>
+    </a>
+  </div>
+</header>
+
+<!-- ===== MAIN CONTAINER ===== -->
+<div>
+
+  <!-- LEFT SIDE (INFO) -->
+  <div>
+    <h1>Create Your Student Account</h1>
+    <p>Register and start your journey towards your dream career.</p>
+
+    <div>
+      <h4>Find Best Opportunities</h4>
+      <p>Explore job openings from top companies.</p>
+    </div>
+
+    <div>
+      <h4>Track Your Progress</h4>
+      <p>Stay updated with your application status.</p>
+    </div>
+
+    <div>
+      <h4>Build Your Profile</h4>
+      <p>Showcase your skills and grow your career.</p>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE (FORM) -->
+  <div>
+
+    <h2 style="color: #ffffff;">Student Registration</h2>
+<br>
+    <form onsubmit="showSuccess(event)">
+
+      <!-- Row 1 -->
+      <div>
+        <label style="color: #ffffff;">Full Name</label><br>
+        <input type="text" placeholder="Enter your full name">
+      </div>
+
+      <div>
+        <label style="color: #ffffff;">College Name</label><br>
+        <input type="text" placeholder="Enter your college name">
+      </div>
+
+      <!-- Row 2 -->
+      <div>
+        <label style="color: #ffffff;">Department</label><br>
+        <select>
+          <option>Select your department</option>
+          <option>CSE</option>
+          <option>BCA</option>
+          <option>MCA</option>
+          <option>BBA</option>
+          <option>MBA</option>
+          <option>IT</option>
+          <option>ECE</option>
+        </select>
+      </div>
+
+      <div>
+        <label style="color: #ffffff;">Year</label><br>
+        <select>
+          <option>Select year</option>
+          <option>1st Year</option>
+          <option>2nd Year</option>
+          <option>3rd Year</option>
+          <option>4th Year</option>
+        </select>
+      </div>
+
+      <!-- Row 3 -->
+      <div>
+        <label style="color: #ffffff;">CGPA / Percentage</label><br>
+        <input type="text" placeholder="Enter your CGPA or %">
+      </div>
+
+      <div>
+        <label style="color: #ffffff;">Date of Birth</label><br>
+        <input type="date">
+      </div>
+
+      <!-- Row 4 -->
+      <div>
+        <label style="color: #ffffff;">Password</label><br>
+        <input type="password" placeholder="Create a password">
+      </div>
+
+      <div>
+        <label style="color: #ffffff;">Confirm Password</label><br>
+        <input type="password" placeholder="Confirm your password">
+      </div>
+
+      <!-- Skills -->
+      <div>
+        <label style="color: #ffffff;"><h3>Skills (Select all that apply)</h3></label><br>
+
+        <input type="checkbox"> <span style="color: #ffffff;">Java</span>
+        <input type="checkbox"> <span style="color: #ffffff;">Python</span>
+        <input type="checkbox"> <span style="color: #ffffff;">C / C++</span>  
+        <input type="checkbox"> <span style="color: #ffffff;">Web Development</span>
+        <input type="checkbox"> <span style="color: #ffffff;">DBMS</span>
+        <input type="checkbox"> <span style="color: #ffffff;">Data Structures</span>
+        <input type="checkbox"> <span style="color: #ffffff;">Machine Learning</span>
+        <input type="text" name="other_skill" placeholder="Other skill">
+      </div>
+
+      <!-- Resume Upload -->
+      <div>
+        <label style="color: #ffffff;"><h3>Upload Resume</h3></label>
+        <input type="file">
+      </div>
+
+      <!-- Photo Upload -->
+      <div>
+        <label style="color: #ffffff;"><h3>Upload Photo</h3></label>
+        <input type="file">
+      </div>
+
+      <!-- Submit -->
+      <div>
+        <button type="submit">Register</button>
+      </div>
+
+      <div class="terms">
+  <a href="StudentTerms.html">Terms & Conditions and Privacy Policy</a>
+</div>
+
+    </form>
+
+  </div>
+
+</div>
+
+<!-- JavaScript part -->
+<script>
+function showSuccess(event) {
+    event.preventDefault(); 
+
+    alert("Registration Successful!");
+
+    // clear form after submit
+    event.target.reset();
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* ===== BODY ===== */
+body {
+  background: #cefad0;
+}
+
+/* ===== HEADER ===== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: #0b3a38;
+  color: white;
+}
+
+header button {
+  padding: 8px 16px;
+  background: #a1b4b4;
+  border: 1px solid white;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ===== MAIN LAYOUT ===== */
+body > div {
+  display: flex;
+  padding: 40px;
+  gap: 40px;
+}
+
+/* ===== LEFT SIDE ===== */
+body > div > div:first-child {
+  flex: 1;
+}
+
+body > div > div:first-child h1 {
+  font-size: 32px;
+  margin-bottom: 15px;
+  color: #0b1f3a;
+}
+
+body > div > div:first-child p {
+  margin-bottom: 25px;
+  color: #555;
+}
+
+body > div > div:first-child div {
+  margin-bottom: 20px;
+}
+
+body > div > div:first-child h4 {
+  color: #0b1f3a;
+  margin-bottom: 5px;
+}
+
+/* ===== RIGHT SIDE (FORM CARD) ===== */
+body > div > div:last-child {
+  flex: 1.2;
+  background: rgba(6, 71, 62, 0.8);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* ===== FORM TITLE ===== */
+form h2 {
+  margin-bottom: 20px;
+}
+
+/* ===== FORM GRID ===== */
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px 20px;
+}
+
+/* Full width elements */
+form > div:nth-last-child(4),
+form > div:nth-last-child(3),
+form > div:nth-last-child(2),
+form > div:nth-last-child(1) {
+  grid-column: span 2;
+}
+
+/* ===== LABEL ===== */
+label {
+  font-size: 14px;
+  color: #333;
+}
+
+/* ===== INPUTS ===== */
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* ===== CHECKBOX ===== */
+input[type="checkbox"] {
+  width: auto;
+  margin: 5px;
+}
+
+/* ===== FILE INPUT ===== */
+input[type="file"] {
+  border: none;
+}
+
+/* ===== BUTTON ===== */
+button[type="submit"] {
+  width: 50%;
+  padding: 12px;
+  display: block;
+  margin: 15px auto;
+  background: #728080;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.terms {
+  text-align: center;
+  font-size: 16px;
+  color: white;
+  margin-top: 15px;
+}
+
+.terms a {
+  color: white;
+  text-decoration: underline;
+}
