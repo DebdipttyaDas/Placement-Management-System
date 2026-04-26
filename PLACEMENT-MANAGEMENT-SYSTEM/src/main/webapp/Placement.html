@@ -1,61 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <title>Student Portal</title>
+  <title>Placements</title>
   <link rel="stylesheet" href="Placement.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <div class="dashboard-wrapper">
+  <!-- DASHBOARD CONTAINER -->
+  <div class="dashboard-container">
+
     <!-- LEFT SIDEBAR -->
-    <aside class="sidebar">
+    <div class="sidebar">
       <h2>Placements</h2>
+
       <ul>
         <li>Dashboard</li>
-        <li class="active">Placements</li>
+        <li>Placements</li>
         <li>My Applications</li>
       </ul>
-    </aside>
-
-    <!-- RIGHT MAIN AREA -->
-    <div class="main-area">
-      <!-- TOP NAVIGATION -->
-      <header class="top-nav">
-        <div class="nav-right">
-          <i class="fa-solid fa-circle-user"></i>
-          <i class="fa-solid fa-bell"></i>
-        </div>
-      </header>
-
-      <!-- MAIN CONTENT -->
-      <main class="main-content">
-        
-        <!-- SEARCH SECTION -->
-        <div class="search-container">
-          <div class="search-box">
-            <input type="text" placeholder="Search for job titles or companies...">
-          </div>
-        </div>
-
-        <!-- FILTER BUTTONS -->
-        <div class="filter-container">
-          <button class="filter-btn active">All</button>
-          <button class="filter-btn">IT</button>
-          <button class="filter-btn">Engineering</button>
-          <button class="filter-btn">Marketing</button>
-          <button class="filter-btn">Medical</button>
-          <button class="filter-btn">HR</button>
-        </div>
-
-      </main>
     </div>
+
+      <!-- TOP BAR -->
+
+      <div style="display:flex; justify-content:flex-end; padding:15px;width:100%; background:#06352f; color:white;">
+  <div style="display:flex; align-items:center; gap:30px;">
+
+    <i class="fa fa-user-circle" style="font-size:25px;"></i>
+    
+    <i class="fa fa-bell" style="font-size:25px;"></i>
   </div>
+</div>
 
-</body>
+<!-- SEARCH BAR -->
+        <div class="main">
+        <div class="search-box">
+            <input type="text"placeholder="Search for job titles or companies...">
+        </div>
+        
 
-</html>
+    <!-- FILTER BUTTONS -->
+    <div class="job-filters">
+        <button>All</button>
+        <button>IT</button>
+        <button>Engineering</button>
+        <button>Marketing</button>
+        <button>Medical</button>
+        <button>HR</button>
+    </div>
+
+
+    <div class="job-cards">
+        <div class="job-card">
+            <h3>Job Title</h3>
+            <p><b style="color: black;">Company Name</b></p>
+
+            <div>
+                <span>Location</span>
+                <span>Part-time/Full-time</span>
+            </div>
+
+            <button>View Details</button>
+        </div>
+    </div>
+</div>
+    </body>
+    </html>
