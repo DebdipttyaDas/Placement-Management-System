@@ -58,10 +58,6 @@
                 <label>Password</label><br>
                 <input type="password" name="password" placeholder="Create a password" required><br><br>
 
-<<<<<<< HEAD
-</center>
-</body>
-</html>
                 <!-- Button -->
                 <button type="submit">Register</button>
 
@@ -72,14 +68,9 @@
 
             </form>
 
-            <!-- JS -->
-            <script>
-                // Validation logic can go here if needed. Removed preventDefault.
-            </script>
 
         </center>
 
     </body>
 
     </html>
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
