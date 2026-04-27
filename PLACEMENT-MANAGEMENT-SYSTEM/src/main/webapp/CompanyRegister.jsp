@@ -1,0 +1,73 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Company Register</title>
+    <link rel="stylesheet" href="CompanyRegister.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<header>
+    <h2>CampusConnect</h2>
+    <nav>
+        <p>Already have an account? 
+        <a href="Login.jsp" style="color: white;">Login</a>
+        </p>
+    </nav>
+</header>
+
+<!-- Register Section -->
+<center>
+
+    <h1>Create Your Company Account</h1>
+    <h4>Register your company to access placement services</h4>
+
+    <!-- FORM -->
+    <form action="#" method="post" onsubmit="showSuccess(event)">
+
+        <!-- Company Name -->
+        <label>Company Name</label><br>
+        <input type="text" name="companyName" placeholder="Enter company name"><br><br>
+
+        <!-- Industry -->
+        <label>Industry</label><br>
+        <input type="text" name="industry" placeholder="Enter industry"><br><br>
+
+        <!-- Company Type -->
+        <label>Company Type</label><br>
+        <input type="text" name="companyType" placeholder="e.g. IT, Startup, MNC"><br><br>
+
+        <!-- Company Email -->
+        <label>Company Email</label><br>
+        <input type="email" name="email" placeholder="Enter company email"><br><br>
+
+        <!-- Phone Number -->
+        <label>Phone Number</label><br>
+        <input type="text" name="phone" placeholder="Enter phone number"><br><br>
+
+        <!-- Button -->
+        <button type="submit">Register</button>
+
+        <!-- Terms -->
+        <div class="terms">
+            <a href="CompanyTerms.jsp">Terms & Conditions and Privacy Policy</a>
+        </div>
+
+    </form>
+
+    <!-- JS -->
+    <script>
+    function showSuccess(event) {
+        event.preventDefault();
+        alert("Registration Successful!");
+        event.target.reset();
+    }
+    </script>
+
+</center>
+
+</body>
+</html>
