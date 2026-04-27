@@ -3,8 +3,9 @@ function showStudent() {
   document.getElementById("userInput").placeholder = "Enter your username or email";
 
   document.getElementById("footerText").innerText = "New student?";
-  document.getElementById("footerLink").innerText = "Create new Account";
-  document.getElementById("footerLink").href = "StudentRegister.html";
+  document.getElementById("footerLink").href = "StudentRegister.jsp";
+
+  document.getElementById("role").value = "student"; // IMPORTANT
 }
 
 function showCompany() {
@@ -12,6 +13,7 @@ function showCompany() {
   document.getElementById("userInput").placeholder = "Enter company code";
 
   document.getElementById("footerText").innerText = "New company?";
-  document.getElementById("footerLink").innerText = "Create new Account";
-  document.getElementById("footerLink").href = "CompanyRegister.html";
+  document.getElementById("footerLink").href = "CompanyRegister.jsp";
+
+  document.getElementById("role").value = "company"; // IMPORTANT
 }
