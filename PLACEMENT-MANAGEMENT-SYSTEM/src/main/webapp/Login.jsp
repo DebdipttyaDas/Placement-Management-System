@@ -1,0 +1,146 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>User Login</title>
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- External CSS -->
+<link rel="stylesheet" href="Login.css">
+
+<!-- JS -->
+<script src="Login.js"></script>
+
+</head>
+
+<body class="h-screen flex flex-col relative">
+
+<div class="min-h-screen bg-[#cefad0]">
+<div class="relative z-10 flex flex-col h-full">
+
+<!-- Navbar -->
+<header class="flex justify-between items-center px-10 py-4 bg-[#06473e]">
+
+  <h1 class="text-3xl font-bold text-[#ffffff] tracking-wide transition duration-300 hover:scale-105 hover:text-[#ffffff]">
+    CampusConnect
+  </h1>
+
+<!-- Nav Links -->
+  <nav class="flex space-x-5 text-sm items-center">
+    <a href="#" class="text-[#ffffff] hover:text-[#ffffff]">About</a>
+    <a href="#" class="text-[#ffffff] hover:text-[#ffffff]">Contact</a>
+    <a href="#" class="bg-[#688783] text-white px-3 py-1 rounded-md hover:bg-[#5a7571]">
+      Admin
+    </a>
+  </nav>
+
+</header>
+
+<!-- Main -->
+<main class="flex-1 flex justify-center items-center">
+<div class="text-center">
+
+<h1 class="text-3xl font-bold text-[#000208] mb-2">Welcome Back !</h1>
+
+<p class="text-[#000208] text-sm mb-6">
+<b>Unlock Your Potential, Where Dreams Meet Their Destination.</b>
+</p>
+
+<!-- Card -->
+<div class="glass-card w-90 p-6 rounded-2xl">
+
+<!-- FORM START -->
+<form action="LoginServlet" method="post">
+
+<!-- Hidden Role -->
+<input type="hidden" id="role" name="role" value="student">
+
+<!-- Tabs -->
+<div class="flex justify-around border-b border-white-200 mb-4 text-sm">
+  <button type="button" onclick="showStudent()" class="text-white pb-2 hover:text-[#d0d3d9]"><b>Student</b></button>
+  <button type="button" onclick="showCompany()" class="text-white pb-2 hover:text-[#d0d3d9]"><b>Company</b></button>
+</div>
+
+<!-- Username -->
+<div class="text-left mb-3">
+  <label id="userLabel" class="text-xs text-white">USERNAME OR EMAIL</label>
+
+  <input id="userInput" name="email" type="text" style="color: white;"
+    placeholder="Enter your username or email"
+    class="w-full mt-1 p-2 rounded-md bg-white/10 border border-black-200 text-white placeholder-white-400 focus:outline-none focus:ring-2 focus:ring-white-400">
+</div>
+
+<!-- Password -->
+<div class="text-left mb-3">
+  <div class="flex justify-between text-xs text-white">
+    <label>PASSWORD</label>
+    <a href="#" class="text-white hover:underline">Forgot?</a>
+  </div>
+
+  <input type="password" name="password"
+    placeholder="Enter your password" style="color: white;"
+    class="w-full mt-1 p-2 rounded-md bg-white/10 border border-black-200 text-white placeholder-white-400 focus:outline-none focus:ring-2 focus:ring-white-400">
+
+</div>
+
+<!-- Company Form -->
+<div id="companyForm" style="display:none;">
+
+  <div class="text-left mb-3">
+    <label class="text-xs text-white">COMPANY CODE</label>
+    <input type="text"  style="color: white;" name="companyCode"
+      placeholder="Enter company code"
+      class="w-full mt-1 p-2 rounded-md bg-white/10 border border-black-200 text-white placeholder-white-400 focus:outline-none focus:ring-2 focus:ring-white-400">
+  </div>
+
+  <div class="text-left mb-3">
+    <div class="flex justify-between text-xs text-white">
+      <label>PASSWORD</label>
+      <a href="#" class="text-white hover:underline">Forgot?</a>
+    </div>
+
+    <input type="password"  style="color: white;" name="companyPassword"
+      placeholder="Enter your password"
+       class="w-full mt-1 p-2 rounded-md bg-white/10 border border-black-200 text-white placeholder-white-400 focus:outline-none focus:ring-2 focus:ring-white-400">
+    </div>
+
+</div>
+
+
+<!-- Button -->
+<button type="submit"
+class="w-full mt-3 py-2 rounded-lg bg-[#063831] text-white hover:scale-105 transition">
+  Access Portal
+</button>
+
+</form>
+<!-- FORM END -->
+
+<!-- Footer -->
+<div class="mt-3 text-xs text-white">
+  <span id="footerText">New student?</span>
+  <a id="footerLink" href="StudentRegister.jsp" class="text-white hover:underline">
+    Create new Account
+  </a>
+</div>
+
+<!-- ERROR MESSAGE -->
+<%
+String error = (String) request.getAttribute("error");
+if(error != null){
+%>
+<p class="text-red-300 mt-2"><%= error %></p>
+<%
+}
+%>
+
+</div>
+</div>
+</main>
+</div>
+</body>
+</html>
