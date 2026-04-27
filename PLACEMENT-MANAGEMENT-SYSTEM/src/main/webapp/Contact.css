@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f4f6f9;
+    background-color: #cefad0;
 }
 
 /* HEADER */
@@ -15,7 +15,9 @@ header {
 }
 
 /* ===== HEADER TEXT ===== */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     text-align: center;
 }
 
@@ -27,15 +29,16 @@ body {
 
 /* ===== FORM ===== */
 form {
-    background: #cefad0;
+    background: #06473e;
     padding: 20px;
     border-radius: 10px;
     margin: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* INPUT FIELDS */
-input, textarea {
+input,
+textarea {
     width: 90%;
     padding: 10px;
     margin-top: 5px;

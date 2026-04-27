@@ -1,73 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>About Us - Placement Portal</title>
-    <link rel="stylesheet" href="About.css">
-</head>
+    <!DOCTYPE html>
+    <html lang="en">
 
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>About Us - Placement Portal</title>
+        <link rel="stylesheet" href="About.css">
+    </head>
 
-<!-- HEADER -->
-<header>
-    <h1>About us - CampusConnect</h1>
-</header>
+    <body>
 
-<!-- ABOUT CONTAINER -->
-<div class="about-container">
+        <!-- HEADER -->
+        <header>
+            <h1>About us - CampusConnect</h1>
+            <center>
+                <a href="Login.jsp" style="color: white; text-decoration: none;">Back to Home</a>
+            </center>
+        </header>
 
-    <!-- INTRO -->
-    <h2><u>About Us</u></h2>
-    <p>
-        Our Placement Management System <b>CampusConnect</b> is designed to help students connect with job opportunities 
-        and simplify the placement process in colleges.
-    </p>
+        <!-- ABOUT CONTAINER -->
+        <div class="about-container">
 
-    <!-- MISSION -->
-    <h3>Our Mission</h3>
-    <ul>
-        <li>To simplify the placement process for students and institutions</li>
-        <li>To provide a centralized platform for job and internship opportunities</li>
-        <li>To ensure transparency in the placement process</li>
-        <li>To help students track and manage their applications easily</li>
-        <li>To enhance career opportunities through technology</li>
-        <li>To create a user-friendly and efficient placement system</li>
-    </ul>
+            <!-- INTRO -->
+            <h2><u>About Us</u></h2>
+            <p>
+                Our Placement Management System <b>CampusConnect</b> is designed to help students connect with job
+                opportunities
+                and simplify the placement process in colleges.
+            </p>
 
-    <!-- FEATURES -->
-    <h3>What We Provide</h3>
-    <ul>
-        <li>Easy job search and application</li>
-        <li>Real-time updates and notifications</li>
-        <li>Simple and user-friendly interface</li>
-    </ul>
+            <!-- MISSION -->
+            <h3>Our Mission</h3>
+            <ul>
+                <li>To simplify the placement process for students and institutions</li>
+                <li>To provide a centralized platform for job and internship opportunities</li>
+                <li>To ensure transparency in the placement process</li>
+                <li>To help students track and manage their applications easily</li>
+                <li>To enhance career opportunities through technology</li>
+                <li>To create a user-friendly and efficient placement system</li>
+            </ul>
 
-    <!-- USERS -->
-    <h3>Users</h3>
-    <ul>
-        <li>Students – Apply and track jobs</li>
-        <li>Admin – Manage placements and companies</li>
-        <li>Company – Post job openings and review applications</li>
-    </ul>
+            <!-- FEATURES -->
+            <h3>What We Provide</h3>
+            <ul>
+                <li>Easy job search and application</li>
+                <li>Real-time updates and notifications</li>
+                <li>Simple and user-friendly interface</li>
+            </ul>
 
-    <!-- FUTURE SCOPE -->
-    <h3>Future Scope</h3>
-    <ul>
-        <li>AI-based job recommendations</li>
-        <li>Resume builder</li>
-        <li>Interview scheduling</li>
-        <li>Real-time notifications</li>
-        <li>Chat with recruiters</li>
-        <li>Mobile app support</li>
-    </ul>
+            <!-- USERS -->
+            <h3>Users</h3>
+            <ul>
+                <li>Students – Apply and track jobs</li>
+                <li>Admin – Manage placements and companies</li>
+                <li>Company – Post job openings and review applications</li>
+            </ul>
 
-    <!-- FOOTER -->
-    <p>Developed by: Team CampusConnect</p>
-    <p>© <%= java.time.Year.now() %> All Rights Reserved</p>
+            <!-- FUTURE SCOPE -->
+            <h3>Future Scope</h3>
+            <ul>
+                <li>AI-based job recommendations</li>
+                <li>Resume builder</li>
+                <li>Interview scheduling</li>
+                <li>Real-time notifications</li>
+                <li>Chat with recruiters</li>
+                <li>Mobile app support</li>
+            </ul>
 
-</div>
+            <!-- FOOTER -->
+            <p>Developed by: Team CampusConnect</p>
+            <p>© <%= java.time.Year.now() %> All Rights Reserved</p>
 
-</body>
-</html>
+        </div>
+
+    </body>
+
+    </html>
