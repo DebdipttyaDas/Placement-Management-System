@@ -44,6 +44,7 @@
 <h3>4. Sharing of Information</h3>
 <p>Your data may be shared with registered companies for recruitment purposes only.</p>
 
+<<<<<<< HEAD
 <h3>5. Cookies</h3>
 <p>We may use cookies to enhance user experience and track usage.</p>
 
@@ -58,3 +59,21 @@
 
 </body>
 </html>
+=======
+                <!-- Button -->
+                <button type="submit">Register</button>
+
+                <!-- Terms -->
+                <div class="terms">
+                    <a href="CompanyTerms.jsp">Terms & Conditions and Privacy Policy</a>
+                </div>
+
+            </form>
+
+
+        </center>
+
+    </body>
+
+    </html>
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
