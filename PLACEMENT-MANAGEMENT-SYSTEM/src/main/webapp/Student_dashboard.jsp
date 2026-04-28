@@ -1,0 +1,117 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard</title>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="Student_dashboard.css">
+</head>
+
+<body>
+
+<!-- DASHBOARD CONTAINER -->
+<div class="dashboard-container">
+
+  <!-- LEFT SIDEBAR -->
+  <div class="sidebar">
+    <h2>Student Dashboard</h2>
+
+    <ul>
+      <li>Dashboard</li>
+      <li><a href="Placement.jsp">Placements</a></li>
+      <li>My Applications</li>
+    </ul>
+  </div>
+
+  <!-- MAIN AREA -->
+  <div class="main-area">
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      <div class="top-icons">
+        <span class="icon">👤</span>
+        <span class="icon">🔔</span>
+      </div>
+    </div>
+
+    <!-- BODY CONTENT -->
+    <div class="content">
+
+      <!-- WELCOME BOX -->
+      <div class="welcome-box">
+        <h1>WELCOME BACK !</h1>
+        <p>Explore placements, apply for jobs, and build your career</p>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats">
+        <div class="card"><b>Applied Jobs:</b> 5</div>
+        <div class="card"><b>Shortlisted:</b> 2</div>
+        <div class="card"><b>Open Jobs:</b> 12</div>
+      </div>
+
+      <!-- COMPANY INSIGHTS -->
+      <section class="insights-container">
+        <h1>COMPANY INSIGHTS</h1>
+
+        <div class="insights-grid">
+          <div class="company-card">
+            <div class="company-icon color-google">G</div>
+            <div class="company-info">
+              <h3 class="company-header">Google: 25+ LPA</h3>
+              <p class="detail-text"><strong>Focus:</strong> Algorithms & Systems</p>
+            </div>
+          </div>
+
+          <div class="company-card">
+            <div class="company-icon color-microsoft">M</div>
+            <div class="company-info">
+              <h3 class="company-header">Microsoft: 22+ LPA</h3>
+              <p class="detail-text"><strong>Focus:</strong> Project Experience</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="insights-grid">
+          <div class="company-card">
+            <div class="company-icon color-amazon">A</div>
+            <div class="company-info">
+              <h3 class="company-header">Amazon: 20+ LPA</h3>
+              <p class="detail-text"><strong>Focus:</strong> Problem Solving</p>
+            </div>
+          </div>
+
+          <div class="company-card">
+            <div class="company-icon color-Deloitte">D</div>
+            <div class="company-info">
+              <h3 class="company-header">Deloitte: 18+ LPA</h3>
+              <p class="detail-text"><strong>Focus:</strong> Problem Solving</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LATEST PLACEMENTS -->
+      <div class="list-box">
+        <h1>LATEST PLACEMENTS OPPORTUNITIES</h1>
+        <ul>
+          <li>TCS - Software Engineer</li>
+          <li>Infosys - Analyst</li>
+          <li>Wipro - Developer</li>
+          <li>Accenture - Consultant</li>
+          <li>Cognizant - Engineer</li>
+          <li>HCL - Specialist</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
