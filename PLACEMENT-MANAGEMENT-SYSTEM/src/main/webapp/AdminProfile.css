@@ -1,0 +1,107 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    background: #01342d;
+    color: white;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Buttons container */
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Buttons */
+.nav-buttons button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* BACK BUTTON */
+.nav-btn {
+    background:#437c75;
+    color: rgb(255, 255, 255);
+
+}
+
+.nav-btn:hover {
+    background: #92b2a7;
+}
+
+/* Save Button */
+.save-btn {
+    background:  #587f73;
+    color: white;
+}
+
+.save-btn:hover {
+    background: #92b2a7;
+}
+
+/* Profile Container */
+.profile-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+/* Profile Card */
+.profile-card {
+    width: 400px;
+    background: #cefad0;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Heading */
+.profile-card h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form */
+.profile-card form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels */
+.profile-card label {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Inputs */
+.profile-card input {
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #000000;
+}
+
+/* Input focus */
+.profile-card input:focus {
+    outline: none;
+    border-color: #14b8a6;
+}
