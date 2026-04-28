@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", email);
                 session.setAttribute("role", role);
-                response.sendRedirect("student_dashboard.jsp");
+                response.sendRedirect("Student_dashboard.jsp");
             } else {
                 request.setAttribute("error", "Invalid student credentials");
                 request.getRequestDispatcher("Login.jsp?role=student").forward(request, response);

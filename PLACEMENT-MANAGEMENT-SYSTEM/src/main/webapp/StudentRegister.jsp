@@ -153,6 +153,16 @@
           <a href="StudentTerms.jsp">Terms & Conditions and Privacy Policy</a>
         </div>
 
+        <!-- ERROR MESSAGE -->
+        <%
+        String errorMessage = (String) request.getAttribute("errorMessage");
+        if(errorMessage != null){
+        %>
+        <p style="color: red; margin-top: 10px;"><%= errorMessage %></p>
+        <%
+        }
+        %>
+
       </form>
 
     </div>

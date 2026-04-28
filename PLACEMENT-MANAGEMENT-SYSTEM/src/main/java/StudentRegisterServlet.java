@@ -123,7 +123,7 @@ public class StudentRegisterServlet extends HttpServlet {
         } else {
             // Registration failed
             request.setAttribute("errorMessage", "Registration Failed. Please try again.");
-            request.getRequestDispatcher("StudentRegister.html").forward(request, response);
+            request.getRequestDispatcher("StudentRegister.jsp").forward(request, response);
         }
     }
 
