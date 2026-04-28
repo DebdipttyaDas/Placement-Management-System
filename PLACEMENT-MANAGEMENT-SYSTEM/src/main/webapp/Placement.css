@@ -51,15 +51,6 @@ body {
     min-height: 100vh;
 }
 
-/* TOPBAR */
-.topbar {
-    height: 50px;
-    width: 100%;
-    background-color: #043734;
-    padding-right: 20px;
-    color: white;
-}
-
 /* SEARCH */
 .search-box {
     display: flex;             
@@ -172,4 +163,28 @@ body {
 /* A for filter buttons */
 .job-filters button:active {
     background-color: #bdccdb; 
+}
+
+/* TOPBAR */
+.topbar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+    width: 100%;
+    background: #06352f;
+    color: white;
+    box-sizing: border-box;
+}
+
+/* ICON CONTAINER */
+.topbar-icons {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* ICON STYLE */
+.icon {
+    font-size: 20px;
+    cursor: pointer;
 }

@@ -47,16 +47,6 @@ body {
   flex-direction: column;
 }
 
-/* ===== TOP BAR ===== */
-.top-bar {
-  display: flex;
-  justify-content: flex-end;
-  padding: 15px 20px;
-  background: #06473e;
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
 /* ===== BODY CONTENT ===== */
 .content {
   padding: 20px;
@@ -183,4 +173,22 @@ body {
 
 .list-box ul {
   padding-left: 20px;
+}
+
+/* TOP BAR ICONS */
+.top-icons {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.icon {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+/* Sidebar links */
+.sidebar a {
+  color: white;
+  text-decoration: none;
 }
