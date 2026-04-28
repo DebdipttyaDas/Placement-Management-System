@@ -1,65 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Terms & Conditions</title>
-    <link rel="stylesheet" href="CompanyTerms.css">
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="en">
 
-<h1>Terms & Conditions</h1>
+    <head>
+        <meta charset="UTF-8">
+        <title>Company Register</title>
+        <link rel="stylesheet" href="CompanyRegister.css">
+    </head>
 
-<p>Welcome to CampusConnect. By accessing and using this platform, you agree to comply with the following terms and conditions.</p>
+    <body>
 
-<h3>1. Use of Platform</h3>
-<p>You agree to use this platform only for legitimate purposes such as job applications, recruitment, and academic placements.</p>
+        <!-- Navbar -->
+        <header>
+            <h2>CampusConnect</h2>
+            <nav>
+                <p>Already have an account?
+                    <a href="Login.jsp" style="color: white;">Login</a>
+                </p>
+            </nav>
+        </header>
 
-<h3>2. User Responsibility</h3>
-<p>You are responsible for maintaining the confidentiality of your account credentials and all activities under your account.</p>
+        <!-- Register Section -->
+        <center>
 
-<h3>3. Accuracy of Information</h3>
-<p>All information provided by you must be accurate and up to date. Any false information may lead to account suspension.</p>
+            <h1>Create Your Company Account</h1>
+            <h4>Register your company to access placement services</h4>
 
-<h3>4. Prohibited Activities</h3>
-<p>You must not misuse the platform, attempt unauthorized access, or engage in fraudulent activities.</p>
+            <!-- FORM -->
+            <form action="CompanyRegisterServlet" method="post">
 
-<h3>5. Contact</h3>
-<p>If you have any questions, please contact us through the platform.</p>
+                <!-- Company Name -->
+                <label>Company Name</label><br>
+                <input type="text" name="companyName" placeholder="Enter company name" required><br><br>
 
-<h1>Privacy Policy</h1>
+                <!-- Company Code -->
+                <label>Company Code (for login)</label><br>
+                <input type="text" name="companyCode" placeholder="Enter a unique company code" required><br><br>
 
-<p>Your privacy is important to us. This policy explains how CampusConnect collects and uses your data.</p>
+                <!-- Industry -->
+                <label>Industry</label><br>
+                <input type="text" name="industry" placeholder="Enter industry" required><br><br>
 
-<h3>1. Information We Collect</h3>
-<p>We collect personal details such as name, email, phone number, academic details, and resume information.</p>
+                <!-- Company Type -->
+                <label>Company Type</label><br>
+                <input type="text" name="companyType" placeholder="e.g. IT, Startup, MNC" required><br><br>
 
-<h3>2. How We Use Information</h3>
-<p>Your information is used to connect students with companies, manage applications, and improve services.</p>
+                <!-- Company Email -->
+                <label>Company Email</label><br>
+                <input type="email" name="email" placeholder="Enter company email" required><br><br>
 
-<h3>3. Data Protection</h3>
-<p>We implement security measures to protect your data from unauthorized access.</p>
+                <!-- Phone Number -->
+                <label>Phone Number</label><br>
+                <input type="text" name="phone" placeholder="Enter phone number" required><br><br>
 
-<h3>4. Sharing of Information</h3>
-<p>Your data may be shared with registered companies for recruitment purposes only.</p>
+                <!-- Password -->
+                <label>Password</label><br>
+                <input type="password" name="password" placeholder="Create a password" required><br><br>
 
-<<<<<<< HEAD
-<h3>5. Cookies</h3>
-<p>We may use cookies to enhance user experience and track usage.</p>
-
-<h3>6. User Rights</h3>
-<p>You can update or delete your personal information at any time.</p>
-
-<h3>7. Contact</h3>
-<p>For any privacy-related queries, contact us through the website.</p>
-
-<!-- 🔥 IMPORTANT CHANGE HERE -->
-<p><a href="CompanyRegister.jsp">Back to Register</a></p>
-
-</body>
-</html>
-=======
                 <!-- Button -->
                 <button type="submit">Register</button>
 
@@ -76,4 +74,3 @@
     </body>
 
     </html>
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
