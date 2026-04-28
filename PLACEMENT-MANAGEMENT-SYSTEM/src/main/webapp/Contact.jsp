@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
 <!-- HEADER -->
 <header>
   <h1>Contact us - CampusConnect</h1>
