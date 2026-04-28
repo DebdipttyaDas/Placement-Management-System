@@ -33,7 +33,7 @@
   <nav class="flex space-x-5 text-sm items-center">
     <a href="#" class="text-[#ffffff] hover:text-[#ffffff]">About</a>
     <a href="#" class="text-[#ffffff] hover:text-[#ffffff]">Contact</a>
-    <a href="#" class="bg-[#688783] text-white px-3 py-1 rounded-md hover:bg-[#5a7571]">
+    <a href="#" onclick="showAdmin()" class="bg-[#688783] text-white px-3 py-1 rounded-md hover:bg-[#5a7571]">
       Admin
     </a>
   </nav>
@@ -137,6 +137,29 @@ if(error != null){
 <%
 }
 %>
+
+<!-- SUCCESS MESSAGE -->
+<%
+String successMessage = (String) request.getAttribute("successMessage");
+if(successMessage != null){
+%>
+<p class="text-green-300 mt-2"><%= successMessage %></p>
+<%
+}
+%>
+
+<script>
+window.onload = function() {
+    var roleParam = new URLSearchParams(window.location.search).get("role");
+    if (roleParam === 'admin') {
+        showAdmin();
+    } else if (roleParam === 'company') {
+        showCompany();
+    } else {
+        showStudent();
+    }
+}
+</script>
 
 </div>
 </div>
