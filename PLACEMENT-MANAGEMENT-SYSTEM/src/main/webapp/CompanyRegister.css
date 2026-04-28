@@ -75,8 +75,9 @@ input::placeholder {
 
 /* Button */
 button {
-    width: 100%;
+    width: 200px;
     padding: 10px;
+    margin: 20px auto;
     margin-top: 10px;
     display: block;
     border: none;
@@ -85,6 +86,9 @@ button {
     color: white;
     cursor: pointer;
     transition: 0.3s;
+}
+.btn-container{
+	text-align: center;
 }
 
 button:hover {
