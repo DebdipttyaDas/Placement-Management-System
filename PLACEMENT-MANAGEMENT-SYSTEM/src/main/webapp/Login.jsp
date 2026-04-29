@@ -32,7 +32,7 @@
 <!-- Nav Links -->
   <nav class="flex space-x-5 text-sm items-center">
     <a href="About.jsp" class="text-[#ffffff] hover:text-[#ffffff]">About</a>
-    <a href="Contact.html" class="text-[#ffffff] hover:text-[#ffffff]">Contact</a>
+    <a href="Contact.jsp" class="text-[#ffffff] hover:text-[#ffffff]">Contact</a>
     <a href="#" onclick="showAdmin()" class="bg-[#688783] text-white px-3 py-1 rounded-md hover:bg-[#5a7571]">
       Admin
     </a>
