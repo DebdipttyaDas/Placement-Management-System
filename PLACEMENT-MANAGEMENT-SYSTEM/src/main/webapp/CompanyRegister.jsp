@@ -34,10 +34,6 @@
                 <label>Company Name</label><br>
                 <input type="text" name="companyName" placeholder="Enter company name" required><br><br>
 
-                <!-- Company Code -->
-                <label>Company Code (for login)</label><br>
-                <input type="text" name="companyCode" placeholder="Enter a unique company code" required><br><br>
-
                 <!-- Industry -->
                 <label>Industry</label><br>
                 <input type="text" name="industry" placeholder="Enter industry" required><br><br>
