@@ -59,7 +59,7 @@
                 <input type="password" name="password" placeholder="Create a password" required><br><br>
 
                 <!-- Button -->
-                <button type="submit">Register</button>
+                <button type="submit">Request for Registration</button>
 
                 <!-- Terms -->
                 <div class="terms">
