@@ -24,6 +24,11 @@ body {
     padding: 0;
 }
 
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
 .sidebar ul li {
     padding: 12px;
     margin-bottom: 10px;
