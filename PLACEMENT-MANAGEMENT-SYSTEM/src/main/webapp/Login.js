@@ -34,9 +34,6 @@ function showCompany() {
   // Show company section
   document.getElementById("companyForm").style.display = "block";
 
-  // Label change
-  document.getElementById("userLabel").innerText = "COMPANY LOGIN";
-
   // ✅ Use same password field (no duplicate)
   document.querySelector('input[name="password"]').placeholder = "Enter company password";
 
