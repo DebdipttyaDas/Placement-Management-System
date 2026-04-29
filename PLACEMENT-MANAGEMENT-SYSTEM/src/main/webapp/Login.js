@@ -3,6 +3,7 @@ function showStudent() {
 
   // Show student input
   document.getElementById("userInput").style.display = "block";
+  document.getElementById("userLabel").style.display = "block";
 
   // Hide company section
   document.getElementById("companyForm").style.display = "none";
@@ -30,6 +31,7 @@ function showCompany() {
 
   // Hide student email input
   document.getElementById("userInput").style.display = "none";
+  document.getElementById("userLabel").style.display = "none";
 
   // Show company section
   document.getElementById("companyForm").style.display = "block";
@@ -53,6 +55,7 @@ function showAdmin() {
 
   // Show username input
   document.getElementById("userInput").style.display = "block";
+  document.getElementById("userLabel").style.display = "block";
 
   // Hide company section
   document.getElementById("companyForm").style.display = "none";
