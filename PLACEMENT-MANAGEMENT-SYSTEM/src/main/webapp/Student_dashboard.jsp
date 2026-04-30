@@ -8,6 +8,7 @@
 
   <!-- External CSS -->
   <link rel="stylesheet" href="Student_dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
@@ -30,12 +31,16 @@
   <div class="main-area">
 
     <!-- TOP BAR -->
-    <div class="top-bar">
-      <div class="top-icons">
-        <span class="icon">👤</span>
-        <span class="icon">🔔</span>
-      </div>
-    </div>
+       <div style="display:flex; justify-content:flex-end; padding:15px; background:#03352f; color:white;">
+  <div style="display:flex; align-items:center; gap:30px;">
+   <a href="StudentProfile.html">
+    <i class="fa fa-user-circle" style="font-size:25px; color:white;"></i>
+</a>
+    
+    <i class="fa fa-bell" style="font-size:25px;"></i>
+  </div>
+</div>
+  
 
     <!-- BODY CONTENT -->
     <div class="content">
