@@ -14,7 +14,7 @@
   <h1>Contact us - CampusConnect</h1>
 </header>
 
-<p style="text-align:center;">We are here to help you, feel free to reach out !</p>
+<p style="text-align:center">We are here to help you, feel free to reach out !</p>
 
 <hr>
 
