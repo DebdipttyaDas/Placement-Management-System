@@ -6,17 +6,11 @@
   <meta charset="UTF-8">
   <title>Student Dashboard</title>
 
+  <!-- External CSS -->
   <link rel="stylesheet" href="Student_dashboard.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<%
-    // OPTIONAL: Session check (recommended)
-    String user = (String) session.getAttribute("user");
-    if(user == null){
-        response.sendRedirect("Login.jsp");
-        return;
-    }
-%>
+
 <body>
 
 <!-- DASHBOARD CONTAINER -->
@@ -28,7 +22,7 @@
 
     <ul>
       <li>Dashboard</li>
-      <li>Placements</li>
+      <li><a href="Placement.jsp">Placements</a></li>
       <li>My Applications</li>
     </ul>
   </div>
@@ -37,24 +31,16 @@
   <div class="main-area">
 
     <!-- TOP BAR -->
-    <div style="display:flex; justify-content:flex-end; padding:15px; background:#03352f; color:white;">
-      <div style="display:flex; align-items:center; gap:30px;">
-        <i class="fa fa-user-circle" style="font-size:25px;"></i>
-
-        <!-- SHOW USER EMAIL -->
-        <span><%= user %></span>
-
-        <i class="fa fa-bell" style="font-size:25px;"></i>
-
-        <!-- LOGOUT -->
-        <form action="LogoutServlet" method="post" style="display:inline;">
-          <button style="background:none; border:none; color:white; cursor:pointer;">
-            Logout
-          </button>
-        </form>
-
-      </div>
-    </div>
+       <div style="display:flex; justify-content:flex-end; padding:15px; background:#03352f; color:white;">
+  <div style="display:flex; align-items:center; gap:30px;">
+   <a href="StudentProfile.html">
+    <i class="fa fa-user-circle" style="font-size:25px; color:white;"></i>
+</a>
+    
+    <i class="fa fa-bell" style="font-size:25px;"></i>
+  </div>
+</div>
+  
 
     <!-- BODY CONTENT -->
     <div class="content">
@@ -67,11 +53,9 @@
 
       <!-- STATS -->
       <div class="stats">
-
         <div class="card"><b>Applied Jobs:</b> 5</div>
         <div class="card"><b>Shortlisted:</b> 2</div>
         <div class="card"><b>Open Jobs:</b> 12</div>
-
       </div>
 
       <!-- COMPANY INSIGHTS -->
@@ -115,7 +99,7 @@
         </div>
       </section>
 
-      <!-- PLACEMENTS -->
+      <!-- LATEST PLACEMENTS -->
       <div class="list-box">
         <h1>LATEST PLACEMENTS OPPORTUNITIES</h1>
         <ul>
