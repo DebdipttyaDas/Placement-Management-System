@@ -18,7 +18,7 @@
 
     <div class="nav-buttons">
         <!-- FIXED: anchor as button -->
-        <a href="admin_dashboard.jsp" class="nav-btn">Back to Dashboard</a>
+        <a href="AdminDashboard.html" class="nav-btn">Back to Dashboard</a>
         
     </div>
 </header>
