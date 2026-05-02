@@ -25,8 +25,8 @@
 
     <ul>
       <li><a href="Student_dashboard.jsp">Dashboard</a></li>
-      <li>Placements</li>
-      <li>My Applications</li>
+      <li><a href="Placement.jsp">Placements</a></li>
+      <li><a href="MyApplication.html">My Applications</a></li>
     </ul>
   </div>
 
