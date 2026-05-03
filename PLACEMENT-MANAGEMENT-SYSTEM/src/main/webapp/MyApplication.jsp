@@ -1,0 +1,214 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Applications</title>
+
+<link rel="stylesheet" href="MyApplication.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- ===== SIDEBAR ===== -->
+    <div class="sidebar">
+        <h2>My Applications</h2>
+
+        <ul>
+            <li><a href="Student_dashboard.jsp">Dashboard</a></li>
+            <li><a href="Placement.jsp">Placements</a></li>
+            <!-- FIXED HERE -->
+            <li class="active"><a href="MyApplication.jsp">My Applications</a></li>
+        </ul>
+    </div>
+
+    <!-- ===== MAIN AREA ===== -->
+    <div class="main-area">
+
+        <!-- ===== TOP BAR ===== -->
+        <div class="top-bar">
+            <div class="top-icons">
+
+                <a href="StudentProfile.jsp">
+                    <i class="fa fa-user-circle" style="color: white;"></i>
+                </a>
+
+                <i class="fa fa-bell" style="color: white;"></i>
+
+            </div>
+        </div>
+
+        <!-- ===== CONTENT ===== -->
+        <div class="content">
+
+            <h1>My Applications</h1>
+            <p class="subtitle">Tracking your journey to professional success...</p>
+
+            <!-- Stats -->
+            <div class="stats-container">
+
+                <div class="card">
+                    <div class="icon blue"><i class="fa-solid fa-file"></i></div>
+                    <div class="text">
+                        <h2>8</h2>
+                        <p>Total Applications</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="icon green"><i class="fa-solid fa-paper-plane"></i></div>
+                    <div class="text">
+                        <h2>3</h2>
+                        <p>Applied</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="icon orange"><i class="fa-solid fa-clock"></i></div>
+                    <div class="text">
+                        <h2>2</h2>
+                        <p>In Process</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="icon purple"><i class="fa-solid fa-check"></i></div>
+                    <div class="text">
+                        <h2>3</h2>
+                        <p>Completed</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Applications -->
+            <div class="table-container">
+
+                <div class="table-header">
+                    <h2>Application History</h2>
+
+                    <div class="controls">
+                        <input type="text" placeholder="Search company or role..." size="50">
+                        <select onchange="filterStatus(this.value)">
+                            <option value="all">All Status</option>
+                            <option value="applied">Applied</option>
+                            <option value="process">In Process</option>
+                            <option value="complete">Completed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Role</th>
+                            <th>Drive</th>
+                            <th>Applied On</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr class="row process">
+                        <td class="company">
+                    <div>
+                            <b>Tata Consultancy Services</b>
+                            </div>
+                            <td>Systems Engineer</td>
+                            <td>TCS Ninja Hiring 2025</td>
+                            <td>15 May 2025</td>
+                            <td><span class="status process">In Process</span></td>
+                            <td><button class="btn">View Details</button></td>
+                        </tr>
+
+                        <tr class="row applied">
+                        <td class="company">
+                            <div>
+                            <b>Infosys</b>
+                            </div></td>
+                            <td>Software Engineer</td>
+                            <td>Infosys Springboard 2025</td>
+                            <td>10 May 2025</td>
+                            <td><span class="status applied">Applied</span></td>
+                            <td><button class="btn">View Details</button></td>
+                        </tr>
+
+                        <tr class="row complete">
+                        <td class="company">
+                        <div>
+                            <b>Wipro</b>
+                            </div></td>
+                            <td>Project Engineer</td>
+                            <td>Wipro Elite National Talent Hunt 2025</td>
+                            <td>05 May 2025</td>
+                            <td><span class="status complete">Completed</span></td>
+                            <td><button class="btn">View Details</button></td>
+                        </tr>
+                        <tr class="row applied">
+                <td class="company">
+                    <div><b>Accenture</b></div>
+                </td>
+                <td>Associate Software Engineer</td>
+                <td>Accenture ASE Hiring 2025</td>
+                <td>01 May 2025</td>
+                <td><span class="status applied">Applied</span></td>
+                <td><button class="btn">View Details</button></td>
+            </tr>
+        <tr class="row process">
+                <td class="company">
+                    <div>
+                        <b>Capgemini</b>
+                    </div>
+                </td>
+                <td>Systems Engineer</td>
+                <td>Capgemini Springboard 2025</td>
+                <td>15 May 2025</td>
+                <td><span class="status process">In Process</span></td>
+                <td><button class="btn">View Details</button></td>
+            </tr>
+            <tr class="row applied">
+                <td class="company">
+                    <div><b>Cognizant</b></div>
+                </td>
+                <td>Programmer Analyst Trainee</td>
+                <td>Cognizant GenC Next 2025</td>
+                <td>28 Apr 2025</td>
+                <td><span class="status applied">Applied</span></td>
+                <td><button class="btn">View Details</button></td>
+            </tr>                
+                           </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- JavaScript -->
+<script>
+function filterStatus(status) {
+    let rows = document.querySelectorAll(".table-container tbody tr");
+
+    rows.forEach(row => {
+        if (status === "all") {
+            row.style.display = "table-row";
+        } else {
+            row.style.display = row.classList.contains(status) ? "table-row" : "none";
+        }
+    });
+}
+</script>
+
+</body>
+</html>

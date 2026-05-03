@@ -21,9 +21,9 @@
     <h2>Student Dashboard</h2>
 
     <ul>
-      <li>Dashboard</li>
+      <li><a href="Student_dashboard.jsp">Dashboard</a></li>
       <li><a href="Placement.jsp">Placements</a></li>
-      <li>My Applications</li>
+      <li><a href="MyApplication.html">My Applications</a></li>
     </ul>
   </div>
 
@@ -33,7 +33,7 @@
     <!-- TOP BAR -->
        <div style="display:flex; justify-content:flex-end; padding:15px; background:#03352f; color:white;">
   <div style="display:flex; align-items:center; gap:30px;">
-   <a href="StudentProfile.html">
+   <a href="StudentProfile.jsp">
     <i class="fa fa-user-circle" style="font-size:25px; color:white;"></i>
 </a>
     
