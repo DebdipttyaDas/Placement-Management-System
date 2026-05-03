@@ -74,6 +74,7 @@
 
         </center>
 
+    <script src="CompanyRegister.js"></script>
     </body>
 
     </html>

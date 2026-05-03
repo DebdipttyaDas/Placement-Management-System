@@ -17,7 +17,7 @@
     <h2>Student Profile</h2>
 
     <ul>
-      <li><a href="student_dashboard.jsp">Dashboard</a></li>
+      <li><a href="Student_dashboard.jsp">Dashboard</a></li>
       <li>Jobs</li>
       <li>Applications</li>
     </ul>
@@ -39,7 +39,7 @@
 
       <div class="btn-group">
         <!-- FIXED BUTTON -->
-        <a href="student_dashboard.jsp" class="nav-btn">Back to Dashboard</a>
+        <a href="Student_dashboard.jsp" class="nav-btn">Back to Dashboard</a>
 
         <!-- Save Button connected to form -->
         <button type="submit" form="profileForm">Save Profile</button>
