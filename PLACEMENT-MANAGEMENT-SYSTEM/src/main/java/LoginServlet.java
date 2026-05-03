@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", email);
                 session.setAttribute("role", role);
-                response.sendRedirect("admin_dashboard.jsp");
+                response.sendRedirect("AdminDashboard.jsp");
             } else {
                 request.setAttribute("error", "Invalid admin credentials");
                 request.getRequestDispatcher("Login.jsp?role=admin").forward(request, response);
@@ -78,7 +78,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", email);
                 session.setAttribute("role", role);
-                response.sendRedirect("company_dashboard.jsp");
+                response.sendRedirect("CompanyDashboard.jsp");
             } else {
                 request.setAttribute("error", "Invalid company credentials");
                 request.getRequestDispatcher("Login.jsp?role=company").forward(request, response);
