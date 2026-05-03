@@ -1,0 +1,241 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Placement Management System</title>
+
+    <link rel="stylesheet" href="AdminDashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<nav class="sidebar">
+    <div class="logo">
+        <center><h2>Admin Dashboard</h2></center>
+        <br>
+    </div>
+
+    <ul class="nav-menu">
+        <li class="active">Dashboard</li>
+        <li>Students</li>
+        <li>Companies</li>
+        <li>Placements</li>
+        <li>Applications</li>
+        <li>Reports</li>
+        <li>Settings</li>
+    </ul>
+
+    <!-- Logout -->
+    <form action="LogoutServlet" method="post">
+        <button class="logout-btn">Logout</button>
+    </form>
+</nav>
+
+<!-- Main Content -->
+<main class="main-content">
+
+    <!-- Top Bar -->
+    <header class="top-bar">
+        <h1>Welcome Admin!</h1>
+
+        <input type="text" class="search-input" placeholder="Search students, companies, jobs...">
+
+        <div class="user-profile">
+            <a href="AdminProfile.jsp">
+                <i class="fa fa-user-circle" style="font-size:25px; color:black;"></i>
+            </a>
+            <i class="fa fa-bell" style="font-size:25px;"></i>
+        </div>
+    </header>
+
+    <!-- Stats -->
+    <section class="stats-container">
+        <div class="stat-card">
+            <h3>Total Students</h3>
+            <p class="count">1,200</p>
+            <span class="trend">+120 this month</span>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Companies</h3>
+            <p class="count">45</p>
+            <span class="trend">+6 this month</span>
+        </div>
+
+        <div class="stat-card">
+            <h3>Active Jobs</h3>
+            <p class="count">120</p>
+            <span class="trend">+15 this month</span>
+        </div>
+
+        <div class="stat-card">
+            <h3>Placed Students</h3>
+            <p class="count">300</p>
+            <span class="trend">+40 this month</span>
+        </div>
+    </section>
+
+    <!-- Charts -->
+    <section class="charts-container">
+
+        <div class="chart-box">
+            <h3>Placement Rate</h3>
+            <br><br><br>
+            <canvas id="barChart"></canvas>
+        </div>
+
+        <div class="chart-box">
+            <h3>Students per Department</h3>
+            <br><br><br>
+            <canvas id="pieChart"></canvas>
+        </div>
+
+        <div class="chart-box">
+            <h3>Job Postings (Monthly)</h3>
+            <br><br><br>
+            <canvas id="lineChart"></canvas>
+        </div>
+
+    </section>
+
+    <!-- Drives -->
+    <section class="drives-container">
+        <div class="section-header">
+            <h3>Upcoming Drives</h3>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Role</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>TCS</td>
+                    <td>Software Engineer</td>
+                    <td>20 May, 2024</td>
+                    <td><span class="status-scheduled">Scheduled</span></td>
+                </tr>
+
+                <tr>
+                    <td>Microsoft</td>
+                    <td>SDE Intern</td>
+                    <td>28 May, 2024</td>
+                    <td><span class="status-scheduled">Scheduled</span></td>
+                </tr>      
+                <tr>
+                        <td>Infosys</td>
+                        <td>System Engineer</td>
+                        <td>05 Jun, 2024</td>
+                        <td><span class="status-scheduled">Scheduled</span></td>
+                    </tr>
+                    <tr>
+                        <td>Wipro</td>
+                        <td>Project Engineer</td>
+                        <td>12 Jun, 2024</td>
+                        <td><span class="status-upcoming">Upcoming</span></td>
+                    </tr>
+                    <tr>
+                        <td>Accenture</td>
+                        <td>Software Developer</td>
+                        <td>15 Jun, 2024</td>
+                        <td><span class="status-upcoming">Upcoming</span></td>
+                    </tr>
+                    <tr>
+                        <td>Cognizant</td>
+                        <td>Junior Developer</td>
+                        <td>20 Jun, 2024</td>
+                        <td><span class="status-upcoming">Upcoming</span></td>
+                    </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Notifications -->
+    <section class="notifications-container">
+
+        <div class="section-header">
+            <h3>Notifications</h3>
+            <button>View All</button>
+        </div>
+
+        <div class="notification-list">
+
+            <div class="notification-card">
+                <i class="fa fa-bell"></i>
+                <div>
+                    <p>New job posted by TCS</p>
+                    <span>2 hours ago</span>
+                </div>
+            </div>
+
+            <div class="notification-card">
+                <i class="fa fa-user"></i>
+                <div>
+                    <p>New student registered</p>
+                    <span>5 hours ago</span>
+                </div>
+            </div>
+
+<div class="notification-card">
+            <i class="fa fa-building"></i>
+            <div>
+                <p>Microsoft scheduled a drive</p>
+                <span>Yesterday</span>
+            </div>
+        </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<!-- Chart JS -->
+<script>
+new Chart(document.getElementById("barChart"), {
+    type: "bar",
+    data: {
+        labels: ["Jan","Feb","Mar","Apr","May","Jun"],
+        datasets: [{
+            label: "Placement %",
+            data: [40, 55, 60, 50, 70, 80]
+        }]
+    }
+});
+
+new Chart(document.getElementById("pieChart"), {
+    type: "pie",
+    data: {
+        labels: ["CSE","BCA","MCA","BBA","MBA","IT","ECE"],
+        datasets: [{
+            data: [40, 25, 20, 15, 10, 12,10]
+        }]
+    }
+});
+
+new Chart(document.getElementById("lineChart"), {
+    type: "line",
+    data: {
+        labels: ["Jan","Feb","Mar","Apr","May","Jun"],
+        datasets: [{
+            label: "Jobs Posted",
+            data: [10, 20, 15, 25, 30, 35],
+            fill: false
+        }]
+    }
+});
+</script>
+
+</body>
+</html>
