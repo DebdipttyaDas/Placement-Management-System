@@ -20,7 +20,7 @@
 <!-- Sidebar -->
 <nav class="sidebar">
     <div class="logo">
-        <center><h2>Admin Dashboard</h2></center>
+        <h2>Admin Dashboard</h2>
         <br>
     </div>
 
@@ -30,8 +30,7 @@
         <li>Companies</li>
         <li>Placements</li>
         <li>Applications</li>
-        <li>Reports</li>
-        <li>Settings</li>
+        <li>Interviews</li>
     </ul>
 
     <!-- Logout -->
@@ -46,8 +45,6 @@
     <!-- Top Bar -->
     <header class="top-bar">
         <h1>Welcome Admin!</h1>
-
-        <input type="text" class="search-input" placeholder="Search students, companies, jobs...">
 
         <div class="user-profile">
             <a href="AdminProfile.jsp">
