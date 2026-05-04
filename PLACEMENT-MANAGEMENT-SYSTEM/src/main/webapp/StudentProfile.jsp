@@ -17,9 +17,9 @@
     <h2>Student Profile</h2>
 
     <ul>
-      <li><a href="Student_dashboard.jsp">Dashboard</a></li>
-      <li>Jobs</li>
-      <li>Applications</li>
+       <li><a href="Student_dashboard.jsp" style="color: white;text-decoration: none;">Dashboard</a></li>
+        <li><a href="Placement.jsp" style="color: white;text-decoration: none;">Placement</a></li>
+        <li><a href="MyApplications.jsp" style="color: white;text-decoration: none;">My Applications</a></li>
     </ul>
 
     <!-- Logout -->
@@ -55,7 +55,7 @@
         <p>JPG or PNG. Max size 2MB</p>
 
         <div class="avatar-box">
-          <!-- Optional image -->
+
           <!-- <img src="uploads/profile.jpg"> -->
         </div>
 

@@ -119,15 +119,15 @@
         <div>
           <label style="color: #ffffff;"><h3>Skills (Select all that apply)</h3></label><br>
 
-          <input type="checkbox" name="skills" value="Java"> <span style="color: #ffffff;">Java</span>
-          <input type="checkbox" name="skills" value="Python"> <span style="color: #ffffff;">Python</span>
-          <input type="checkbox" name="skills" value="C / C++"> <span style="color: #ffffff;">C / C++</span>
-          <input type="checkbox" name="skills" value="Web Development"> <span style="color: #ffffff;">Web Development</span>
-          <input type="checkbox" name="skills" value="DBMS"> <span style="color: #ffffff;">DBMS</span>
-          <input type="checkbox" name="skills" value="Data Structures"> <span style="color: #ffffff;">Data Structures</span>
-          <input type="checkbox" name="skills" value="Machine Learning"> <span style="color: #ffffff;">Machine Learning</span>
-
-          <input type="text" name="other_skill" placeholder="Other skill">
+<label><input type="checkbox"> <span style="color: #ffffff;">Java</span></label>
+        <label><input type="checkbox"> <span style="color: #ffffff;">Python</span></label>
+        <label><input type="checkbox"> <span style="color: #ffffff;">C / C++</span></label>  
+        <label><input type="checkbox"> <span style="color: #ffffff;">Data Analysis & Visualisation</span></label>
+        <label><input type="checkbox"> <span style="color: #ffffff;">Digital Marketing Analytics</span></label>
+        <label><input type="checkbox"> <span style="color: #ffffff;">Artificial Intelligence</span></label>
+        <label><input type="checkbox"> <span style="color: #ffffff;">DBMS</span></label>
+        <label><input type="checkbox"> <span style="color: #ffffff;">Machine Learning</span></label>
+        <label><input type="text" name="other_skill" placeholder="Other skill"></label>
         </div>
 
         <!-- Resume -->
