@@ -13,9 +13,9 @@ import jakarta.servlet.http.HttpServletResponse;
 public class CompanyRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	// Database configuration
-	private static final String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/placement2";
 	private static final String DB_USER = "root";
-	private static final String DB_PASSWORD = "root";
+	private static final String DB_PASSWORD = "Su@67674990";
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

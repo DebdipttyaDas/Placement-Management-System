@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
     <head>
         <meta charset="UTF-8">
@@ -29,27 +29,27 @@
             <!-- FORM -->
             <form action="CompanyRegisterServlet" method="post">
 
-                <!-- Company Name -->
+                <!-- Company Name (matches request.getParameter("companyName")) -->
                 <label>Company Name</label><br>
                 <input type="text" name="companyName" placeholder="Enter company name" required><br><br>
 
-                <!-- Industry -->
+                <!-- Industry (matches request.getParameter("industry")) -->
                 <label>Industry</label><br>
                 <input type="text" name="industry" placeholder="Enter industry" required><br><br>
 
-                <!-- Company Type -->
+                <!-- Company Type (matches request.getParameter("companyType")) -->
                 <label>Company Type</label><br>
                 <input type="text" name="companyType" placeholder="e.g. IT, Startup, MNC" required><br><br>
 
-                <!-- Company Email -->
+                <!-- Company Email (matches request.getParameter("email")) -->
                 <label>Company Email</label><br>
                 <input type="email" name="email" placeholder="Enter company email" required><br><br>
 
-                <!-- Phone Number -->
+                <!-- Phone Number (matches request.getParameter("phone")) -->
                 <label>Phone Number</label><br>
                 <input type="text" name="phone" placeholder="Enter phone number" required><br><br>
 
-                <!-- Password -->
+                <!-- Password (matches request.getParameter("password")) -->
                 <label>Password</label><br>
                 <input type="password" name="password" placeholder="Create a password" required><br><br>
 
@@ -73,7 +73,7 @@
 
         </center>
 
-    <script src="CompanyRegister.js"></script>
+        <script src="CompanyRegister.js"></script>
     </body>
 
     </html>
