@@ -30,13 +30,12 @@ public class LoginServlet extends HttpServlet {
 
         // For company form submission
         String companyCode = request.getParameter("companyCode");
-        String companyPassword = request.getParameter("companyPassword");
 
         if ("company".equals(role)) {
             // Use company specific fields if provided
             if (companyCode != null && !companyCode.trim().isEmpty()) {
                 email = companyCode;
-                password = companyPassword;
+                // password is already fetched correctly via request.getParameter("password")
             }
         }
 
