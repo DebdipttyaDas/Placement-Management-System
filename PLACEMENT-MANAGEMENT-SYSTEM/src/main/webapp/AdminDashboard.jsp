@@ -26,11 +26,8 @@
 
     <ul class="nav-menu">
         <li class="active">Dashboard</li>
-        <li>Students</li>
-        <li>Companies</li>
-        <li>Placements</li>
-        <li>Applications</li>
-        <li>Interviews</li>
+        <li>Student Management</li>
+        <li>Notification</li>
     </ul>
 
     <!-- Logout -->
