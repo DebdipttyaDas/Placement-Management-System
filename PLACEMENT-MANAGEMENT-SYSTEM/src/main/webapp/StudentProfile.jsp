@@ -56,11 +56,13 @@
             <p>JPG or PNG. Max size 2MB</p>
 
             <div class="avatar-box">
-
-              <!-- <img src="uploads/profile.jpg"> -->
+              <img id="profilePreview"
+                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ccc'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>"
+                alt="Profile Preview">
             </div>
 
-            <input type="file" name="photo" class="upload-btn">
+            <input type="file" name="photo" id="photoInput" class="upload-btn" accept="image/png, image/jpeg"
+              onchange="previewImage(event)">
           </div>
 
           <!-- PERSONAL INFO -->
@@ -196,16 +198,26 @@
         skillsArray.forEach((skill, index) => {
           const chip = document.createElement('div');
           chip.className = 'skill-chip';
-          chip.innerHTML = `
-            <span class="skill-name">${skill.name}</span>
-            <span class="skill-level">${skill.level}</span>
-            <span class="skill-remove" onclick="removeSkill(${index})">&times;</span>
-        `;
+          chip.innerHTML =
+            '<span class="skill-name">' + skill.name + '</span>' +
+            '<span class="skill-level">' + skill.level + '</span>' +
+            '<span class="skill-remove" onclick="removeSkill(' + index + ')">&times;</span>';
           container.appendChild(chip);
-          stringData.push(`${skill.name}:${skill.level}`);
+          stringData.push(skill.name + ':' + skill.level);
         });
 
         hiddenInput.value = stringData.join(',');
+      }
+
+      function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+          const output = document.getElementById('profilePreview');
+          output.src = reader.result;
+        }
+        if (event.target.files[0]) {
+          reader.readAsDataURL(event.target.files[0]);
+        }
       }
     </script>
   </body>
