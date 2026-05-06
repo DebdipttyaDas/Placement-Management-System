@@ -21,7 +21,7 @@
     <h2>Student Dashboard</h2>
 
     <ul>
-      <li><a href="Student_dashboard.jsp">Dashboard</a></li>
+      <li>Dashboard</li>
       <li><a href="Placement.jsp">Placements</a></li>
       <li><a href="MyApplication.html">My Applications</a></li>
     </ul>
