@@ -18,9 +18,9 @@
       <h2>Placements</h2>
 
       <ul>
-        <li><a href="Student_dashboard.jsp">Dashboard</a></li>
-        <li>Placements</li>
-        <li><a href="MyApplication.jsp">My Applications</a></li>
+        <li><a href="Student_dashboard.jsp" style="text-decoration:none; color:white">Dashboard</a></li>
+        <li><a href="PLacement.jsp" style="text-decoration:none; color:white">Placements</a></li>
+        <li><a href="MyApplication.jsp" style="text-decoration:none; color:white">My Applications</a></li>
       </ul>
     </div>
 
