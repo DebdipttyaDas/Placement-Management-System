@@ -14,7 +14,7 @@ body {
 /* SIDEBAR CARD STYLE */
 .sidebar-card {
     width: 220px;
-    height: 225vh;
+    height: 200vh;
     background: #063831;
     color: white;
     padding: 20px;
@@ -223,7 +223,7 @@ body {
 
 .skills-header h2 {
     margin: 0;
-    color: #063831;
+    color: black;
 }
 
 .btn-add-skill {
