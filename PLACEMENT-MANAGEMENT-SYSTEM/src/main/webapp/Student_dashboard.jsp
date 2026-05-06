@@ -21,9 +21,9 @@
     <h2>Student Dashboard</h2>
 
     <ul>
-      <li>Dashboard</li>
-      <li><a href="Placement.jsp">Placements</a></li>
-      <li><a href="MyApplication.jsp">My Applications</a></li>
+      <li><a href="Student_dashboard.jsp" style="text-decoration: none; color:white;">Dashboard</a></li>
+      <li><a href="Placement.jsp" style="text-decoration: none; color:white;">Placements</a></li>
+      <li><a href="MyApplication.jsp" style="text-decoration: none; color:white;">My Applications</a></li>
     </ul>
   </div>
 

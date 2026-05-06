@@ -20,10 +20,10 @@
         <h2>My Applications</h2>
 
         <ul>
-            <li><a href="Student_dashboard.jsp">Dashboard</a></li>
-            <li><a href="Placement.jsp">Placements</a></li>
-            <!-- FIXED HERE -->
-            <li class="active">My Applications</a></li>
+            <li><a href="Student_dashboard.jsp" style="text-decoration: none; color:white;">Dashboard</a></li>
+            <li><a href="Placement.jsp" style="text-decoration: none; color:white;">Placements</a></li>
+             <li><a href="MyApplication.jsp" style="text-decoration: none; color:white;">My Application</a></li>
+            
         </ul>
     </div>
 
