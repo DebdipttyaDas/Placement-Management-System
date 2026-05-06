@@ -13,11 +13,16 @@ body {
 
 /* ===== Side bar ===== */
 .sidebar {
-    width: 230px;
-    height: 150vh;
-    background:#06473e;
+    width: 220px;
+    height: 100vh;
+    background-color: #06473e;
+    text-decoration:none;
     color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
     padding: 20px;
+    box-sizing: border-box;
 }
 
 .sidebar h2 {
@@ -26,31 +31,29 @@ body {
 
 .sidebar ul {
     list-style: none;
+    padding: 0;
 }
 
 .sidebar ul li {
-    margin: 15px 0;
-}
-
-.sidebar ul li a {
-    font-size: 16px;
-    text-decoration: none;
-    color: white;
-    padding: 10px;
-    display: block;
+    padding: 12px;
+    margin-bottom: 10px;
+    background-color: rgba(255,255,255,0.1);
     border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.sidebar ul li a:hover {
-    background: #7a9491;
+.sidebar ul li:hover {
+    background-color: rgba(255,255,255,0.25);
+    transform: translateX(5px);
 }
-
 
 /* ===== Main Area ===== */
 .main-area {
     flex: 1;
     display: flex;
     flex-direction: column;
+    margin-left: 220px;
 }
 
 .dashboard-container {

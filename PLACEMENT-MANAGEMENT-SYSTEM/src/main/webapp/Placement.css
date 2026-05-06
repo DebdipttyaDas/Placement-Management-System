@@ -11,6 +11,7 @@ body {
     width: 220px;
     height: 100vh;
     background-color: #06473e;
+    text-decoration:none;
     color: white;
     position: fixed;
     top: 0;
