@@ -23,15 +23,18 @@ public class UpdateProfileServlet extends HttpServlet {
         String cgpa = request.getParameter("cgpa");
         String languages = request.getParameter("languages");
         
-        String skill1 = request.getParameter("skill1");
-        String skill2 = request.getParameter("skill2");
-        String skill3 = request.getParameter("skill3");
-        String skill4 = request.getParameter("skill4");
-        String otherSkills = request.getParameter("otherSkills");
+        String skills = request.getParameter("skills");
 
         Part photoPart = request.getPart("photo");
+        if (photoPart != null && photoPart.getSize() > 0) {
+            String fileName = java.nio.file.Paths.get(photoPart.getSubmittedFileName()).getFileName().toString();
+            String uploadPath = getServletContext().getRealPath("") + java.io.File.separator + "uploads";
+            java.io.File uploadDir = new java.io.File(uploadPath);
+            if (!uploadDir.exists()) uploadDir.mkdir();
+            photoPart.write(uploadPath + java.io.File.separator + fileName);
+        }
 
-        // TODO: Add logic to update student profile and handle file upload in database/filesystem
+        // Add logic to update student profile in database
 
         request.setAttribute("message", "Profile updated successfully!");
         request.getRequestDispatcher("StudentProfile.jsp").forward(request, response);
