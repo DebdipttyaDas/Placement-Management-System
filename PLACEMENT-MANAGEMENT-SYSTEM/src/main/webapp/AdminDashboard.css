@@ -14,10 +14,16 @@ body {
 /* ===== Side bar ===== */
 .sidebar {
     width: 230px;
-    height: 210vh;
+    height: 300vh;
     background: #06473e;
     color: white;
     padding: 20px;
+     display: flex;      
+    flex-direction: column;
+}
+
+.sidebar form {
+    margin-top: auto;
 }
 
 .nav-menu {
@@ -51,7 +57,6 @@ body {
     cursor: pointer;
     transition: 0.3s;
 }
-
 .logout-btn:hover {
     background-color: #65807a;
 }

@@ -23,7 +23,7 @@
     <ul>
       <li>Dashboard</li>
       <li><a href="Placement.jsp">Placements</a></li>
-      <li><a href="MyApplication.html">My Applications</a></li>
+      <li><a href="MyApplication.jsp">My Applications</a></li>
     </ul>
   </div>
 

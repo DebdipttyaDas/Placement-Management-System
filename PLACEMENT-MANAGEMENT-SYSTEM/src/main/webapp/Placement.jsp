@@ -19,13 +19,13 @@
 
       <ul>
         <li><a href="Student_dashboard.jsp">Dashboard</a></li>
-        <li><a href="Placement.jsp">Placements</a></li>
+        <li>Placements</li>
         <li><a href="MyApplication.jsp">My Applications</a></li>
       </ul>
     </div>
 
     <!-- TOP BAR -->
-    <div style="display:flex; justify-content:flex-end; padding:15px;width:100%; background:#06352f; color:white;">
+    <div style="display:flex; justify-content:flex-end; padding:15px;width:98%; background:#06352f; color:white;">
       <div style="display:flex; align-items:center; gap:30px;">
         <i class="fa fa-user-circle" style="font-size:25px;"></i>
         <i class="fa fa-bell" style="font-size:25px;"></i>
