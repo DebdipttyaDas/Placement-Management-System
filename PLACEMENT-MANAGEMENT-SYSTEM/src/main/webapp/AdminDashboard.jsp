@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.DriverManager" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +20,7 @@
 <!-- Sidebar -->
 <nav class="sidebar">
     <div class="logo">
-        <center><h2>Admin Dashboard</h2></center>
+        <h2>Admin Dashboard</h2>
         <br>
     </div>
 
@@ -26,8 +30,7 @@
         <li>Companies</li>
         <li>Placements</li>
         <li>Applications</li>
-        <li>Reports</li>
-        <li>Settings</li>
+        <li>Interviews</li>
     </ul>
 
     <!-- Logout -->
@@ -42,8 +45,6 @@
     <!-- Top Bar -->
     <header class="top-bar">
         <h1>Welcome Admin!</h1>
-
-        <input type="text" class="search-input" placeholder="Search students, companies, jobs...">
 
         <div class="user-profile">
             <a href="AdminProfile.jsp">
@@ -101,6 +102,69 @@
             <canvas id="lineChart"></canvas>
         </div>
 
+    </section>
+
+    <!-- Pending Companies Approvals -->
+    <section class="drives-container">
+        <div class="section-header">
+            <h3>Pending Company Approvals</h3>
+        </div>
+        
+        <%
+            String msgSuccess = request.getParameter("success");
+            String msgError = request.getParameter("error");
+            if (msgSuccess != null) { out.println("<p style='color:green; padding:10px;'>" + msgSuccess + "</p>"); }
+            if (msgError != null) { out.println("<p style='color:red; padding:10px;'>" + msgError + "</p>"); }
+        %>
+
+        <table style="margin-bottom: 20px;">
+            <thead>
+                <tr>
+                    <th>Company Name</th>
+                    <th>Industry</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    try {
+                        Class.forName("com.mysql.cj.jdbc.Driver");
+                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/placement_management", "root", "root");
+                        PreparedStatement ps = conn.prepareStatement("SELECT id, company_name, industry, email FROM companies WHERE status = 'PENDING'");
+                        ResultSet rs = ps.executeQuery();
+                        boolean hasPending = false;
+                        while(rs.next()) {
+                            hasPending = true;
+                %>
+                <tr>
+                    <td><%= rs.getString("company_name") %></td>
+                    <td><%= rs.getString("industry") %></td>
+                    <td><%= rs.getString("email") %></td>
+                    <td>
+                        <form action="ApproveCompanyServlet" method="post" style="display:inline;">
+                            <input type="hidden" name="companyId" value="<%= rs.getInt("id") %>">
+                            <button type="submit" style="padding:5px 10px; background-color:#28a745; color:white; border:none; border-radius:3px; cursor:pointer;">Approve</button>
+                        </form>
+                    </td>
+                </tr>
+                <%      }
+                        if (!hasPending) {
+                %>
+                <tr>
+                    <td colspan="4" style="text-align:center;">No pending approvals</td>
+                </tr>
+                <%
+                        }
+                        rs.close();
+                        ps.close();
+                        conn.close();
+                    } catch(Exception e) {
+                        out.println("<tr><td colspan='4'>Error loading pending companies: " + e.getMessage() + "</td></tr>");
+                    }
+                %>
+            </tbody>
+        </table>
     </section>
 
     <!-- Drives -->

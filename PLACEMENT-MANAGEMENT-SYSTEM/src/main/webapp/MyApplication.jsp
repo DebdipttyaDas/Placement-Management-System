@@ -23,7 +23,7 @@
             <li><a href="Student_dashboard.jsp">Dashboard</a></li>
             <li><a href="Placement.jsp">Placements</a></li>
             <!-- FIXED HERE -->
-            <li class="active"><a href="MyApplication.jsp">My Applications</a></li>
+            <li class="active">My Applications</a></li>
         </ul>
     </div>
 

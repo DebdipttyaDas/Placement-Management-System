@@ -52,9 +52,9 @@
             <!-- USERS -->
             <h3>Users</h3>
             <ul>
-                <li>Students – Apply and track jobs</li>
-                <li>Admin – Manage placements and companies</li>
-                <li>Company – Post job openings and review applications</li>
+                <li>Students can apply and track jobs</li>
+                <li>Admin can manage placements and companies</li>
+                <li>Company can post job openings and review applications</li>
             </ul>
 
             <!-- FUTURE SCOPE -->
@@ -70,7 +70,7 @@
 
             <!-- FOOTER -->
             <p>Developed by: Team CampusConnect</p>
-            <p>© <%= java.time.Year.now() %> All Rights Reserved</p>
+            <p>Â© <%= java.time.Year.now() %> All Rights Reserved</p>
 
         </div>
 
