@@ -20,7 +20,7 @@
         <ul>
           <li><a href="Student_dashboard.jsp" style="color: white;text-decoration: none;">Dashboard</a></li>
           <li><a href="Placement.jsp" style="color: white;text-decoration: none;">Placement</a></li>
-          <li><a href="MyApplications.jsp" style="color: white;text-decoration: none;">My Applications</a></li>
+          <li><a href="MyApplication.jsp" style="color: white;text-decoration: none;">My Applications</a></li>
         </ul>
 
         <!-- Logout -->
