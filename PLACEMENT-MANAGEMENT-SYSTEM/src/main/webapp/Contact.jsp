@@ -66,7 +66,7 @@
       Developed by Team CampusConnect <br>
       © 2026 All Rights Reserved
     </footer>
-
+    <script src="Contact.js"></script>
   </body>
 
   </html>

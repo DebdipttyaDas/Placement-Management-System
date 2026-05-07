@@ -61,8 +61,7 @@
                 alt="Profile Preview">
             </div>
 
-            <input type="file" name="photo" id="photoInput" class="upload-btn" accept="image/png, image/jpeg"
-              onchange="previewImage(event)">
+            <input type="file" name="photo" id="photoInput" class="upload-btn" accept="image/png, image/jpeg">
           </div>
 
           <!-- PERSONAL INFO -->
@@ -208,18 +207,8 @@
 
         hiddenInput.value = stringData.join(',');
       }
-
-      function previewImage(event) {
-        const reader = new FileReader();
-        reader.onload = function () {
-          const output = document.getElementById('profilePreview');
-          output.src = reader.result;
-        }
-        if (event.target.files[0]) {
-          reader.readAsDataURL(event.target.files[0]);
-        }
-      }
     </script>
+    <script src="StudentProfile.js"></script>
   </body>
 
   </html>
