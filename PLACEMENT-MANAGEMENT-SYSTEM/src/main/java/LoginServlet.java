@@ -62,6 +62,10 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", email);
                 session.setAttribute("role", role);
+                
+                // Set mock profile completeness (Can be fetched from DB later)
+                session.setAttribute("profileComplete", 80);
+                
                 response.sendRedirect("Student_dashboard.jsp");
             } else {
                 request.setAttribute("error", "Invalid student credentials");

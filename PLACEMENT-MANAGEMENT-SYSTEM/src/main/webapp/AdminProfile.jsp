@@ -18,7 +18,7 @@
 
     <div class="nav-buttons">
         <button class="nav-btn"><a href="AdminDashboard.jsp" class="nav-btn" style="text-decoration:none;">Back to dashboard</a></button>
-         <button class="save-btn">Save Profile</button>
+         <button class="save-btn" onclick="document.getElementById('adminProfileForm').submit();">Save Profile</button>
     </div>
 </header>
 
@@ -29,24 +29,22 @@
 
         <h2>Edit Profile</h2>
 
-        <form>
+        <form id="adminProfileForm" action="AdminProfileServlet" method="post">
 
             <label>Admin ID</label>
-            <input type="text" placeholder="Enter Admin ID">
-
+            <input type="text" name="adminId" placeholder="Enter Admin ID" required>
 
             <label>Username</label>
-            <input type="text" placeholder="Enter Username">
+            <input type="text" name="username" placeholder="Enter Username" required>
 
             <label>Email</label>
-            <input type="email" placeholder="Enter Email">
+            <input type="email" name="email" placeholder="Enter Email" required>
 
             <label>Password</label>
-            <input type="password" placeholder="Enter Password">
+            <input type="password" name="password" placeholder="Enter Password">
 
             <label>Phone Number</label>
-            <input type="number" placeholder="Enter Phone Number">
-
+            <input type="number" name="phone" placeholder="Enter Phone Number">
 
         </form>
         <!-- FORM END -->
