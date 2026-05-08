@@ -1,0 +1,185 @@
+/* SIDEBAR */
+.sidebar {
+    width: 240px;
+    background: #f9fafb;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+}
+
+.logo {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.menu {
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.menu:hover {
+    background: #e5e7eb;
+}
+
+.menu.active {
+    background: #e0ecff;
+}
+
+/* PROFILE */
+.profile {
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.profile img {
+    border-radius: 50%;
+}
+
+.name {
+    font-size: 14px;
+}
+
+.role {
+    font-size: 12px;
+    color: gray;
+}
+
+/* MAIN */
+.main {
+    margin-left: 240px;
+    padding: 25px;
+    width: 100%;
+}
+
+/* TOPBAR */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.top-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.btn {
+    background: #1e3a8a;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+}
+
+/* PERFORMANCE */
+.performance p {
+    color: gray;
+    font-size: 12px;
+}
+
+.performance h2 {
+    font-size: 50px;
+    font-weight: bold;
+    color: #1e3a8a;
+}
+
+/* CARD */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    overflow:hidden;
+}
+
+/* PIE FIX */
+.pie-wrapper {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: auto;
+}
+
+.pie-wrapper canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* CENTER TEXT */
+.center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.center-text h2 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.center-text p {
+    font-size: 12px;
+    color: gray;
+}
+
+/* PROGRESS */
+.progress-item {
+    margin-top: 15px;
+}
+
+.progress-item p {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bar {
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 10px;
+}
+
+.bar div {
+    height: 8px;
+    background: #1e3a8a;
+    border-radius: 10px;
+}
+
+/* LINE GRAPH */
+.line-wrapper {
+    height: 320px;
+    margin-top:20px;
+}
+
+/* GROWTH */
+.growth {
+    color: green;
+    font-size: 12px;
+}
+
+/* SMALL CARDS */
+.small-card {
+    background: #f3f4f6;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.small-card.orange {
+    background: #fcd9c6;
+}
+
+.small-card.blue {
+    background: #c7d7f5;
+}
+
+/* TEXT */
+.sector-text {
+    margin-top: 10px;
+    font-size: 12px;
+    text-align: center;
+}
