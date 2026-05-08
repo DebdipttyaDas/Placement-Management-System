@@ -173,6 +173,7 @@
   <script>
     // Optionally keep validation here if needed, but removed preventDefault for actual submission.
   </script>
+  <script src="StudentRegister.js"></script>
   
 </body>
 </html>

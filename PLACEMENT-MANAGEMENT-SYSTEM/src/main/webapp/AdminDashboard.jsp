@@ -263,40 +263,7 @@
 </main>
 
 <!-- Chart JS -->
-<script>
-new Chart(document.getElementById("barChart"), {
-    type: "bar",
-    data: {
-        labels: ["Jan","Feb","Mar","Apr","May","Jun"],
-        datasets: [{
-            label: "Placement %",
-            data: [40, 55, 60, 50, 70, 80]
-        }]
-    }
-});
-
-new Chart(document.getElementById("pieChart"), {
-    type: "pie",
-    data: {
-        labels: ["CSE","BCA","MCA","BBA","MBA","IT","ECE"],
-        datasets: [{
-            data: [40, 25, 20, 15, 10, 12,10]
-        }]
-    }
-});
-
-new Chart(document.getElementById("lineChart"), {
-    type: "line",
-    data: {
-        labels: ["Jan","Feb","Mar","Apr","May","Jun"],
-        datasets: [{
-            label: "Jobs Posted",
-            data: [10, 20, 15, 25, 30, 35],
-            fill: false
-        }]
-    }
-});
-</script>
+<script src="AdminDashboard.js"></script>
 
 </body>
 </html>
