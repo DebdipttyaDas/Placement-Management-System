@@ -74,18 +74,6 @@
     class="w-full mt-1 p-2 rounded-md bg-white/10 border border-black-200 text-white placeholder-white-400 focus:outline-none focus:ring-2 focus:ring-white-400">
 </div>
 
-<!-- Password -->
-<div class="text-left mb-3">
-  <div class="flex justify-between text-xs text-white">
-    <label>PASSWORD</label>
-    <a href="#" class="text-white hover:underline">Forgot?</a>
-  </div>
-
-  <input type="password" name="password"
-    placeholder="Enter your password" style="color: white;"
-    class="w-full mt-1 p-2 rounded-md bg-white/10 border border-black-200 text-white placeholder-white-400 focus:outline-none focus:ring-2 focus:ring-white-400">
-
-</div>
 
 <!-- Company Form -->
 <div id="companyForm" style="display:none;">
@@ -99,6 +87,18 @@
 
 </div>
 
+<!-- Password -->
+<div class="text-left mb-3">
+  <div class="flex justify-between text-xs text-white">
+    <label>PASSWORD</label>
+    <a href="#" class="text-white hover:underline">Forgot?</a>
+  </div>
+
+  <input type="password" name="password"
+    placeholder="Enter your password" style="color: white;"
+    class="w-full mt-1 p-2 rounded-md bg-white/10 border border-black-200 text-white placeholder-white-400 focus:outline-none focus:ring-2 focus:ring-white-400">
+
+</div>
 
 <!-- Button -->
 <button type="submit"
