@@ -19,7 +19,7 @@
 
       <ul>
         <li><a href="Student_dashboard.jsp" style="text-decoration:none; color:white">Dashboard</a></li>
-        <li><a href="PLacement.jsp" style="text-decoration:none; color:white">Placements</a></li>
+        <li><a href="#" style="text-decoration:none; color:white">Placements</a></li>
         <li><a href="MyApplication.jsp" style="text-decoration:none; color:white">My Applications</a></li>
       </ul>
     </div>
