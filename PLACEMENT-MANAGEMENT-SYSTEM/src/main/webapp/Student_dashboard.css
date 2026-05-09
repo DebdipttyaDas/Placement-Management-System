@@ -597,58 +597,67 @@ body {
   text-decoration: none;
 }
 
-/* JOB CARDS CONTAINER */
-.job-cards {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 50px;
+/* advertisement */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #000;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* SINGLE JOB CARD */
-.job-card {
-    width: 280px;
-    padding: 50px;
-    background-color: #408A71;
-    color: white;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+.slideshow {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-radius: 16px;
 }
 
-/* CARD TEXT */
-.job-card h3 {
-    margin: 10px 0 5px;
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out;
 }
 
-.job-card p {
-    color: white;
-    margin-bottom: 10px;
+.slide.active {
+  opacity: 1;
 }
 
-/* TAGS */
-.job-card span {
-    display: inline-block;
-    background-color: #06473e;
-    padding: 4px 8px;
-    border-radius: 5px;
-    font-size: 12px;
-    margin-right: 5px;
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* APPLY BUTTON */
-.job-card button {
-    width: 100%;
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #06473e;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  z-index: 10;
 }
 
-.job-card button:hover {
-    background-color: #06473e;
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.dot.on {
+  width: 25px;
+  border-radius: 5px;
+  background: white;
 }
