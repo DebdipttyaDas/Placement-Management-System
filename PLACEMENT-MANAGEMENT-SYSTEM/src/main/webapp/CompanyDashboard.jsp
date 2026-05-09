@@ -28,10 +28,27 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         <br><br>
 
         <ul class="menu">
-            <li class="active">Dashboard</li>
-            <li>Job Posting</li>
-            <li>Placement Management</li>
-            <li>Interview Scheduling</li>
+            <li class="active">
+            
+            Dashboard
+        </li>
+
+        <li >
+            <a href="JobPosted.jsp"
+            style="text-decoration: none; color: white;"> Job Posted</a>
+        </li>
+
+        <li>
+            <a href="Interviews.jsp"
+            style="text-decoration: none; color: white;">Interviews</a>
+        </li>
+        
+        <li >
+        <a href="PlacementAnalysis.jsp"
+                        style="text-decoration: none; color: white;">
+                        Placement Analysis </a>
+           
+        </li>
         </ul>
 
     </div>
