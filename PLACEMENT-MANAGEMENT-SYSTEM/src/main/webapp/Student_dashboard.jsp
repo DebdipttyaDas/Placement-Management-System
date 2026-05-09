@@ -221,39 +221,32 @@ pageEncoding="UTF-8" isELIgnored="false"%>
 
           </div>
 
-          <!-- LATEST PLACEMENTS -->
-          <h2> Recommended Jobs for You </h2>
-<div class="job-cards">
-    <div class="job-card">
-        <h3>Job Title</h3>
-        <p><b style="color: white;">Company Name</b></p>
-        <div>
-            <span>Location</span>
-            <span>Part-time/Full-time</span>
-        </div>
-        <button>View Details</button>
-    </div>
-
-    <div class="job-card">
-        <h3>Job Title</h3>
-        <p><b style="color: white;">Company Name</b></p>
-        <div>
-            <span>Location</span>
-            <span>Part-time/Full-time</span>
-        </div>
-        <button>View Details</button>
-    </div>
-    
-    <div class="job-card">
-        <h3>Job Title</h3>
-        <p><b style="color: white;">Company Name</b></p>
-        <div>
-            <span>Location</span>
-            <span>Part-time/Full-time</span>
-        </div>
-        <button>View Details</button>
-    </div>
-</div>
+          <!-- Advertisement -->
+          <div class="slideshow">
+              <div class="slide active"><img src="image/empty-road-trees.jpg" alt="Slide 1" /></div>
+              <div class="slide"><img src="image/filip-zrnzevic-_EMkxLdko9k-unsplash.jpg" alt="Slide 2" /></div>
+              <div class="slide"><img src="image/pexels-deeonederer-2793170.jpg" alt="Slide 3" /></div>
+           <div class="dots">
+              <div class="dot on"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+           </div>
+          </div>
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let current = 0;
+    function goTo(n) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('on');
+      current = n % slides.length;
+      slides[current].classList.add('active');
+      dots[current].classList.add('on');
+    }
+    dots.forEach((d, i) => d.onclick = () => goTo(i));
+    setInterval(() => goTo(current + 1), 3000);
+</script>
+          
 
         </div>
 
