@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8" isELIgnored="false"%>
 
   <!DOCTYPE html>
   <html lang="en">
@@ -63,24 +64,53 @@
               </div>
             </div>
 
-            <div class="readiness-box">
-              <div class="readiness-header">
-                <span class="readiness-title">Profile Completion</span>
-                <span class="pro-badge">Pro Level</span>
-              </div>
-              <div class="progress-bar-container">
-                <div class="progress-track">
-                  <div class="progress-fill" id="profileProgressBar"></div>
-                  <script>
-                    document.getElementById('profileProgressBar').style.width = '${not empty sessionScope.profileComplete ? sessionScope.profileComplete : "0"}%';
-                  </script>
-                </div>
-              </div>
-              <div class="readiness-footer">
-                <span>${not empty sessionScope.profileComplete ? sessionScope.profileComplete : '0'}% Complete</span>
-                <span>${sessionScope.profileComplete == 100 ? 'All Set!' : 'Action: Update Profile'}</span>
-              </div>
+            <%
+    Object profileObj = session.getAttribute("profileComplete");
+
+    String profileComplete = "0";
+
+    if(profileObj != null){
+        profileComplete = profileObj.toString();
+    }
+
+    int progressValue = Integer.parseInt(profileComplete);
+%>
+
+<div class="readiness-box">
+
+    <div class="readiness-header">
+        <span class="readiness-title">Profile Completion</span>
+        <span class="pro-badge">Pro Level</span>
+    </div>
+
+    <div class="progress-bar-container">
+
+        <div class="progress-track">
+
+            <div class="progress-fill"
+                 id="profileProgressBar"
+                 style="width:<%= profileComplete %>%;">
             </div>
+
+        </div>
+
+    </div>
+
+    <div class="readiness-footer">
+
+        <span>
+            <%= profileComplete %>% Complete
+        </span>
+
+        <span>
+            <%= (progressValue == 100)
+                ? "All Set!"
+                : "Action: Update Profile" %>
+        </span>
+
+    </div>
+
+</div>
           </div>
 
           <!-- STATS -->
