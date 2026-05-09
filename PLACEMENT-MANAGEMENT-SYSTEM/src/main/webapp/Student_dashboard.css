@@ -600,8 +600,8 @@ body {
 /* advertisement */
 .slideshow {
   position: relative;
-  width: 800px;
-  height: 500px;
+  width: 1250px;
+  height: 400px;
   overflow: hidden;
   border-radius: 16px;
 }
