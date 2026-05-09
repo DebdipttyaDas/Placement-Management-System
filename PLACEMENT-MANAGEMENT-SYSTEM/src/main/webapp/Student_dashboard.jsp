@@ -223,11 +223,13 @@ pageEncoding="UTF-8" isELIgnored="false"%>
 
           <!-- Advertisement -->
           <div class="slideshow">
-              <div class="slide active"><img src="image/empty-road-trees.jpg" alt="Slide 1" /></div>
-              <div class="slide"><img src="image/filip-zrnzevic-_EMkxLdko9k-unsplash.jpg" alt="Slide 2" /></div>
-              <div class="slide"><img src="image/pexels-deeonederer-2793170.jpg" alt="Slide 3" /></div>
+              <div class="slide active"><img src="images/img1.png" alt="Slide 1" /></div>
+              <div class="slide"><img src="images/img2.png" alt="Slide 2" /></div>
+              <div class="slide"><img src="images/img3.png" alt="Slide 3" /></div>
+              <div class="slide"><img src="images/img4.png" alt="Slide 4" /></div>
            <div class="dots">
               <div class="dot on"></div>
+              <div class="dot"></div>
               <div class="dot"></div>
               <div class="dot"></div>
            </div>
