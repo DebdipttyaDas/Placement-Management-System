@@ -16,6 +16,10 @@
 <!-- External CSS -->
 <link rel="stylesheet" href="Placement_management.css">
 
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body class="bg-gray-100 flex">
@@ -43,18 +47,7 @@
         </li>
     </ul>
 
-    <!-- PROFILE -->
-    <div class="profile">
-
-        <img src="https://i.pravatar.cc/40" alt="Profile">
-
-        <div>
-            <p class="name">Dr. Julian Vance</p>
-            <span class="role">Placement Dean</span>
-        </div>
-
-    </div>
-
+    
 </div>
 
 <!-- MAIN -->
@@ -63,21 +56,15 @@
     <!-- TOPBAR -->
     <div class="topbar">
 
-        <h1 class="text-3xl font-bold">Executive Architect</h1>
+            <h2>Analytics Dashboard</h2>
 
-        <div class="top-actions">
-
-            <span class="text-xl">🔍</span>
-
-            <span class="text-xl">🔔</span>
-
-            <button class="btn">
-                Generate Report
-            </button>
+            <div class="top-icons">
+                <i class="fa fa-user-circle profile"></i>
+                <i class="fa fa-bell bell"></i>
+            </div>
 
         </div>
-
-    </div>
+    
 
     <!-- PERFORMANCE -->
     <div class="performance">
