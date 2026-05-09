@@ -52,7 +52,7 @@ pageEncoding="UTF-8" isELIgnored="false"%>
             <div class="welcome-text-section">
               <span class="career-journey">CAREER JOURNEY</span>
               <h1>Hello, <%= session.getAttribute("studentName") !=null ? session.getAttribute("studentName")
-                  : "Student" %>! 👋</h1>
+                  : "Student" %>!</h1>
               <p>You're in the top 15% of candidates this week. Keep the momentum going for the upcoming Google
                 interview.</p>
 
