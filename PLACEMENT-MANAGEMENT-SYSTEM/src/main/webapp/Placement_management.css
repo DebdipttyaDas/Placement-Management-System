@@ -68,7 +68,7 @@ body {
 .topbar {
     background: #06473e;
     color: white;
-    padding: 15px 20px;
+    padding: 20px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
