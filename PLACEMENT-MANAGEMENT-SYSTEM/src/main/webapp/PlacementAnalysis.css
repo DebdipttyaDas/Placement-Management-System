@@ -7,8 +7,10 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    display: flex;
+    overflow-x:hidden;
+    background:#f4f6f9
 }
+
 
 
 /* SIDEBAR */
@@ -60,30 +62,40 @@ body {
 /* MAIN */
 .main {
     margin-left: 240px;
-    padding: 25px;
-    width: 100%;
+    width: calc(100% - 240px);
+    min-height: 100vh;
+    background: #f4f6f9;
+    overflow-x:hidden;
 }
 
 /* TOPBAR */
-.topbar {
-    background: #06473e;
-    color: white;
-    padding: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.topbar{
+    background:#06473e;
+    color:white;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    
+    position:fixed;
+    top:0;
+    left:240px;
+    
+    width:calc(100vw - 240px);
+    z-index:1000;
 }
-
 .top-icons {
     display: flex;
     align-items: flex-end;
-    gap: 17px;  
+    gap: 22px;
+    margin-left:auto;  
 }
 
 .profile, .bell {
     font-size: 24px;
     cursor: pointer;
 }
+
 
 
 /* PERFORMANCE */
@@ -192,4 +204,38 @@ body {
     margin-top: 10px;
     font-size: 12px;
     text-align: center;
+}
+
+.page-content{
+    padding:25px;
+}
+
+.container{
+    width:100%;
+    
+}
+
+.grid{
+    width:100%;
+}
+
+/* FIX FOR TAILWIND GRID OVERFLOW */
+.grid-cols-2{
+    grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+}
+
+.grid-cols-4{
+    grid-template-columns: repeat(4,minmax(0,1fr)) !important;
+}
+
+/* IMPORTANT */
+.card,
+.small-card{
+    min-width:0;
+}
+
+/* REMOVE EXTRA SPACE */
+.page-content{
+    padding:110px 25px 25px 25px;
+    width:100%;
 }
