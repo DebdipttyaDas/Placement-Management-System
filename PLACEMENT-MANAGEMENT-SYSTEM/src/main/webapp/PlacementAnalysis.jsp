@@ -28,24 +28,27 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <!-- SIDEBAR -->
 <div class="sidebar">
-
-    <h2>Company Portal</h2>
+<h2>Placement Analysis </h2>
 <br><br>
     <ul class="menu">
         <li>
-            <a href="CompanyDashboard.jsp">Dashboard</a>
+            <a href="CompanyDashboard.jsp"
+            style="text-decoration: none; color:white;">Dashboard</a>
         </li>
 
         <li >
-            <a href="#">Job Posting</a>
-        </li>
-
-        <li class="active">
-            Placement Management
+            <a href="JobPosted.jsp"
+            style="text-decoration: none; color: white;"> Job Posted</a>
         </li>
 
         <li>
-            <a href="Interviews.jsp">Interview Scheduling</a>
+            <a href="Interviews.jsp"
+            style="text-decoration: none; color: white;">Interviews</a>
+        </li>
+        
+        <li class="active" >
+                        Placement Analysis 
+           
         </li>
     </ul>
 
@@ -58,7 +61,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     <!-- TOPBAR -->
     <div class="topbar">
 
-            <h2>Analytics Dashboard</h2>
+           
 
             <div class="top-icons">
                 <i class="fa fa-user-circle profile"></i>
@@ -67,10 +70,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
         </div>
     
-
+<div class="page-content">
     <!-- PERFORMANCE -->
     <div class="performance">
-
+<h2>Analytics Dashboard</h2>
         <p>GLOBAL PERFORMANCE</p>
 
         <h2>98.4%</h2>
@@ -247,7 +250,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     </div>
 
 </div>
-
 </div>
 <!-- CHART SCRIPT -->
 <script>
