@@ -35,10 +35,8 @@ contentType="text/html;
                   style="text-decoration: none; color: white;"> Job Posted </a> 
                   </li>
                    <li class="active">
-                    <a href="MyApplication.jsp" 
-                    style="text-decoration: none; color: white;">
                     
-                     Interviews </a> 
+                     Interviews  
                      </li>
                       <li>
                        <a href="PlacementAnalysis.jsp"
