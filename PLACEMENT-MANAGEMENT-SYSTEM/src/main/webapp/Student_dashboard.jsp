@@ -58,7 +58,7 @@ pageEncoding="UTF-8" isELIgnored="false"%>
 
               <div class="welcome-actions">
                 <div class="btn-apply-wrapper">
-                  <a href="#" class="btn-apply"><i class="fa fa-briefcase"></i> Apply to Jobs</a>
+                  <a href="Placement.jsp" class="btn-apply"><i class="fa fa-briefcase"></i> Apply to Jobs</a>
                 </div>
                 <a href="#" class="btn-resume"><i class="fa fa-file-alt"></i> My Resume</a>
               </div>
@@ -222,6 +222,7 @@ pageEncoding="UTF-8" isELIgnored="false"%>
           </div>
 
           <!-- LATEST PLACEMENTS -->
+          <h2> Recommended Jobs for You </h2>
 <div class="job-cards">
     <div class="job-card">
         <h3>Job Title</h3>
