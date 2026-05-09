@@ -1,52 +1,60 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+}
+
+
 /* SIDEBAR */
 .sidebar {
     width: 240px;
-    background: #f9fafb;
-    height: 100vh;
+     min-height:100vh;
+     background: #06473e;
+    color: white;
     padding: 20px;
+    height: 100vh;
     position: fixed;
 }
 
 .logo {
-    font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .menu {
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    list-style: none;
+}
+
+.menu li {
+    padding: 15px;
+    margin: 10px 0;
     cursor: pointer;
-}
-
-.menu:hover {
-    background: #e5e7eb;
-}
-
-.menu.active {
-    background: #e0ecff;
-}
-
-/* PROFILE */
-.profile {
-    position: absolute;
-    bottom: 20px;
+    border-radius: 8px;
     display: flex;
-    gap: 10px;
     align-items: center;
+    gap: 10px;
 }
 
-.profile img {
-    border-radius: 50%;
+.menu li{
+    transition:0.3s ease;
+}
+.menu li:hover{
+    background:rgba(255,255,255,0.18);
+    transform:translateX(8px) scale(1.02);
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+.menu li:active{
+    transform:scale(0.97);
 }
 
-.name {
-    font-size: 14px;
-}
 
-.role {
-    font-size: 12px;
-    color: gray;
+.menu li.active {
+    background: #0d6e60;
 }
 
 /* MAIN */
@@ -58,23 +66,25 @@
 
 /* TOPBAR */
 .topbar {
+    background: #06473e;
+    color: white;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.top-actions {
-    display: flex;
-    gap: 15px;
     align-items: center;
 }
 
-.btn {
-    background: #1e3a8a;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 8px;
+.top-icons {
+    display: flex;
+    align-items: flex-end;
+    gap: 17px;  
 }
+
+.profile, .bell {
+    font-size: 24px;
+    cursor: pointer;
+}
+
 
 /* PERFORMANCE */
 .performance p {
