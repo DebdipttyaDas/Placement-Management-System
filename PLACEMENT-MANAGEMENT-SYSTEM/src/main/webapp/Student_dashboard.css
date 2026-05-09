@@ -55,7 +55,7 @@ body {
 
 /* ===== WELCOME BOX ===== */
 .welcome-box {
-  background: linear-gradient(135deg, #61ef68 0%, #61ef68 50%, #61ef68 100%);
+  background: #0d6e60;
   padding: 30px;
   border-radius: 15px;
   margin-bottom: 25px;
