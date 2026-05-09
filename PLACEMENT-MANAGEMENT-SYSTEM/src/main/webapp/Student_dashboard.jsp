@@ -222,17 +222,37 @@ pageEncoding="UTF-8" isELIgnored="false"%>
           </div>
 
           <!-- LATEST PLACEMENTS -->
-          <div class="list-box">
-            <h1>LATEST PLACEMENTS OPPORTUNITIES</h1>
-            <ul>
-              <li>TCS - Software Engineer</li>
-              <li>Infosys - Analyst</li>
-              <li>Wipro - Developer</li>
-              <li>Accenture - Consultant</li>
-              <li>Cognizant - Engineer</li>
-              <li>HCL - Specialist</li>
-            </ul>
-          </div>
+<div class="job-cards">
+    <div class="job-card">
+        <h3>Job Title</h3>
+        <p><b style="color: black;">Company Name</b></p>
+        <div>
+            <span>Location</span>
+            <span>Part-time/Full-time</span>
+        </div>
+        <button>View Details</button>
+    </div>
+
+    <div class="job-card">
+        <h3>Job Title</h3>
+        <p><b style="color: black;">Company Name</b></p>
+        <div>
+            <span>Location</span>
+            <span>Part-time/Full-time</span>
+        </div>
+        <button>View Details</button>
+    </div>
+    
+    <div class="job-card">
+        <h3>Job Title</h3>
+        <p><b style="color: black;">Company Name</b></p>
+        <div>
+            <span>Location</span>
+            <span>Part-time/Full-time</span>
+        </div>
+        <button>View Details</button>
+    </div>
+</div>
 
         </div>
 
