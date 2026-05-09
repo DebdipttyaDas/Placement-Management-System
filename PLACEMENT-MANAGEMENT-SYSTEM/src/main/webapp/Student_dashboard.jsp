@@ -225,7 +225,7 @@ pageEncoding="UTF-8" isELIgnored="false"%>
 <div class="job-cards">
     <div class="job-card">
         <h3>Job Title</h3>
-        <p><b style="color: black;">Company Name</b></p>
+        <p><b style="color: white;">Company Name</b></p>
         <div>
             <span>Location</span>
             <span>Part-time/Full-time</span>
@@ -235,7 +235,7 @@ pageEncoding="UTF-8" isELIgnored="false"%>
 
     <div class="job-card">
         <h3>Job Title</h3>
-        <p><b style="color: black;">Company Name</b></p>
+        <p><b style="color: white;">Company Name</b></p>
         <div>
             <span>Location</span>
             <span>Part-time/Full-time</span>
@@ -245,7 +245,7 @@ pageEncoding="UTF-8" isELIgnored="false"%>
     
     <div class="job-card">
         <h3>Job Title</h3>
-        <p><b style="color: black;">Company Name</b></p>
+        <p><b style="color: white;">Company Name</b></p>
         <div>
             <span>Location</span>
             <span>Part-time/Full-time</span>
