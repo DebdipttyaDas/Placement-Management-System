@@ -48,8 +48,39 @@
 
           <!-- WELCOME BOX -->
           <div class="welcome-box">
-            <h1>WELCOME BACK !</h1>
-            <p>Explore placements, apply for jobs, and build your career</p>
+            <div class="welcome-text-section">
+              <span class="career-journey">CAREER JOURNEY</span>
+              <h1>Hello, <%= session.getAttribute("studentName") !=null ? session.getAttribute("studentName")
+                  : "Student" %>! 👋</h1>
+              <p>You're in the top 15% of candidates this week. Keep the momentum going for the upcoming Google
+                interview.</p>
+
+              <div class="welcome-actions">
+                <div class="btn-apply-wrapper">
+                  <a href="#" class="btn-apply"><i class="fa fa-briefcase"></i> Apply to Jobs</a>
+                </div>
+                <a href="#" class="btn-resume"><i class="fa fa-file-alt"></i> My Resume</a>
+              </div>
+            </div>
+
+            <div class="readiness-box">
+              <div class="readiness-header">
+                <span class="readiness-title">Profile Completion</span>
+                <span class="pro-badge">Pro Level</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-track">
+                  <div class="progress-fill" id="profileProgressBar"></div>
+                  <script>
+                    document.getElementById('profileProgressBar').style.width = '${not empty sessionScope.profileComplete ? sessionScope.profileComplete : "0"}%';
+                  </script>
+                </div>
+              </div>
+              <div class="readiness-footer">
+                <span>${not empty sessionScope.profileComplete ? sessionScope.profileComplete : '0'}% Complete</span>
+                <span>${sessionScope.profileComplete == 100 ? 'All Set!' : 'Action: Update Profile'}</span>
+              </div>
+            </div>
           </div>
 
           <!-- STATS -->
@@ -59,46 +90,106 @@
             <div class="card"><b>Open Jobs:</b> 12</div>
           </div>
 
-          <!-- COMPANY INSIGHTS -->
-          <section class="insights-container">
-            <h1>COMPANY INSIGHTS</h1>
+          <!-- DASHBOARD WIDGETS -->
+          <div class="dashboard-widgets">
 
-            <div class="insights-grid">
-              <div class="company-card">
-                <div class="company-icon color-google">G</div>
-                <div class="company-info">
-                  <h3 class="company-header">Google: 25+ LPA</h3>
-                  <p class="detail-text"><strong>Focus:</strong> Algorithms & Systems</p>
+            <!-- LEFT COLUMN -->
+            <div class="widget-col-left">
+
+              <!-- Upcoming Deadlines -->
+              <div class="widget-box deadlines-box">
+                <div class="widget-header">
+                  <h3><i class="fa-regular fa-clock"></i> Upcoming Deadlines</h3>
+                  <a href="#" class="view-all">View All</a>
+                </div>
+
+                <div class="deadline-item">
+                  <div class="dl-icon stripe-icon"><i class="fa-brands fa-stripe-s"></i></div>
+                  <div class="dl-info">
+                    <h4>Stripe</h4>
+                    <p>Software Engineer Intern</p>
+                  </div>
+                  <div class="dl-action">
+                    <span class="time-left">2 hours left</span>
+                    <a href="#" class="btn-text">APPLY NOW</a>
+                  </div>
+                </div>
+
+                <div class="deadline-item">
+                  <div class="dl-icon meta-icon"><i class="fa-brands fa-meta"></i></div>
+                  <div class="dl-info">
+                    <h4>Meta</h4>
+                    <p>Product Design Associate</p>
+                  </div>
+                  <div class="dl-action">
+                    <span class="time-normal">Tomorrow</span>
+                    <span class="status-draft">IN DRAFT</span>
+                  </div>
                 </div>
               </div>
 
-              <div class="company-card">
-                <div class="company-icon color-microsoft">M</div>
-                <div class="company-info">
-                  <h3 class="company-header">Microsoft: 22+ LPA</h3>
-                  <p class="detail-text"><strong>Focus:</strong> Project Experience</p>
-                </div>
+              <!-- Career Tip -->
+              <div class="widget-box career-tip-box">
+                <span class="tip-badge">CAREER TIP</span>
+                <h3>Master the 'System Design' interview</h3>
+                <p>Learn how to build scalable architectures for real-world scenarios.</p>
+                <a href="#" class="read-guide">Read Full Guide &rarr;</a>
+                <i class="fa-solid fa-book-open tip-bg-icon"></i>
               </div>
+
             </div>
 
-            <div class="insights-grid">
-              <div class="company-card">
-                <div class="company-icon color-amazon">A</div>
-                <div class="company-info">
-                  <h3 class="company-header">Amazon: 20+ LPA</h3>
-                  <p class="detail-text"><strong>Focus:</strong> Problem Solving</p>
+            <!-- RIGHT COLUMN -->
+            <div class="widget-col-right">
+
+              <!-- Scheduled Interviews -->
+              <div class="widget-box interviews-box">
+                <div class="widget-header">
+                  <h3><i class="fa-regular fa-calendar-check"></i> Scheduled Interviews</h3>
+                  <div class="carousel-nav">
+                    <button>&lt;</button>
+                    <button>&gt;</button>
+                  </div>
                 </div>
+
+                <!-- Active Interview Card -->
+                <div class="interview-card active-card">
+                  <div class="ic-header">
+                    <span class="ic-time">TODAY @ 14:30</span>
+                    <span class="ic-badge">Technical Round 1</span>
+                  </div>
+                  <h2 class="ic-company">Google</h2>
+                  <div class="ic-details">
+                    <span><i class="fa-solid fa-video"></i> Google Meet</span>
+                    <span><i class="fa-regular fa-user"></i> Sarah Jenkins (Recruiter)</span>
+                  </div>
+                  <div class="ic-actions">
+                    <button class="btn-join">Join Call</button>
+                    <button class="btn-more">...</button>
+                  </div>
+                </div>
+
+                <!-- Upcoming Interview Card -->
+                <div class="interview-card upcoming-card">
+                  <div class="ic-header">
+                    <span class="ic-time">OCT 24 @ 10:00</span>
+                    <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Interviewer"
+                      class="interviewer-pic" />
+                  </div>
+                  <h2 class="ic-company">Airbnb</h2>
+                  <p class="ic-type">Culture Fit Round</p>
+
+                  <div class="ic-footer">
+                    <span class="interviewer-name">Interviewer: David Chen</span>
+                    <a href="#" class="btn-calendar">ADD TO CALENDAR</a>
+                  </div>
+                </div>
+
               </div>
 
-              <div class="company-card">
-                <div class="company-icon color-Deloitte">D</div>
-                <div class="company-info">
-                  <h3 class="company-header">Deloitte: 18+ LPA</h3>
-                  <p class="detail-text"><strong>Focus:</strong> Problem Solving</p>
-                </div>
-              </div>
             </div>
-          </section>
+
+          </div>
 
           <!-- LATEST PLACEMENTS -->
           <div class="list-box">

@@ -63,6 +63,27 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user", email);
                 session.setAttribute("role", role);
                 
+                // Fetch student name from database
+                String studentName = "Student"; // Fallback name
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+                         PreparedStatement ps = conn.prepareStatement("SELECT full_name FROM students WHERE email = ?")) {
+                        ps.setString(1, email);
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                String fullName = rs.getString("full_name");
+                                if (fullName != null && !fullName.trim().isEmpty()) {
+                                    studentName = fullName.trim().split("\\s+")[0]; // Get first name
+                                }
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    System.err.println("Error fetching student name: " + e.getMessage());
+                }
+                session.setAttribute("studentName", studentName);
+                
                 // Set mock profile completeness (Can be fetched from DB later)
                 session.setAttribute("profileComplete", 80);
                 
