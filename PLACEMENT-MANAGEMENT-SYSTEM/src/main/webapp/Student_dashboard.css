@@ -610,8 +610,8 @@ body {
 .job-card {
     width: 260px;
     padding: 50px;
-    background-color: #a9dce9d1;
-    color: black;
+    background-color: #408A71;
+    color: white;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
 }
@@ -622,14 +622,14 @@ body {
 }
 
 .job-card p {
-    color: black;
+    color: white;
     margin-bottom: 10px;
 }
 
 /* TAGS */
 .job-card span {
     display: inline-block;
-    background-color: #e5e7eb;
+    background-color: #06473e;
     padding: 4px 8px;
     border-radius: 5px;
     font-size: 12px;
@@ -641,7 +641,7 @@ body {
     width: 100%;
     margin-top: 10px;
     padding: 10px;
-    background-color: #05174a;
+    background-color: #06473e;
     color: white;
     border: none;
     border-radius: 6px;
@@ -650,5 +650,5 @@ body {
 }
 
 .job-card button:hover {
-    background-color: #03306b;
+    background-color: #06473e;
 }
