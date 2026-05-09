@@ -22,28 +22,30 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 </head>
 
-<body class="bg-gray-100 flex">
+<body>
+
+<div class="container">
 
 <!-- SIDEBAR -->
 <div class="sidebar">
 
-    <h2 class="logo">ARCHITECT PORTAL</h2>
-
-    <ul>
-        <li class="menu">
-            <a href="AdminDashboard.jsp">Dashboard</a>
+    <h2 class="logo">COMPANY PORTAL</h2>
+<br><br>
+    <ul class="menu">
+        <li>
+            <a href="CompanyDashboard.jsp">Dashboard</a>
         </li>
 
-        <li class="menu">
-            <a href="Students.jsp">Students</a>
+        <li >
+            <a href="#">Job Posting</a>
         </li>
 
-        <li class="menu">
-            <a href="Companies.jsp">Companies</a>
+        <li class="active">
+            Placement Management
         </li>
 
-        <li class="menu active">
-            <a href="Placement_management.jsp">Analytics</a>
+        <li>
+            <a href="Interviews.jsp">Interview Scheduling</a>
         </li>
     </ul>
 
@@ -246,6 +248,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 </div>
 
+</div>
 <!-- CHART SCRIPT -->
 <script>
 
