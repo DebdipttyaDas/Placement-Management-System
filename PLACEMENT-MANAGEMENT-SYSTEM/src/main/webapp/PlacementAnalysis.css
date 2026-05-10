@@ -1,43 +1,46 @@
-/* RESET */
+/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
 
 body {
+<<<<<<< HEAD
 
     background: #f4f6f9;
 
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
     font-family: 'Poppins', sans-serif;
     background:#f4f6f9
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 }
 
-/* ===== LAYOUT ===== */
-.container {
-    display: flex;
-}
 
-/* ===== SIDEBAR ===== */
+
+/* SIDEBAR */
 .sidebar {
-    width: 230px;
-    height: 120vh;
-    background: #0b3d36;
+    width: 240px;
+     min-height:100vh;
+     background: #06473e;
     color: white;
     padding: 20px;
+    height: 100vh;
+    position: fixed;
 }
 
+.sidebar h2 {
+    font-size: 21px;      
+    font-weight: 700;     
+    margin-bottom: 20px;  
+    color: #ffffff;     
+}
 .logo {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.admin-text {
-    font-size: 12px;
-    margin-bottom: 25px;
-    opacity: 0.7;
+    margin-bottom: 30px;
 }
 
 .menu {
@@ -45,10 +48,14 @@ body {
 }
 
 .menu li {
-    padding: 12px;
-    margin-bottom: 10px;
+    padding: 10px 12px;
+    margin: 6px 0;
+    cursor: pointer;
     border-radius: 8px;
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
     display: flex;
     align-items: center;
     gap: 10px;
@@ -107,21 +114,29 @@ body {
     cursor: pointer;
 }
 
-.menu li:hover {
-    background-color: rgba(255,255,255,0.25);
-    transform: translateX(5px);
+
+
+/* PERFORMANCE */
+.performance p {
+    color: gray;
+    font-size: 12px;
 }
 
-.menu .active {
-    background: #1d5c52;
+.performance h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1e3a8a;
 }
 
+<<<<<<< HEAD
 
 /* ===== MAIN ===== */
 .main-content {
     flex: 1;
     padding: 20px 30px;
     
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 /* CARD */
 .card {
     background: white;
@@ -129,187 +144,82 @@ body {
     border-radius: 12px;
     overflow:hidden;
     width: 100%;
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 }
 
-/* ===== TOPBAR ===== */
-.topbar {
+.center{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+/* PIE FIX */
+.pie-wrapper {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 20px auto;
+}
+
+.pie-wrapper canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* CENTER TEXT */
+.center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.center-text h2 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.center-text p {
+    font-size: 12px;
+    color: gray;
+}
+
+/* PROGRESS */
+.progress-item {
+    margin-top: 15px;
+}
+
+.progress-item p {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    background: #0b3d36;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 20px;
-    width: 100%;
-    color: white;
 }
 
-.top-links span {
-    margin-right: 20px;
-    cursor: pointer;
-    color: white;
-}
-
-/* ===== HEADER ===== */
-.page-header {
-    margin: 60px 0;
-}
-
-.page-header h1 {
-    font-size: 26px;
-}
-
-.page-header p {
-    color: #666;
-    margin-top: 5px;
-}
-
-.header-actions {
-    display: flex;
-    gap: 12px;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.controls-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f5f7fb;
-    margin-bottom:5px;
-    padding: 15px 20px;
-    border-radius: 8px;
-}
-/* Filter button (light) */
-.filter-btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 20px;
-    background: #0b3d36;
-    color: white;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.filter-btn:hover {
-    background: #555;
-}
-
-/* Create button (blue) */
-.create-btn {
-    padding: 8px 18px;
-    border: none;
-    border-radius: 20px;
-    background: #0b3d36;
-    color: white;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.create-btn:hover {
-    background: #555;
-}
-
-/* ===== CONTROLS ===== */
-.top-controls {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    background: #f5f7fb;
-}
-
-/* Group everything together */
-.left-group {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-/* Date */
-.date-text {
-    font-size: 18px;
-    color: #333;
-}
-
-/* Arrows */
-.arrow {
-    cursor: pointer;
-    font-size: 20px;
-    color: #666;
-}
-
-/* Toggle buttons */
-.view-toggle {
-    display: flex;
-    background: #eaecef;
-    border-radius: 10px;
-    padding: 5px;
-    margin-left: 10px; /* small gap from date */
-}
-
-.view-toggle button {
-    border: none;
-    background: transparent;
-    padding: 6px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    color: #555;
-}
-
-.view-toggle .active {
-    background: white;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    color: #000;
-}
-
-/* --- NEW TOOLBAR STYLES --- */
-
-.toolbar {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;            
-    padding: 15px 20px;
-    background: #f5f7fb;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-/* Ensure Right Actions are aligned nicely */
-.right-actions {
-    display: flex;
-    gap: 12px;
-}
-
-
-/* ===== CONTENT GRID ===== */
-.content {
-    display: flex;
-    gap: 20px;
-}
-
-/* ===== LEFT SCHEDULE ===== */
-.schedule {
-    flex: 2;
-    background: #ffffff;
-    padding: 20px;
+.bar {
+    height: 8px;
+    background: #e5e7eb;
     border-radius: 10px;
 }
 
-.slot {
-    display: flex;
-    margin-bottom: 20px;
+.bar div {
+    height: 8px;
+    background: #1e3a8a;
+    border-radius: 10px;
 }
 
+<<<<<<< HEAD
 
 .time {
     width: 90px;
     font-size: 13px;
     color: #666;
 
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 /* LINE GRAPH AREA*/
 .line-wrapper{
     width: 1000px;
@@ -320,9 +230,13 @@ body {
     display:flex;
     justify-content:center;
     align-items:center;
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 }
 
+<<<<<<< HEAD
 
 /* CARDS */
 .card {
@@ -332,107 +246,66 @@ body {
     background: #f9fafb;
     border-left: 5px solid;
 
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 #lineChart{
     width: 1000px !important;
     height:170px !important;
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 }
 
-.card h4 {
-    font-size: 13px;
-    margin-bottom: 5px;
-}
-
-.card p {
-    font-size: 14px;
-    margin-bottom: 3px;
-}
-
-.card small {
-    color: #777;
-}
-
-/* COLORS */
-.blue {
-    border-color: #2563eb;
-}
-
-.purple {
-    border-color: #7c3aed;
-}
-
-.red {
-    border-color: #dc2626;
-}
-
-/* BUTTON */
-.assign-btn {
-    margin-top: 10px;
-    padding: 6px 10px;
-    border: none;
-    background: #dc2626;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* ADD SLOT */
-.add-slot {
-    text-align: center;
-    padding: 12px;
-    border: 2px dashed #ccc;
-    border-radius: 8px;
-    color: #666;
-    cursor: pointer;
-}
-
-/* ===== RIGHT SIDE ===== */
-.sidebar-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* STATS */
-.stats {
-    display: flex;
-    gap: 10px;
-}
-
-.box {
-    flex: 1;
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-}
-
-.box p {
+/* GROWTH */
+.growth {
+    color: green;
     font-size: 12px;
-    color: #666;
 }
 
-.box h2 {
-    margin-top: 5px;
-}
-
-.red-text {
-    color: #dc2626;
-}
-
-/* PENDING */
-.pending {
-    background: white;
+/* SMALL CARDS */
+.small-card {
+    background: #f3f4f6;
     padding: 15px;
     border-radius: 10px;
 }
 
+<<<<<<< HEAD
 
 .person {
     background: #f3f4f6;
     padding: 10px;
     border-radius: 6px;
     margin: 8px 0;
+=======
+.small-card.orange {
+    background: #fcd9c6;
+}
+
+.small-card.blue {
+    background: #c7d7f5;
+}
+
+/* TEXT */
+.sector-text {
+    margin-top: 10px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.page-content{
+    padding:25px;
+}
+
+.container{
+    width:100%;
+    
+}
+
+.grid{
+    width:100%;
+}
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 
 /* FIX FOR TAILWIND GRID OVERFLOW */
 .grid-cols-2{
@@ -446,9 +319,13 @@ body {
     width:1100px;
 
     margin:0 auto;
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 }
 
+<<<<<<< HEAD
 
 .view-btn {
     width: 100%;
@@ -458,6 +335,8 @@ body {
     background: #e5e7eb;
     border-radius: 6px;
 
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 .grid-cols-4{
     display:grid !important;
     grid-template-columns: repeat(4, 264px) !important;
@@ -465,41 +344,56 @@ body {
     gap:20px;
     width:fit-content;
     margin:40px auto 0 auto;
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 }
 
-/* PANEL LOAD */
-.panel-load {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
+
+/* IMPORTANT */
+.card,
+.small-card{
+    min-width:0;
 }
 
+<<<<<<< HEAD
 
 .bar {
     height: 8px;
     border-radius: 10px;
     margin: 8px 0 15px;
 
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 .page-content{
     padding:110px 25px 25px 25px;
 
     max-width:1450px;
 
     margin:0 auto;
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 }
 
-.blue-bar {
-    background: #2563eb;
-    width: 70%;
+/* TOP 2 CARDS */
+    .grid-cols-2 .card{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    transition:0.35s ease;
+    min-height:320px;
 }
 
-.red-bar {
-    background: #dc2626;
-    width: 90%;
+/* LINE GRAPH HOVER */
+.card.mt-6:hover{
+    transform:translateY(-10px);
+    box-shadow:0 22px 40px rgba(0,0,0,0.18);
 }
 
+<<<<<<< HEAD
 /* ===== MODAL & TOAST ===== */
 .modal-overlay {
     position: fixed;
@@ -517,6 +411,8 @@ body {
     pointer-events: none;
     transition: opacity 0.3s ease;
 
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 
    /* LINE GRAPH CARD */
 .card.mt-6{
@@ -532,27 +428,40 @@ body {
     align-items:center;
 }
 
-.modal-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
+
+/* FIRST ROW FIX */
+.grid-cols-2{
+    align-items:stretch;
+}
+/* ALL CARDS */
+.card,
+.small-card{
+    transition:0.4s ease;
+    box-shadow:0 6px 14px rgba(0,0,0,0.08);
 }
 
-.modal-content {
-    background: linear-gradient(135deg, rgba(11, 61, 54, 0.95), rgba(6, 71, 62, 0.9));
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    width: 550px;
-    padding: 30px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-    color: white;
-    transform: translateY(-20px);
-    transition: transform 0.3s ease;
-    position: relative;
+.card:hover,
+.small-card:hover{
+    transform:translateY(-10px) scale(1.02);
+    box-shadow:0 22px 40px rgba(0,0,0,0.18);
+}
+.card.mt-6 .flex{
+    gap:20px;
+}
+.card.mt-6 .flex{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
 }
 
-.modal-overlay.active .modal-content {
-    transform: translateY(0);
+.growth{
+    white-space:nowrap;
+    font-size:14px;
+    font-weight:600;
+    margin-left:25px;
 }
+<<<<<<< HEAD
 
 .modal-header {
     display: flex;
@@ -682,3 +591,5 @@ body {
 .toast.error {
     background: #ef4444;
 }
+=======
+>>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
