@@ -101,51 +101,19 @@ contentType="text/html;
                        
        <button class="filter-btn"> Filter View </button>
        
-        <button class="create-btn"> Create New Slot </button> 
+        <button class="create-btn" id="openSlotModalBtn"> Create New Slot </button> 
         </div>
          </div> 
          
          <!-- CONTENT GRID --> 
          <div class="content">
          
-          <!-- LEFT SIDE -->
-           <div class="schedule">
-           
-            <!-- SLOT 1 -->
-             <div class="slot"> 
-             <span class="time">09:00 AM</span>
-              <div class="card blue">
-               <h4>TECH ROUND 1</h4>
-                <p><b>Google Inc</b></p> 
-                
-                <p>Student: Arjun Sarkar</p> 
-                </div> 
+           <!-- LEFT SIDE -->
+            <div class="schedule" id="adminScheduleContainer">
+                <div style="padding: 20px; text-align: center; color: #666; font-size: 14px;">
+                    Loading scheduled interviews...
                 </div>
-                
-          <!-- SLOT 2 -->
-           <div class="slot"> 
-           <span class="time">10:30 AM</span> 
-           <div class="card purple">
-            <h4>HR INTERVIEW</h4>
-             <p><b>Adobe Systems</b></p>
-              <p>Student: Priya Dey</p>
-               </div>
-                </div>
-                
-        <!-- SLOT 3 --> 
-        <div class="slot">
-         <span class="time">--</span>
-          <div class="card red">
-           <h4>URGENT: RESCHEDULE</h4>
-            <p><b>Microsoft</b></p> 
-            <p>Student: Unassigned</p> 
-            <button class="assign-btn"> Assign Candidate </button>
-             </div>
-              </div>
-              
-    <!-- ADD SLOT -->
-     <div class="add-slot"> + Add availability slot </div>
-      </div>
+            </div>
       
        <!-- RIGHT SIDE -->
         <div class="sidebar-right"> 
@@ -200,5 +168,181 @@ contentType="text/html;
                
                </script> 
                
+               <!-- MODAL OVERLAY -->
+               <div class="modal-overlay" id="slotModalOverlay">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <h2><i class="fa fa-calendar-plus"></i> Schedule Interview Slot</h2>
+                           <button class="close-btn" id="closeSlotModalBtn">&times;</button>
+                       </div>
+                       <form id="scheduleInterviewForm">
+                           <div class="form-row">
+                               <div class="form-group">
+                                   <label>Company Name</label>
+                                   <input type="text" id="company_name" name="company_name" required placeholder="e.g. Google Inc">
+                               </div>
+                               <div class="form-group">
+                                   <label>Interview Round</label>
+                                   <input type="text" id="interview_round" name="interview_round" required placeholder="e.g. Technical Round 1">
+                               </div>
+                           </div>
+                           <div class="form-row">
+                               <div class="form-group">
+                                   <label>Student Name</label>
+                                   <input type="text" id="student_name" name="student_name" required placeholder="e.g. Arjun Sarkar">
+                               </div>
+                               <div class="form-group">
+                                   <label>Student Email</label>
+                                   <input type="email" id="student_email" name="student_email" required placeholder="e.g. arjun@example.com">
+                               </div>
+                           </div>
+                           <div class="form-row">
+                               <div class="form-group">
+                                   <label>Interviewer Name</label>
+                                   <input type="text" id="interviewer_name" name="interviewer_name" required placeholder="e.g. Sarah Jenkins">
+                               </div>
+                               <div class="form-group">
+                                   <label>Duration (mins)</label>
+                                   <input type="number" id="duration" name="duration" value="60" required min="15">
+                               </div>
+                           </div>
+                           <div class="form-row">
+                               <div class="form-group">
+                                   <label>Date</label>
+                                   <input type="date" id="interview_date" name="interview_date" required>
+                               </div>
+                               <div class="form-group">
+                                   <label>Time</label>
+                                   <input type="time" id="interview_time" name="interview_time" required>
+                               </div>
+                           </div>
+                           <button type="submit" class="submit-btn" id="submitBtn">
+                               <span>Create Slot & Generate Meet</span>
+                               <div class="loader" id="submitLoader"></div>
+                           </button>
+                       </form>
+                   </div>
+               </div>
+               
+               <!-- TOAST NOTIFICATION -->
+               <div id="toastNotification" class="toast">Slot created successfully!</div>
+               
+               <script>
+               // Modal Logic
+               const openBtn = document.getElementById('openSlotModalBtn');
+               const closeBtn = document.getElementById('closeSlotModalBtn');
+               const modalOverlay = document.getElementById('slotModalOverlay');
+               
+               openBtn.addEventListener('click', () => {
+                   modalOverlay.classList.add('active');
+               });
+               
+               closeBtn.addEventListener('click', () => {
+                   modalOverlay.classList.remove('active');
+               });
+               
+               // Form Submission (AJAX)
+               const form = document.getElementById('scheduleInterviewForm');
+               const submitBtn = document.getElementById('submitBtn');
+               const loader = document.getElementById('submitLoader');
+               const toast = document.getElementById('toastNotification');
+               
+               form.addEventListener('submit', async (e) => {
+                   e.preventDefault();
+                   
+                   // UI State
+                   submitBtn.disabled = true;
+                   loader.style.display = 'inline-block';
+                   submitBtn.querySelector('span').style.display = 'none';
+                   
+                   const formData = {
+                       company_name: document.getElementById('company_name').value,
+                       student_name: document.getElementById('student_name').value,
+                       student_email: document.getElementById('student_email').value,
+                       interviewer_name: document.getElementById('interviewer_name').value,
+                       interview_date: document.getElementById('interview_date').value,
+                       interview_time: document.getElementById('interview_time').value,
+                       duration: parseInt(document.getElementById('duration').value),
+                       interview_round: document.getElementById('interview_round').value
+                   };
+                   
+                   try {
+                       const response = await fetch('ScheduleInterviewServlet', {
+                           method: 'POST',
+                           headers: { 'Content-Type': 'application/json' },
+                           body: JSON.stringify(formData)
+                       });
+                       
+                       const result = await response.json();
+                       
+                       if (result.success) {
+                           showToast("Interview slot created successfully!", "success");
+                           modalOverlay.classList.remove('active');
+                           form.reset();
+                            // Auto-update interview cards dynamically via AJAX
+                            loadAdminInterviews();
+                       } else {
+                           showToast(result.message || "Failed to create slot", "error");
+                       }
+                   } catch (error) {
+                       console.error("Error:", error);
+                       showToast("Network error. Please try again.", "error");
+                   } finally {
+                       submitBtn.disabled = false;
+                       loader.style.display = 'none';
+                       submitBtn.querySelector('span').style.display = 'inline';
+                   }
+               });
+               
+               function showToast(message, type) {
+                   toast.innerText = message;
+                   toast.className = 'toast show ' + (type === 'error' ? 'error' : '');
+                   setTimeout(() => { toast.classList.remove('show'); }, 3000);
+               }
+
+               // Load Interviews dynamically
+               async function loadAdminInterviews() {
+                   const container = document.getElementById('adminScheduleContainer');
+                   try {
+                       const response = await fetch('FetchInterviewsServlet?all=true');
+                       if (!response.ok) throw new Error("Failed to fetch");
+                       const interviews = await response.json();
+                       
+                       if (interviews.length === 0) {
+                           container.innerHTML = `<div style="padding: 20px; text-align: center; color: #666; font-size: 14px;">No interviews scheduled yet.</div>`;
+                       } else {
+                           container.innerHTML = ""; // clear loading text
+                           
+                           // Array of colors for styling cards
+                           const colors = ['blue', 'purple', 'red'];
+                           
+                           interviews.forEach((inv, index) => {
+                               const cardColor = colors[index % colors.length];
+                               
+                               const slotHtml = `
+                                 <div class="slot"> 
+                                     <span class="time">${inv.interview_time}</span>
+                                     <div class="card ${cardColor}">
+                                         <h4>${inv.interview_round.toUpperCase()}</h4>
+                                         <p><b>${inv.company_name}</b></p> 
+                                         <p>Student: ${inv.student_name}</p> 
+                                     </div> 
+                                 </div>`;
+                               container.innerHTML += slotHtml;
+                           });
+                       }
+                       
+                       // Append Add Slot button at the end
+                       container.innerHTML += `<div class="add-slot" onclick="document.getElementById('openSlotModalBtn').click();" style="cursor:pointer;"> + Add availability slot </div>`;
+                       
+                   } catch (err) {
+                       console.error(err);
+                       container.innerHTML = `<div style="padding: 20px; text-align: center; color: red; font-size: 14px;">Unable to load interviews</div>`;
+                   }
+               }
+               
+               // Initial load
+               loadAdminInterviews();
+               </script>
                </body>
                </html>
