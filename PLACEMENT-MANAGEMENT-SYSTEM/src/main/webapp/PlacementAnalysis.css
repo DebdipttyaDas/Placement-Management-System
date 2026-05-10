@@ -23,6 +23,12 @@ body {
     position: fixed;
 }
 
+.sidebar h2 {
+    font-size: 21px;      
+    font-weight: 700;     
+    margin-bottom: 20px;  
+    color: #ffffff;     
+}
 .logo {
     margin-bottom: 30px;
 }
@@ -32,13 +38,14 @@ body {
 }
 
 .menu li {
-    padding: 15px;
-    margin: 10px 0;
+    padding: 10px 12px;
+    margin: 6px 0;
     cursor: pointer;
     border-radius: 8px;
     display: flex;
     align-items: center;
     gap: 10px;
+    transition:0.3s ease;
 }
 
 .menu li{
@@ -102,8 +109,8 @@ body {
 }
 
 .performance h2 {
-    font-size: 50px;
-    font-weight: bold;
+    font-size: 32px;
+    font-weight: 700;
     color: #1e3a8a;
 }
 
@@ -181,6 +188,8 @@ body {
 .line-wrapper{
     width: 100%;
     height:250px;
+    width:600px;
+    height:300px;
 
     margin-top:35px;
 
@@ -192,6 +201,8 @@ body {
 #lineChart{
     width: 100% !important;
     height: 250px !important;
+    width:600px !important;
+    height:300px !important;
 }
 
 /* GROWTH */
@@ -334,3 +345,4 @@ body {
     font-weight:600;
     margin-left:25px;
 }
+
