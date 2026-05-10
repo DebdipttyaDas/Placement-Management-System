@@ -279,7 +279,7 @@ new Chart(document.getElementById("pieChart"), {
 
     options: {
 
-        responsive: false,
+        responsive: true,
 
         maintainAspectRatio: false,
 
