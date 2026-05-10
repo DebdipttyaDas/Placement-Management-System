@@ -186,7 +186,7 @@ body {
 
 /* LINE GRAPH AREA*/
 .line-wrapper{
-    width: 100%;
+    width: 1200px;
     height:300px;
 
     margin-top:35px;
@@ -197,7 +197,7 @@ body {
 }
 
 #lineChart{
-    width: 100% !important;
+    width: 1200px !important;
     height:300px !important;
 }
 
@@ -273,7 +273,7 @@ body {
 .page-content{
     padding:110px 25px 25px 25px;
 
-    max-width:1400px;
+    max-width:1450px;
 
     margin:0 auto;
 }
@@ -296,8 +296,7 @@ body {
 
    /* LINE GRAPH CARD */
 .card.mt-6{
-    width:100%;
-    max-width:1400px;
+    width:1100px;
     padding:30px 35px;
     margin:35px auto 0 auto;
     transition:0.4s ease;
