@@ -44,9 +44,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         </li>
         
         <li >
-        <a href="PlacementAnalysis.jsp"
-                        style="text-decoration: none; color: white;">
-                        Placement Analysis </a>
+        <a href="PlacementAnalysis.jsp" 
+        	style="text-decoration: none; color: white;">Placement Analysis </a>
+                        
            
         </li>
         </ul>
