@@ -3,41 +3,35 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
 
 body {
-<<<<<<< HEAD
     background: #f4f6f9;
-=======
     font-family: 'Poppins', sans-serif;
-    background:#f4f6f9
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
+    overflow-x: hidden;
 }
 
 /* ===== LAYOUT ===== */
 .container {
     display: flex;
+    min-height: 100vh;
 }
 
 /* ===== SIDEBAR ===== */
 .sidebar {
     width: 230px;
-    height: 120vh;
+    min-height: 100vh;
     background: #0b3d36;
     color: white;
     padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
-.logo {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.admin-text {
-    font-size: 12px;
-    margin-bottom: 25px;
-    opacity: 0.7;
+.sidebar h2 {
+    font-size: 22px;
+    margin-bottom: 30px;
 }
 
 .menu {
@@ -45,644 +39,319 @@ body {
 }
 
 .menu li {
-    padding: 12px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-<<<<<<< HEAD
-=======
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition:0.3s ease;
-}
-
-.menu li{
-    transition:0.3s ease;
-}
-.menu li:hover{
-    background:rgba(255,255,255,0.18);
-    transform:translateX(8px) scale(1.02);
-    box-shadow:0 4px 12px rgba(0,0,0,0.15);
-}
-.menu li:active{
-    transform:scale(0.97);
-}
-
-
-.menu li.active {
-    background: #0d6e60;
-}
-
-/* MAIN */
-.main {
-    margin-left: 300px;
-    min-height: 100vh;
-    background: #f4f6f9;
-}
-/* TOPBAR */
-.topbar{
-    background:#06473e;
-    color:white;
-    padding:20px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    
-    position:fixed;
-    top:0;
-    left:240px;
-    
-    right:0;
-    width:auto;
-    z-index: 1000;
-}
-.top-icons {
-    display: flex;
-    align-items: flex-end;
-    gap: 22px;
-    margin-left:auto;  
-}
-
-.profile, .bell {
-    font-size: 24px;
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
+    padding: 14px 15px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    transition: 0.3s ease;
     cursor: pointer;
 }
 
 .menu li:hover {
-    background-color: rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.15);
     transform: translateX(5px);
 }
 
-.menu .active {
+.menu li.active {
     background: #1d5c52;
 }
 
-<<<<<<< HEAD
-/* ===== MAIN ===== */
-.main-content {
-    flex: 1;
-    padding: 20px 30px;
-=======
-/* CARD */
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    overflow:hidden;
+.menu li a {
+    text-decoration: none;
+    color: white;
+    display: block;
     width: 100%;
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
+}
+
+/* ===== MAIN ===== */
+.main {
+    margin-left: 230px;
+    width: calc(100% - 230px);
+    min-height: 100vh;
+    background: #f4f6f9;
 }
 
 /* ===== TOPBAR ===== */
 .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #0b3d36;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 20px;
-    width: 100%;
+    background: #06473e;
     color: white;
-}
+    padding: 20px 40px;
 
-.top-links span {
-    margin-right: 20px;
-    cursor: pointer;
-    color: white;
-}
-
-/* ===== HEADER ===== */
-.page-header {
-    margin: 60px 0;
-}
-
-.page-header h1 {
-    font-size: 26px;
-}
-
-.page-header p {
-    color: #666;
-    margin-top: 5px;
-}
-
-.header-actions {
     display: flex;
-    gap: 12px;
     justify-content: flex-end;
     align-items: center;
-}
 
-.controls-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f5f7fb;
-    margin-bottom:5px;
-    padding: 15px 20px;
-    border-radius: 8px;
-}
-/* Filter button (light) */
-.filter-btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 20px;
-    background: #0b3d36;
-    color: white;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.filter-btn:hover {
-    background: #555;
-}
-
-/* Create button (blue) */
-.create-btn {
-    padding: 8px 18px;
-    border: none;
-    border-radius: 20px;
-    background: #0b3d36;
-    color: white;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.create-btn:hover {
-    background: #555;
-}
-
-/* ===== CONTROLS ===== */
-.top-controls {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    background: #f5f7fb;
-}
-
-/* Group everything together */
-.left-group {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-/* Date */
-.date-text {
-    font-size: 18px;
-    color: #333;
-}
-
-/* Arrows */
-.arrow {
-    cursor: pointer;
-    font-size: 20px;
-    color: #666;
-}
-
-/* Toggle buttons */
-.view-toggle {
-    display: flex;
-    background: #eaecef;
-    border-radius: 10px;
-    padding: 5px;
-    margin-left: 10px; /* small gap from date */
-}
-
-.view-toggle button {
-    border: none;
-    background: transparent;
-    padding: 6px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    color: #555;
-}
-
-.view-toggle .active {
-    background: white;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    color: #000;
-}
-
-/* --- NEW TOOLBAR STYLES --- */
-
-.toolbar {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;            
-    padding: 15px 20px;
-    background: #f5f7fb;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-/* Ensure Right Actions are aligned nicely */
-.right-actions {
-    display: flex;
-    gap: 12px;
-}
-
-
-/* ===== CONTENT GRID ===== */
-.content {
-    display: flex;
-    gap: 20px;
-}
-
-/* ===== LEFT SCHEDULE ===== */
-.schedule {
-    flex: 2;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.slot {
-    display: flex;
-    margin-bottom: 20px;
-}
-
-<<<<<<< HEAD
-.time {
-    width: 90px;
-    font-size: 13px;
-    color: #666;
-=======
-/* LINE GRAPH AREA*/
-.line-wrapper{
-    width: 1000px;
-    height:170px;
-
-    margin-top:35px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
-}
-
-<<<<<<< HEAD
-/* CARDS */
-.card {
-    flex: 1;
-    padding: 15px;
-    border-radius: 8px;
-    background: #f9fafb;
-    border-left: 5px solid;
-=======
-#lineChart{
-    width: 1000px !important;
-    height:170px !important;
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
-}
-
-.card h4 {
-    font-size: 13px;
-    margin-bottom: 5px;
-}
-
-.card p {
-    font-size: 14px;
-    margin-bottom: 3px;
-}
-
-.card small {
-    color: #777;
-}
-
-/* COLORS */
-.blue {
-    border-color: #2563eb;
-}
-
-.purple {
-    border-color: #7c3aed;
-}
-
-.red {
-    border-color: #dc2626;
-}
-
-/* BUTTON */
-.assign-btn {
-    margin-top: 10px;
-    padding: 6px 10px;
-    border: none;
-    background: #dc2626;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* ADD SLOT */
-.add-slot {
-    text-align: center;
-    padding: 12px;
-    border: 2px dashed #ccc;
-    border-radius: 8px;
-    color: #666;
-    cursor: pointer;
-}
-
-/* ===== RIGHT SIDE ===== */
-.sidebar-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* STATS */
-.stats {
-    display: flex;
-    gap: 10px;
-}
-
-.box {
-    flex: 1;
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-}
-
-.box p {
-    font-size: 12px;
-    color: #666;
-}
-
-.box h2 {
-    margin-top: 5px;
-}
-
-.red-text {
-    color: #dc2626;
-}
-
-/* PENDING */
-.pending {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-}
-
-<<<<<<< HEAD
-.person {
-    background: #f3f4f6;
-    padding: 10px;
-    border-radius: 6px;
-    margin: 8px 0;
-=======
-/* FIX FOR TAILWIND GRID OVERFLOW */
-.grid-cols-2{
-    display:grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap:35px;
-
-    align-items:center;
-    width:1100px;
-
-    margin:0 auto;
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
-}
-
-<<<<<<< HEAD
-.view-btn {
-    width: 100%;
-    margin-top: 10px;
-    padding: 8px;
-    border: none;
-    background: #e5e7eb;
-    border-radius: 6px;
-=======
-.grid-cols-4{
-    display:grid !important;
-    grid-template-columns: repeat(4, 264px) !important;
-    justify-content:center;
-    gap:20px;
-    width:fit-content;
-    margin:40px auto 0 auto;
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
-}
-
-/* PANEL LOAD */
-.panel-load {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-}
-
-<<<<<<< HEAD
-.bar {
-    height: 8px;
-    border-radius: 10px;
-    margin: 8px 0 15px;
-=======
-.page-content{
-    padding:110px 25px 25px 25px;
-
-    max-width:1450px;
-
-    margin:0 auto;
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
-}
-
-.blue-bar {
-    background: #2563eb;
-    width: 70%;
-}
-
-.red-bar {
-    background: #dc2626;
-    width: 90%;
-}
-
-<<<<<<< HEAD
-/* ===== MODAL & TOAST ===== */
-.modal-overlay {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    left: 230px;
+    right: 0;
+
     z-index: 1000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-=======
-
-   /* LINE GRAPH CARD */
-.card.mt-6{
-    width:1100px;
-    height: 300px;
-    padding:30px 35px;
-    margin:35px auto 0 auto;
-    transition:0.4s ease;
-    box-shadow:0 6px 14px rgba(0,0,0,0.08);
-    
-    display:flex;
-    flex-direction:column;
-    align-items:center;
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 }
 
-.modal-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
+.top-icons {
+    display: flex;
+    align-items: center;
+    gap: 22px;
 }
 
-.modal-content {
-    background: linear-gradient(135deg, rgba(11, 61, 54, 0.95), rgba(6, 71, 62, 0.9));
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    width: 550px;
-    padding: 30px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-    color: white;
-    transform: translateY(-20px);
-    transition: transform 0.3s ease;
-    position: relative;
+.profile,
+.bell {
+    font-size: 24px;
+    cursor: pointer;
 }
 
-.modal-overlay.active .modal-content {
-    transform: translateY(0);
+/* ===== PAGE CONTENT ===== */
+.page-content {
+    padding: 110px 25px 40px;
+    max-width: 1450px;
+    margin: 0 auto;
 }
 
-.modal-header {
+/* ===== PERFORMANCE ===== */
+.performance {
+    margin-bottom: 30px;
+}
+
+.performance h2:first-child {
+    font-size: 34px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.performance p {
+    margin-top: 8px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #6b7280;
+}
+
+.performance h2:nth-of-type(2) {
+    margin-top: 18px;
+    font-size: 52px;
+    color: #0b3d36;
+}
+
+.performance span {
+    display: block;
+    margin-top: 10px;
+    color: #6b7280;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+/* ===== GRID FIX ===== */
+.grid-cols-2 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 25px;
+    width: 100%;
+}
+
+.grid-cols-4 {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 20px;
+    width: 100%;
+}
+
+/* ===== CARD ===== */
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+/* ===== PROGRESS ===== */
+.progress-item {
+    margin-bottom: 25px;
+}
+
+.progress-item p {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 15px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #374151;
 }
 
-.modal-header h2 {
-    font-size: 20px;
-    margin: 0;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 13px;
-    color: #e0e0e0;
-}
-
-.form-group input, .form-group select {
+.bar {
     width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    outline: none;
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
-.form-group input::placeholder {
-    color: rgba(255,255,255,0.5);
+.bar div {
+    height: 100%;
+    background: linear-gradient(90deg, #0b3d36, #0d6e60);
+    border-radius: 20px;
 }
 
-.form-group input:focus {
-    border-color: #10b981;
-    background: rgba(255, 255, 255, 0.15);
+/* ===== PIE CHART ===== */
+.pie-wrapper {
+    position: relative;
+    width: 270px;
+    height: 270px;
+    margin: 20px auto;
 }
 
-.form-row {
-    display: flex;
-    gap: 20px;
+#pieChart {
+    width: 100% !important;
+    height: 100% !important;
 }
 
-.form-row .form-group {
-    flex: 1;
+.center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
 
-.submit-btn {
+.center-text h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.center-text p {
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+.sector-text {
+    text-align: center;
+    margin-top: 20px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* ===== LINE CHART CARD ===== */
+.card.mt-6 {
+    margin-top: 30px;
     width: 100%;
-    padding: 15px;
-    background: #10b981;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: background 0.3s;
+    min-height: 350px;
+}
+
+.growth {
+    background: rgba(16,185,129,0.1);
+    color: #059669;
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.line-wrapper {
+    width: 100%;
+    height: 220px;
+    margin-top: 35px;
+
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.submit-btn:hover {
-    background: #059669;
+#lineChart {
+    width: 100% !important;
+    height: 220px !important;
 }
 
-.submit-btn:disabled {
-    background: #6b7280;
-    cursor: not-allowed;
+/* ===== SMALL CARDS ===== */
+.small-card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
 }
 
-/* Spinner */
-.loader {
-    display: none;
-    border: 3px solid rgba(255,255,255,0.3);
-    border-top: 3px solid white;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    animation: spin 1s linear infinite;
+.small-card:hover {
+    transform: translateY(-4px);
 }
 
-@keyframes spin { 
-    0% { transform: rotate(0deg); } 
-    100% { transform: rotate(360deg); } 
+.small-card.orange {
+    background: linear-gradient(135deg, #fff7ed, #ffedd5);
 }
 
-/* Toast */
-.toast {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #10b981;
-    color: white;
-    padding: 15px 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transform: translateY(100px);
-    opacity: 0;
-    transition: all 0.4s ease;
-    z-index: 2000;
-    font-weight: bold;
+.small-card.blue {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
 }
 
-.toast.show {
-    transform: translateY(0);
-    opacity: 1;
+.small-card p {
+    color: #6b7280;
 }
 
-.toast.error {
-    background: #ef4444;
+.small-card h2 {
+    color: #111827;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 900px) {
+
+    .grid-cols-2 {
+        grid-template-columns: 1fr !important;
+    }
+
+    .grid-cols-4 {
+        grid-template-columns: 1fr !important;
+    }
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .main {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+
+    .topbar {
+        left: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        min-height: auto;
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .topbar {
+        left: 0;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .performance h2:first-child {
+        font-size: 28px;
+    }
+
+    .performance h2:nth-of-type(2) {
+        font-size: 42px;
+    }
 }
