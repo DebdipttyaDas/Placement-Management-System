@@ -281,7 +281,7 @@ new Chart(document.getElementById("pieChart"), {
 
     options: {
 
-        responsive: true,
+        responsive: false,
 
         maintainAspectRatio: false,
 
@@ -328,7 +328,7 @@ new Chart(document.getElementById("lineChart"), {
 
     options: {
 
-        responsive: true,
+        responsive: false,
 
         maintainAspectRatio: false,
 
