@@ -29,8 +29,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <!-- SIDEBAR -->
 <div class="sidebar">
-<h2>Placement Analysis </h2>
-<br><br>
+<h2>Placement  Analysis </h2>
     <ul class="menu">
         <li>
             <a href="CompanyDashboard.jsp"
@@ -59,8 +58,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <!-- MAIN -->
 <div class="main">
 
-    <!-- TOPBAR -->
+<!-- HEADER -->
+
+    
     <div class="topbar">
+
 
            
 
