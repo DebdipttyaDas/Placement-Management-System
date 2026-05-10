@@ -27,7 +27,7 @@ contentType="text/html;
            
             <ul class="menu">
              <li>
-              <a href="AdminDashboard.jsp" 
+              <a href="CompanyDashboard.jsp" 
               style="text-decoration: none; color:white;"> Dashboard </a>
                </li>
                 <li>
