@@ -46,7 +46,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
             style="text-decoration: none; color: white;">Interviews</a>
         </li>
         
-        <li class="active">Placement Analysis </li>
+        <li class="active" >
+                        Placement Analysis 
+           
+        </li>
     </ul>
 
     
@@ -59,6 +62,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
     
     <div class="topbar">
+
+
+           
+
             <div class="top-icons">
                 <i class="fa fa-user-circle profile"></i>
                 <i class="fa fa-bell bell"></i>
