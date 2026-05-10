@@ -14,7 +14,8 @@ body {
 /* ===== Side bar ===== */
 .sidebar {
     width: 230px;
-    height: 300vh;
+    height: 100vh;
+    Position: fixed;
     background: #06473e;
     color: white;
     padding: 20px;
