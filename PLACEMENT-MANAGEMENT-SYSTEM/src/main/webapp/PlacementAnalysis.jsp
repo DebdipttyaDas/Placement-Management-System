@@ -24,6 +24,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <body>
 
+
 <div class="container">
 
 <!-- SIDEBAR -->
@@ -251,6 +252,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 </div>
 </div>
+</div>
+
 <!-- CHART SCRIPT -->
 <script>
 
