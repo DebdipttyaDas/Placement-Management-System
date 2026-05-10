@@ -153,7 +153,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         </div>
 
         <!-- PIE CARD -->
-        <div class="card center">
+        <div class="card">
 
             <h3 class="text-2xl font-semibold mb-4">
                 Sector Distribution
@@ -184,7 +184,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     <!-- LINE GRAPH -->
     <div class="card mt-6">
 
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between items-center w-full">
 
             <div>
 
