@@ -67,7 +67,7 @@ body {
 
 /* MAIN */
 .main {
-    margin-left: 280px;
+    margin-left: 450px;
     min-height: 100vh;
     background: #f4f6f9;
 }
@@ -255,7 +255,7 @@ body {
     gap:35px;
 
     align-items:center;
-    max-width:1200px;
+    max-width:1400px;
 
     margin:0 auto;
 }
@@ -277,7 +277,7 @@ body {
 .page-content{
     padding:110px 25px 25px 25px;
 
-    max-width:1150px;
+    max-width:1400px;
 
     margin:0 auto;
 }
@@ -301,7 +301,7 @@ body {
    /* LINE GRAPH CARD */
 .card.mt-6{
     width:100%;
-    max-width:1200px;
+    max-width:1400px;
     padding:30px 35px;
     margin:35px auto 0 auto;
     transition:0.4s ease;
