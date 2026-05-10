@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"
+  import="java.sql.*" %>
 
   <!DOCTYPE html>
   <html lang="en">
@@ -64,53 +64,45 @@ pageEncoding="UTF-8" isELIgnored="false"%>
               </div>
             </div>
 
-            <%
-    Object profileObj = session.getAttribute("profileComplete");
+            <% Object profileObj=session.getAttribute("profileComplete"); String profileComplete="0" ; if(profileObj
+              !=null){ profileComplete=profileObj.toString(); } int progressValue=Integer.parseInt(profileComplete); %>
 
-    String profileComplete = "0";
+              <div class="readiness-box">
 
-    if(profileObj != null){
-        profileComplete = profileObj.toString();
-    }
+                <div class="readiness-header">
+                  <span class="readiness-title">Profile Completion</span>
+                  <span class="pro-badge">Pro Level</span>
+                </div>
 
-    int progressValue = Integer.parseInt(profileComplete);
-%>
+                <div class="progress-bar-container">
 
-<div class="readiness-box">
+                  <div class="progress-track">
 
-    <div class="readiness-header">
-        <span class="readiness-title">Profile Completion</span>
-        <span class="pro-badge">Pro Level</span>
-    </div>
+                    <div class="progress-fill" id="profileProgressBar" data-width="<%= profileComplete %>">
+                    </div>
+                    <script>
+                      // Apply width dynamically to satisfy strict IDE CSS validation
+                      const pBar = document.getElementById('profileProgressBar');
+                      pBar.style.width = pBar.getAttribute('data-width') + '%';
+                    </script>
 
-    <div class="progress-bar-container">
+                  </div>
 
-        <div class="progress-track">
+                </div>
 
-            <div class="progress-fill"
-                 id="profileProgressBar"
-                 style="width:<%= profileComplete %>%;">
-            </div>
+                <div class="readiness-footer">
 
-        </div>
+                  <span>
+                    <%= profileComplete %>% Complete
+                  </span>
 
-    </div>
+                  <span>
+                    <%= (progressValue==100) ? "All Set!" : "Action: Update Profile" %>
+                  </span>
 
-    <div class="readiness-footer">
+                </div>
 
-        <span>
-            <%= profileComplete %>% Complete
-        </span>
-
-        <span>
-            <%= (progressValue == 100)
-                ? "All Set!"
-                : "Action: Update Profile" %>
-        </span>
-
-    </div>
-
-</div>
+              </div>
           </div>
 
           <!-- STATS -->
@@ -182,39 +174,11 @@ pageEncoding="UTF-8" isELIgnored="false"%>
                   </div>
                 </div>
 
-                <!-- Active Interview Card -->
-                <div class="interview-card active-card">
-                  <div class="ic-header">
-                    <span class="ic-time">TODAY @ 14:30</span>
-                    <span class="ic-badge">Technical Round 1</span>
-                  </div>
-                  <h2 class="ic-company">Google</h2>
-                  <div class="ic-details">
-                    <span><i class="fa-solid fa-video"></i> Google Meet</span>
-                    <span><i class="fa-regular fa-user"></i> Sarah Jenkins (Recruiter)</span>
-                  </div>
-                  <div class="ic-actions">
-                    <button class="btn-join">Join Call</button>
-                    <button class="btn-more">...</button>
+                <div id="interviewsContainer">
+                  <div style="padding: 20px; text-align: center; color: #666; font-size: 14px;">
+                    Loading scheduled interviews...
                   </div>
                 </div>
-
-                <!-- Upcoming Interview Card -->
-                <div class="interview-card upcoming-card">
-                  <div class="ic-header">
-                    <span class="ic-time">OCT 24 @ 10:00</span>
-                    <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Interviewer"
-                      class="interviewer-pic" />
-                  </div>
-                  <h2 class="ic-company">Airbnb</h2>
-                  <p class="ic-type">Culture Fit Round</p>
-
-                  <div class="ic-footer">
-                    <span class="interviewer-name">Interviewer: David Chen</span>
-                    <a href="#" class="btn-calendar">ADD TO CALENDAR</a>
-                  </div>
-                </div>
-
               </div>
 
             </div>
@@ -223,32 +187,32 @@ pageEncoding="UTF-8" isELIgnored="false"%>
 
           <!-- Advertisement -->
           <div class="slideshow">
-              <div class="slide active"><img src="images/img1.png" alt="Slide 1" /></div>
-              <div class="slide"><img src="images/img2.png" alt="Slide 2" /></div>
-              <div class="slide"><img src="images/img3.png" alt="Slide 3" /></div>
-              <div class="slide"><img src="images/img4.png" alt="Slide 4" /></div>
-           <div class="dots">
+            <div class="slide active"><img src="images/img1.png" alt="Slide 1" /></div>
+            <div class="slide"><img src="images/img2.png" alt="Slide 2" /></div>
+            <div class="slide"><img src="images/img3.png" alt="Slide 3" /></div>
+            <div class="slide"><img src="images/img4.png" alt="Slide 4" /></div>
+            <div class="dots">
               <div class="dot on"></div>
               <div class="dot"></div>
               <div class="dot"></div>
               <div class="dot"></div>
-           </div>
+            </div>
           </div>
-<script>
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    let current = 0;
-    function goTo(n) {
-      slides[current].classList.remove('active');
-      dots[current].classList.remove('on');
-      current = n % slides.length;
-      slides[current].classList.add('active');
-      dots[current].classList.add('on');
-    }
-    dots.forEach((d, i) => d.onclick = () => goTo(i));
-    setInterval(() => goTo(current + 1), 3000);
-</script>
-          
+          <script>
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            let current = 0;
+            function goTo(n) {
+              slides[current].classList.remove('active');
+              dots[current].classList.remove('on');
+              current = n % slides.length;
+              slides[current].classList.add('active');
+              dots[current].classList.add('on');
+            }
+            dots.forEach((d, i) => d.onclick = () => goTo(i));
+            setInterval(() => goTo(current + 1), 3000);
+          </script>
+
 
         </div>
 
@@ -256,6 +220,77 @@ pageEncoding="UTF-8" isELIgnored="false"%>
 
     </div>
 
+    <script>
+      // Fetch interviews via AJAX
+      async function loadInterviews() {
+        const container = document.getElementById('interviewsContainer');
+        try {
+          const response = await fetch('FetchInterviewsServlet');
+          if (!response.ok) throw new Error("Failed to fetch");
+          const interviews = await response.json();
+
+          if (interviews.length === 0) {
+            container.innerHTML = `<div style="padding: 20px; text-align: center; color: #666; font-size: 14px;">No scheduled interviews at this time.</div>`;
+            return;
+          }
+
+          container.innerHTML = ""; // clear loading text
+          interviews.forEach((inv, index) => {
+            const dateTimeStr = inv.interview_date + "T" + inv.interview_time;
+            const cardClass = index === 0 ? 'active-card' : 'upcoming-card'; // Highlight the first one
+
+            const cardHtml = `
+                    <div class="interview-card ${cardClass}">
+                      <div class="ic-header">
+                        <span class="ic-time">${inv.interview_date} @ ${inv.interview_time}</span>
+                        <span class="ic-badge">${inv.interview_round}</span>
+                      </div>
+                      <h2 class="ic-company">${inv.company_name}</h2>
+                      <div class="ic-details">
+                        <span><i class="fa-solid fa-video"></i> Google Meet</span>
+                        <span><i class="fa-regular fa-user"></i> ${inv.interviewer_name}</span>
+                      </div>
+                      <div class="ic-actions">
+                        <button class="btn-join" data-time="${dateTimeStr}" onclick="window.open('${inv.meet_link}', '_blank')">Join Call</button>
+                        <button class="btn-more">...</button>
+                      </div>
+                    </div>
+                  `;
+            container.innerHTML += cardHtml;
+          });
+
+          // Re-check expiry after rendering
+          checkMeetingExpiry();
+        } catch (err) {
+          console.error(err);
+          container.innerHTML = `<div style="padding: 20px; text-align: center; color: red; font-size: 14px;">Unable to load interviews</div>`;
+        }
+      }
+
+      // Call it on load
+      loadInterviews();
+
+      // Example auto-disable logic for join buttons based on time
+      function checkMeetingExpiry() {
+        const joinButtons = document.querySelectorAll('.btn-join');
+        const now = new Date();
+        joinButtons.forEach(btn => {
+          const timeStr = btn.getAttribute('data-time');
+          if (timeStr) {
+            const meetingTime = new Date(timeStr);
+            const diffHours = (now - meetingTime) / (1000 * 60 * 60);
+            if (diffHours > 1) { // expired after 1 hour
+              btn.disabled = true;
+              btn.style.background = '#888';
+              btn.innerText = 'Expired';
+              btn.onclick = null;
+            }
+          }
+        });
+      }
+      setInterval(checkMeetingExpiry, 60000);
+      checkMeetingExpiry();
+    </script>
   </body>
 
   </html>

@@ -101,51 +101,19 @@ contentType="text/html;
                        
        <button class="filter-btn"> Filter View </button>
        
-        <button class="create-btn"> Create New Slot </button> 
+        <button class="create-btn" id="openSlotModalBtn"> Create New Slot </button> 
         </div>
          </div> 
          
          <!-- CONTENT GRID --> 
          <div class="content">
          
-          <!-- LEFT SIDE -->
-           <div class="schedule">
-           
-            <!-- SLOT 1 -->
-             <div class="slot"> 
-             <span class="time">09:00 AM</span>
-              <div class="card blue">
-               <h4>TECH ROUND 1</h4>
-                <p><b>Google Inc</b></p> 
-                
-                <p>Student: Arjun Sarkar</p> 
-                </div> 
+           <!-- LEFT SIDE -->
+            <div class="schedule" id="adminScheduleContainer">
+                <div style="padding: 20px; text-align: center; color: #666; font-size: 14px;">
+                    Loading scheduled interviews...
                 </div>
-                
-          <!-- SLOT 2 -->
-           <div class="slot"> 
-           <span class="time">10:30 AM</span> 
-           <div class="card purple">
-            <h4>HR INTERVIEW</h4>
-             <p><b>Adobe Systems</b></p>
-              <p>Student: Priya Dey</p>
-               </div>
-                </div>
-                
-        <!-- SLOT 3 --> 
-        <div class="slot">
-         <span class="time">--</span>
-          <div class="card red">
-           <h4>URGENT: RESCHEDULE</h4>
-            <p><b>Microsoft</b></p> 
-            <p>Student: Unassigned</p> 
-            <button class="assign-btn"> Assign Candidate </button>
-             </div>
-              </div>
-              
-    <!-- ADD SLOT -->
-     <div class="add-slot"> + Add availability slot </div>
-      </div>
+            </div>
       
        <!-- RIGHT SIDE -->
         <div class="sidebar-right"> 
