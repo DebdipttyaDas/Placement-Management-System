@@ -6,18 +6,8 @@
 }
 
 body {
-<<<<<<< HEAD
-
-    background: #f4f6f9;
-
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
     font-family: 'Poppins', sans-serif;
     background:#f4f6f9
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 }
 
 
@@ -52,10 +42,6 @@ body {
     margin: 6px 0;
     cursor: pointer;
     border-radius: 8px;
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
     display: flex;
     align-items: center;
     gap: 10px;
@@ -128,15 +114,6 @@ body {
     color: #1e3a8a;
 }
 
-<<<<<<< HEAD
-
-/* ===== MAIN ===== */
-.main-content {
-    flex: 1;
-    padding: 20px 30px;
-    
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 /* CARD */
 .card {
     background: white;
@@ -144,10 +121,6 @@ body {
     border-radius: 12px;
     overflow:hidden;
     width: 100%;
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 }
 
 .center{
@@ -211,15 +184,6 @@ body {
     border-radius: 10px;
 }
 
-<<<<<<< HEAD
-
-.time {
-    width: 90px;
-    font-size: 13px;
-    color: #666;
-
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 /* LINE GRAPH AREA*/
 .line-wrapper{
     width: 1000px;
@@ -230,31 +194,11 @@ body {
     display:flex;
     justify-content:center;
     align-items:center;
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 }
 
-<<<<<<< HEAD
-
-/* CARDS */
-.card {
-    flex: 1;
-    padding: 15px;
-    border-radius: 8px;
-    background: #f9fafb;
-    border-left: 5px solid;
-
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 #lineChart{
     width: 1000px !important;
     height:170px !important;
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 }
 
 /* GROWTH */
@@ -270,14 +214,6 @@ body {
     border-radius: 10px;
 }
 
-<<<<<<< HEAD
-
-.person {
-    background: #f3f4f6;
-    padding: 10px;
-    border-radius: 6px;
-    margin: 8px 0;
-=======
 .small-card.orange {
     background: #fcd9c6;
 }
@@ -305,7 +241,6 @@ body {
 .grid{
     width:100%;
 }
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 
 /* FIX FOR TAILWIND GRID OVERFLOW */
 .grid-cols-2{
@@ -319,24 +254,8 @@ body {
     width:1100px;
 
     margin:0 auto;
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 }
 
-<<<<<<< HEAD
-
-.view-btn {
-    width: 100%;
-    margin-top: 10px;
-    padding: 8px;
-    border: none;
-    background: #e5e7eb;
-    border-radius: 6px;
-
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 .grid-cols-4{
     display:grid !important;
     grid-template-columns: repeat(4, 264px) !important;
@@ -344,10 +263,6 @@ body {
     gap:20px;
     width:fit-content;
     margin:40px auto 0 auto;
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 }
 
 
@@ -357,25 +272,12 @@ body {
     min-width:0;
 }
 
-<<<<<<< HEAD
-
-.bar {
-    height: 8px;
-    border-radius: 10px;
-    margin: 8px 0 15px;
-
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 .page-content{
     padding:110px 25px 25px 25px;
 
     max-width:1450px;
 
     margin:0 auto;
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 }
 
 /* TOP 2 CARDS */
@@ -393,26 +295,6 @@ body {
     box-shadow:0 22px 40px rgba(0,0,0,0.18);
 }
 
-<<<<<<< HEAD
-/* ===== MODAL & TOAST ===== */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
 
    /* LINE GRAPH CARD */
 .card.mt-6{
@@ -461,139 +343,4 @@ body {
     font-weight:600;
     margin-left:25px;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 15px;
-}
-
-.modal-header h2 {
-    font-size: 20px;
-    margin: 0;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 13px;
-    color: #e0e0e0;
-}
-
-.form-group input, .form-group select {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    outline: none;
-}
-
-.form-group input::placeholder {
-    color: rgba(255,255,255,0.5);
-}
-
-.form-group input:focus {
-    border-color: #10b981;
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.form-row {
-    display: flex;
-    gap: 20px;
-}
-
-.form-row .form-group {
-    flex: 1;
-}
-
-.submit-btn {
-    width: 100%;
-    padding: 15px;
-    background: #10b981;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: background 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.submit-btn:hover {
-    background: #059669;
-}
-
-.submit-btn:disabled {
-    background: #6b7280;
-    cursor: not-allowed;
-}
-
-/* Spinner */
-.loader {
-    display: none;
-    border: 3px solid rgba(255,255,255,0.3);
-    border-top: 3px solid white;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin { 
-    0% { transform: rotate(0deg); } 
-    100% { transform: rotate(360deg); } 
-}
-
-/* Toast */
-.toast {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #10b981;
-    color: white;
-    padding: 15px 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transform: translateY(100px);
-    opacity: 0;
-    transition: all 0.4s ease;
-    z-index: 2000;
-    font-weight: bold;
-}
-
-.toast.show {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.toast.error {
-    background: #ef4444;
-}
-=======
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
-=======
-
->>>>>>> branch 'main' of https://github.com/DebdipttyaDas/Placement-Management-System.git
