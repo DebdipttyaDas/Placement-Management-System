@@ -7,7 +7,6 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    overflow-x:hidden;
     background:#f4f6f9
 }
 
@@ -61,16 +60,9 @@ body {
 
 /* MAIN */
 .main {
-    margin-left: 240px;
-    width: calc(100% - 240px);
-
+    margin-left: 280px;
     min-height: 100vh;
     background: #f4f6f9;
-
-    overflow-x: hidden;
-
-    display: flex;
-    justify-content: center;
 }
 /* TOPBAR */
 .topbar{
@@ -121,6 +113,7 @@ body {
     padding: 20px;
     border-radius: 12px;
     overflow:hidden;
+    width:500px;
 }
 
 .center{
@@ -245,10 +238,15 @@ body {
 /* FIX FOR TAILWIND GRID OVERFLOW */
 .grid-cols-2{
     display:grid;
-    grid-template-columns: minmax(0,1fr) minmax(0,1fr);
-    max-width:1200px;
-    margin:0 auto;
+
+    grid-template-columns: 1.4fr 1fr;
+
     gap:35px;
+
+    width:100%;
+    max-width:1200px;
+
+    margin:0 auto;
 }
 
 .grid-cols-4{
@@ -267,8 +265,9 @@ body {
 
 .page-content{
     padding:110px 25px 25px 25px;
-    width:100%;
-    max-width:1250px;
+
+    max-width:1150px;
+
     margin:0 auto;
 }
 
