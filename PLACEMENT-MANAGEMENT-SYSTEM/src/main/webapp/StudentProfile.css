@@ -3,18 +3,20 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f4f7f6;
+    overflow: hidden;
 }
 
 /* MAIN LAYOUT */
 .container {
     display: flex;
+    height: 100vh;
 
 }
 
 /* SIDEBAR CARD STYLE */
 .sidebar-card {
     width: 220px;
-    height: 200vh;
+    height: 100vh;
     background: #063831;
     color: white;
     padding: 20px;
@@ -22,10 +24,13 @@ body {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
 }
 
 .sidebar-card form {
-    margin-top: auto;
+    margin-top: 430px;
 }
 
 /* TITLE */
@@ -76,12 +81,16 @@ body {
 /* MAIN CONTENT */
 .main-content {
     flex: 1;
+    margin-left: 260px;
+    height: 100vh;
+    overflow-y: auto;
     padding: 20px;
+    box-sizing: border-box;
 }
 
 /* HEADER CARD */
 .header-card {
-    background: #0d6e60;
+    background: #063831;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -112,27 +121,29 @@ body {
     cursor: pointer;
 }
 
-/* BACK BUTTON */
-.nav-btn {
-    background: #063831;
-    color: rgb(255, 255, 255);
-    text-decoration: none;
+/* BOTH BUTTONS SAME STYLE */
+.nav-btn,
+.btn-group button {
+
+    background-color: #688783;
+    color: white;
+
     font-size: 16px;
     padding: 10px 20px;
+
+    border: none;
     border-radius: 8px;
+
     cursor: pointer;
+    text-decoration: none;
 
+    transition: 0.3s;
 }
 
-/* SAVE BUTTON */
-.btn-group button:last-child {
-    background-color: #063831;
-    color: white;
-    font-size: 16px;
-}
-
+/* HOVER EFFECT */
+.nav-btn:hover,
 .btn-group button:hover {
-    background-color: #0a5c4f;
+    background-color: #5a7571;
 }
 
 /* CARDS */
