@@ -82,7 +82,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         <h2>98.4%</h2>
 
         <span>
-            Placement success rate across all vertical disciplines for 2024.
+            Placement success rate across all vertical disciplines for 2026.
         </span>
 
     </div>
