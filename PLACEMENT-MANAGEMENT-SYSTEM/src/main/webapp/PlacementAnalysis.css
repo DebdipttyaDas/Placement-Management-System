@@ -212,17 +212,14 @@ body {
     background: #f3f4f6;
     padding: 15px;
     border-radius: 10px;
-    width: 250px;
 }
 
 .small-card.orange {
     background: #fcd9c6;
-    width: 250px;
 }
 
 .small-card.blue {
     background: #c7d7f5;
-    width: 250px;
 }
 
 /* TEXT */
@@ -260,8 +257,8 @@ body {
 }
 
 .grid-cols-4{
-    display:grid;
-    grid-template-columns:220px 220px 220px 220px !important;
+    display:grid !important;
+    grid-template-columns: repeat(4, 250px) !important;
     justify-content:center;
     gap:20px;
 }
