@@ -88,7 +88,7 @@ body{
 .topbar{
     height:70px;
     top:0;
-    left:240px;   /* same as sidebar width */
+    left:240px; 
     width:calc(100% - 240px);
     position:fixed;
     background:#06473e;
