@@ -34,7 +34,7 @@
 
                     <li>
                         <a href="JobPost.jsp" style="text-decoration:none;color:white;">
-                            Job Posted
+                            Job Post
                         </a>
                     </li>
 
