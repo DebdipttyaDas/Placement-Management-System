@@ -82,7 +82,7 @@
 
 <p>
     Companies must not misuse student data or use the platform
-    for unauthorized marketing or fraudulent purposes.
+    for unauthorized marketing  purposes.
 </p>
 
 <!-- ================= PRIVACY POLICY ================= -->
