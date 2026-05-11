@@ -62,7 +62,7 @@
 
                     <div class="top-links">
 
-                        <a href="AdminProfile.jsp">
+                        <a href="#">
 
                             <i class="fa fa-user-circle" style="font-size:25px;color:white;"></i>
 
