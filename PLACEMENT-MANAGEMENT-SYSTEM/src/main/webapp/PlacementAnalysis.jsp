@@ -37,8 +37,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         </li>
 
         <li >
-            <a href="JobPosted.jsp"
-            style="text-decoration: none; color: white;"> Job Posted</a>
+            <a href="JobPost.jsp"
+            style="text-decoration: none; color: white;"> Job Post</a>
         </li>
 
         <li>
