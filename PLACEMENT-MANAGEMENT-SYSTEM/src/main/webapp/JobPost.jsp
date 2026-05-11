@@ -33,10 +33,10 @@
             </a>
         </li>
 
-        <li
-             class="active">
+        <li>
+            <a href="JobPost.jsp" class="active">
                 Job Post
-            
+            </a>
         </li>
 
         <li>
