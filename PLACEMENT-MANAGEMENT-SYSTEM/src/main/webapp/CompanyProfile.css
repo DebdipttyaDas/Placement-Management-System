@@ -27,12 +27,6 @@ body {
     height: 100%;
 }
 
-.hero-img {
-    width: 50%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-}
 
 /* --- CINEMATIC REVEAL ANIMATIONS --- */
 
