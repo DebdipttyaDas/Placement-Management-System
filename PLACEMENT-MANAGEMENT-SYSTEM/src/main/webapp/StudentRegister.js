@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const allowedPhotoExtensions = ["jpg", "jpeg", "png"];
             const fileExtension = photo.name.split('.').pop().toLowerCase();
             if (!allowedPhotoExtensions.includes(fileExtension)) {
-                alert("Photo must be a JPG, JPEG, or PNG file.");
+                alert("Photo must be a JPG file.");
                 event.preventDefault();
                 return;
             }
