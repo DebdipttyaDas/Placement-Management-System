@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // 4. Validate File Upload Types (Optional but good practice)
         if (resume) {
-            const allowedResumeExtensions = ["pdf", "doc", "docx"];
+            const allowedResumeExtensions = ["pdf"];
             const fileExtension = resume.name.split('.').pop().toLowerCase();
             if (!allowedResumeExtensions.includes(fileExtension)) {
                 alert("Resume must be a PDF, DOC, or DOCX file.");
