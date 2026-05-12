@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Validate file type
                 const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
                 if (!allowedTypes.includes(file.type)) {
-                    alert("Please upload a valid image (JPG, JPEG, PNG).");
+                    alert("Please upload a valid image (Only JPG).");
                     this.value = ""; // Clear the input so invalid file isn't uploaded
                     return;
                 }
