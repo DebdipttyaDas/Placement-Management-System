@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const allowedResumeExtensions = ["pdf"];
             const fileExtension = resume.name.split('.').pop().toLowerCase();
             if (!allowedResumeExtensions.includes(fileExtension)) {
-                alert("Resume must be a PDF, DOC, or DOCX file.");
+                alert("Resume must be a PDF file.");
                 event.preventDefault();
                 return;
             }
