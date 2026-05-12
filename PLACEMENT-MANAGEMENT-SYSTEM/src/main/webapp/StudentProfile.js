@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Check file size (max 2MB)
                 if (file.size > 2 * 1024 * 1024) {
-                    alert("Image must be smaller than 2MB.");
+                    alert("Image must be smaller than 500KB.");
                     this.value = "";
                     return;
                 }
