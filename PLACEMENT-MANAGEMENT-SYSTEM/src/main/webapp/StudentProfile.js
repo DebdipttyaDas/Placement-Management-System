@@ -11,14 +11,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const file = this.files[0];
             if (file) {
                 // Validate file type
-                const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+                const allowedTypes = ["image/jpg"];
                 if (!allowedTypes.includes(file.type)) {
                     alert("Please upload a valid image (Only JPG).");
                     this.value = ""; // Clear the input so invalid file isn't uploaded
                     return;
                 }
 
-                // Check file size (max 2MB)
+                // Check file size (max 500KB)
                 if (file.size > 500 * 1024) {
                     alert("Uploaded image must be smaller than 500KB.");
                     this.value = "";
