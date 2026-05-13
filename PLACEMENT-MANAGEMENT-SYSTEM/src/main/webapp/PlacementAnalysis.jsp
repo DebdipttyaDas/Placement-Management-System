@@ -51,7 +51,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
            
         </li>
     </ul>
+<!-- LOGOUT -->
+    <div class="logout">
 
+        <button>
+            Logout
+        </button>
+
+    </div>
     
 </div>
 
