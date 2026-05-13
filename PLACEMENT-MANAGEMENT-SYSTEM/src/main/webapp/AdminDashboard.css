@@ -64,7 +64,9 @@ body {
 /* ===== Main Content ===== */
 .main-content {
     flex: 1;
+    margin-left: 230px;
     padding: 20px;
+    width: calc(100% - 230px);
 }
 
 /* ===== Top Bar ===== */
