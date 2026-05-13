@@ -70,7 +70,7 @@
 
             <!-- FOOTER -->
             <p>Developed by: Team CampusConnect</p>
-            <p>Â© <%= java.time.Year.now() %> All Rights Reserved</p>
+            <p>2026 All Rights Reserved</p>
 
         </div>
 
