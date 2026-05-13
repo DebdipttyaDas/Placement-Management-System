@@ -62,6 +62,31 @@ body {
     background: #0d6e60;
 }
 
+.logout{
+    margin-top: auto;
+    padding-top:280px;
+}
+
+.logout button{
+    width:100%;
+    margin-top:50px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:rgb(104, 159, 144);
+    color:whitesmoke;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.logout button:hover{
+    background:#a9b8b4;
+     transform:translateX(8px) scale(1.02);
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
 /* Main Content */
 .main-content {
     flex: 1;
