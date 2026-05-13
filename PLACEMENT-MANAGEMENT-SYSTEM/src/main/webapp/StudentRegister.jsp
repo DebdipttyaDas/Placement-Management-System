@@ -150,7 +150,7 @@
         <!-- Terms -->
         <div class="terms">
           <!-- changed html → jsp (if you convert it) -->
-          <a href="StudentTerms.jsp">Terms & Conditions and Privacy Policy</a>
+          <a href="Terms.jsp">Terms & Conditions and Privacy Policy</a>
         </div>
 
         <!-- ERROR MESSAGE -->
