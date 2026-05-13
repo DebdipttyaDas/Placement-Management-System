@@ -58,7 +58,7 @@
 
                 <!-- Terms -->
                 <div class="terms">
-                    <a href="CompanyTerms.jsp">Terms & Conditions and Privacy Policy</a>
+                    <a href="Terms.jsp">Terms & Conditions and Privacy Policy</a>
                 </div>
 
                 <!-- ERROR MESSAGE -->
