@@ -27,7 +27,7 @@
     <ul class="nav-menu">
         <li class="active">Dashboard</li>
         <li>Student Management</li>
-        <li>Notification</li>
+        <li>Notifications</li>
     </ul>
 
     <!-- Logout -->
