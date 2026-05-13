@@ -10,6 +10,8 @@
 
 <link rel="stylesheet" href="AdminLogin.css">
 
+<script src="Login.js"></script>
+
 </head>
 
 <body class="login-body">
