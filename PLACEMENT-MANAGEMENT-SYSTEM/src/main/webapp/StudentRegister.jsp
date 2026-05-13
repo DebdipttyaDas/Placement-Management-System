@@ -115,20 +115,7 @@
           <input type="password" name="password" placeholder="Create a password" required>
         </div>
 
-        <!-- Skills -->
-        <div>
-          <label style="color: #ffffff;"><h3>Skills (Select all that apply)</h3></label><br>
-
-<label><input type="checkbox"> <span style="color: #ffffff;">Java</span></label>
-        <label><input type="checkbox"> <span style="color: #ffffff;">Python</span></label>
-        <label><input type="checkbox"> <span style="color: #ffffff;">C / C++</span></label>  
-        <label><input type="checkbox"> <span style="color: #ffffff;">Data Analysis & Visualisation</span></label>
-        <label><input type="checkbox"> <span style="color: #ffffff;">Digital Marketing Analytics</span></label>
-        <label><input type="checkbox"> <span style="color: #ffffff;">Artificial Intelligence</span></label>
-        <label><input type="checkbox"> <span style="color: #ffffff;">DBMS</span></label>
-        <label><input type="checkbox"> <span style="color: #ffffff;">Machine Learning</span></label>
-        <label><input type="text" name="other_skill" placeholder="Other skill"></label>
-        </div>
+        
 
         <!-- Resume -->
         <div>
