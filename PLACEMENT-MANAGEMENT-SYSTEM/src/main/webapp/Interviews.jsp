@@ -49,6 +49,16 @@
                     </li>
 
                 </ul>
+                
+                <!-- LOGOUT -->
+    <div class="logout">
+
+        <button>
+            Logout
+        </button>
+
+    </div>
+                
 
             </aside>
 
