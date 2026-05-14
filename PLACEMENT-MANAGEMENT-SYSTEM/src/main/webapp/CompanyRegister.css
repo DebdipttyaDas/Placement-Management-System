@@ -33,6 +33,21 @@ header nav a:last-child {
     cursor: pointer;
 }
 
+.logo{
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+    letter-spacing:1px;
+    display:inline-block;
+    transition:0.3s ease;
+    cursor:pointer;
+}
+
+.logo:hover{
+    transform:scale(1.05);
+    color:#dfeee8;
+}
+
 /* Center Content */
 center {
     margin-top: 50px;
