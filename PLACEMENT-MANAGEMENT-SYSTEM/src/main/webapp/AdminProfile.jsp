@@ -63,6 +63,8 @@
 
 </div>
 
+<script src="AdminProfile.js"></script>
+
 <!-- Chatbot -->
 <link rel="stylesheet" href="chatbot.css">
 
