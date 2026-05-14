@@ -12,10 +12,9 @@
 
         <!-- Navbar -->
         <header>
-            <h1 class="text-3xl font-bold text-[#ffffff] tracking-wide transition duration-300 hover:scale-105 hover:text-[#ffffff]">
-    CampusConnect
-  </h1>
-            <nav>
+      <h2 class="logo">CampusConnect</h2>
+ 			 
+             <nav>
                 <p>Already have an account?
                     <a href="Login.jsp" style="color: white;">Login</a>
                 </p>
