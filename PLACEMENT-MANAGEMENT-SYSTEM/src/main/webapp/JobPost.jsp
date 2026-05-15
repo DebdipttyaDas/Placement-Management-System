@@ -95,6 +95,8 @@
             Fill out the details below to publish a new opportunity for students.
         </p>
 
+        <form action="JobPostServlet" method="post" onsubmit="prepareSubmit()">
+
         <!-- BASIC INFORMATION -->
         <div class="section">
 
@@ -114,6 +116,7 @@
                 </label>
 
                 <input type="text"
+                name="jobTitle" required
                 class="form-control"
                 placeholder="e.g. Senior Software Engineer">
 
@@ -129,7 +132,7 @@
                         Department
                     </label>
 
-                    <select class="form-control">
+                    <select name="department" class="form-control">
 
                         <option>Select Department</option>
 
@@ -160,7 +163,7 @@
                         Employment Type
                     </label>
 
-                    <select class="form-control">
+                    <select name="employmentType" class="form-control">
 
                         <option>Full-time</option>
 
@@ -184,7 +187,7 @@
                         Location Type
                     </label>
 
-                    <select class="form-control">
+                    <select name="locationType" class="form-control">
 
                         <option>Remote</option>
 
@@ -204,6 +207,7 @@
                     </label>
 
                     <input type="text"
+                    name="salaryRange"
                     class="form-control"
                     placeholder="e.g. INR 50K-100K">
 
@@ -274,17 +278,21 @@
                 <div class="editor form-control"
                 contenteditable="true">
                 </div>
+                
+                <input type="hidden" name="jobDescription" id="hiddenJobDesc">
 
             </div>
 
         </div>
 
         <!-- BUTTON -->
-        <button class="submit-btn">
+        <button type="submit" class="submit-btn">
 
             Publish Job
 
         </button>
+
+        </form>
 
     </div>
 
@@ -292,6 +300,10 @@
 
 <!-- SCRIPT -->
 <script>
+
+function prepareSubmit() {
+    document.getElementById("hiddenJobDesc").value = document.querySelector(".editor").innerHTML;
+}
 
 function formatText(command){
 

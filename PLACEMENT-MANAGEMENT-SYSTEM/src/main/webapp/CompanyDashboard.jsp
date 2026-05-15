@@ -100,7 +100,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                 </div>
 
                 <div class="hero-content">
-                    <button class="btn btn-white">
+                    <button class="btn btn-white" onclick="window.location.href='JobPost.jsp'">
                         + Post new jobs
                     </button>
                 </div>
