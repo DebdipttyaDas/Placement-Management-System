@@ -22,7 +22,7 @@
         <ul>
             <li><a href="Student_dashboard.jsp" style="text-decoration: none; color:white;">Dashboard</a></li>
             <li><a href="Placement.jsp" style="text-decoration: none; color:white;">Placements</a></li>
-             <li><a href="#" style="text-decoration: none; color:white;">My Application</a></li>
+             <li><a href="MyApplication.jsp" style="text-decoration: none; color:white;">My Application</a></li>
             
         </ul>
     </div>
