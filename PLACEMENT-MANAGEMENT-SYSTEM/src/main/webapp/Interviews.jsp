@@ -98,28 +98,10 @@
                 <div class="toolbar">
 
                     <div class="left-group">
-
-                        <span class="arrow">&#10094;</span>
-
-                        <span class="date-text">May 06, 2026</span>
-
-                        <span class="arrow">&#10095;</span>
-
-                        <div class="view-toggle">
-
-                            <button class="active">Day</button>
-                            <button>Week</button>
-                            <button>Month</button>
-
-                        </div>
-
+                        <h2 style="margin: 0; color: #1e293b;">Upcoming Interviews</h2>
                     </div>
 
                     <div class="right-actions">
-
-                        <button class="filter-btn">
-                            Filter View
-                        </button>
 
                         <button class="create-btn" id="openSlotModalBtn">
 
@@ -149,14 +131,9 @@
                         <!-- STATS -->
                         <div class="stats">
 
-                            <div class="box">
+                            <div class="box" style="width: 100%;">
                                 <p>Total Rounds</p>
-                                <h2>24</h2>
-                            </div>
-
-                            <div class="box">
-                                <p>Conflicts</p>
-                                <h2 class="red-text">02</h2>
+                                <h2 id="totalRoundsCount" style="color: #1e293b;">0</h2>
                             </div>
 
                         </div>
@@ -164,18 +141,10 @@
                         <!-- PENDING -->
                         <div class="pending">
 
-                            <h3>Pending Assignment</h3>
+                            <h3>Scheduled Students</h3>
 
-                            <div class="person">
-                                Rahul Chowdhary
-                            </div>
-
-                            <div class="person">
-                                Sudipta Roy
-                            </div>
-
-                            <div class="person">
-                                Prantik Bose
+                            <div id="dynamicStudentsList">
+                                <div style="color: #64748b; font-size: 14px; margin-top: 10px;">Loading...</div>
                             </div>
 
                             <button class="view-btn">
@@ -189,13 +158,9 @@
 
                             <h3>Panelist Load</h3>
 
-                            <p>Suresh Kumar (Tech)</p>
-
-                            <div class="bar blue-bar"></div>
-
-                            <p>Anita Banerjee (HR)</p>
-
-                            <div class="bar red-bar"></div>
+                            <div id="dynamicPanelistList">
+                                <div style="color: #64748b; font-size: 14px; margin-top: 10px;">Loading...</div>
+                            </div>
 
                         </div>
 
@@ -400,281 +365,7 @@
      JAVASCRIPT
 ========================================================= -->
 
-        <script>
-
-            const modal = document.getElementById("slotModal");
-
-            const openBtn =
-                document.getElementById("openSlotModalBtn");
-
-            const closeBtn =
-                document.getElementById("closeSlotModalBtn");
-
-            const cancelBtn =
-                document.getElementById("cancelModalBtn");
-
-            const form =
-                document.getElementById("scheduleInterviewForm");
-
-            const loader =
-                document.getElementById("slotLoader");
-
-            const btnText =
-                document.getElementById("btnText");
-
-            const toast =
-                document.getElementById("toast");
-
-            /* OPEN MODAL */
-
-            openBtn.onclick = () => {
-
-                modal.classList.add("active");
-            };
-
-            /* CLOSE MODAL */
-
-            function closeModal() {
-
-                modal.classList.remove("active");
-            }
-
-            closeBtn.onclick = closeModal;
-
-            cancelBtn.onclick = closeModal;
-
-            /* CLOSE ON OUTSIDE CLICK */
-
-            window.onclick = function (e) {
-
-                if (e.target === modal) {
-
-                    closeModal();
-                }
-            };
-
-            /* TYPE BUTTON */
-
-            let selectedType = "Virtual";
-
-            document.querySelectorAll(".type-btn")
-                .forEach(btn => {
-
-                    btn.addEventListener("click", () => {
-
-                        document.querySelectorAll(".type-btn")
-                            .forEach(b => b.classList.remove("active"));
-
-                        btn.classList.add("active");
-
-                        selectedType = btn.dataset.type;
-                    });
-                });
-
-            /* TOAST */
-
-            function showToast(message, isError = false) {
-
-                toast.innerText = message;
-
-                toast.className =
-                    isError
-                        ? "toast show error"
-                        : "toast show";
-
-                setTimeout(() => {
-
-                    toast.classList.remove("show");
-
-                }, 3000);
-            }
-
-            /* SUBMIT */
-
-            form.addEventListener("submit", async function (e) {
-
-                e.preventDefault();
-
-                loader.style.display = "block";
-
-                btnText.innerText = "Creating...";
-
-                const payload = {
-
-                    company_name:
-                        document.getElementById("companyName").value,
-
-                    student_name:
-                        document.getElementById("studentName").value,
-
-                    interview_date:
-                        document.getElementById("interviewDate").value,
-
-                    interview_time:
-                        document.getElementById("interviewTime").value,
-
-                    interview_round:
-                        document.getElementById("interviewRound").value,
-
-                    interviewer_name:
-                        document.getElementById("interviewerName").value,
-
-                    interview_type:
-                        selectedType,
-
-                    meet_link:
-                        document.getElementById("meetLink").value
-                };
-
-                try {
-
-                    const response =
-                        await fetch("ScheduleInterviewServlet", {
-
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-
-                            body: JSON.stringify(payload)
-                        });
-
-                    const result = await response.json();
-
-                    if (response.ok) {
-
-                        showToast(
-                            "Interview slot created successfully!"
-                        );
-
-                        form.reset();
-
-                        closeModal();
-
-                        fetchInterviews();
-
-                    } else {
-
-                        showToast(
-                            result.message || "Failed to create slot",
-                            true
-                        );
-                    }
-
-                } catch (error) {
-
-                    console.error(error);
-
-                    showToast(
-                        "Server error occurred",
-                        true
-                    );
-
-                } finally {
-
-                    loader.style.display = "none";
-
-                    btnText.innerText = "Create Slot";
-                }
-            });
-
-            /* FETCH INTERVIEWS */
-
-            async function fetchInterviews() {
-
-                try {
-
-                    const response =
-                        await fetch(
-                            "FetchInterviewsServlet?all=true"
-                        );
-
-                    const data = await response.json();
-
-                    const container =
-                        document.getElementById(
-                            "adminScheduleContainer"
-                        );
-
-                    if (data.length === 0) {
-
-                        container.innerHTML =
-                            `<div class="add-slot">
-                No interviews scheduled yet
-            </div>`;
-
-                        return;
-                    }
-
-                    let html = "";
-
-                    data.forEach(interview => {
-
-                        html += `
-
-            <div class="slot">
-
-                <div class="time">
-                    ${interview.interview_time}
-                </div>
-
-                <div class="card blue">
-
-                    <h4>
-                        ${interview.interview_round}
-                    </h4>
-
-                    <p>
-                        <strong>
-                            ${interview.company_name}
-                        </strong>
-                    </p>
-
-                    <p>
-                        Student:
-                        ${interview.student_name}
-                    </p>
-
-                    <p>
-                        Interviewer:
-                        ${interview.interviewer_name}
-                    </p>
-
-                    <small>
-                        ${interview.interview_date}
-                    </small>
-
-                    <br><br>
-
-                    <a href="${interview.meet_link}"
-                       target="_blank">
-
-                        <button class="assign-btn">
-                            Join Meeting
-                        </button>
-
-                    </a>
-
-                </div>
-
-            </div>
-            `;
-                    });
-
-                    container.innerHTML = html;
-
-                } catch (error) {
-
-                    console.error(error);
-                }
-            }
-
-            /* INITIAL LOAD */
-
-            fetchInterviews();
-
-        </script>
+        <script src="interviews.js"></script>
 
         <!-- Chatbot -->
         <link rel="stylesheet" href="chatbot.css">
