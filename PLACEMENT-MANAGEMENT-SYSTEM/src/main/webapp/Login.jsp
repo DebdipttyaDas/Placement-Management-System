@@ -22,7 +22,7 @@
 <div class="min-h-screen bg-[#cefad0]">
 <div class="relative z-10 flex flex-col h-full">
 
-<!-- Navbar -->
+<!-- Navbarr -->
 <header class="flex justify-between items-center px-10 py-4 bg-[#06473e]">
 
   <h1 class="text-3xl font-bold text-[#ffffff] tracking-wide transition duration-300 hover:scale-105 hover:text-[#ffffff]">
