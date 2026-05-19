@@ -9,8 +9,8 @@
     </head>
 
     <body>
-
-        <!-- Navbarr -->
+    
+        <!-- Navbar -->
         <header>
       <h2 class="logo">CampusConnect</h2>
  			 
