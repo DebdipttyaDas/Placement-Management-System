@@ -28,48 +28,60 @@
             <h4>Register your company to access placement services</h4>
 
             <!-- FORM -->
-            <form action="CompanyRegisterServlet" method="post">
+         <form action="CompanyRegisterServlet" method="post" class="company-form">
 
-                <!-- Company Name (matches request.getParameter("companyName")) -->
-                <label>Company Name</label><br>
-                <input type="text" name="companyName" placeholder="Enter company name" required><br><br>
+    <div class="form-grid">
 
-                <!-- Industry (matches request.getParameter("industry")) -->
-                <label>Industry</label><br>
-                <input type="text" name="industry" placeholder="Enter industry" required><br><br>
+        <div class="input-group">
+            <label>Company Name</label>
+            <input type="text" name="companyName" placeholder="Enter company name" required>
+        </div>
 
-                <!-- Company Type (matches request.getParameter("companyType")) -->
-                <label>Company Type</label><br>
-                <input type="text" name="companyType" placeholder="e.g. IT, Startup, MNC" required><br><br>
+        <div class="input-group">
+            <label>Industry</label>
+            <input type="text" name="industry" placeholder="Enter industry" required>
+        </div>
 
-                <!-- Company Email (matches request.getParameter("email")) -->
-                <label>Company Email</label><br>
-                <input type="email" name="email" placeholder="Enter company email" required><br><br>
+        <div class="input-group">
+            <label>Company Type</label>
+            <input type="text" name="companyType" placeholder="e.g. IT, Startup, MNC" required>
+        </div>
 
-                <!-- Phone Number (matches request.getParameter("phone")) -->
-                <label>Phone Number</label><br>
-                <input type="text" name="phone" placeholder="Enter phone number" required><br><br>
+        <div class="input-group">
+            <label>Company Email</label>
+            <input type="email" name="email" placeholder="Enter company email" required>
+        </div>
 
-                <!-- Password (matches request.getParameter("password")) -->
-                <label>Password</label><br>
-                <input type="password" name="password" placeholder="Create a password" required><br><br>
+        <div class="input-group">
+            <label>Phone Number</label>
+            <input type="text" name="phone" placeholder="Enter phone number" required>
+        </div>
 
-                <!-- Button -->
-                <button type="submit">Request for Registration</button>
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Create a password" required>
+        </div>
 
-                <!-- Terms -->
-                <div class="terms">
-                    <a href="Terms.jsp">Terms & Conditions and Privacy Policy</a>
-                </div>
+    </div>
 
-                <!-- ERROR MESSAGE -->
-                <% String errorMessage=(String) request.getAttribute("errorMessage"); if(errorMessage !=null){ %>
-                    <p style="color: red; margin-top: 10px;">
-                        <%= errorMessage %>
-                    </p>
-                    <% } %>
+    <button type="submit">Request for Registration</button>
 
-            </form>
+    <div class="terms">
+        <a href="Terms.jsp">Terms & Conditions and Privacy Policy</a>
+    </div>
+    
+    <!-- ERROR MESSAGE -->
+    <% String errorMessage = (String) request.getAttribute("errorMessage");
+
+    if(errorMessage != null){ %>
+
+        <p style="color:red; margin-top:10px;">
+            <%= errorMessage %>
+        </p>
+
+    <% } %>
+
+</form>
 
 
         </center>
