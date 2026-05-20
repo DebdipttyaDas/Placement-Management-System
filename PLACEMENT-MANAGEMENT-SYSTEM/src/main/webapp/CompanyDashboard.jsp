@@ -432,147 +432,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                         <div class="interviews-panel">
 
-                            <div class="interview-item">
-
-                            <div class="avatar av-as">AS</div>
-
-                            <div class="interview-info">
-                                <div class="interview-name">Alice Smith</div>
-                                <div class="interview-role">Tech Round 1 • SWE</div>
-                                <div class="interview-time">
-                                    10:00 AM – 11:00 AM
+                            <div class="interviews-panel" id="companyInterviewsPanel">
+                                <div style="padding: 12px 0; color: #64748b; font-size: 14px;">
+                                  Loading scheduled interviews...
                                 </div>
-                            </div>
-
-                            <button class="video-btn">
-                                <i class="fa fa-video"></i>
-                            </button>
-
-                        </div>
-
-                        <div class="interview-item extra-interview">
-
-                            <div class="avatar av-bj">BJ</div>
-
-                            <div class="interview-info">
-                                <div class="interview-name">Bob Jones</div>
-                                <div class="interview-role">HR Round • PM Intern</div>
-                                <div class="interview-time">
-                                    11:30 AM – 12:00 PM
-                                </div>
-                            </div>
-
-                            <button class="video-btn">
-                                <i class="fa fa-video"></i>
-                            </button>
-
-                        </div>
-
-                    <!-- Interview 3 -->
-                    <div class="interview-item extra-interview">
-
-                        <div class="avatar av-rk">RK</div>
-
-                        <div class="interview-info">
-                            <div class="interview-name">Rahul Kumar</div>
-                            <div class="interview-role">Technical Round • Backend Developer</div>
-
-                            <div class="interview-time">
-                                1:00 PM – 1:45 PM
-                            </div>
-                        </div>
-
-                        <button class="video-btn">
-                            <i class="fa fa-video"></i>
-                        </button>
-
-                    </div>
-
-
-                    <!-- Interview 4 -->
-                    <div class="interview-item extra-interview">
-
-                        <div class="avatar av-sn">SN</div>
-
-                        <div class="interview-info">
-                            <div class="interview-name">Sneha Nair</div>
-                            <div class="interview-role">HR Interview • UI/UX Designer</div>
-
-                            <div class="interview-time">
-                                2:30 PM – 3:00 PM
-                            </div>
-                        </div>
-
-                        <button class="video-btn">
-                            <i class="fa fa-video"></i>
-                        </button>
-
-                    </div>
-
-
-                    <!-- Interview 5 -->
-                    <div class="interview-item extra-interview">
-
-                        <div class="avatar av-ap">AP</div>
-
-                        <div class="interview-info">
-                            <div class="interview-name">Arjun Patel</div>
-                            <div class="interview-role">Final Round • Data Analyst</div>
-
-                            <div class="interview-time">
-                                3:30 PM – 4:15 PM
-                            </div>
-                        </div>
-
-                        <button class="video-btn">
-                            <i class="fa fa-video"></i>
-                        </button>
-
-                    </div>
-
-
-                    <!-- Interview 6 -->
-                    <div class="interview-item extra-interview">
-
-                        <div class="avatar av-ms">MS</div>
-
-                        <div class="interview-info">
-                            <div class="interview-name">Meera Sharma</div>
-                            <div class="interview-role">Technical Round • Cloud Engineer</div>
-
-                            <div class="interview-time">
-                                4:30 PM – 5:15 PM
-                            </div>
-                        </div>
-
-                        <button class="video-btn">
-                            <i class="fa fa-video"></i>
-                        </button>
-
-                    </div>
-
-
-                    <!-- Interview 7 -->
-                    <div class="interview-item extra-interview">
-
-                        <div class="avatar av-dp">DP</div>
-
-                        <div class="interview-info">
-                            <div class="interview-name">Dev Prakash</div>
-                            <div class="interview-role">Machine Learning Round • AI Engineer</div>
-
-                            <div class="interview-time">
-                                5:30 PM – 6:15 PM
-                            </div>
-                        </div>
-
-                        <button class="video-btn">
-                            <i class="fa fa-video"></i>
-                        </button>
-
-                    </div>
-
-                    </div>
+                              </div>
 
                 </div>
 
@@ -632,7 +496,71 @@ function hideInterviews() {
     });
 
 }
+var companyAvatarClasses = ["av-as", "av-bj", "av-rk", "av-sn", "av-ap", "av-ms", "av-dp"];
 
+function getInitials(name) {
+  var parts = (name || "").trim().split(/\s+/);
+  if (parts.length >= 2) {
+    return (parts[0].charAt(0) + parts[1].charAt(0)).toUpperCase();
+  }
+  return (name || "NA").substring(0, 2).toUpperCase();
+}
+
+function escapeHtml(text) {
+  if (!text) return "";
+  return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function buildCompanyInterviewItem(inv, index) {
+  var extraClass = index > 0 ? " extra-interview" : "";
+  var avatarClass = companyAvatarClasses[index % companyAvatarClasses.length];
+  var meetLink = inv.meet_link || "";
+  var hasMeet = meetLink.indexOf("http") === 0;
+  var videoClick = hasMeet
+    ? "window.open('" + meetLink.replace(/'/g, "\\'") + "','_blank')"
+    : "alert('Meeting link: " + meetLink.replace(/'/g, "\\'") + "')";
+
+  return '<div class="interview-item' + extraClass + '">' +
+    '<div class="avatar ' + avatarClass + '">' + escapeHtml(getInitials(inv.student_name)) + '</div>' +
+    '<div class="interview-info">' +
+      '<div class="interview-name">' + escapeHtml(inv.student_name) + '</div>' +
+      '<div class="interview-role">' + escapeHtml(inv.interview_round) + ' &bull; ' + escapeHtml(inv.company_name) + '</motion.div>' +
+      '<div class="interview-time">' + escapeHtml(inv.interview_date) + ' &bull; ' + escapeHtml(inv.interview_time) + '</div>' +
+    '</div>' +
+    '<button type="button" class="video-btn" onclick="' + videoClick + '"><i class="fa fa-video"></i></button>' +
+  '</div>';
+}
+
+function loadCompanyInterviews() {
+  var panel = document.getElementById("companyInterviewsPanel");
+  if (!panel) return;
+
+  fetch("FetchInterviewsServlet?all=true")
+    .then(function (r) { if (!r.ok) throw new Error("Failed"); return r.json(); })
+    .then(function (interviews) {
+      if (!interviews.length) {
+        panel.innerHTML = '<div style="padding:12px 0;color:#64748b;">No interviews scheduled yet.</div>';
+        return;
+      }
+      panel.innerHTML = "";
+      interviews.forEach(function (inv, i) {
+        panel.innerHTML += buildCompanyInterviewItem(inv, i);
+      });
+    })
+    .catch(function (err) {
+      console.error(err);
+      panel.innerHTML = '<div style="padding:12px 0;color:#dc2626;">Unable to load interviews.</div>';
+    });
+}
+
+loadCompanyInterviews();
+setInterval(loadCompanyInterviews, 5000);
+if ("BroadcastChannel" in window) {
+  new BroadcastChannel("interview-schedule-channel").onmessage = function (e) {
+    if (e.data && e.data.event === "interviewScheduled") loadCompanyInterviews();
+  };
+}
 
 </script>
 

@@ -219,6 +219,30 @@
       </div>
 
     </div>
+    <%
+  String dashboardStudentEmail = "";
+  String dashboardStudentFullName = "";
+  Object sessionUser = session.getAttribute("user");
+  if (sessionUser != null) {
+    dashboardStudentEmail = sessionUser.toString();
+    try {
+      Class.forName("com.mysql.cj.jdbc.Driver");
+      try (Connection conn = DriverManager.getConnection(
+              "jdbc:mysql://localhost:3306/placement_management", "root", "password");
+           PreparedStatement ps = conn.prepareStatement(
+              "SELECT full_name FROM students WHERE email = ?")) {
+        ps.setString(1, dashboardStudentEmail);
+        try (ResultSet rs = ps.executeQuery()) {
+          if (rs.next() && rs.getString("full_name") != null) {
+            dashboardStudentFullName = rs.getString("full_name").trim();
+          }
+        }
+      }
+    } catch (Exception e) { }
+  }
+  String jsStudentEmail = dashboardStudentEmail.replace("\\", "\\\\").replace("\"", "\\\"");
+  String jsStudentFullName = dashboardStudentFullName.replace("\\", "\\\\").replace("\"", "\\\"");
+%>
 
     <script>
       // Fetch interviews via AJAX
@@ -239,6 +263,14 @@
             const dateTimeStr = inv.interview_date + "T" + inv.interview_time;
             const cardClass = index === 0 ? 'active-card' : 'upcoming-card'; // Highlight the first one
 
+            const isVirtual = inv.meet_link.startsWith("http");
+            const detailsHtml = isVirtual 
+              ? `<span><i class="fa-solid fa-video"></i> Google Meet</span>`
+              : `<span><i class="fa-solid fa-location-dot"></i> ${inv.meet_link}</span>`;
+            const buttonHtml = isVirtual
+              ? `<button class="btn-join" data-time="${dateTimeStr}" onclick="window.open('${inv.meet_link}', '_blank')">Join Call</button>`
+              : `<button class="btn-join" style="background: #64748b; cursor: default;" onclick="alert('This interview is in-person or via phone at: ${inv.meet_link}')">Details</button>`;
+
             const cardHtml = `
                     <div class="interview-card ${cardClass}">
                       <div class="ic-header">
@@ -247,11 +279,11 @@
                       </div>
                       <h2 class="ic-company">${inv.company_name}</h2>
                       <div class="ic-details">
-                        <span><i class="fa-solid fa-video"></i> Google Meet</span>
+                        ${detailsHtml}
                         <span><i class="fa-regular fa-user"></i> ${inv.interviewer_name}</span>
                       </div>
                       <div class="ic-actions">
-                        <button class="btn-join" data-time="${dateTimeStr}" onclick="window.open('${inv.meet_link}', '_blank')">Join Call</button>
+                        ${buttonHtml}
                         <button class="btn-more">...</button>
                       </div>
                     </div>
@@ -267,8 +299,25 @@
         }
       }
 
-      // Call it on load
+      // Call it on load and set auto-refresh interval for simultaneous updates
       loadInterviews();
+
+      if ("BroadcastChannel" in window) {
+        const bc = new BroadcastChannel("interview-schedule-channel");
+        bc.onmessage = (event) => {
+          if (event.data && event.data.event === "interviewScheduled") {
+            loadInterviews();
+          }
+        };
+      }
+
+      window.addEventListener("storage", (event) => {
+        if (event.key === "interviewScheduledAt") {
+          loadInterviews();
+        }
+      });
+
+      setInterval(loadInterviews, 5000);
 
       // Example auto-disable logic for join buttons based on time
       function checkMeetingExpiry() {
