@@ -61,15 +61,14 @@
             <label>Password</label>
             <input type="password" name="password" placeholder="Create a password" required>
         </div>
-
-    </div>
+</div>
+   
 
     <button type="submit">Request for Registration</button>
 
     <div class="terms">
         <a href="Terms.jsp">Terms & Conditions and Privacy Policy</a>
     </div>
-    
     <!-- ERROR MESSAGE -->
     <% String errorMessage = (String) request.getAttribute("errorMessage");
 
