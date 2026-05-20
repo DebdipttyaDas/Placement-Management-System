@@ -49,7 +49,6 @@ function showCompany() {
   document.getElementById("role").value = "company";
 }
 
-
 // ================= ADMIN =================
 function showAdmin() {
 
