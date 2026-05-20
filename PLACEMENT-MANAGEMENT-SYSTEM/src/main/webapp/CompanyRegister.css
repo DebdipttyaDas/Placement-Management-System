@@ -32,7 +32,6 @@ header nav a:last-child {
     border-radius: 5px;
     cursor: pointer;
 }
-
 .logo {
     color: white;
     font-size: 30px;
@@ -47,7 +46,6 @@ header nav a:last-child {
     transform: scale(1.05);
     color: #ffffff;
 }
-
 /* Center Content */
 center {
     margin-top: 50px;
@@ -65,7 +63,7 @@ form {
 }
 
 .company-form{
-    width: 70%;
+    width: 100%;
     background: #1f6f68;
     padding: 40px;
     border-radius: 20px;
@@ -117,6 +115,20 @@ button{
     color: white;
     font-size: 16px;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+button:hover{
+    background: #032f30;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* Click / Touch Effect */
+button:active{
+    transform: scale(0.96);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
 /* Terms */
