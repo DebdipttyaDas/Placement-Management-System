@@ -25,7 +25,7 @@
         <center>
 
             <h1>Create Your Company Account</h1>
-            <h4>Register your company to access placement services</h4>
+            <h4>Register your company to access our placement services</h4>
 
             <!-- FORM -->
          <form action="CompanyRegisterServlet" method="post" class="company-form">
