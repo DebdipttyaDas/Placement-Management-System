@@ -47,14 +47,11 @@
             <input type="text" name="companyType" placeholder="e.g. IT, Startup, MNC" required>
         </div>
 
+<div class="last-row">
+
         <div class="input-group">
             <label>Company Email</label>
             <input type="email" name="email" placeholder="Enter company email" required>
-        </div>
-
-        <div class="input-group">
-            <label>Phone Number</label>
-            <input type="text" name="phone" placeholder="Enter phone number" required>
         </div>
 
         <div class="input-group">
@@ -63,6 +60,7 @@
         </div>
 </div>
    
+   </div>
 
     <button type="submit">Request for Registration</button>
 

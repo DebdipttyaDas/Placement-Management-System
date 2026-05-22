@@ -73,7 +73,16 @@ form {
 .form-grid{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
+    gap: 50px 25px;
+    justify-items: center;
+}
+
+.last-row{
+    grid-column: 1 / 4;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
 }
 
 .input-group{
@@ -90,6 +99,7 @@ form {
 
 
 .input-group input{
+    width: 250px;
     padding: 12px;
     border: 2px solid black;
     border-radius: 10px;
