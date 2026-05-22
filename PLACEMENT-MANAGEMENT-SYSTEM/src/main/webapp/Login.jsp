@@ -67,7 +67,7 @@
 
 <!-- Username -->
 <div class="text-left mb-3">
-  <label id="userLabel" class="text-xs text-white">USERNAME OR EMAIL</label>
+  <label id="userLabel" class="text-xs text-white">EMAIL</label>
 
   <input id="userInput" name="email" type="text" style="color: white;"
     placeholder="Enter your username or email"
