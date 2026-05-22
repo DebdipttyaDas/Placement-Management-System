@@ -70,7 +70,7 @@
   <label id="userLabel" class="text-xs text-white">EMAIL</label>
 
   <input id="userInput" name="email" type="text" style="color: white;"
-    placeholder="Enter your username or email"
+    placeholder="Enter your email"
     class="w-full mt-1 p-2 rounded-md bg-white/10 border border-black-200 text-white placeholder-white-400 focus:outline-none focus:ring-2 focus:ring-white-400">
 </div>
 
