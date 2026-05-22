@@ -9,8 +9,8 @@ function showStudent() {
   document.getElementById("companyForm").style.display = "none";
 
   // Labels + placeholders
-  document.getElementById("userLabel").innerText = "USERNAME OR EMAIL";
-  document.getElementById("userInput").placeholder = "Enter your username or email";
+  document.getElementById("userLabel").innerText = "EMAIL";
+  document.getElementById("userInput").placeholder = "Enter your email";
 
   // ✅ Reset password placeholder
   document.querySelector('input[name="password"]').placeholder = "Enter your password";
