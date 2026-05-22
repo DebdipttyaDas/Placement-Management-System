@@ -71,7 +71,7 @@
             <input type="text" name="name" placeholder="Your name">
             <input type="email" name="email" placeholder="Your email">
             <input type="password" name="password" placeholder="Your password">
-            <input type="password" name="confirmPassword" placeholder="Confirm password">
+            
           </div>
 
           <!-- ACADEMIC -->
