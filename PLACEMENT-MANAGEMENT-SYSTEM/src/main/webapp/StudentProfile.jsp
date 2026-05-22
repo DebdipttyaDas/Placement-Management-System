@@ -53,7 +53,7 @@
           <!-- AVATAR CARD -->
           <div class="card avatar-card">
             <h2>Profile Picture</h2>
-            <p>JPG or PNG. Max size 2MB</p>
+            <p>Only JPG . Max size 500KB</p>
 
             <div class="avatar-box">
               <img id="profilePreview"
