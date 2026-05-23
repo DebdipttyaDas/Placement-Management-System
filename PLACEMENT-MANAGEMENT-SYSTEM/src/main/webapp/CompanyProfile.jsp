@@ -134,44 +134,7 @@
 
         </section>
 
-        <!-- CULTURE -->
-        <section class="culture-section">
-
-            <div class="section-header">
-
-                <h2>Culture & Life</h2>
-                <div class="underline"></div>
-
-            </div>
-
-            <div class="culture-grid">
-
-                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1200&auto=format&fit=crop"
-                     alt="Office Culture">
-
-                <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1200&auto=format&fit=crop"
-                     alt="Workspace Design">
-
-            </div>
-
-            <div class="culture-text">
-
-                <p>
-                    We believe that being at our best starts with being ourselves.
-                    Our culture is built on <strong>“Googleness”</strong>—a combination of humility,
-                    curiosity, and a drive to do big things.We foster a work-hard, 
-                    play-hard environment where innovation happens in micro-kitchens and high-tech labs alike.
-                </p>
-
-                <p>
-                    Our employees are encouraged to spend 20% of their time on passion
-                    projects, leading to breakthroughs that change the world.
-                </p>
-
-            </div>
-
-        </section>
-
+       
         <!-- BENEFITS -->
         <section class="benefits-section">
 
