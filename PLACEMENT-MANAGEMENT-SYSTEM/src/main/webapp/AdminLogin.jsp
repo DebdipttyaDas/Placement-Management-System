@@ -53,12 +53,12 @@
                     <!-- Admin ID -->
                     <div class="input-group">
 
-                        <label>ADMIN ID</label>
+                        <label>USERNAME</label>
 
                         <input 
                             type="text"
                             name="adminId"
-                            placeholder="Enter Admin ID"
+                            placeholder="Enter Username"
                             required
                             style="color: white;"
                         >
