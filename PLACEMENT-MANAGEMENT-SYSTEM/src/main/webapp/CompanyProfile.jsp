@@ -384,37 +384,8 @@
 
 </section>
 
-        <!-- IMPACT SECTION -->
-        <section class="impact-section">
-
-            <div class="impact-container">
-
-                <div class="stat-item">
-
-                    <h2 class="stat-number">2030</h2>
-                    <p class="stat-label">Goal for 24/7 Carbon-Free Energy</p>
-
-                </div>
-
-                <div class="stat-item">
-
-                    <h2 class="stat-number">150+</h2>
-                    <p class="stat-label">Countries served globally</p>
-
-                </div>
-
-                <div class="stat-item">
-
-                    <h2 class="stat-number">2B+</h2>
-                    <p class="stat-label">Active Users on Android</p>
-
-                </div>
-
-            </div>
-
-        </section>
-
       
+
             <!-- BACK TO TOP -->
             <button id="backToTop" title="Go to top">
 
