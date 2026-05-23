@@ -156,6 +156,13 @@
 
                 </div>
 
+<div class="form-group">
+        <label>Salary</label>
+
+        <input type="text"
+        class="form-control"
+        placeholder="e.g. INR 30k-50k">
+    </div>
                 <!-- EMPLOYMENT TYPE -->
                 <div class="form-group">
 
