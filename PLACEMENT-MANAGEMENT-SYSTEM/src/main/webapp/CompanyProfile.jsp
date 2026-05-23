@@ -414,36 +414,7 @@
 
         </section>
 
-        <!-- FOOTER -->
-        <footer class="main-footer">
-
-            <div class="footer-grid">
-
-                <div class="footer-col">
-
-                    <h3>Resources</h3>
-
-                    <ul>
-
-                        <li><a href="#">Blog</a></li>
-                <li><a href="#">Brand Resource Center</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Contact us</a></li>
-                <li><a href="#">Help Center</a></li>
-                <li><a href="#">Investor Relations</a></li>
-                <li><a href="#">Locations</a></li>
-                <li><a href="#">Press resources</a></li>
-                    </ul>
-
-                </div>
-
-           
-            
-
-          
-
-    
-
+      
             <!-- BACK TO TOP -->
             <button id="backToTop" title="Go to top">
 
