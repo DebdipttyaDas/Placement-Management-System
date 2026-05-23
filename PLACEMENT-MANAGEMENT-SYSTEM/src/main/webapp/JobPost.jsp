@@ -108,62 +108,58 @@
 
             </div>
 
-            <!-- JOB TITLE -->
-            <div class="form-group">
+             <div class="form-row">
 
-                <label>
-                    Job Title
-                </label>
+    <div class="form-group">
+        <label>Job Title *</label>
 
-                <input type="text"
-                name="jobTitle" required
-                class="form-control"
-                placeholder="e.g. Senior Software Engineer">
+        <input type="text"
+        class="form-control"
+        placeholder="e.g. Senior Software Engineer">
+    </div>
 
-            </div>
+    <div class="form-group">
 
-            <!-- ROW -->
-            <div class="form-row">
+                    <label>Employment Type</label>
 
-                <!-- DEPARTMENT -->
-                <div class="form-group">
-
-                    <label>
-                        Department
-                    </label>
-
-                    <select name="department" class="form-control">
-
-                        <option>Select Department</option>
-
-                        <option>CSE</option>
-
-                        <option>ECE</option>
-
-                        <option>EEE</option>
-
-                        <option>IT</option>
-
-                        <option>BCA</option>
-
-                        <option>MCA</option>
-
-                        <option>BBA</option>
-
-                        <option>MBA</option>
-
+                    <select class="form-control">
+                        <option>Full-time</option>
+                        <option>Part-time</option>
+                        <option>Internship</option>
                     </select>
 
                 </div>
 
-<div class="form-group">
+</div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>Department</label>
+
+                    <select class="form-control">
+                        <option>Select Department</option>
+                        <option>CSE</option>
+                        <option>ECE</option>
+                        <option>EEE</option>
+                        <option>IT</option>
+                        <option>BCA</option>
+                        <option>MCA</option>
+                        <option>BBA</option>
+                        <option>MBA</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
         <label>Salary</label>
 
         <input type="text"
         class="form-control"
         placeholder="e.g. INR 30k-50k">
     </div>
-               </div>
+            </div>
 
             <div class="form-row">
 
