@@ -22,29 +22,32 @@ public class JobPostServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         String jobTitle = request.getParameter("jobTitle");
         String department = request.getParameter("department");
         String employmentType = request.getParameter("employmentType");
         String locationType = request.getParameter("locationType");
         String salaryRange = request.getParameter("salaryRange");
-        String jobDescription = request.getParameter("jobDescription");
+        String jobDescription = normalizeEditorHtml(request.getParameter("jobDescription"));
 
         boolean isSuccess = false;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String insertQuery = "INSERT INTO jobs (job_title, department, employment_type, location_type, salary_range, job_description) VALUES (?, ?, ?, ?, ?, ?)";
-            
+
             try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
                  PreparedStatement ps = conn.prepareStatement(insertQuery)) {
-                
+
                 ps.setString(1, jobTitle);
                 ps.setString(2, department);
                 ps.setString(3, employmentType);
                 ps.setString(4, locationType);
                 ps.setString(5, salaryRange);
                 ps.setString(6, jobDescription);
-                
+
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected > 0) {
                     isSuccess = true;
@@ -59,5 +62,12 @@ public class JobPostServlet extends HttpServlet {
         } else {
             response.sendRedirect("JobPost.jsp?error=Failed");
         }
+    }
+
+    private String normalizeEditorHtml(String jobDescription) {
+        if (jobDescription == null) {
+            return "";
+        }
+        return jobDescription.trim();
     }
 }
