@@ -163,60 +163,29 @@
         class="form-control"
         placeholder="e.g. INR 30k-50k">
     </div>
-                <!-- EMPLOYMENT TYPE -->
-                <div class="form-group">
+               </div>
 
-                    <label>
-                        Employment Type
-                    </label>
-
-                    <select name="employmentType" class="form-control">
-
-                        <option>Full-time</option>
-
-                        <option>Part-time</option>
-
-                        <option>Internship</option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
-            <!-- ROW -->
             <div class="form-row">
 
-                <!-- LOCATION -->
                 <div class="form-group">
 
-                    <label>
-                        Location Type
-                    </label>
+                    <label>Location Type</label>
 
-                    <select name="locationType" class="form-control">
-
+                    <select class="form-control">
                         <option>Remote</option>
-
                         <option>On-site</option>
-
                         <option>Hybrid</option>
-
                     </select>
 
                 </div>
 
-                <!-- SALARY -->
                 <div class="form-group">
 
-                    <label>
-                        Salary Range
-                    </label>
+                    <label>Location</label>
 
                     <input type="text"
-                    name="salaryRange"
                     class="form-control"
-                    placeholder="e.g. INR 50K-100K">
+                    placeholder="e.g. Bangalore,Pune">
 
                 </div>
 
