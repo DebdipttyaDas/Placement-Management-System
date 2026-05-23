@@ -437,19 +437,7 @@
 
                 </div>
 
-                <div class="footer-col">
-                <h3>Outreach & Initiatives</h3>
-            <ul>
-                <li><a href="#">Accessibility</a></li>
-                <li><a href="#">Crisis Response</a></li>
-                <li><a href="#">Google.org</a></li>
-                <li><a href="#">Google for Health</a></li>
-                <li><a href="#">Grow with Google</a></li>
-                <li><a href="#">Learning</a></li>
-                <li><a href="#">Public Policy</a></li>
-                <li><a href="#">Sustainability</a></li>
-            </ul>
-            </div>
+           
             
 
           
