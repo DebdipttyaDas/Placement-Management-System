@@ -57,7 +57,7 @@
 
                         <input 
                             type="text"
-                            name="adminId"
+                            name="userName"
                             placeholder="Enter Username"
                             required
                             style="color: white;"
