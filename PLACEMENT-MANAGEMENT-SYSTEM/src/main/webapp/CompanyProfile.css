@@ -715,7 +715,7 @@ body {
     line-height: 1.7;
     margin-bottom: 25px;
     font-size: 15px;
-    flex-grow: 1; /* Pushes the button to the bottom so all buttons line up */
+    flex-grow: 1; 
 }
 
 /* BUTTON */
