@@ -7,6 +7,9 @@
     <display-name>Placement Management System</display-name>
     <description>Placement Management System - Final Year Project</description>
 
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
 
     <!-- Welcome File List -->
     <welcome-file-list>

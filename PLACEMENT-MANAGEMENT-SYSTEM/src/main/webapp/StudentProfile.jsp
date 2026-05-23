@@ -48,7 +48,7 @@
         </div>
 
         <!-- FORM START -->
-        <form id="profileForm" action="UpdateProfileServlet" method="post" enctype="multipart/form-data">
+        <form id="profileForm" action="UpdateStudentProfileServlet" method="post" enctype="multipart/form-data">
 
           <!-- AVATAR CARD -->
           <div class="card avatar-card">
@@ -67,19 +67,23 @@
           <!-- PERSONAL INFO -->
           <div class="card">
             <h2>Personal Information</h2>
-
-            <input type="text" name="name" placeholder="Your name">
-            <input type="email" name="email" placeholder="Your email">
-            <input type="password" name="password" placeholder="Your password">
-            
+            <div class="form-grid">
+              <input type="text" name="name" placeholder="Your name">
+              <input type="email" name="email" placeholder="Your email">
+              <input type="password" name="password" placeholder="Your password">
+              <input type="tel" name="phone" placeholder="Phone number">
+              <input class="full-width" type="date" name="dob" placeholder="Date of birth">
+            </div>
           </div>
 
           <!-- ACADEMIC -->
           <div class="card">
-            <h2>Academic Records</h2>
-
-            <input type="text" name="department" placeholder="Department">
-            <input type="text" name="cgpa" placeholder="CGPA">
+            <h2>Academic Details</h2>
+            <div class="form-grid">
+              <input type="text" name="college" placeholder="College name">
+              <input type="text" name="department" placeholder="Department">
+              <input type="text" name="dgpa" placeholder="DGPA">
+            </div>
           </div>
 
           <!-- LANGUAGES -->

@@ -82,21 +82,11 @@
           </select>
         </div>
 
-        <div>
-          <label style="color: #ffffff;">Year</label><br>
-          <select name="year" required>
-            <option value="">Select year</option>
-            <option value="1st Year">1st Year</option>
-            <option value="2nd Year">2nd Year</option>
-            <option value="3rd Year">3rd Year</option>
-            <option value="4th Year">4th Year</option>
-          </select>
-        </div>
 
         <!-- Row 3 -->
         <div>
           <label style="color: #ffffff;">CGPA / Percentage</label><br>
-          <input type="text" name="cgpa" placeholder="Enter your CGPA or %" required>
+          <input type="text" name="dgpa" placeholder="Enter your DGPA or %" required>
         </div>
 
         <div>

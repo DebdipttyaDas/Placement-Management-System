@@ -155,6 +155,30 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.card .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 20px;
+    row-gap: 16px;
+    margin-top: 16px;
+}
+
+.card .form-grid .full-width {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 900px) {
+    .card .form-grid {
+        grid-template-columns: 1fr;
+        row-gap: 14px;
+    }
+
+    .card .form-grid .full-width {
+        grid-column: 1;
+    }
+}
+
+
 /* AVATAR CARD */
 .avatar-card {
     text-align: center;
@@ -196,12 +220,24 @@ body {
 
 /* INPUT FIELDS */
 .card input {
-    width: 98%;
-    padding: 10px;
-    margin-top: 10px;
+    width: 100%;
+    padding: 10px 12px;
     border-radius: 6px;
     border: 1px solid #000000;
     transition: 0.2s;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+/* Standalone inputs (e.g. Languages) — not inside form-grid */
+.card > input:not(.upload-btn) {
+    margin-top: 12px;
+}
+
+/* Grid fields: equal horizontal & vertical gaps from .form-grid only */
+.card .form-grid input {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .card input:focus {
