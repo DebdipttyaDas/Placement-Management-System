@@ -112,7 +112,7 @@
             <div class="form-group">
 
                 <label>
-                    Job Title *
+                    Job Title
                 </label>
 
                 <input type="text"
