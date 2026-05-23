@@ -451,54 +451,10 @@
             </ul>
             </div>
             
-<!-- COLUMN 3: TECH -->
-        <div class="footer-col">
-            <h3>Research & Technology</h3>
-            <ul>
-                <li><a href="#">Google AI</a></li>
-                <li><a href="#">Google Cloud</a></li>
-                <li><a href="#">Google DeepMind</a></li>
-                <li><a href="#">Google for Developers</a></li>
-                <li><a href="#">Google Labs</a></li>
-                <li><a href="#">Google Research</a></li>
-            </ul>
-        </div>
-        
-    <!-- COLUMN 4: ABOUT -->
-        <div class="footer-col">
-            <h3>More About Us</h3>
-            <ul>
-                <li><a href="#">Around the globe</a></li>
-                <li><a href="#">Human rights</a></li>
-                <li><a href="#">Safety Center</a></li>
-                <li><a href="#">Supplier responsibility</a></li>
-                <li><a href="#">Transparency Center</a></li>
-                <li><a href="#">Transparency Report</a></li>
-            </ul>
-        </div>
-    </div>            
 
-     <!-- BOTTOM BAR -->
-    <div class="footer-bottom">
-        <div class="footer-brand-side">
-            <div class="footer-logo">Google</div>
-            <div class="social-icons">
-                <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-        </div>
-                    
-                <div class="bottom-links">
+          
 
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">About Google</a>
-
-                </div>
-
-            </div>
+    
 
             <!-- BACK TO TOP -->
             <button id="backToTop" title="Go to top">
