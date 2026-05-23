@@ -231,7 +231,7 @@
             <div class="form-group">
 
                 <label>
-                    Job Description *
+                    Job Description
                 </label>
 
                 <!-- TOOLBAR -->
