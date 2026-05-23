@@ -208,8 +208,6 @@
             <br>
             <br>
             
-            <p>Investing in our people is the most important investment we make. We offer a holistic suite of benefits designed to support your physical, emotional, and financial wellbeing. From top-tier healthcare and mental health support to onsite wellness centers and gourmet micro-kitchens, we ensure you have everything you need to perform at your peak. Beyond the office, our generous leave policies and family-support programs mean that your life outside of work is just as prioritized as your life within it.</p>
-
         </section>
 
         <!-- NEWS SECTION -->
