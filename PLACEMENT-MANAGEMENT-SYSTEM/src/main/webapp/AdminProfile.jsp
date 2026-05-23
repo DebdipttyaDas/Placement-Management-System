@@ -31,11 +31,11 @@
 
         <form id="adminProfileForm" action="AdminProfileServlet" method="post">
 
-            <label>Admin ID</label>
-            <input type="text" name="adminId" placeholder="Enter Admin ID" required>
+            <label>Admin Name</label>
+            <input type="text" name="adminName" placeholder="Enter Admin Name" required>
 
             <label>Username</label>
-            <input type="text" name="username" placeholder="Enter Username" required>
+            <input type="text" name="userName" placeholder="Enter Username" required>
 
             <label>Email</label>
             <input type="email" name="email" placeholder="Enter Email" required>

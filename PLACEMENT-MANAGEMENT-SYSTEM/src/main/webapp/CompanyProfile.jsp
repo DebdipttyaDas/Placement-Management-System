@@ -134,44 +134,7 @@
 
         </section>
 
-        <!-- CULTURE -->
-        <section class="culture-section">
-
-            <div class="section-header">
-
-                <h2>Culture & Life</h2>
-                <div class="underline"></div>
-
-            </div>
-
-            <div class="culture-grid">
-
-                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1200&auto=format&fit=crop"
-                     alt="Office Culture">
-
-                <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1200&auto=format&fit=crop"
-                     alt="Workspace Design">
-
-            </div>
-
-            <div class="culture-text">
-
-                <p>
-                    We believe that being at our best starts with being ourselves.
-                    Our culture is built on <strong>“Googleness”</strong>—a combination of humility,
-                    curiosity, and a drive to do big things.We foster a work-hard, 
-                    play-hard environment where innovation happens in micro-kitchens and high-tech labs alike.
-                </p>
-
-                <p>
-                    Our employees are encouraged to spend 20% of their time on passion
-                    projects, leading to breakthroughs that change the world.
-                </p>
-
-            </div>
-
-        </section>
-
+       
         <!-- BENEFITS -->
         <section class="benefits-section">
 
@@ -245,8 +208,6 @@
             <br>
             <br>
             
-            <p>Investing in our people is the most important investment we make. We offer a holistic suite of benefits designed to support your physical, emotional, and financial wellbeing. From top-tier healthcare and mental health support to onsite wellness centers and gourmet micro-kitchens, we ensure you have everything you need to perform at your peak. Beyond the office, our generous leave policies and family-support programs mean that your life outside of work is just as prioritized as your life within it.</p>
-
         </section>
 
         <!-- NEWS SECTION -->
@@ -384,121 +345,7 @@
 
 </section>
 
-        <!-- IMPACT SECTION -->
-        <section class="impact-section">
-
-            <div class="impact-container">
-
-                <div class="stat-item">
-
-                    <h2 class="stat-number">2030</h2>
-                    <p class="stat-label">Goal for 24/7 Carbon-Free Energy</p>
-
-                </div>
-
-                <div class="stat-item">
-
-                    <h2 class="stat-number">150+</h2>
-                    <p class="stat-label">Countries served globally</p>
-
-                </div>
-
-                <div class="stat-item">
-
-                    <h2 class="stat-number">2B+</h2>
-                    <p class="stat-label">Active Users on Android</p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- FOOTER -->
-        <footer class="main-footer">
-
-            <div class="footer-grid">
-
-                <div class="footer-col">
-
-                    <h3>Resources</h3>
-
-                    <ul>
-
-                        <li><a href="#">Blog</a></li>
-                <li><a href="#">Brand Resource Center</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Contact us</a></li>
-                <li><a href="#">Help Center</a></li>
-                <li><a href="#">Investor Relations</a></li>
-                <li><a href="#">Locations</a></li>
-                <li><a href="#">Press resources</a></li>
-                    </ul>
-
-                </div>
-
-                <div class="footer-col">
-                <h3>Outreach & Initiatives</h3>
-            <ul>
-                <li><a href="#">Accessibility</a></li>
-                <li><a href="#">Crisis Response</a></li>
-                <li><a href="#">Google.org</a></li>
-                <li><a href="#">Google for Health</a></li>
-                <li><a href="#">Grow with Google</a></li>
-                <li><a href="#">Learning</a></li>
-                <li><a href="#">Public Policy</a></li>
-                <li><a href="#">Sustainability</a></li>
-            </ul>
-            </div>
-            
-<!-- COLUMN 3: TECH -->
-        <div class="footer-col">
-            <h3>Research & Technology</h3>
-            <ul>
-                <li><a href="#">Google AI</a></li>
-                <li><a href="#">Google Cloud</a></li>
-                <li><a href="#">Google DeepMind</a></li>
-                <li><a href="#">Google for Developers</a></li>
-                <li><a href="#">Google Labs</a></li>
-                <li><a href="#">Google Research</a></li>
-            </ul>
-        </div>
-        
-    <!-- COLUMN 4: ABOUT -->
-        <div class="footer-col">
-            <h3>More About Us</h3>
-            <ul>
-                <li><a href="#">Around the globe</a></li>
-                <li><a href="#">Human rights</a></li>
-                <li><a href="#">Safety Center</a></li>
-                <li><a href="#">Supplier responsibility</a></li>
-                <li><a href="#">Transparency Center</a></li>
-                <li><a href="#">Transparency Report</a></li>
-            </ul>
-        </div>
-    </div>            
-
-     <!-- BOTTOM BAR -->
-    <div class="footer-bottom">
-        <div class="footer-brand-side">
-            <div class="footer-logo">Google</div>
-            <div class="social-icons">
-                <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-        </div>
-                    
-                <div class="bottom-links">
-
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">About Google</a>
-
-                </div>
-
-            </div>
+      
 
             <!-- BACK TO TOP -->
             <button id="backToTop" title="Go to top">
@@ -507,7 +354,7 @@
 
             </button>
 
-        </footer>
+        
 
     </main>
 

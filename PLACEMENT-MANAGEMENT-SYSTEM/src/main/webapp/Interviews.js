@@ -19,17 +19,26 @@ document.addEventListener("DOMContentLoaded", function () {
        OPEN MODAL
     ========================================================= */
 
-    openBtn.addEventListener("click", function () {
-        modal.classList.add("active");
-    });
+    if (openBtn) {
+        openBtn.addEventListener("click", function () {
+            modal.classList.add("active");
+        });
+    }
 
     /* =========================================================
        CLOSE MODAL
     ========================================================= */
 
     function closeModal() {
-        modal.classList.remove("active");
-        form.reset();
+
+        if (modal) {
+            modal.classList.remove("active");
+        }
+
+        if (form) {
+            form.reset();
+        }
+
         selectedType = "Virtual";
 
         document.querySelectorAll(".type-btn").forEach(function (btn) {
@@ -37,13 +46,19 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         var virtualBtn = document.querySelector("[data-type='Virtual']");
+
         if (virtualBtn) {
             virtualBtn.classList.add("active");
         }
     }
 
-    closeBtn.addEventListener("click", closeModal);
-    cancelBtn.addEventListener("click", closeModal);
+    if (closeBtn) {
+        closeBtn.addEventListener("click", closeModal);
+    }
+
+    if (cancelBtn) {
+        cancelBtn.addEventListener("click", closeModal);
+    }
 
     window.addEventListener("click", function (e) {
         if (e.target === modal) {
@@ -58,11 +73,15 @@ document.addEventListener("DOMContentLoaded", function () {
     var typeButtons = document.querySelectorAll(".type-btn");
 
     typeButtons.forEach(function (btn) {
+
         btn.addEventListener("click", function () {
+
             typeButtons.forEach(function (b) {
                 b.classList.remove("active");
             });
+
             btn.classList.add("active");
+
             selectedType = btn.getAttribute("data-type");
         });
     });
@@ -72,39 +91,82 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================================================= */
 
     function showToast(message, isError) {
+
         if (isError === undefined) {
             isError = false;
         }
+
+        if (!toast) {
+            alert(message);
+            return;
+        }
+
         toast.innerText = message;
+
         if (isError) {
             toast.className = "toast show error";
         } else {
             toast.className = "toast show";
         }
+
         setTimeout(function () {
             toast.classList.remove("show");
         }, 4000);
     }
 
     /* =========================================================
-       BUILD CARD HTML (no template literals)
+       BUILD CARD HTML
     ========================================================= */
 
     function buildInterviewCard(inv, color) {
+
+        var meetingButton = "";
+
+        if (inv.meet_link && inv.meet_link.trim() !== "") {
+
+            meetingButton =
+                '<a href="' + inv.meet_link + '" target="_blank">' +
+                    '<button class="assign-btn">Join Meeting</button>' +
+                '</a>';
+
+        } else {
+
+            meetingButton =
+                '<button class="assign-btn disabled" disabled>No Link</button>';
+        }
+
         return (
-            '<motion.div class="slot">' +
-                '<span class="time">' + inv.interview_time + '</span>' +
-                '<motion.div class="card ' + color + '">' +
-                    '<h4>' + inv.interview_round + '</h4>' +
-                    '<p><b>' + inv.company_name + '</b></p>' +
-                    '<p>Student: ' + inv.student_name + '</p>' +
-                    '<p>Panelist: ' + inv.interviewer_name + '</p>' +
+            '<div class="slot">' +
+
+                '<span class="time">' +
+                    (inv.interview_time || "N/A") +
+                '</span>' +
+
+                '<div class="card ' + color + '">' +
+
+                    '<h4>' +
+                        (inv.interview_round || "Interview") +
+                    '</h4>' +
+
+                    '<p><b>' +
+                        (inv.company_name || "Unknown Company") +
+                    '</b></p>' +
+
+                    '<p>Student: ' +
+                        (inv.student_name || "N/A") +
+                    '</p>' +
+
+                    '<p>Panelist: ' +
+                        (inv.interviewer_name || "N/A") +
+                    '</p>' +
+
                     '<br>' +
-                    '<a href="' + inv.meet_link + '" target="_blank">' +
-                        '<button class="assign-btn">Join Meeting</button>' +
-                    '</a>' +
-                '</motion.div>' +
-            '</motion.div>'
+
+                    meetingButton +
+
+                '</div>' +
+
+            '</div>'
         );
     }
 
@@ -113,45 +175,69 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================================================= */
 
     function loadAdminInterviews() {
+
         var container = document.getElementById("adminScheduleContainer");
 
+        if (!container) {
+            return;
+        }
+
         fetch("FetchInterviewsServlet?all=true")
+
             .then(function (response) {
+
                 if (!response.ok) {
                     throw new Error("Failed to fetch interviews");
                 }
+
                 return response.json();
             })
-            .then(function (interviews) {
-                document.getElementById("totalRoundsCount").innerText = interviews.length;
 
-                if (interviews.length === 0) {
+            .then(function (interviews) {
+
+                var totalRoundsCount =
+                    document.getElementById("totalRoundsCount");
+
+                if (totalRoundsCount) {
+                    totalRoundsCount.innerText = interviews.length;
+                }
+
+                if (!Array.isArray(interviews) || interviews.length === 0) {
+
                     container.innerHTML =
-                        '<motion.div class="loading-text">' +
+                        '<div class="loading-text">' +
                             'No interview slots scheduled yet.' +
-                        '</motion.div>';
+                        '</div>';
+
                     return;
                 }
 
                 container.innerHTML = "";
 
                 interviews.forEach(function (inv, index) {
+
                     var color = "blue";
+
                     if (index % 3 === 1) {
                         color = "purple";
                     }
+
                     if (index % 3 === 2) {
                         color = "red";
                     }
+
                     container.innerHTML += buildInterviewCard(inv, color);
                 });
             })
+
             .catch(function (error) {
+
                 console.error(error);
+
                 container.innerHTML =
-                    '<motion.div class="loading-text">' +
+                    '<div class="loading-text">' +
                         'Failed to load interviews.' +
-                    '</motion.div>';
+                    '</div>';
             });
     }
 
@@ -161,54 +247,111 @@ document.addEventListener("DOMContentLoaded", function () {
        FORM SUBMIT
     ========================================================= */
 
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
+    if (form) {
 
-        btnText.style.display = "none";
-        loader.style.display = "block";
+        form.addEventListener("submit", function (e) {
 
-        var payload = {
-            interview_round: document.getElementById("interviewRound").value,
-            company_name: document.getElementById("companyName").value,
-            student_name: document.getElementById("studentName").value,
-            interview_date: document.getElementById("interviewDate").value,
-            interview_time: document.getElementById("interviewTime").value,
-            interviewer_name: document.getElementById("interviewerName").value,
-            interview_type: selectedType,
-            duration: 60,
-            meet_link: document.getElementById("meetLink").value || ""
-        };
+            e.preventDefault();
 
-        fetch("ScheduleInterviewServlet", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
-        })
+            if (btnText) {
+                btnText.style.display = "none";
+            }
+
+            if (loader) {
+                loader.style.display = "block";
+            }
+
+            var payload = {
+
+                interview_round:
+                    document.getElementById("interviewRound").value,
+
+                company_name:
+                    document.getElementById("companyName").value,
+
+                student_name:
+                    document.getElementById("studentName").value,
+
+                interview_date:
+                    document.getElementById("interviewDate").value,
+
+                interview_time:
+                    document.getElementById("interviewTime").value,
+
+                interviewer_name:
+                    document.getElementById("interviewerName").value,
+
+                interview_type: selectedType,
+
+                duration: 60,
+
+                meet_link:
+                    document.getElementById("meetLink").value || ""
+            };
+
+            fetch("ScheduleInterviewServlet", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(payload)
+            })
+
             .then(function (response) {
+
+                if (!response.ok) {
+                    throw new Error("Server response error");
+                }
+
                 return response.json();
             })
+
             .then(function (data) {
+
                 if (data.success) {
-                    showToast("Interview slot scheduled successfully!");
-                    closeModal();
-                    loadAdminInterviews();
-                } else {
+
                     showToast(
-                        data.message || "Failed to schedule interview",
+                        "Interview slot scheduled successfully!"
+                    );
+
+                    closeModal();
+
+                    loadAdminInterviews();
+
+                } else {
+
+                    showToast(
+                        data.message ||
+                        "Failed to schedule interview",
                         true
                     );
                 }
             })
+
             .catch(function (error) {
+
                 console.error(error);
-                showToast("Server error occurred", true);
+
+                showToast(
+                    "Server error occurred",
+                    true
+                );
             })
+
             .finally(function () {
-                btnText.style.display = "inline";
-                loader.style.display = "none";
+
+                if (btnText) {
+                    btnText.style.display = "inline";
+                }
+
+                if (loader) {
+                    loader.style.display = "none";
+                }
             });
-    });
+        });
+    }
 
 });
