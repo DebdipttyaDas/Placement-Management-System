@@ -424,7 +424,7 @@
         id="toast"></div>
 
     <!-- JS -->
-    <script src="interviews.js"></script>
+    <script src="Interviews.js"></script>
     
     
     <!-- Chatbot -->
