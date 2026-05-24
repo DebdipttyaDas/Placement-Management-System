@@ -29,7 +29,7 @@
         <li><a href="PlacementMonitoring.jsp">
                     Company Monitoring
                 </a></li>
-        <li>Student Management</li>
+        <li>Student Monitoring</li>
         <li>Notifications</li>
     </ul>
 
