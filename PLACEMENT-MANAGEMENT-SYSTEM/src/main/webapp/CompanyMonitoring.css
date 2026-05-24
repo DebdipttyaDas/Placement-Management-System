@@ -65,22 +65,24 @@ body {
     width:calc(100% - 230px);
     min-height:100vh;
 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:40px;
 }
+
 
 /* GREEN COMPANY BOX */
 .company-box{
-    width:90%;
-    max-width:1300px;
-    min-height:500px;
+    width:100%;
+    max-width:1200px;
+    min-height:600px;
+
     background:#06473e;
     padding:45px;
     border-radius:20px;
     box-shadow:0 5px 15px rgba(0,0,0,0.1);
-    
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-
 }
 
 
