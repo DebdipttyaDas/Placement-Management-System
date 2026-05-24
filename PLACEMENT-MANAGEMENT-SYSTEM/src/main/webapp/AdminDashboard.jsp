@@ -26,7 +26,7 @@
 
     <ul class="nav-menu">
         <li class="active">Dashboard</li>
-        <li><a href="PlacementMonitoring.jsp" style="text-decoration: none; color: white;">
+        <li><a href="CompanyMonitoring.jsp" style="text-decoration: none; color: white;">
                     Company Monitoring
                 </a></li>
         <li>Student Monitoring</li>
