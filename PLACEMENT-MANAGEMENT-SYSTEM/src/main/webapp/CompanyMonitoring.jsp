@@ -6,13 +6,13 @@ pageEncoding="UTF-8" %>
 
 <head>
     <meta charset="UTF-8">
-    <title>Placement Monitoring</title>
+    <title>Company Monitoring</title>
 
     <!-- Tailwind External CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- External CSS -->
-    <link rel="stylesheet" href="PlacementMonitoring.css">
+    <link rel="stylesheet" href="CompanyMonitoring.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet"
@@ -27,7 +27,7 @@ pageEncoding="UTF-8" %>
     
     <nav class="sidebar">
     <div class="logo">
-        <h2 class="text-2xl font-bold mb-8">Placement Monitoring</h2>        
+        <h2 class="text-2xl font-bold mb-3">Company Monitoring</h2>        
     </div>
     <ul class="nav-menu">
         <li ><a href ="AdminDashboard.jsp">Dashboard</a></li>

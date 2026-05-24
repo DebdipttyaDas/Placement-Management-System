@@ -39,6 +39,12 @@ body {
     transition: 0.3s;
 }
 
+.nav-menu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
 .nav-menu li:hover
  {
     background: #b5c5c3;
