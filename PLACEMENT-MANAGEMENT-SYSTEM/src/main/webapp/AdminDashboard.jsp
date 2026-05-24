@@ -28,7 +28,7 @@
         <li class="active">Dashboard</li>
         <li><a href="CompanyMonitoring.jsp">Company Monitoring</a></li>
         <li><a href="StudentMonitoring.jsp">Student Monitoring</a></li>
-        <li><a href="CompanyMonitoring.jsp" style="text-decoration: none; color: white;">Notifications</a></li>
+        <li><a href="#" style="text-decoration: none; color: white;">Notifications</a></li>
     </ul>
 
     <!-- Logout -->

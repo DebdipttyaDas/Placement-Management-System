@@ -33,7 +33,7 @@ pageEncoding="UTF-8" %>
         <li ><a href ="AdminDashboard.jsp">Dashboard</a></li>
         <li class="active">Company Monitoring</li>
         <li><a href="StudentMonitoring.jsp">Student Monitoring</a></li>
-        <li>Notifications</li>
+        <li><a href="#" style="text-decoration: none; color: white;">Notifications</a></li>
     </ul>       
        <!-- Logout -->
     <form action="LogoutServlet" method="post">
