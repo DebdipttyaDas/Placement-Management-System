@@ -31,9 +31,8 @@ pageEncoding="UTF-8" %>
     </div>
     <ul class="nav-menu">
         <li ><a href ="AdminDashboard.jsp">Dashboard</a></li>
-        <li class="active"><a href="PlacementMonitoring.jsp">
-                    Placement Monitoring
-                </a> </li>
+        <li class="active">Company Monitoring</li>
+        <li><a href="StudentMonitoring.html">Student Monitoring</a></li>
         <li>Notifications</li>
     </ul>       
        <!-- Logout -->
