@@ -28,6 +28,10 @@
         <li class="active">Dashboard</li>
         <li><a href="CompanyMonitoring.jsp">Company Monitoring</a></li>
         <li><a href="StudentMonitoring.html">Student Monitoring</a></li>
+        <li><a href="CompanyMonitoring.jsp" style="text-decoration: none; color: white;">
+                    Company Monitoring
+                </a></li>
+        <li>Student Monitoring</li>
         <li>Notifications</li>
     </ul>
 
