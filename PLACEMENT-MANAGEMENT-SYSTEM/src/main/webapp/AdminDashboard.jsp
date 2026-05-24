@@ -26,6 +26,9 @@
 
     <ul class="nav-menu">
         <li class="active">Dashboard</li>
+        <li><a href="PlacementMonitoring.jsp">
+                    Company Monitoring
+                </a></li>
         <li>Student Management</li>
         <li>Notifications</li>
     </ul>

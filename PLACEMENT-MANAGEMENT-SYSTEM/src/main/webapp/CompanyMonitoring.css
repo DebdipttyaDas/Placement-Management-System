@@ -1,0 +1,184 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    background: #f4f6f9;
+}
+/* ===== Side bar ===== */
+.sidebar {
+    width: 230px;
+    height: 100vh;
+    position: fixed;
+    background: #06473e;
+    color: white;
+    padding: 20px;
+    display: flex;      
+    flex-direction: column;
+}
+.sidebar form {
+    margin-top: auto;
+}
+
+.nav-menu {
+    list-style: none;
+}
+
+.nav-menu li {
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-menu li:hover
+ {
+    background: #b5c5c3;
+}
+/* LOGOUT BUTTON AT BOTTOM */
+.logout-btn {
+    margin-top: auto;
+    padding: 10px;
+    width: 100%;
+    margin-left: 2px;
+    margin-right: 4px;
+    border: none;
+    border-radius: 8px;
+    background-color: #1d6b61;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.logout-btn:hover {
+    background-color: #65807a;
+}
+
+/* MAIN AREA */
+.main-area{
+    margin-left:220px;
+    width:calc(100% - 220px);
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:40px;
+}
+
+/* GREEN COMPANY BOX */
+.company-box{
+    width:100%;
+    max-width:1100px;
+    background:#06473e;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* JOB CARD */
+.job-card{
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    transition:0.3s;
+}
+
+.job-card:hover{
+    transform:translateY(-5px);
+}
+
+/* JOB TYPE */
+.job-type{
+    background:#06473e;
+    color:white;
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:14px;
+}
+
+/* LABEL */
+.label{
+    color:gray;
+    font-size:14px;
+}
+
+/* VALUE */
+.value{
+    font-weight:bold;
+    margin-top:5px;
+}
+
+/* FORM PAGE */
+.form-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.form-box{
+    width:500px;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.form-heading{
+    text-align:center;
+    font-size:30px;
+    color:#06473e;
+    margin-bottom:30px;
+    font-weight:bold;
+}
+
+/* INPUT GROUP */
+.input-group{
+    margin-bottom:20px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.input-group input,
+.input-group select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    outline:none;
+}
+
+/* BUTTON */
+.submit-btn{
+    width:100%;
+    padding:14px;
+    background:#06473e;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.3s;
+}
+
+.submit-btn:hover{
+    background:#043730;
+}
+
+.company-heading{
+    font-size:36px;
+    font-weight:bold;
+    color:#06473e;
+    margin-bottom:18px;
+}

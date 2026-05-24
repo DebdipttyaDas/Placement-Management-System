@@ -258,30 +258,10 @@
 
                         <label>Select Company</label>
 
-                        <select id="companyName"
-                            required>
-
-                            <option value="">
-                                Choose Company
-                            </option>
-
-                            <option value="CloudScale Solutions">
-                                CloudScale Solutions
-                            </option>
-
-                            <option value="Infosys">
-                                Infosys
-                            </option>
-
-                            <option value="TCS">
-                                TCS
-                            </option>
-
-                            <option value="Wipro">
-                                Wipro
-                            </option>
-
-                        </select>
+                        <input type="text"
+                        id="companyName"
+                        placeholder="Enter company name"
+                        required>
 
                     </div>
 
@@ -334,40 +314,6 @@
                             id="interviewerName"
                             placeholder="Full Name"
                             required>
-
-                    </div>
-
-                    <div class="modern-form-group">
-
-                        <label>Interview Type</label>
-
-                        <div class="interview-type-selector">
-
-                            <button type="button"
-                                class="type-btn active"
-                                data-type="Virtual">
-
-                                Virtual
-
-                            </button>
-
-                            <button type="button"
-                                class="type-btn"
-                                data-type="In-person">
-
-                                In-person
-
-                            </button>
-
-                            <button type="button"
-                                class="type-btn"
-                                data-type="Phone">
-
-                                Phone
-
-                            </button>
-
-                        </div>
 
                     </div>
 
@@ -424,7 +370,7 @@
         id="toast"></div>
 
     <!-- JS -->
-    <script src="interviews.js"></script>
+    <script src="Interviews.js"></script>
     
     
     <!-- Chatbot -->
