@@ -32,7 +32,7 @@ pageEncoding="UTF-8" %>
     <ul class="nav-menu">
         <li ><a href ="AdminDashboard.jsp">Dashboard</a></li>
         <li class="active">Company Monitoring</li>
-        <li><a href="StudentMonitoring.html">Student Monitoring</a></li>
+        <li><a href="StudentMonitoring.jsp">Student Monitoring</a></li>
         <li>Notifications</li>
     </ul>       
        <!-- Logout -->
