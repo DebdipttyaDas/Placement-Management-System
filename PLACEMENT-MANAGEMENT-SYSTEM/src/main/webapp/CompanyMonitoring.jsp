@@ -21,7 +21,7 @@ pageEncoding="UTF-8" %>
 
 <body >
 
-<div class="flex min-h-screen">
+<div class="page-container">
 
     <!-- SIDEBAR -->
     
@@ -44,7 +44,7 @@ pageEncoding="UTF-8" %>
     <!-- MAIN AREA -->
     <div class="main-area flex-1">
 
-<div>
+<div class="company-wrapper">
 
 <h1 class="company-heading">
                         Company Post
@@ -55,17 +55,6 @@ pageEncoding="UTF-8" %>
 
             <!-- GREEN BOX -->
             <div class="company-box">
-
-                <div class="flex justify-between items-center mb-8">
-
-                    
-
-                    <a href="AddCompanyPost.jsp"
-                        class="bg-white text-[#06473e] px-5 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">
-                        + Add Job
-                    </a>
-
-                </div>
 
                 <!-- JOBS -->
                 <div class="space-y-6">
@@ -134,11 +123,7 @@ pageEncoding="UTF-8" %>
                         } else {
                     %>
 
-                    <div class="bg-white p-8 rounded-xl text-center">
-
-                        <h2 class="text-xl font-semibold text-gray-600">
-                            No Job Posts Available
-                        </h2>
+                    <div class="empty-box">                      
 
                     </div>
 
