@@ -337,8 +337,8 @@ td {
 .student-avatar {
     width: 40px;
     height: 40px;
-    background-color: rgba(6, 71, 62, 0.1); /* 10% opacity of your green */
-    color: #06473e;                         /* Your main brand color */
+    background-color: rgba(6, 71, 62, 0.1); 
+    color: #06473e;                         
     font-weight: 700;
     font-size: 14px;
     display: flex;
