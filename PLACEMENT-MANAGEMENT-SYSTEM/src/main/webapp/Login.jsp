@@ -51,8 +51,7 @@
 </p>
 
 <!-- Card -->
-<div class="glass-card w-90 p-6 rounded-2xl">
-
+<div class="glass-card w-[420px] p-6 rounded-2xl">
 <!-- FORM START -->
 <form action="LoginServlet" method="post">
 
