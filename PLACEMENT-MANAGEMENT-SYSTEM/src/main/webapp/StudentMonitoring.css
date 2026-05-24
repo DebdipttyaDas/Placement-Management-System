@@ -277,7 +277,7 @@ body{
     overflow: hidden;
     font-family: system-ui, -apple-system, sans-serif;
     margin: 20px 0;
-    width: 100%; /* <-- THIS LINE FORCES IT TO BE ULTRADING */
+    width: 100%; 
     box-sizing: border-box;
 }
 
@@ -319,7 +319,7 @@ tbody tr:hover {
 }
 
 tbody tr:last-child {
-    border-bottom: none; /* Avoid double line with footer */
+    border-bottom: none; 
 }
 
 td {
