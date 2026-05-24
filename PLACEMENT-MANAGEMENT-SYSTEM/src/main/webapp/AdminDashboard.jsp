@@ -26,7 +26,7 @@
 
     <ul class="nav-menu">
         <li class="active">Dashboard</li>
-        <li>Placement Monitoring</li>
+        <li>Student Management</li>
         <li>Notifications</li>
     </ul>
 
