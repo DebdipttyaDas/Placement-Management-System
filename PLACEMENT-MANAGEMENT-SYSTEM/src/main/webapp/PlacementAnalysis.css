@@ -100,6 +100,7 @@ body {
 /* TOPBAR */
 .topbar{
     background:#06473e;
+    height:50px;
     color:white;
     padding:20px 40px;
     display:flex;
@@ -114,18 +115,6 @@ body {
     width:auto;
     z-index: 1000;
 }
-.top-icons {
-    display: flex;
-    align-items: flex-end;
-    gap: 22px;
-    margin-left:auto;  
-}
-
-.profile, .bell {
-    font-size: 24px;
-    cursor: pointer;
-}
-
 
 
 /* PERFORMANCE */

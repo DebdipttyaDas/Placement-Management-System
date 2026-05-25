@@ -112,18 +112,6 @@ body{
     color:#fff;
 }
 
-.profile-icons{
-    display:flex;
-    align-items:center;
-    gap:20px;
-}
-
-.profile-icons i{
-    font-size:22px;
-    color:#fff;
-    cursor:pointer;
-}
-
 /* FORM CONTAINER */
 .form-container{
     margin-top: 50px;

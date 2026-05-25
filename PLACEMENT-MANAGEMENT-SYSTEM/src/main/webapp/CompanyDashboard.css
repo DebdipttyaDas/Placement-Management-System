@@ -105,13 +105,18 @@ body {
 
 .top-icons {
     display: flex;
-    align-items: flex-end;
-    gap: 25px;  
+    align-items: center;
 }
 
-.profile, .bell {
-    font-size: 24px;
+.user-profile i{
+    font-size: 25px;
+    color: white;
     cursor: pointer;
+}
+
+.user-profile a{
+	margin-right:15px;
+	text-decoration:none;
 }
 
 /* Content */
