@@ -172,7 +172,7 @@
 
     <div class="section-title">
 
-        <h2>Company Database System</h2>
+        <h2>Company Details</h2>
 
         <p>
             Manage company registration, contact information,
