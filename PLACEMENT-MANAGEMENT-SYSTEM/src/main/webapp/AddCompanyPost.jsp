@@ -16,7 +16,7 @@ pageEncoding="UTF-8"%>
 
         <form action="AddCompanyPostServlet" method="post" class="job-form">
 
-            <h1>Add Company Post</h1>
+            <h1>Company Post</h1>
 
             <div class="form-grid">
 
@@ -70,19 +70,6 @@ pageEncoding="UTF-8"%>
                 </div>
 
             </div>
-
-            <!-- Description -->
-            <div class="input-group full-width">
-                <label>Job Description</label>
-
-                <textarea name="description"
-                          placeholder="Enter job description here..."></textarea>
-            </div>
-
-            <!-- Submit -->
-            <button type="submit" class="submit-btn">
-                Submit Job Post
-            </button>
 
         </form>
 
