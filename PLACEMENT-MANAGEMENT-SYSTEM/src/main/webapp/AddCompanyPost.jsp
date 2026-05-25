@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8" %>
+pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,82 +8,86 @@ pageEncoding="UTF-8" %>
     <meta charset="UTF-8">
     <title>Add Company Post</title>
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- External CSS -->
-    <link rel="stylesheet" href="PlacementMonitoring.css">
+    <link rel="stylesheet" href="AddCompanyPost.css">
 </head>
 
-<body class="bg-gray-100">
+<body>
 
-<div class="form-container">
+    <div class="form-container">
 
-    <div class="form-box">
+        <form action="AddCompanyPostServlet" method="post" class="job-form">
 
-        <h1 class="form-heading">
-            Add Company Job
-        </h1>
+            <h1>Add Company Post</h1>
 
-        <form action="AddCompanyPostServlet" method="post">
+            <div class="form-grid">
 
-            <!-- Job Title -->
-            <div class="input-group">
-                <label>Job Title</label>
-                <input type="text" name="job_title" required>
+                <!-- Job Title -->
+                <div class="input-group">
+                    <label>Job Title *</label>
+                    <input type="text"
+                           name="jobTitle"
+                           placeholder="e.g. Senior Software Engineer"
+                           required>
+                </div>
+
+                <!-- Employment Type -->
+                <div class="input-group">
+                    <label>Employment Type</label>
+                    <input type="text"
+                           name="employmentType"
+                           placeholder="e.g. Full-time">
+                </div>
+
+                <!-- Department -->
+                <div class="input-group">
+                    <label>Department</label>
+                    <input type="text"
+                           name="department"
+                           placeholder="e.g. BCA">
+                </div>
+
+                <!-- Salary -->
+                <div class="input-group">
+                    <label>Salary</label>
+                    <input type="text"
+                           name="salary"
+                           placeholder="e.g. INR 30k-50k">
+                </div>
+
+                <!-- Location Type -->
+                <div class="input-group">
+                    <label>Location Type</label>
+                    <input type="text"
+                           name="locationType"
+                           placeholder="e.g. Remote">
+                </div>
+
+                <!-- Location -->
+                <div class="input-group">
+                    <label>Location</label>
+                    <input type="text"
+                           name="location"
+                           placeholder="e.g. Bangalore, Pune">
+                </div>
+
             </div>
 
-            <!-- Department -->
-            <div class="input-group">
-                <label>Department</label>
-                <input type="text" name="department" required>
+            <!-- Description -->
+            <div class="input-group full-width">
+                <label>Job Description</label>
+
+                <textarea name="description"
+                          placeholder="Enter job description here..."></textarea>
             </div>
 
-            <!-- Location Type -->
-            <div class="input-group">
-                <label>Location Type</label>
-
-                <select name="location_type" required>
-                    <option value="">Select</option>
-                    <option>Remote</option>
-                    <option>Hybrid</option>
-                    <option>Onsite</option>
-                </select>
-            </div>
-
-            <!-- Employment Type -->
-            <div class="input-group">
-                <label>Employment Type</label>
-
-                <select name="employment_type" required>
-                    <option value="">Select</option>
-                    <option>Full-Time</option>
-                    <option>Part-Time</option>
-                    <option>Internship</option>
-                </select>
-            </div>
-
-            <!-- Salary -->
-            <div class="input-group">
-                <label>Salary</label>
-                <input type="text" name="salary" required>
-            </div>
-
-            <!-- Location -->
-            <div class="input-group">
-                <label>Location</label>
-                <input type="text" name="location" required>
-            </div>
-
+            <!-- Submit -->
             <button type="submit" class="submit-btn">
-                Post Job
+                Submit Job Post
             </button>
 
         </form>
 
     </div>
-
-</div>
 
 </body>
 </html>
