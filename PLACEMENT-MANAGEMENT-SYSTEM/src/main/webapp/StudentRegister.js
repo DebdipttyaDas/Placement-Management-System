@@ -116,8 +116,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Resume must be a PDF file.");
                 markInvalid(resumeInput);
                 isValid = false;
-            } else if (resume.size > 800 * 1024) {
-                alert("Resume size must be less than 800KB.");
+            } else if (resume.size > 500 * 1024) {
+                alert("Resume size must be less than 500KB.");
                 markInvalid(resumeInput);
                 isValid = false;
             }
@@ -126,12 +126,12 @@ document.addEventListener("DOMContentLoaded", function () {
         var photo = photoInput && photoInput.files[0] ? photoInput.files[0] : null;
         if (photo) {
             var photoExt = photo.name.split(".").pop().toLowerCase();
-            if (photoExt !== "jpg" && photoExt !== "jpeg") {
+            if (photoExt !== "jpg") {
                 alert("Photo must be a JPG file.");
                 markInvalid(photoInput);
                 isValid = false;
-            } else if (photo.size > 500 * 1024) {
-                alert("Photo size must be less than 500KB.");
+            } else if (photo.size > 100 * 1024) {
+                alert("Photo size must be less than 100KB.");
                 markInvalid(photoInput);
                 isValid = false;
             }
