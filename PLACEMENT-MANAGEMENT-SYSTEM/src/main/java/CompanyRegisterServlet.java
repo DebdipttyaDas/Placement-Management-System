@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/CompanyRegisterServlet")
 public class CompanyRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	// Database configuration
 	private static final String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
 	private static final String DB_USER = "root";
@@ -28,9 +28,6 @@ public class CompanyRegisterServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 		String password = request.getParameter("password");
-		
-		// Generate Company Code
-	    String companyCode = CodeGenerator.generateCompanyCode();
 
 		boolean isRegistered = false;
 
@@ -42,18 +39,17 @@ public class CompanyRegisterServlet extends HttpServlet {
 			try (Connection conn = java.sql.DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 					PreparedStatement ps = conn.prepareStatement(insertQuery)) {
 
-			ps.setString(1, companyName);
-			ps.setString(2, companyCode);
-			ps.setString(3, industry);
-			ps.setString(4, companyType);
-			ps.setString(5, email);
-			ps.setString(6, phone);
-			ps.setString(7, password);
+				ps.setString(1, companyName);
+				ps.setString(2, industry);
+				ps.setString(3, companyType);
+				ps.setString(4, email);
+				ps.setString(5, phone);
+				ps.setString(6, password);
 
-			int rowsAffected = ps.executeUpdate();
-			if (rowsAffected > 0) {
-				isRegistered = true;
-			}
+				int rowsAffected = ps.executeUpdate();
+				if (rowsAffected > 0) {
+					isRegistered = true;
+				}
 			}
 		} catch (ClassNotFoundException e) {
 			System.err.println("MySQL JDBC Driver not found: " + e.getMessage());
