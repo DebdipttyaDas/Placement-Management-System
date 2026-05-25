@@ -52,8 +52,6 @@
                 <div class="company-text">
 
                     <h1>Google</h1>
-                    <p>Technology & Innovation • Mountain View, CA</p>
-
                 </div>
 
             </div>
@@ -63,11 +61,7 @@
                 <button class="back-btn"
                         onclick="window.location.href='CompanyDashboard.jsp'">
                     Back to Dashboard
-                </button>
-
-                <button class="follow-btn">
-                    + Follow Company
-                </button>
+            </button>
 
             </div>
 
@@ -96,45 +90,7 @@
                 intersection of technology and creativity to build for everyone.
 
             </p>
-
-            <div class="info-cards">
-
-                <div class="card">
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-                    <h4>HEADQUARTERS</h4>
-
-                    <p>Mountain View, CA, USA</p>
-
-                </div>
-
-                <div class="card">
-
-                    <i class="fa-solid fa-building"></i>
-
-                    <h4>INDUSTRY</h4>
-
-                    <p>Technology & Innovation</p>
-                    <p>AI, Cloud Computing, IT Services</p>
-
-                </div>
-
-                <div class="card">
-
-                    <i class="fa-solid fa-users"></i>
-
-                    <h4>OUR COMPANY</h4>
-
-                    <p>10,000+ Employees</p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-       
+            
         <!-- BENEFITS -->
         <section class="benefits-section">
 
