@@ -16,7 +16,7 @@ pageEncoding="UTF-8"%>
 
         <form action="AddCompanyPostServlet" method="post" class="job-form">
 
-            <h1>Company Post</h1>
+            <h1>Company Name</h1>
 
             <div class="form-grid">
 
