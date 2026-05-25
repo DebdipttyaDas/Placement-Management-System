@@ -174,10 +174,10 @@
 
         <h2>Company Details</h2>
 
-        <p>
+        <h3>
             Manage company registration, contact information,
             address details, and legal records efficiently.
-        </p>
+        </h3>
 
     </div>
 
