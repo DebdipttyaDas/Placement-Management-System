@@ -312,7 +312,7 @@ body {
 
 /* CARD */
 .company-card{
-    background: #ffffff;
+    background: #f2f6d7;
     border: 1px solid #e5e7eb;
     border-radius: 20px;
     overflow: hidden;
@@ -377,7 +377,7 @@ body {
 
 /* HOVER */
 .input-box input:hover{
-    border-color: #06473e;
+    border-color: #005f53;
 }
 
 /* FOCUS */
