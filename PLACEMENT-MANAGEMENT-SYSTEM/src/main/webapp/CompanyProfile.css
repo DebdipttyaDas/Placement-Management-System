@@ -141,10 +141,6 @@ body {
     color: #1a1a1a;
 }
 
-.company-text p {
-    color: #000000;
-    font-weight: 400;
-}
 
 .back-btn {
     padding: 12px 25px;
@@ -163,22 +159,6 @@ body {
     box-shadow: 0 5px 15px rgba(6, 71, 62, 0.3);
 }
 
-.follow-btn {
-    padding: 12px 25px;
-    background: #06473e;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.follow-btn:hover {
-    background: #04352e;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(6, 71, 62, 0.3);
-}
 
 /* --- CONTENT SECTIONS --- */
 .content-wrapper {
@@ -238,102 +218,7 @@ body {
     margin-bottom: 5px;
 }
 
-/* --- CULTURE SECTION --- */
-.culture-section {
-    margin-top: 100px;
-    opacity: 0;
-    /* Smoothly fades the whole section in on load */
-    animation: sectionReveal 1s ease-out forwards;
-}
 
-.culture-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px; /* Slightly increased for better breathing room */
-    margin: 40px 0;
-}
-
-.culture-grid img {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-    border-radius: 20px; /* More modern, rounded feel */
-    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-}
-
-/* Image Interaction Animation */
-.culture-grid img:hover {
-    transform: scale(1.03) translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-}
-
-.culture-text p {
-    margin-bottom: 20px;
-    font-size: 1.1rem;
-    color: #555;
-    line-height: 1.8;
-    opacity: 0;
-    /* Staggered text reveal */
-    animation: textSlideIn 0.8s ease-out 0.4s forwards;
-}
-
-.culture-text p:nth-child(2) {
-    animation-delay: 0.6s;
-}
-
-/* --- ANIMATION KEYFRAMES --- */
-@keyframes sectionReveal {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes textSlideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 768px) {
-    .company-info-bar {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-        bottom: -50px; 
-    }
-    
-    .left-info {
-        flex-direction: column;
-    }
-
-    .hero-container {
-        height: 40vh;
-    }
-
-    .culture-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .culture-grid img {
-        height: 250px; /* Shorter height for mobile screens */
-    }
-
-    .content-wrapper {
-        margin-top: 120px;
-    }
-}
 
 /* --- BENEFITS SECTION --- */
 .benefits-section {
@@ -387,374 +272,111 @@ body {
     color: #666;
 }
 
-/* =========================
-   LATEST NEWS & EVENTS
-========================= */
-
-.news-section{
-    padding:90px 8%;
-    background:#f4f7fb;
-    overflow:hidden;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* SECTION TITLE */
+/* SECTION */
+.company-section{
+    width: 100%;
+    padding: 80px 8%;
+    background: #f4f7ff;
+    font-family: Arial, sans-serif;
+}
+
+/* TITLE */
 .section-title{
-    text-align:center;
-    margin-bottom:60px;
-    animation:fadeUp 1s ease;
+    text-align: center;
+    margin-bottom: 50px;
 }
 
 .section-title h2{
-    font-size:42px;
-    color:#06473e;
-    margin-bottom:15px;
-    font-weight:700;
+    font-size: 40px;
+    color: #0f172a;
+    margin-bottom: 10px;
 }
 
 .section-title p{
-    max-width:700px;
-    margin:auto;
-    color:#666;
-    line-height:1.7;
-    font-size:16px;
+    color: #64748b;
+    font-size: 16px;
+    line-height: 1.6;
 }
 
-.news-container {
+/* CARD CONTAINER */
+.card-container{
     display: grid;
-    /* Use auto-fill to prevent cards from stretching too wide on huge screens */
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); 
-    gap: 40px;
-    align-items: stretch;
+    grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+    gap: 30px;
 }
 
-.news-card {
-    /* REMOVED width: 210% -> Grid items should stay at 100% width */
-    width: 100%; 
-    min-height: 580px;
+/* CARD */
+.company-card{
     background: white;
-    border-radius: 24px;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 12px 35px rgba(0,0,0,0.08);
-    transition: 0.5s ease;
-    position: relative;
-    display: flex;
-    flex-direction: column; /* Keeps content aligned */
-    animation: cardFade 1s ease;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: 0.4s;
 }
 
-/* Ensure the image fills the new height */
-.news-image {
-    overflow: hidden;
-    height: 280px; /* Slightly taller for the larger card size */
-    flex-shrink: 0;
+.company-card:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(37,99,235,0.18);
 }
 
-.news-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+/* HEADER */
+.card-header{
+    background: linear-gradient(135deg,#2563eb,#3b82f6);
+    padding: 22px;
 }
 
-/* Ensure content fills the remaining space */
-.news-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 28px;
-}
-
-/* =========================
-   MODERN NEWS CARD
-   ========================= */
-
-.news-card {
-    background: #ffffff;
-    border-radius: 24px;
-    overflow: hidden;
-    position: relative;
-    /* Clean, soft shadow */
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    display: flex;
-    flex-direction: column;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    cursor: pointer;
-}
-
-/* SUBTLE GLOW EFFECT */
-.news-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at top right, rgba(6, 71, 62, 0.05), transparent);
-    opacity: 0;
-    transition: 0.5s;
-    pointer-events: none;
-}
-
-/* CARD HOVER STATES */
-.news-card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 22px 50px rgba(6, 71, 62, 0.12);
-    border-color: rgba(6, 71, 62, 0.1);
-}
-
-.news-card:hover::before {
-    opacity: 1;
-}
-
-/* IMAGE HANDLING */
-.news-image {
-    height: 240px;
-    overflow: hidden;
-    position: relative;
-}
-
-.news-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.news-card:hover .news-image img {
-    transform: scale(1.08);
-}
-
-/* CONTENT WRAPPER */
-.news-content {
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    z-index: 2;
-}
-
-/* DATE BADGE */
-.news-date {
-    font-size: 12px;
-    font-weight: 700;
-    color: #06473e;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 12px;
-    display: block;
-}
-
-/* TITLE */
-.news-content h3 {
-    font-size: 22px;
-    color: #1a1a1a;
-    margin-bottom: 15px;
-    line-height: 1.3;
-    font-weight: 700;
-    transition: color 0.3s ease;
-}
-
-.news-card:hover h3 {
-    color: #06473e;
-}
-
-/* DESCRIPTION */
-.news-content p {
-    font-size: 15px;
-    color: #555;
-    line-height: 1.7;
-    margin-bottom: 25px;
-    flex-grow: 1;
-}
-
-/* MODERN BUTTON STYLE */
-.news-content a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    background: #06473e;
-    color: #ffffff;
-    width: fit-content;
-    padding: 12px 28px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(6, 71, 62, 0.2);
-}
-
-.news-content a:hover {
-    background: #0b6b5f;
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(11, 107, 95, 0.3);
-}
-
-/* ENTRANCE ANIMATION */
-@keyframes cardEntrance {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.news-card {
-    animation: cardEntrance 0.8s ease backwards;
-}
-
-/* =========================
-   NEWS CONTAINER SETUP
-========================= */
-.news-container {
-    display: grid;
-    /* This creates a responsive grid that fits 1, 2, or 3+ cards depending on screen width */
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 35px; /* The perfect gap you asked for */
-    padding: 20px 0;
-}
-
-/* =========================
-   NEWS CARD STYLING
-========================= */
-.news-card {
-    background: #ffffff;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    position: relative;
-    display: flex;
-    flex-direction: column; /* Keeps content stacked vertically */
-    height: 100%; /* Ensures all cards in a row have the same height */
-    animation: cardFade 1s ease backwards;
-}
-
-/* SUBTLE TOP GLOW */
-.news-card::before {
-    content: "";
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(6, 71, 62, 0.08) 0%, transparent 70%);
-    top: -80px;
-    right: -80px;
-    transition: 0.6s ease;
-    z-index: 1;
-}
-
-/* CARD HOVER EFFECTS */
-.news-card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 18px 45px rgba(6, 71, 62, 0.15);
-}
-
-.news-card:hover::before {
-    transform: scale(1.5);
-}
-
-/* IMAGE SECTION */
-.news-image {
-    height: 240px;
-    overflow: hidden;
-    position: relative;
-}
-
-.news-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.7s ease;
-}
-
-.news-card:hover .news-image img {
-    transform: scale(1.1);
-}
-
-/* CONTENT BOX */
-.news-content {
-    padding: 28px;
-    position: relative;
-    z-index: 2;
-    flex-grow: 1; /* Makes this area fill the space */
-    display: flex;
-    flex-direction: column;
-}
-
-/* DATE TAG */
-.news-date {
-    display: inline-block;
-    background: #06473e;
+.card-header h3{
     color: white;
-    padding: 6px 16px;
-    border-radius: 30px;
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 18px;
-    width: fit-content;
-    letter-spacing: 0.5px;
+    font-size: 24px;
 }
 
-/* TITLE */
-.news-content h3 {
-    font-size: 22px;
-    color: #111;
-    margin-bottom: 15px;
-    line-height: 1.4;
+/* BODY */
+.card-body{
+    padding: 25px;
+}
+
+/* INPUT */
+.input-box{
+    margin-bottom: 20px;
+}
+
+.input-box label{
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #1e293b;
+    font-weight: bold;
+}
+
+.input-box input{
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    outline: none;
+    font-size: 15px;
     transition: 0.3s;
 }
 
-.news-card:hover h3 {
-    color: #06473e;
+.input-box input:focus{
+    border-color: #2563eb;
+    box-shadow: 0 0 8px rgba(37,99,235,0.2);
 }
 
-/* PARAGRAPH */
-.news-content p {
-    color: #666;
-    line-height: 1.7;
-    margin-bottom: 25px;
-    font-size: 15px;
-    flex-grow: 1; 
-}
+/* RESPONSIVE */
+@media(max-width:768px){
 
-/* BUTTON */
-.news-content a {
-    display: inline-block;
-    text-decoration: none;
-    background: #06473e;
-    color: white;
-    padding: 12px 26px;
-    border-radius: 40px;
-    font-size: 14px;
-    font-weight: 600;
-    transition: all 0.4s ease;
-    width: fit-content;
-    text-align: center;
-}
-
-/* BUTTON HOVER */
-.news-content a:hover {
-    background: #0b6b5f;
-    transform: translateX(5px);
-    box-shadow: 0 4px 15px rgba(6, 71, 62, 0.2);
-}
-
-/* =========================
-   ANIMATION KEYFRAMES
-========================= */
-@keyframes cardFade {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+    .section-title h2{
+        font-size: 30px;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+
 }
-
-
 
 /* --- BACK TO TOP BUTTON --- */
 #backToTop {

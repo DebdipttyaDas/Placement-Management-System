@@ -90,7 +90,8 @@
                 intersection of technology and creativity to build for everyone.
 
             </p>
-            
+            </section>
+
         <!-- BENEFITS -->
         <section class="benefits-section">
 
@@ -166,141 +167,157 @@
             
         </section>
 
-        <!-- NEWS SECTION -->
-        <section class="news-section">
+<!-- COMPANY DATABASE SECTION -->
+<section class="company-section">
 
-            <div class="section-title">
+    <div class="section-title">
 
-                <h2>Latest News & Events</h2>
-
-                <p>
-                    Stay updated with our newest innovations,company events,
-                    internship programs, and technology breakthroughs.
-                </p>
-
-            </div>
-
-            <div class="news-container">
-
-                <!-- CARD 1 -->
-                <div class="news-card">
-
-                    <div class="news-image">
-
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop"
-                             alt="AI Event">
-
-                    </div>
-
-                    <div class="news-content">
-
-                        <span class="news-date">May 2026</span>
-
-                        <h3>AI Innovation Summit 2026</h3>
-
-                        <p>
-                        Our annual AI summit brought together engineers,
-                    <br>
-                    researchers, and innovators to discuss the future
-                    <br>
-                    of artificial intelligence.
-                </p>
-
-                        <a href="#">Apply Now</a>
-
-                    </div>
-
-                </div>
-
-                <!-- CARD 2 -->
-                <div class="news-card">
-
-                    <div class="news-image">
-
-                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop"
-                             alt="Internship Program">
-
-                    </div>
-
-                    <div class="news-content">
-
-                        <span class="news-date">April 2026</span>
-
-                        <h3>Summer Internship Program Open</h3>
-
-                        <p>
-                            Applications are now open for students passionate
-                            <br>
-                            about software engineering and AI,cloud computing.
-                            <br>
-                            and UI/UX design.
-                        </p>
-
-                        <a href="#">Apply Now</a>
-
-                    </div>
-
-                </div>
-<!-- CARD 3 -->
-<div class="news-card">
-
-    <div class="news-image">
-        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200&auto=format&fit=crop" alt="Tech Conference">
-    </div>
-
-    <div class="news-content">
-
-        <span class="news-date">February 2026</span>
-
-        <h3>
-            Global Tech Conference & Hackathon
-        </h3>
+        <h2>Company Database System</h2>
 
         <p>
-            Developers, designers, and innovators from around the world
-            joined our 48-hour hackathon to create impactful solutions
-            powered by AI and cloud technologies.
+            Manage company registration, contact information,
+            address details, and legal records efficiently.
         </p>
-
-        <a href="#">
-            View Highlights
-        </a>
 
     </div>
 
-</div>
+    <div class="card-container">
 
-<!-- CARD 4 -->
-        <div class="news-card">
+        <!-- CARD 1 -->
+        <div class="company-card">
 
-            <div class="news-image">
-                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop" alt="Cloud Computing">
+            <div class="card-header">
+                <h3>Register Table</h3>
             </div>
 
-            <div class="news-content">
+            <div class="card-body">
 
-                <span class="news-date">March 2026</span>
+                <div class="input-box">
+                    <label>Company Name</label>
+                    <input type="text" placeholder="Enter company name">
+                </div>
 
-                <h3>
-                    Next-Gen Cloud Infrastructure
-                </h3>
+                <div class="input-box">
+                    <label>Company Code</label>
+                    <input type="text" placeholder="Enter company code">
+                </div>
 
-                <p>
-                    We are excited to announce the launch of our sustainable 
-                    data centers, reducing carbon footprints while increasing 
-                    processing speeds for global enterprises.
-                </p>
+                <div class="input-box">
+                    <label>Industry</label>
+                    <input type="text" placeholder="Enter industry">
+                </div>
 
-                <a href="#">
-                    Explore Tech
-                </a>
+                <div class="input-box">
+                    <label>Company Type</label>
+                    <input type="text" placeholder="Enter company type">
+                </div>
+
+                <div class="input-box">
+                    <label>Company Email</label>
+                    <input type="email" placeholder="Enter email">
+                </div>
+
+                <div class="input-box">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter password">
+                </div>
 
             </div>
 
         </div>
 
-</section>
+        <!-- CARD 2 -->
+        <div class="company-card">
 
+            <div class="card-header">
+                <h3>Contact Details</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="input-box">
+                    <label>Phone Number</label>
+                    <input type="text" placeholder="Enter phone number">
+                </div>
+
+                <div class="input-box">
+                    <label>Website Link</label>
+                    <input type="text" placeholder="Enter website link">
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="company-card">
+
+            <div class="card-header">
+                <h3>Address Details</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="input-box">
+                    <label>Company Address</label>
+                    <input type="text" placeholder="Enter address">
+                </div>
+
+                <div class="input-box">
+                    <label>City</label>
+                    <input type="text" placeholder="Enter city">
+                </div>
+
+                <div class="input-box">
+                    <label>State</label>
+                    <input type="text" placeholder="Enter state">
+                </div>
+
+                <div class="input-box">
+                    <label>Country</label>
+                    <input type="text" placeholder="Enter country">
+                </div>
+
+                <div class="input-box">
+                    <label>Pincode</label>
+                    <input type="text" placeholder="Enter pincode">
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="company-card">
+
+            <div class="card-header">
+                <h3>Legal Information</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="input-box">
+                    <label>Registration Number</label>
+                    <input type="text" placeholder="Enter registration number">
+                </div>
+
+                <div class="input-box">
+                    <label>PAN Number</label>
+                    <input type="text" placeholder="Enter PAN number">
+                </div>
+
+                <div class="input-box">
+                    <label>License Number</label>
+                    <input type="text" placeholder="Enter license number">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
       
 
             <!-- BACK TO TOP -->
@@ -309,8 +326,6 @@
                 <i class="fa-solid fa-arrow-up"></i>
 
             </button>
-
-        
 
     </main>
 
