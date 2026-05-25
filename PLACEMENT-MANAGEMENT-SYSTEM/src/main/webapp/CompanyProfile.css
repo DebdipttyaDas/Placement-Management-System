@@ -453,28 +453,6 @@ body {
     box-shadow: 0 12px 24px rgba(0,0,0,0.25);
 }
 
-/* CLICK EFFECT */
-.action-bar-buttons button:active{
-    transform: scale(0.96);
-}
-
-/* SHINE EFFECT */
-.btn-save::before,
-.btn-update::before{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.25);
-    transition: 0.5s;
-}
-
-.btn-save:hover::before,
-.btn-update:hover::before{
-    left: 100%;
-}
 
 /* RESPONSIVE */
 @media(max-width:768px){
