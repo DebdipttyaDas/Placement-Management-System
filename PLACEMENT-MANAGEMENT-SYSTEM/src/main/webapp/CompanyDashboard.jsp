@@ -72,9 +72,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             <div class="user-profile">
             <a href="CompanyProfile.jsp">
-                <i class="fa fa-user-circle" style="font-size:25px;gap:18px; color:white;"></i>
+                <i class="fa fa-user-circle"></i>
             </a>
-                <i class="fa fa-bell bell" style=" font-size:25px;gap:18px; color:white;"></i>
+                <i class="fa fa-bell bell"></i>
             </div>
 
         </div>

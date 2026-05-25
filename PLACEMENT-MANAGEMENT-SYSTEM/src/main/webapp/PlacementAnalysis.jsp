@@ -68,17 +68,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <!-- HEADER -->
 
     
-    <div class="topbar">
-
-
-           
-
-            <div class="top-icons">
-                <i class="fa fa-user-circle profile"></i>
-                <i class="fa fa-bell bell"></i>
-            </div>
-
-        </div>
+    <div class="topbar"></div>
     
 <div class="page-content">
     <!-- PERFORMANCE -->

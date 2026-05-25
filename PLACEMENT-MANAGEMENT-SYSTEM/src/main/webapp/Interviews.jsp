@@ -73,17 +73,6 @@
 
                 <h2>Interviews</h2>
 
-                <div class="top-links">
-
-                    <a href="#">
-
-                        <i class="fa fa-user-circle"
-                            style="font-size:25px;color:white;"></i>
-
-                    </a>
-
-                </div>
-
             </div>
 
             <!-- PAGE HEADER -->

@@ -73,15 +73,7 @@
         <h2>
             Post, Hire and Grow !
         </h2>
-
-        <div class="profile-icons">
-
-            <i class="fa-solid fa-user-circle"></i>
-
-            <i class="fa-solid fa-bell"></i>
-
-        </div>
-
+        
     </div>
 
     <!-- FORM CONTAINER -->
