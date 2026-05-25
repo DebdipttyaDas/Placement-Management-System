@@ -106,7 +106,7 @@ body {
 .top-icons {
     display: flex;
     align-items: flex-end;
-    gap: 17px;  
+    gap: 25px;  
 }
 
 .profile, .bell {

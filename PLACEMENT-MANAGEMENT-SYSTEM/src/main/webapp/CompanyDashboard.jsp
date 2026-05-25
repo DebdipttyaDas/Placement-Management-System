@@ -70,9 +70,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             <h2>Company Dashboard</h2>
 
-            <div class="top-icons">
-                <i class="fa fa-user-circle profile"></i>
-                <i class="fa fa-bell bell"></i>
+            <div class="user-profile">
+            <a href="CompanyProfile.jsp">
+                <i class="fa fa-user-circle" style="font-size:25px; color:white;"></i>
+            </a>
+                <i class="fa fa-bell bell" style=" font-size:25px; color:white;"></i>
             </div>
 
         </div>
