@@ -187,7 +187,7 @@
         <div class="company-card">
 
             <div class="card-header">
-                <h3>Register Table</h3>
+                <h3>Register Details</h3>
             </div>
 
             <div class="card-body">
