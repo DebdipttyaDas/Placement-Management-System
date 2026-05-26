@@ -94,13 +94,13 @@
 
             <div class="section-title">
 
-                <i class="fa-solid fa-circle-info"></i>
-
-                Basic Information
+                Company Name <input type="text"
+        class="form-controll"
+        placeholder="Enter Company name ">
 
             </div>
 
-             <div class="form-row">
+<div class="form-row">
 
     <div class="form-group">
         <label>Job Title *</label>

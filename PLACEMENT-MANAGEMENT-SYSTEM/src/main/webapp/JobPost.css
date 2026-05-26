@@ -147,6 +147,18 @@ body{
     font-weight:600;
     color:#1e2a35;
     margin-bottom:25px;
+    font-size: 25px;
+}
+
+.form-controll{
+    width:500px;
+    padding:14px;
+    border:1.5px solid #b8c2cc;
+    border-radius:8px;
+    background:#f1f3f8;
+    font-size:14px;
+    outline:none;
+    transition:0.3s;
 }
 
 /* FORM */
