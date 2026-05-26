@@ -1,9 +1,21 @@
 /* RESET */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
     overflow-x: hidden;
+}
+
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
 }
 
 /* SIDEBAR */
@@ -62,12 +74,15 @@ body {
 
 /* MAIN CONTENT */
 .main {
-    margin-left: 220px;
-    margin-top: 50px; /* space for topbar */
-    width: calc(100% - 220px);
+    position: fixed;
+    top: 60px;
+    left: 220px;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
     padding: 20px;
     box-sizing: border-box;
-    min-height: 100vh;
     background: #ffffff;
     color: #333333;
 }
