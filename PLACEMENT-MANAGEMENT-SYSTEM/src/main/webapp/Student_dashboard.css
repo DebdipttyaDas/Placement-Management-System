@@ -1,22 +1,36 @@
+html {
+  height: 100vh;
+  overflow: hidden;
+}
+
 /* ===== RESET ===== */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #f4f6f9;
+  overflow: hidden;
+  height: 100vh;
 }
 
 /* ===== DASHBOARD LAYOUT ===== */
 .dashboard-container {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* ===== SIDEBAR LEFT===== */
 .sidebar {
   width: 220px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
   background: #06473e;
   color: white;
   padding: 15px;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .sidebar h2 {
@@ -43,14 +57,20 @@ body {
 
 /* ===== MAIN AREA ===== */
 .main-area {
-  flex: 1;
+  margin-left: 220px;
+  width: calc(100% - 220px);
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 /* ===== BODY CONTENT ===== */
 .content {
   padding: 20px;
+  flex: 1;
 }
 
 /* ===== WELCOME BOX ===== */
