@@ -235,11 +235,6 @@
 
             <div class="card-body">
 
-<div class="input-box">
-                    <label>Company ID</label>
-                    <input type="text" placeholder="Enter company ID">
-                </div>
-
                 <div class="input-box">
                     <label>Phone Number</label>
                     <input type="text" placeholder="Enter phone number">
