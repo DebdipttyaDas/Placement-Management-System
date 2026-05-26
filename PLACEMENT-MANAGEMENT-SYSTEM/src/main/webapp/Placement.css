@@ -1,5 +1,27 @@
 /* RESET */
-html, body {
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+ body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -62,11 +84,11 @@ body {
     color: white;
     position: fixed;
     top: 0;
-    left: 220px; /* starts after sidebar */
+    left: 220px;
     width: calc(100% - 220px);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end; /* ← change this */
     padding: 0 20px;
     box-sizing: border-box;
     z-index: 1000;
@@ -79,7 +101,7 @@ body {
     left: 220px;
     right: 0;
     bottom: 0;
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
     padding: 20px;
     box-sizing: border-box;
