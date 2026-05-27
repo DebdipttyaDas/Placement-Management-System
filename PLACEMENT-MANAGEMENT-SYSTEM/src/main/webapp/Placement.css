@@ -3,7 +3,6 @@ html {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden;
 }
 
 body {
@@ -11,33 +10,10 @@ body {
     padding: 0;
     height: 100%;
     font-family: Arial, sans-serif;
-    overflow: hidden;
 }
 
 .dashboard-container {
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
-}
-
-
- body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-}
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
-}
-
-.dashboard-container {
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
+    display: relative;
 }
 
 /* SIDEBAR */
@@ -96,17 +72,27 @@ body {
 
 /* MAIN CONTENT */
 .main {
-    position: fixed;
-    top: 60px;
+    position: absolute;
+
+    top: 50px;
     left: 220px;
-    right: 0;
-    bottom: 0;
-    overflow-y: scroll;
+
+    width: calc(100% - 220px);
+    height: calc(100vh - 50px);
+
+    overflow-y: auto;
     overflow-x: hidden;
+
     padding: 20px;
     box-sizing: border-box;
-    background: #ffffff;
-    color: #333333;
+
+    background: white;
+}
+
+.top-search-section {
+    max-height: 220px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /* SEARCH BOX */
