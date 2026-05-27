@@ -1,6 +1,11 @@
 /* =========================================================
    RESET
 ========================================================= */
+html, body {
+    height: 100%;
+    overflow: hidden;
+    background:#f4f6f9;
+}
 
 *{
     margin:0;
@@ -9,35 +14,31 @@
     font-family:Arial,sans-serif;
 }
 
-body{
-    background:#f4f6f9;
-    overflow-x:hidden;
-}
-
 /* =========================================================
    LAYOUT
 ========================================================= */
 
-.container{
-    display:flex;
+.container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
 }
 
 /* =========================================================
    SIDEBAR
 ========================================================= */
 
-.sidebar{
-    width:230px;
-    min-height:100vh;
-
-    background:#0b3d36;
-
-    color:white;
-
-    padding:20px;
-
-    display:flex;
-    flex-direction:column;
+.sidebar {
+    width: 230px;
+    min-height: 100vh;
+    background: #0b3d36;
+    color: white;
+    padding: 20px;
+    position: fixed;  /* ← only added this */
+    top: 0;           /* ← only added this */
+    left: 0;          /* ← only added this */
+    display: flex;
+    flex-direction: column;
 }
 
 .menu{
@@ -111,33 +112,31 @@ body{
    MAIN CONTENT
 ========================================================= */
 
-.main-content{
-    flex:1;
-    padding:20px 30px;
+.main-content {
+    flex: 1;
+    padding: 0 30px 20px 30px;
+    margin-left: 230px;
+    height: 100vh;
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
 /* =========================================================
    TOPBAR
 ========================================================= */
 
-.topbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    background:#0b3d36;
-
-    position:fixed;
-
-    top:0;
-    left:0;
-    right:0;
-
-    padding:20px;
-
-    color:white;
-
-    z-index:100;
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0b3d36;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    color: white;
+    z-index: 100;
 }
 
 .topbar h2{
@@ -148,11 +147,10 @@ body{
    PAGE HEADER
 ========================================================= */
 
-.page-header{
-    margin-top:90px;
-    margin-bottom:30px;
+.page-header {
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
-
 .page-header h1{
     font-size:32px;
     color:#111827;
