@@ -3,7 +3,7 @@
 ========================================================= */
 html, body {
     height: 100%;
-    overflow: hidden;
+    margin:0;
     background:#f4f6f9;
 }
 
@@ -21,7 +21,7 @@ html, body {
 .container {
     display: flex;
     height: 100vh;
-    overflow: hidden;
+    
 }
 
 /* =========================================================
@@ -30,15 +30,16 @@ html, body {
 
 .sidebar {
     width: 230px;
-    min-height: 100vh;
+    height: 100vh;
     background: #0b3d36;
     color: white;
     padding: 20px;
     position: fixed;  /* ← only added this */
     top: 0;           /* ← only added this */
     left: 0;          /* ← only added this */
-    display: flex;
-    flex-direction: column;
+    display:flex;
+    flex-direction:column;
+   
 }
 
 .menu{
@@ -72,7 +73,7 @@ html, body {
 
 .logout{
     margin-top:auto;
-    padding-top:280px;
+    
 }
 
 .logout button{
@@ -113,12 +114,14 @@ html, body {
 ========================================================= */
 
 .main-content {
-    flex: 1;
-    padding: 0 30px 20px 30px;
+    
+    padding: 100px 30px 20px 30px;
     margin-left: 230px;
+    width:calc(100% - 230px);
     height: 100vh;
     overflow-y: auto;
-    box-sizing: border-box;
+    overflow-x: hidden;
+    
 }
 
 /* =========================================================
@@ -133,8 +136,9 @@ html, body {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    padding: 20px;
+    right:0;
+    height:80px;
+    padding: 0 30px;
     color: white;
     z-index: 100;
 }
@@ -252,6 +256,7 @@ html, body {
 .content{
     display:flex;
     gap:22px;
+    width:100%;
 }
 
 /* =========================================================
@@ -259,8 +264,8 @@ html, body {
 ========================================================= */
 
 .schedule{
-    flex:2;
-
+    flex:3;
+    min-width:0;
     background:white;
 
     padding:22px;
@@ -382,8 +387,7 @@ html, body {
 
 .sidebar-right{
 
-    flex:1;
-
+    width:320;
     display:flex;
     flex-direction:column;
 
