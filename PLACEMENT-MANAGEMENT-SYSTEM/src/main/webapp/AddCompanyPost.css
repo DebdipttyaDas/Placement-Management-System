@@ -84,13 +84,13 @@ body{
 
 .input-group input{
     padding:12px 16px;
-    border:1px solid #d1d5db;
+    border:1px solid #06473e;
+    box-shadow: 0 0 0 3px rgba(6, 71, 62, 0.1);
     border-radius:12px;
     width:320px;
     height:40px;
     font-size:16px;
     outline:none;
-
     background:#f3f4f6;
 }
 
