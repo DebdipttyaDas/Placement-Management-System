@@ -5,6 +5,18 @@
 
 /* RESET */
 
+html {
+    height: 100%;
+    overflow: hidden;
+}
+
+/* BODY */
+body {
+    background: #f5f6f8;
+    height: 100%;
+    overflow: hidden;
+}
+
 *{
     margin:0;
     padding:0;
@@ -13,17 +25,13 @@
 }
 
 
-/* BODY */
-
-body{
-    background:#f5f6f8;
-}
-
 /* CONTAINER */
 
-.container{
-    display:flex;
-    width:100%;
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
 }
 
 
@@ -77,16 +85,20 @@ body{
 
 /* MAIN CONTENT */
 
-.main-content{
-    flex:1;
-    margin-left:240px;
-    margin-top:80px;
-    padding:0;
-    height:calc(100vh - 80px);
-    overflow-y:auto;
-    overflow-x:hidden;
+.main-content {
+    flex: 1;
+    margin-left: 240px;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 10px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
+.main-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
 
 /* TOPBAR */
 
