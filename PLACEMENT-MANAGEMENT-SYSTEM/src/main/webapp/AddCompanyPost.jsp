@@ -22,7 +22,7 @@ pageEncoding="UTF-8"%>
 
                 <!-- Job Title -->
                 <div class="input-group">
-                    <label>Job Title *</label>
+                    <label>Job Title </label>
                     <input type="text"
                            name="jobTitle"
                            placeholder="e.g. Senior Software Engineer"
