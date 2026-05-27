@@ -3,7 +3,6 @@ html {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden;
 }
 
 * {
@@ -17,15 +16,12 @@ body {
     background: var(--bg);
     color: var(--text-primary);
     height: 100%;
-    overflow: hidden;
 }
 
 /* Container */
 .container {
     display: flex;
     height: 100vh;
-    width: 100%;
-    overflow: hidden;
 }
 /* Side bar */
 .sidebar {
@@ -38,7 +34,6 @@ body {
     top: 0;
     left: 0;
     box-sizing: border-box;
-    overflow-y: auto;
 }
 
 .logo {
@@ -104,29 +99,25 @@ body {
 }
 
 /* Main Content */
-.main-content {
-    position: fixed;
-    top: 0;
-    left: 240px;
-    right: 0;
-    bottom: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    background: #f4f6f9;
-    display: flex;
-    flex-direction: column;
+.main-content{
+    margin-left:240px;
+    height:100vh;
+    overflow-y:auto;
+    overflow-x:hidden;
+    background:#f4f6f9;
 }
+
 /* Topbar */
-.topbar {
-    background: #06473e;
-    color: white;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+.topbar{
+    background:#06473e;
+    color:white;
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
 .top-icons {

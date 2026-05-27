@@ -82,38 +82,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         <!-- CENTER BODY CONTENT START -->
         <div class="page">
 
-            <!-- Hero Section -->
-            <div class="hero">
-
-                <div class="hero">
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                </div>
-
-                <div>
-                    <div class="hero-label">Company Dashboard</div>
-
-                    <h1>Hello, Google Recruiting</h1>
-
-                    <p>
-                        Here is your recruitment overview for the current placement season.
-                    </p>
-                </div>
-
-                <div class="hero-content">
-                    <button class="btn btn-white" onclick="window.location.href='JobPost.jsp'">
-                        + Post new jobs
-                    </button>
-                </div>
-
-                <div class="hero-actions">
-                    <button class="btn btn-white">
-                        Review Applications
-                    </button>
-                </div>
-
-            </div>
+            <!-- Hero Section --> 
+            <div class="hero"> 
+            
+            <div class="hero"> 
+            <span class="particle"></span> 
+            <span class="particle"></span> 
+            <span class="particle"></span> 
+            </div> <div> <div class="hero-label">Company Dashboard</div> <h1>Hello, Google Recruiting</h1> <p> Here is your recruitment overview for the current placement season. </p> </div> <div class="hero-content"> <button class="btn btn-white" onclick="window.location.href='JobPost.jsp'"> + Post new jobs </button> </div> <div class="hero-actions"> <button class="btn btn-white"> Review Applications </button> </div> </div>
 
             <!-- Stats -->
             <div class="stats-row">
