@@ -9,7 +9,14 @@
 /* ===== BODY ===== */
 body {
   background: #cefad0;
+  overflow-y: auto;
+  height: 100%;
 }
+
+html {
+  height: 100%;
+}
+
 
 /* ===== HEADER ===== */
 header {
@@ -19,6 +26,9 @@ header {
   padding: 15px 40px;
   background: #0b3a38;
   color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 header button {
