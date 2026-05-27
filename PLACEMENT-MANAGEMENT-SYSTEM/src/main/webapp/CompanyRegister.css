@@ -1,9 +1,17 @@
 /* Page Background */
+html {
+    height: 100%;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #cefad0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
+
 
 /* Navbar */
 header {
@@ -13,6 +21,11 @@ header {
     padding: 15px 40px;
     background-color: #06473e;
     color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
 }
 
 header h2 {
@@ -48,7 +61,7 @@ header nav a:last-child {
 }
 /* Center Content */
 center {
-    margin-top: 50px;
+    margin-top: 100px;
 }
 
 /* Glass Card */
