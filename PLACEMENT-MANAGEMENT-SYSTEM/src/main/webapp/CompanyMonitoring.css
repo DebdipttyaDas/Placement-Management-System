@@ -215,13 +215,14 @@ body {
 /* SEARCH BAR */
 .search-bar {
     display: flex;
+    margin-left: 300px;
     align-items: center;
     background: white;
     border-radius: 12px;
     padding: 12px 20px;
     margin-bottom: 30px;
     width: 100%;
-    max-width: 420px;
+    max-width: 520px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
