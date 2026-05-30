@@ -1,6 +1,12 @@
 /* Page Background */
 html {
     height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
 }
 
 body {
