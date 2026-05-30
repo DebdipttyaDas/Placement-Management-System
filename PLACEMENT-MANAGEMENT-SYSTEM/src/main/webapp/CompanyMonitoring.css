@@ -211,3 +211,30 @@ body {
     justify-content:center;
     align-items:center;
 }
+
+/* SEARCH BAR */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 12px;
+    padding: 12px 20px;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.search-icon {
+    color: #06473e;
+    margin-right: 12px;
+    font-size: 16px;
+}
+
+.search-bar input {
+    border: none !important;
+    outline: none !important;
+    font-size: 15px;
+    width: 100%;
+    background: transparent;
+}
