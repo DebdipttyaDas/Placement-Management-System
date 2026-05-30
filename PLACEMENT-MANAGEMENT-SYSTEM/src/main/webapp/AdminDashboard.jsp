@@ -48,7 +48,6 @@
             <a href="AdminProfile.jsp">
                 <i class="fa fa-user-circle" style="font-size:25px; color:black;"></i>
             </a>
-            <i class="fa fa-bell" style="font-size:25px;"></i>
         </div>
     </header>
 
