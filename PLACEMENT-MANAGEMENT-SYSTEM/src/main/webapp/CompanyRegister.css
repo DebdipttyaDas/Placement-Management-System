@@ -133,6 +133,24 @@ form {
     box-shadow: 0 0 10px rgba(0, 184, 148, 0.6);
 }
 
+/* Textarea (Address) */
+.input-group textarea {
+    width: 250px;
+    padding: 12px;
+    border: 2px solid black;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    transition: 0.3s ease;
+    resize: vertical;
+}
+
+.input-group textarea:focus {
+    border-color: #00b894;
+    box-shadow: 0 0 10px rgba(0, 184, 148, 0.6);
+}
+
 /* Button */
 button{
     margin: 35px auto 0;
