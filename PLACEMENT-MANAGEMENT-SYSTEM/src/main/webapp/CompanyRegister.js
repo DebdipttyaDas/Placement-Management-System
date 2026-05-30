@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var licenseNumberField = document.querySelector('input[name="licenseNumber"]');
         var emailField = document.querySelector('input[name="email"]');
         var passwordField = document.querySelector('input[name="password"]');
-        var addressField = document.querySelector('input[name="address"]');
+        var addressField = document.querySelector('textarea[name="address"]');
 
         var companyName = companyNameField ? companyNameField.value.trim() : "";
         var industry = industryField ? industryField.value.trim() : "";
