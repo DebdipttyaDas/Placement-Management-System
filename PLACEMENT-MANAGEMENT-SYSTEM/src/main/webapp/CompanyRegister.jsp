@@ -78,7 +78,7 @@
 
                     <div class="input-group">
                         <label>Company Address</label>
-                        <input type="text" name="address" placeholder="Enter company address" required>
+                        <textarea name="address" placeholder="Enter company address" rows="3" required></textarea>
                     </div>
 
                 </div>
