@@ -100,6 +100,12 @@
 
                 <div class="right-actions">
 
+                    <button class="mock-ai-btn"
+                        id="openMockInterviewBtn">
+                        <i class="fa-solid fa-robot"></i>
+                        Mock Interview AI
+                    </button>
+
                     <button class="create-btn"
                         id="openSlotModalBtn">
 

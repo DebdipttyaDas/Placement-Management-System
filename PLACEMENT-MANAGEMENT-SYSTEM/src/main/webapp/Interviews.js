@@ -25,6 +25,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    var mockBtn = document.getElementById("openMockInterviewBtn");
+    if (mockBtn) {
+        mockBtn.addEventListener("click", function () {
+            window.location.href = "MockInterview.jsp";
+        });
+    }
+
     /* =========================================================
        CLOSE MODAL
     ========================================================= */

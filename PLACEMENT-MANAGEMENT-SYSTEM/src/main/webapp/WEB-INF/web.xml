@@ -7,6 +7,34 @@
     <display-name>Placement Management System</display-name>
     <description>Placement Management System - Final Year Project</description>
 
+    <!-- AI Mock Interview Feature Servlets -->
+    <servlet>
+        <servlet-name>StartMockInterviewServlet</servlet-name>
+        <servlet-class>StartMockInterviewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StartMockInterviewServlet</servlet-name>
+        <url-pattern>/StartMockInterviewServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EvaluateMockInterviewServlet</servlet-name>
+        <servlet-class>EvaluateMockInterviewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EvaluateMockInterviewServlet</servlet-name>
+        <url-pattern>/EvaluateMockInterviewServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FetchMockInterviewsServlet</servlet-name>
+        <servlet-class>FetchMockInterviewsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FetchMockInterviewsServlet</servlet-name>
+        <url-pattern>/FetchMockInterviewsServlet</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
