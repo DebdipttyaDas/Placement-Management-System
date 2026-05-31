@@ -100,7 +100,7 @@
                 <!-- CARD 1: Register Details -->
                 <div class="company-card">
                     <div class="card-header">
-                        <h3>Register Details</h3>
+                        <h3>Basic Details</h3>
                         <button class="edit-btn" onclick="toggleEdit(this)" title="Edit">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
@@ -111,10 +111,6 @@
                             <input type="text" placeholder="Enter company name">
                         </div>
                         <div class="input-box">
-                            <label>Company Code <span class="optional">(Optional)</span></label>
-                            <input type="text" placeholder="Enter company code">
-                        </div>
-                        <div class="input-box">
                             <label>Industry <span class="required">*</span></label>
                             <input type="text" placeholder="Enter industry">
                         </div>
@@ -123,12 +119,16 @@
                             <input type="text" placeholder="e.g. IT, Startup, MNC">
                         </div>
                         <div class="input-box">
-                            <label>Company Email <span class="required">*</span></label>
-                            <input type="email" placeholder="Enter company email">
+                            <label>Company Code</label>
+                            <input type="text" placeholder="Enter company code">
                         </div>
                         <div class="input-box">
                             <label>Password <span class="required">*</span></label>
                             <input type="password" placeholder="Enter password">
+                        </div>
+                        <div class="input-box">
+                            <label>Number of Employees <span class="optional">(Optional)</span></label>
+                            <input type="text" placeholder="e.g. 500+">
                         </div>
                     </div>
                 </div>
@@ -147,24 +147,16 @@
                             <input type="text" placeholder="Enter phone number">
                         </div>
                         <div class="input-box">
-                            <label>Alternate Phone Number <span class="optional">(Optional)</span></label>
-                            <input type="text" placeholder="Enter alternate phone number">
+                            <label>Company Email</label>
+                            <input type="email" placeholder="Enter company email">
                         </div>
                         <div class="input-box">
                             <label>Website Link <span class="required">*</span></label>
                             <input type="text" placeholder="https://www.example.com">
                         </div>
                         <div class="input-box">
-                            <label>Alternate Email <span class="optional">(Optional)</span></label>
-                            <input type="email" placeholder="Enter alternate email">
-                        </div>
-                        <div class="input-box">
                             <label>LinkedIn URL <span class="optional">(Optional)</span></label>
                             <input type="text" placeholder="https://linkedin.com/company/...">
-                        </div>
-                        <div class="input-box">
-                            <label>Twitter / X Handle <span class="optional">(Optional)</span></label>
-                            <input type="text" placeholder="e.g. @yourcompany">
                         </div>
                     </div>
                 </div>
@@ -179,12 +171,8 @@
                     </div>
                     <div class="card-body">
                         <div class="input-box">
-                            <label>Street Address <span class="required">*</span></label>
+                            <label>Company Address <span class="required">*</span></label>
                             <input type="text" placeholder="Enter street address">
-                        </div>
-                        <div class="input-box">
-                            <label>Landmark <span class="optional">(Optional)</span></label>
-                            <input type="text" placeholder="Enter nearby landmark">
                         </div>
                         <div class="input-box">
                             <label>City <span class="required">*</span></label>
@@ -215,6 +203,10 @@
                     </div>
                     <div class="card-body">
                         <div class="input-box">
+                            <label>CIN<span class="required">*</span></label>
+                            <input type="text" placeholder="Enter CIN">
+                        </div>
+                        <div class="input-box">
                             <label>Registration Number <span class="required">*</span></label>
                             <input type="text" placeholder="Enter registration number">
                         </div>
@@ -223,20 +215,8 @@
                             <input type="text" placeholder="Enter license number">
                         </div>
                         <div class="input-box">
-                            <label>GST Number <span class="optional">(Optional)</span></label>
+                            <label>GST Number <span class="required">*</span></label>
                             <input type="text" placeholder="Enter GST number">
-                        </div>
-                        <div class="input-box">
-                            <label>Tax ID <span class="optional">(Optional)</span></label>
-                            <input type="text" placeholder="Enter tax ID">
-                        </div>
-                        <div class="input-box">
-                            <label>Established Year <span class="required">*</span></label>
-                            <input type="text" placeholder="e.g. 1998">
-                        </div>
-                        <div class="input-box">
-                            <label>Number of Employees <span class="optional">(Optional)</span></label>
-                            <input type="text" placeholder="e.g. 500+">
                         </div>
                     </div>
                 </div>
