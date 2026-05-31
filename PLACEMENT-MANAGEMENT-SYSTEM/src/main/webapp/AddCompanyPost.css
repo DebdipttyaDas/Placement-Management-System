@@ -1,100 +1,47 @@
-/* RESET */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+.job-card{
+    width:300px;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:20px;
+    transition:all 0.4s ease;
 }
 
-
-/* BODY */
-
-body{
-    font-family:Arial, sans-serif;
-    background:#f4f6f9;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    min-height:100vh;
-    padding:40px;
+.extra-details{
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    transition:all 0.4s ease;
 }
 
+.job-card.active .extra-details{
+    max-height:500px;
+    opacity:1;
+    margin-top:15px;
+}
 
-/* FORM CONTAINER */
+.job-card.active{
+    transform:translateY(-5px);
+}
 
-.form-container{
+.view-btn,
+.apply-btn,
+.close-btn{
     width:100%;
-    max-width:1200px;
+    padding:10px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    margin-top:10px;
 }
 
-
-/* FORM BOX */
-
-.job-form{
-    background: #ffffff;
-    padding:30px;
-    border-radius:18px;
-    height:280px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+.view-btn,
+.apply-btn{
+    background:#0d5bd7;
+    color:white;
 }
 
-
-/* HEADING */
-
-.job-form h1{
-    margin-bottom:35px;
-    color:black;
-    font-size:34px;
-}
-
-
-/* GRID */
-
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:15px 30px;
-    justify-items:center;
-}
-
-
-/* INPUT GROUP */
-
-.input-group{
-    display:flex;
-    flex-direction:column;
-}
-
-
-/* LABEL */
-
-.input-group label{
-    margin-bottom:6px;
-    font-size:15px;
-    color:black;
-    font-weight:500;
-}
-
-
-/* INPUT */
-
-.input-group input{
-    padding:12px 16px;
-    border:1px solid #06473e;
-    box-shadow: 0 0 0 3px rgba(6, 71, 62, 0.1);
-    border-radius:12px;
-    width:320px;
-    height:40px;
-    font-size:16px;
-    outline:none;
-    background:#f3f4f6;
-}
-
-/* FULL WIDTH */
-
-.full-width{
-    grid-column:1 / 3;
-    margin-top:25px;
+.close-btn{
+    background:#777;
+    color:white;
 }

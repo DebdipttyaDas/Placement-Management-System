@@ -145,12 +145,12 @@
                 </div>
 
                 <div class="form-group">
-        <label>Salary</label>
-
-        <input type="text"
-        class="form-control"
-        placeholder="e.g. INR 30k-50k">
-    </div>
+			        <label>Salary</label>
+			
+			        <input type="text"
+			        class="form-control"
+			        placeholder="e.g. INR 30k-50k">
+               </div>
             </div>
 
             <div class="form-row">

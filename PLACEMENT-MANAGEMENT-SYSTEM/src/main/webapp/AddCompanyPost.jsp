@@ -8,72 +8,55 @@ pageEncoding="UTF-8"%>
     <title>Add Company Post</title>
 
     <link rel="stylesheet" href="AddCompanyPost.css">
+    
+    <script>
+	       function toggleCard(button){
+	
+		    const card = button.closest(".job-card");
+		    const viewBtn = card.querySelector(".view-btn");
+		
+		    card.classList.toggle("active");
+		
+		    if(card.classList.contains("active")){
+		        viewBtn.style.display = "none";
+		    }else{
+		        viewBtn.style.display = "block";
+		    }
+		}
+   </script>
+    
 </head>
 
 <body>
+       <div class="job-card">
 
-    <div class="form-container">
+    <h3>Software Engineering Intern</h3>
+    <p>TechCorp Solutions</p>
 
-        <form action="AddCompanyPostServlet" method="post" class="job-form">
+    <div class="tags">
+        <span>San Francisco, CA</span>
+        <span>6 Months</span>
+    </div>
 
-            <h1>Company Name</h1>
+    <button class="view-btn" onclick="toggleCard(this)">
+        View Details
+    </button>
 
-            <div class="form-grid">
+    <div class="extra-details">
 
-                <!-- Job Title -->
-                <div class="input-group">
-                    <label>Job Title </label>
-                    <input type="text"
-                           name="jobTitle"
-                           placeholder="e.g. Senior Software Engineer"
-                           required>
-                </div>
+        <p><strong>Skills:</strong> Java, JSP, MySQL</p>
+        <p><strong>Stipend:</strong> ₹15,000/month</p>
+        <p><strong>Eligibility:</strong> B.Tech CSE</p>
+        <p><strong>Last Date:</strong> 30 June 2026</p>
 
-                <!-- Employment Type -->
-                <div class="input-group">
-                    <label>Employment Type</label>
-                    <input type="text"
-                           name="employmentType"
-                           placeholder="e.g. Full-time">
-                </div>
+        <button class="apply-btn">Apply Now</button>
 
-                <!-- Department -->
-                <div class="input-group">
-                    <label>Department</label>
-                    <input type="text"
-                           name="department"
-                           placeholder="e.g. ECE, BCA">
-                </div>
-
-                <!-- Salary -->
-                <div class="input-group">
-                    <label>Salary</label>
-                    <input type="text"
-                           name="salary"
-                           placeholder="e.g. INR 30k-50k">
-                </div>
-
-                <!-- Location Type -->
-                <div class="input-group">
-                    <label>Location Type</label>
-                    <input type="text"
-                           name="locationType"
-                           placeholder="e.g. Remote">
-                </div>
-
-                <!-- Location -->
-                <div class="input-group">
-                    <label>Location</label>
-                    <input type="text"
-                           name="location"
-                           placeholder="e.g. Bangalore, Pune">
-                </div>
-
-            </div>
-
-        </form>
+        <button class="close-btn" onclick="toggleCard(this)">
+            Close Details
+        </button>
 
     </div>
 
+</div>
 </body>
 </html>
