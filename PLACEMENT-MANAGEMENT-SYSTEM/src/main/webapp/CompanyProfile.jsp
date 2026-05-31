@@ -172,7 +172,7 @@
                     <div class="card-body">
                         <div class="input-box">
                             <label>Company Address <span class="required">*</span></label>
-                            <input type="text" placeholder="Enter street address">
+                            <input type="text" placeholder="Enter company address">
                         </div>
                         <div class="input-box">
                             <label>City <span class="required">*</span></label>
