@@ -25,7 +25,7 @@
         <h1 class="logo">CampusConnect</h1>
 
         <div class="nav-link">
-            <a href="Login.jsp">Back to home page</a>
+            <a href="Login.jsp">Back to home</a>
         </div>
 
     </header>
