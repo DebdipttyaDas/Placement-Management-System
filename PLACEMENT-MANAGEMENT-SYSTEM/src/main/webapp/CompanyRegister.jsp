@@ -31,7 +31,7 @@
 
             <div class="form-grid">
 
-                <!-- Row 1 -->
+                <!-- Row 1: Company Name + Industry -->
                 <div class="input-group">
                     <label>Company Name</label>
                     <input type="text" name="companyName" placeholder="Enter company name" required>
@@ -42,17 +42,18 @@
                     <input type="text" name="industry" placeholder="Enter industry" required>
                 </div>
 
+                <!-- Row 2: Company Type + Company Website -->
                 <div class="input-group">
                     <label>Company Type</label>
                     <input type="text" name="companyType" placeholder="e.g. IT, Startup, MNC" required>
                 </div>
 
-                <!-- Row 2 (NEW) -->
                 <div class="input-group">
                     <label>Company Website</label>
                     <input type="url" name="website" placeholder="https://www.example.com" required>
                 </div>
 
+                <!-- Row 3: Registration Number + License Number -->
                 <div class="input-group">
                     <label>Registration Number</label>
                     <input type="text" name="registrationNumber" placeholder="Enter registration number" required>
@@ -63,24 +64,21 @@
                     <input type="text" name="licenseNumber" placeholder="Enter license number" required>
                 </div>
 
-                <!-- Row 3: Email, Password, Address (NEW) using last-row -->
-                <div class="last-row">
+                <!-- Row 4: Email + Password -->
+                <div class="input-group">
+                    <label>Company Email</label>
+                    <input type="email" name="email" placeholder="Enter company email" required>
+                </div>
 
-                    <div class="input-group">
-                        <label>Company Email</label>
-                        <input type="email" name="email" placeholder="Enter company email" required>
-                    </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Create a password" required>
+                </div>
 
-                    <div class="input-group">
-                        <label>Password</label>
-                        <input type="password" name="password" placeholder="Create a password" required>
-                    </div>
-
-                    <div class="input-group">
-                        <label>Company Address</label>
-                        <textarea name="address" placeholder="Enter company address" rows="3" required></textarea>
-                    </div>
-
+                <!-- Address: centered below spanning both columns -->
+                <div class="input-group address-group">
+                    <label>Company Address</label>
+                    <textarea name="address" placeholder="Enter company address" rows="3" required></textarea>
                 </div>
 
             </div>
