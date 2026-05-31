@@ -257,47 +257,6 @@
 
     </main>
 
-    <script>
-        const backBtn = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            backBtn.style.display = window.pageYOffset > 400 ? 'flex' : 'none';
-        });
-        backBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    </script>
-
-    <script>
-        function toggleEdit(btn) {
-            const card = btn.closest('.company-card');
-            const inputs = card.querySelectorAll('input');
-            const icon = btn.querySelector('i');
-            const isEditing = btn.classList.contains('active');
-
-            if (isEditing) {
-                // Save — lock fields back
-                inputs.forEach(input => input.disabled = true);
-                icon.classList.remove('fa-circle-check');
-                icon.classList.add('fa-pen-to-square');
-                btn.classList.remove('active');
-                btn.title = 'Edit';
-            } else {
-                // Edit — unlock fields
-                inputs.forEach(input => input.disabled = false);
-                icon.classList.remove('fa-pen-to-square');
-                icon.classList.add('fa-circle-check');
-                btn.classList.add('active');
-                btn.title = 'Save';
-            }
-        }
-
-        // Lock all inputs on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.company-card input').forEach(input => {
-                input.disabled = true;
-            });
-        });
-    </script>
 
 </body>
 </html>
