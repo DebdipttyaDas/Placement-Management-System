@@ -6,14 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company Profile | Google</title>
-
-    <!-- CSS -->
     <link rel="stylesheet" href="CompanyProfile.css">
-
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
@@ -21,47 +15,28 @@
 
     <!-- HERO SECTION -->
     <div class="hero-container">
-
-        <!-- Background Animated Images -->
         <div class="hero-split">
-
             <img src="https://img.freepik.com/premium-photo/teamwork-group-colleagues-using-laptop-together-collaboration-new-project-modern-office-diversity-idea-businesspeople-meeting-having-conversation-work_590464-206570.jpg"
-                 alt="Team Conversation"
-                 class="hero-img">
-
+                 alt="Team Conversation" class="hero-img">
             <img src="https://cms.k2space.co.uk/app/uploads/2023/06/K2-Criteo-Office-Curator-LARGE-102-scaled.jpg"
-                 alt="Modern Workspace"
-                 class="hero-img">
-
+                 alt="Modern Workspace" class="hero-img">
         </div>
-
         <div class="overlay"></div>
-
-        <!-- COMPANY INFO BAR -->
         <div class="company-info-bar">
-
             <div class="left-info">
-
                 <div class="logo-box">
-                    <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png"
-                         alt="Google Logo">
+                    <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google Logo">
                 </div>
-
                 <div class="company-text">
                     <h1>Google</h1>
                 </div>
-
             </div>
-
             <div class="header-actions">
-                <button class="back-btn"
-                        onclick="window.location.href='CompanyDashboard.jsp'">
+                <button class="back-btn" onclick="window.location.href='CompanyDashboard.jsp'">
                     Back to Dashboard
                 </button>
             </div>
-
         </div>
-
     </div>
 
     <!-- MAIN CONTENT -->
@@ -69,67 +44,47 @@
 
         <!-- OVERVIEW -->
         <section class="overview-section">
-
             <div class="section-header">
                 <h2>Company Overview</h2>
                 <div class="underline"></div>
             </div>
-
             <p class="description">
                 Google's mission is to organize the world's information and make it universally accessible and useful.
                 Since our founding in 1998, we've grown to offer products and services that help billions of people
                 around the world live better lives. From Search to YouTube, Android to Cloud, our teams work at the
                 intersection of technology and creativity to build for everyone.
             </p>
-
         </section>
 
         <!-- BENEFITS -->
         <section class="benefits-section">
-
             <div class="section-header">
                 <h2>Benefits & Perks</h2>
                 <div class="underline"></div>
             </div>
-
             <div class="benefits-grid">
-
                 <div class="benefit-card">
-                    <div class="icon-circle blue">
-                        <i class="fa-solid fa-heart-pulse"></i>
-                    </div>
+                    <div class="icon-circle blue"><i class="fa-solid fa-heart-pulse"></i></div>
                     <h3>Health & Wellness</h3>
                     <p>Comprehensive medical, dental, and vision insurance for you and your family.</p>
                 </div>
-
                 <div class="benefit-card">
-                    <div class="icon-circle red">
-                        <i class="fa-solid fa-utensils"></i>
-                    </div>
+                    <div class="icon-circle red"><i class="fa-solid fa-utensils"></i></div>
                     <h3>Gourmet Meals</h3>
                     <p>Fuel your day with free, healthy, and delicious meals prepared by onsite chefs.</p>
                 </div>
-
                 <div class="benefit-card">
-                    <div class="icon-circle yellow">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                    </div>
+                    <div class="icon-circle yellow"><i class="fa-solid fa-graduation-cap"></i></div>
                     <h3>Learning & Growth</h3>
                     <p>Tuition reimbursement and internal programs to help you master new skills.</p>
                 </div>
-
                 <div class="benefit-card">
-                    <div class="icon-circle green">
-                        <i class="fa-solid fa-couch"></i>
-                    </div>
+                    <div class="icon-circle green"><i class="fa-solid fa-couch"></i></div>
                     <h3>Flexible Work</h3>
                     <p>Hybrid work models and generous time off to ensure a healthy work-life balance.</p>
                 </div>
-
             </div>
-
             <br><br>
-
         </section>
 
         <!-- COMPANY DATABASE SECTION -->
@@ -149,27 +104,27 @@
                     </div>
                     <div class="card-body">
                         <div class="input-box">
-                            <label>Company Name</label>
+                            <label>Company Name <span class="required">*</span></label>
                             <input type="text" placeholder="Enter company name">
                         </div>
                         <div class="input-box">
-                            <label>Company Code</label>
+                            <label>Company Code <span class="optional">(Optional)</span></label>
                             <input type="text" placeholder="Enter company code">
                         </div>
                         <div class="input-box">
-                            <label>Industry</label>
+                            <label>Industry <span class="required">*</span></label>
                             <input type="text" placeholder="Enter industry">
                         </div>
                         <div class="input-box">
-                            <label>Company Type</label>
-                            <input type="text" placeholder="Enter company type">
+                            <label>Company Type <span class="required">*</span></label>
+                            <input type="text" placeholder="e.g. IT, Startup, MNC">
                         </div>
                         <div class="input-box">
-                            <label>Company Email</label>
-                            <input type="email" placeholder="Enter email">
+                            <label>Company Email <span class="required">*</span></label>
+                            <input type="email" placeholder="Enter company email">
                         </div>
                         <div class="input-box">
-                            <label>Password</label>
+                            <label>Password <span class="required">*</span></label>
                             <input type="password" placeholder="Enter password">
                         </div>
                     </div>
@@ -182,12 +137,28 @@
                     </div>
                     <div class="card-body">
                         <div class="input-box">
-                            <label>Phone Number</label>
+                            <label>Phone Number <span class="required">*</span></label>
                             <input type="text" placeholder="Enter phone number">
                         </div>
                         <div class="input-box">
-                            <label>Website Link</label>
-                            <input type="text" placeholder="Enter website link">
+                            <label>Alternate Phone Number <span class="optional">(Optional)</span></label>
+                            <input type="text" placeholder="Enter alternate phone number">
+                        </div>
+                        <div class="input-box">
+                            <label>Website Link <span class="required">*</span></label>
+                            <input type="text" placeholder="https://www.example.com">
+                        </div>
+                        <div class="input-box">
+                            <label>Alternate Email <span class="optional">(Optional)</span></label>
+                            <input type="email" placeholder="Enter alternate email">
+                        </div>
+                        <div class="input-box">
+                            <label>LinkedIn URL <span class="optional">(Optional)</span></label>
+                            <input type="text" placeholder="https://linkedin.com/company/...">
+                        </div>
+                        <div class="input-box">
+                            <label>Twitter / X Handle <span class="optional">(Optional)</span></label>
+                            <input type="text" placeholder="e.g. @yourcompany">
                         </div>
                     </div>
                 </div>
@@ -199,41 +170,61 @@
                     </div>
                     <div class="card-body">
                         <div class="input-box">
-                            <label>Company Address</label>
-                            <input type="text" placeholder="Enter address">
+                            <label>Street Address <span class="required">*</span></label>
+                            <input type="text" placeholder="Enter street address">
                         </div>
                         <div class="input-box">
-                            <label>City</label>
+                            <label>Landmark <span class="optional">(Optional)</span></label>
+                            <input type="text" placeholder="Enter nearby landmark">
+                        </div>
+                        <div class="input-box">
+                            <label>City <span class="required">*</span></label>
                             <input type="text" placeholder="Enter city">
                         </div>
                         <div class="input-box">
-                            <label>State</label>
+                            <label>State <span class="required">*</span></label>
                             <input type="text" placeholder="Enter state">
                         </div>
                         <div class="input-box">
-                            <label>Country</label>
+                            <label>Country <span class="required">*</span></label>
                             <input type="text" placeholder="Enter country">
                         </div>
                         <div class="input-box">
-                            <label>Pincode</label>
+                            <label>Pincode <span class="required">*</span></label>
                             <input type="text" placeholder="Enter pincode">
                         </div>
                     </div>
                 </div>
 
-                <!-- CARD 4: Legal Information (PAN Number REMOVED) -->
+                <!-- CARD 4: Legal Information -->
                 <div class="company-card">
                     <div class="card-header">
                         <h3>Legal Information</h3>
                     </div>
                     <div class="card-body">
                         <div class="input-box">
-                            <label>Registration Number</label>
+                            <label>Registration Number <span class="required">*</span></label>
                             <input type="text" placeholder="Enter registration number">
                         </div>
                         <div class="input-box">
-                            <label>License Number</label>
+                            <label>License Number <span class="required">*</span></label>
                             <input type="text" placeholder="Enter license number">
+                        </div>
+                        <div class="input-box">
+                            <label>GST Number <span class="optional">(Optional)</span></label>
+                            <input type="text" placeholder="Enter GST number">
+                        </div>
+                        <div class="input-box">
+                            <label>Tax ID <span class="optional">(Optional)</span></label>
+                            <input type="text" placeholder="Enter tax ID">
+                        </div>
+                        <div class="input-box">
+                            <label>Established Year <span class="required">*</span></label>
+                            <input type="text" placeholder="e.g. 1998">
+                        </div>
+                        <div class="input-box">
+                            <label>Number of Employees <span class="optional">(Optional)</span></label>
+                            <input type="text" placeholder="e.g. 500+">
                         </div>
                     </div>
                 </div>
@@ -254,18 +245,11 @@
 
     </main>
 
-    <!-- JAVASCRIPT -->
     <script>
         const backBtn = document.getElementById('backToTop');
-
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 400) {
-                backBtn.style.display = 'flex';
-            } else {
-                backBtn.style.display = 'none';
-            }
+            backBtn.style.display = window.pageYOffset > 400 ? 'flex' : 'none';
         });
-
         backBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
