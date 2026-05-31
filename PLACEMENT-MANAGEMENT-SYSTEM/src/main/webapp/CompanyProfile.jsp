@@ -101,6 +101,9 @@
                 <div class="company-card">
                     <div class="card-header">
                         <h3>Register Details</h3>
+                        <button class="edit-btn" onclick="toggleEdit(this)" title="Edit">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
                     </div>
                     <div class="card-body">
                         <div class="input-box">
@@ -134,6 +137,9 @@
                 <div class="company-card">
                     <div class="card-header">
                         <h3>Contact Details</h3>
+                        <button class="edit-btn" onclick="toggleEdit(this)" title="Edit">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
                     </div>
                     <div class="card-body">
                         <div class="input-box">
@@ -167,6 +173,9 @@
                 <div class="company-card">
                     <div class="card-header">
                         <h3>Address Details</h3>
+                        <button class="edit-btn" onclick="toggleEdit(this)" title="Edit">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
                     </div>
                     <div class="card-body">
                         <div class="input-box">
@@ -200,6 +209,9 @@
                 <div class="company-card">
                     <div class="card-header">
                         <h3>Legal Information</h3>
+                        <button class="edit-btn" onclick="toggleEdit(this)" title="Edit">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
                     </div>
                     <div class="card-body">
                         <div class="input-box">
@@ -252,6 +264,38 @@
         });
         backBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+
+    <script>
+        function toggleEdit(btn) {
+            const card = btn.closest('.company-card');
+            const inputs = card.querySelectorAll('input');
+            const icon = btn.querySelector('i');
+            const isEditing = btn.classList.contains('active');
+
+            if (isEditing) {
+                // Save — lock fields back
+                inputs.forEach(input => input.disabled = true);
+                icon.classList.remove('fa-circle-check');
+                icon.classList.add('fa-pen-to-square');
+                btn.classList.remove('active');
+                btn.title = 'Edit';
+            } else {
+                // Edit — unlock fields
+                inputs.forEach(input => input.disabled = false);
+                icon.classList.remove('fa-pen-to-square');
+                icon.classList.add('fa-circle-check');
+                btn.classList.add('active');
+                btn.title = 'Save';
+            }
+        }
+
+        // Lock all inputs on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.company-card input').forEach(input => {
+                input.disabled = true;
+            });
         });
     </script>
 
