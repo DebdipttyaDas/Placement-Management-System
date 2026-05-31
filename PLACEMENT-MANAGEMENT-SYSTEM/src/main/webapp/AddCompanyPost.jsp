@@ -42,7 +42,7 @@ pageEncoding="UTF-8"%>
                     <label>Department</label>
                     <input type="text"
                            name="department"
-                           placeholder="e.g. BCA">
+                           placeholder="e.g. ECE, BCA">
                 </div>
 
                 <!-- Salary -->
