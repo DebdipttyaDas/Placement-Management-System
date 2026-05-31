@@ -60,8 +60,8 @@
                 </div>
 
                 <div class="input-group">
-                    <label>License Number</label>
-                    <input type="text" name="licenseNumber" placeholder="Enter license number" required>
+                    <label>CIN</label>
+                    <input type="text" name="licenseNumber" placeholder="Enter CIN" required>
                 </div>
 
                 <!-- Row 4: Email + Password -->
