@@ -218,6 +218,10 @@
                             <label>GST Number <span class="required">*</span></label>
                             <input type="text" placeholder="Enter GST number">
                         </div>
+                        <div class="input-box">
+                            <label>PAN Number <span class="required">*</span></label>
+                            <input type="text" placeholder="Enter PAN number">
+                        </div>
                     </div>
                 </div>
 
@@ -236,7 +240,6 @@
         </button>
 
     </main>
-
 
 
 </body>
