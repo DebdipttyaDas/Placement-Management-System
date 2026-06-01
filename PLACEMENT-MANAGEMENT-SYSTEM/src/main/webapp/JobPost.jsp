@@ -95,7 +95,7 @@
             <div class="section-title">
 
                 Company Name <input type="text"
-        class="form-controll"
+        class="form-control"
         placeholder="Enter Company name ">
 
             </div>
