@@ -126,10 +126,6 @@
                             <label>Password <span class="required">*</span></label>
                             <input type="password" placeholder="Enter password">
                         </div>
-                        <div class="input-box">
-                            <label>Number of Employees <span class="optional">(Optional)</span></label>
-                            <input type="text" placeholder="e.g. 500+">
-                        </div>
                     </div>
                 </div>
 
