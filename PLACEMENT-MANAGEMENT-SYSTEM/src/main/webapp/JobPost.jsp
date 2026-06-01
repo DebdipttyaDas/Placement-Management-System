@@ -176,9 +176,17 @@
                     placeholder="e.g. Bangalore,Pune">
 
                 </div>
-
             </div>
+            
+				<div class="form-group">
 
+				    <label>Apply Before</label>
+				
+				    <input type="text"
+				           class="form-control"
+				           placeholder="e.g. 30-06-2026">
+				
+				</div>
         </div>
 
         <!-- JOB DETAILS -->
