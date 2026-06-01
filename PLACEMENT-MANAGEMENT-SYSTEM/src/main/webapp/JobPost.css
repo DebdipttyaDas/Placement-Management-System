@@ -143,11 +143,16 @@ body{
 .section-title{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:20px;
     font-weight:600;
     color:#1e2a35;
     margin-bottom:25px;
-    font-size: 25px;
+    font-size: 18px;
+}
+
+.section-title .form-control{
+    flex: 1;
+    max-width: 800px;
 }
 
 .form-control{
@@ -160,6 +165,7 @@ body{
     outline:none;
     transition:0.3s;
 }
+
 
 /* FORM */
 .form-group{
