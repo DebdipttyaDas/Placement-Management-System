@@ -93,11 +93,10 @@
         <div class="section">
 
             <div class="section-title">
-
-                Company Name <input type="text"
-        class="form-control"
-        placeholder="Enter Company name ">
-
+                Company Name 
+                <input type="text"
+                class="form-control"
+                placeholder="Enter Company name ">
             </div>
 
 <div class="form-row">
