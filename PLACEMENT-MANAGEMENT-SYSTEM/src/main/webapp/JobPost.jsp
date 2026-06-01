@@ -179,7 +179,7 @@
             </div>
             
 				<div class="form-group apply-before-group">
-    <label>Apply Before</label>
+    <label>Apply Date</label>
     <input type="date"
            class="form-control">
 </div>
