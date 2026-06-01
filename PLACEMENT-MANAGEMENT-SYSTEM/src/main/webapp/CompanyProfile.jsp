@@ -154,6 +154,10 @@
                             <label>LinkedIn URL <span class="optional">(Optional)</span></label>
                             <input type="text" placeholder="https://linkedin.com/company/...">
                         </div>
+                        <div class="input-box">
+                            <label>Alternate Phone <span class="optional">(Optional)</span></label>
+                            <input type="text" placeholder="Enter alternate phone number">
+                        </div>
                     </div>
                 </div>
 
