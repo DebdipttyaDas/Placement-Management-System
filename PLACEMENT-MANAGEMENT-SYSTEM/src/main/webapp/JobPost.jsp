@@ -178,15 +178,11 @@
                 </div>
             </div>
             
-				<div class="form-group">
-
-				    <label>Apply Before</label>
-				
-				    <input type="text"
-				           class="form-control"
-				           placeholder="e.g. 30-06-2026">
-				
-				</div>
+				<div class="form-group apply-before-group">
+    <label>Apply Before</label>
+    <input type="date"
+           class="form-control">
+</div>
         </div>
 
         <!-- JOB DETAILS -->
