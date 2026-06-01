@@ -35,6 +35,9 @@
                 <button class="back-btn" onclick="window.location.href='CompanyDashboard.jsp'">
                     Back to Dashboard
                 </button>
+                <button class="add-company-btn" onclick="openModal()">
+                    <i class="fa-solid fa-plus"></i> Add Company
+                </button>
             </div>
         </div>
     </div>
@@ -97,7 +100,7 @@
 
             <div class="card-container">
 
-                <!-- CARD 1: Register Details -->
+                <!-- CARD 1: Basic Details -->
                 <div class="company-card">
                     <div class="card-header">
                         <h3>Basic Details</h3>
@@ -203,7 +206,7 @@
                     </div>
                     <div class="card-body">
                         <div class="input-box">
-                            <label>CIN<span class="required">*</span></label>
+                            <label>CIN <span class="required">*</span></label>
                             <input type="text" placeholder="Enter CIN">
                         </div>
                         <div class="input-box">
@@ -242,5 +245,167 @@
     </main>
 
 
+    <!-- ====================================================
+         MODAL OVERLAY — Company Details Form
+    ===================================================== -->
+    <div class="modal-overlay" id="companyModal" onclick="handleOverlayClick(event)">
+        <div class="modal-box">
+
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-building"></i> Add Company Details</h2>
+                <button class="modal-close-btn" onclick="closeModal()" title="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- Basic Details -->
+                <div class="modal-section-title">Basic Details</div>
+                <div class="modal-grid">
+                    <div class="input-box">
+                        <label>Company Name <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter company name">
+                    </div>
+                    <div class="input-box">
+                        <label>Industry <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter industry">
+                    </div>
+                    <div class="input-box">
+                        <label>Company Type <span class="required">*</span></label>
+                        <input type="text" placeholder="e.g. IT, Startup, MNC">
+                    </div>
+                    <div class="input-box">
+                        <label>Company Code</label>
+                        <input type="text" placeholder="Enter company code">
+                    </div>
+                    <div class="input-box">
+                        <label>Password <span class="required">*</span></label>
+                        <input type="password" placeholder="Enter password">
+                    </div>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="modal-section-title">Contact Details</div>
+                <div class="modal-grid">
+                    <div class="input-box">
+                        <label>Phone Number <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter phone number">
+                    </div>
+                    <div class="input-box">
+                        <label>Company Email</label>
+                        <input type="email" placeholder="Enter company email">
+                    </div>
+                    <div class="input-box">
+                        <label>Website Link <span class="required">*</span></label>
+                        <input type="text" placeholder="https://www.example.com">
+                    </div>
+                    <div class="input-box">
+                        <label>LinkedIn URL <span class="optional">(Optional)</span></label>
+                        <input type="text" placeholder="https://linkedin.com/company/...">
+                    </div>
+                    <div class="input-box">
+                        <label>Alternate Phone <span class="optional">(Optional)</span></label>
+                        <input type="text" placeholder="Enter alternate phone number">
+                    </div>
+                </div>
+
+                <!-- Address Details -->
+                <div class="modal-section-title">Address Details</div>
+                <div class="modal-grid">
+                    <div class="input-box">
+                        <label>Company Address <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter company address">
+                    </div>
+                    <div class="input-box">
+                        <label>City <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter city">
+                    </div>
+                    <div class="input-box">
+                        <label>State <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter state">
+                    </div>
+                    <div class="input-box">
+                        <label>Country <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter country">
+                    </div>
+                    <div class="input-box">
+                        <label>Pincode <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter pincode">
+                    </div>
+                </div>
+
+                <!-- Legal Information -->
+                <div class="modal-section-title">Legal Information</div>
+                <div class="modal-grid">
+                    <div class="input-box">
+                        <label>CIN <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter CIN">
+                    </div>
+                    <div class="input-box">
+                        <label>Registration Number <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter registration number">
+                    </div>
+                    <div class="input-box">
+                        <label>License Number <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter license number">
+                    </div>
+                    <div class="input-box">
+                        <label>GST Number <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter GST number">
+                    </div>
+                    <div class="input-box">
+                        <label>PAN Number <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter PAN number">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="modal-cancel-btn" onclick="closeModal()">Cancel</button>
+                <button class="modal-submit-btn">Submit</button>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+</html>
+
+<script>
+    function openModal() {
+        const modal = document.getElementById('companyModal');
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('companyModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function handleOverlayClick(e) {
+        if (e.target === document.getElementById('companyModal')) {
+            closeModal();
+        }
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    // Back to top button
+    window.addEventListener('scroll', function() {
+        const btn = document.getElementById('backToTop');
+        btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+    });
+    document.getElementById('backToTop').addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
 </body>
 </html>
