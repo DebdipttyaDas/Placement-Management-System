@@ -36,7 +36,7 @@
                     Back to Dashboard
                 </button>
                 <button class="add-company-btn" onclick="openModal()">
-                    <i class="fa-solid fa-plus"></i> Add Company
+                    <i class="fa-solid fa-plus"></i> Update Profile
                 </button>
             </div>
         </div>
@@ -146,9 +146,9 @@
                         <input type="text" placeholder="Enter phone number">
                     </div>
                     <div class="input-box">
-                        <label>Company Email</label>
-                        <input type="email" placeholder="Enter company email">
-                    </div>
+    <label>Company Email <span class="required">*</span></label>
+    <input type="email" placeholder="Enter company email" required>
+</div>
                     <div class="input-box">
                         <label>Website Link <span class="required">*</span></label>
                         <input type="text" placeholder="https://www.example.com">
