@@ -9,11 +9,17 @@
     <title>Job Post</title>
 
     <!-- CSS -->
+    <!-- JobPost -->
     <link rel="stylesheet" href="JobPost.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Chatbot -->
+    
+    <link rel="stylesheet" href="chatbot.css">
+   
 </head>
 
 <body>
@@ -95,6 +101,8 @@
             <div class="section-title">
                 Company Name 
                 <input type="text"
+                id="companyName"
+                name="companyName"
                 class="form-control"
                 placeholder="Enter Company name ">
             </div>
@@ -105,15 +113,18 @@
         <label>Job Title *</label>
 
         <input type="text"
+        id="jobTitle"
+        name="jobTitle"
         class="form-control"
-        placeholder="e.g. Senior Software Engineer">
+        placeholder="e.g. Senior Software Engineer"
+        required>
     </div>
 
     <div class="form-group">
 
                     <label>Employment Type</label>
 
-                    <select class="form-control">
+                    <select id="employmentType" name="employmentType" class="form-control">
                         <option>Full-time</option>
                         <option>Part-time</option>
                         <option>Internship</option>
@@ -129,7 +140,7 @@
 
                     <label>Department</label>
 
-                    <select class="form-control">
+                    <select id="department" name="department" class="form-control">
                         <option>Select Department</option>
                         <option>CSE</option>
                         <option>ECE</option>
@@ -158,7 +169,7 @@
 
                     <label>Location Type</label>
 
-                    <select class="form-control">
+                    <select id="locationType" name="locationType" class="form-control">
                         <option>Remote</option>
                         <option>On-site</option>
                         <option>Hybrid</option>
@@ -171,6 +182,8 @@
                     <label>Location</label>
 
                     <input type="text"
+                    id="location"
+                    name="location"
                     class="form-control"
                     placeholder="e.g. Bangalore,Pune">
 
@@ -178,8 +191,14 @@
             </div>
             
 				<div class="form-group apply-before-group">
-                    <label>Application Deadline</label>
-                    <input type="date" class="form-control">
+                    <label>Application Deadline *</label>
+                    <input type="date" 
+                    id="applicationDeadline" 
+                    name="applicationDeadline" 
+                    class="form-control"
+                    onchange="validateDeadline()"
+                    required>
+                    <small id="deadlineMessage" style="color: red; display: none; margin-top: 5px;"></small>
                 </div>
         </div>
 
@@ -252,11 +271,12 @@
         </div>
 
         <!-- BUTTON -->
-        <button type="submit" class="submit-btn">
+        <button type="submit" id="publishBtn" class="submit-btn" onclick="return validateForm()">
 
             Publish Job
 
         </button>
+        <small id="buttonMessage" style="color: red; display: none; margin-top: 10px; display: block;"></small>
 
         </form>
 
@@ -265,34 +285,9 @@
 </div>
 
 <!-- SCRIPT -->
-<script>
-
-function prepareSubmit() {
-    document.getElementById("hiddenJobDesc").value = document.querySelector(".editor").innerHTML;
-}
-
-function formatText(command){
-
-    document.execCommand(command, false, null);
-
-}
-
-function addLink(){
-
-    let url = prompt("Enter URL:");
-
-    if(url){
-
-        document.execCommand("createLink", false, url);
-
-    }
-}
-
-</script>
+<script src="Jobpost.js"></script>
 
 <!-- Chatbot -->
-<link rel="stylesheet" href="chatbot.css">
-
 <div id="chatbot-toggle">
     <i class="fas fa-robot"></i>
 </div>
