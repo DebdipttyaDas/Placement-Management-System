@@ -241,13 +241,13 @@
     function openModal() {
         const modal = document.getElementById('companyModal');
         modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        
     }
 
     function closeModal() {
         const modal = document.getElementById('companyModal');
         modal.classList.remove('active');
-        document.body.style.overflow = '';
+        
     }
 
     function handleOverlayClick(e) {
