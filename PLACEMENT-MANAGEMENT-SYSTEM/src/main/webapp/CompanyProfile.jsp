@@ -157,10 +157,6 @@
                         <label>LinkedIn URL <span class="optional">(Optional)</span></label>
                         <input type="text" placeholder="https://linkedin.com/company/...">
                     </div>
-                    <div class="input-box">
-                        <label>Alternate Phone <span class="optional">(Optional)</span></label>
-                        <input type="text" placeholder="Enter alternate phone number">
-                    </div>
                 </div>
 
                 <!-- Address Details -->
@@ -206,10 +202,6 @@
                     <div class="input-box">
                         <label>GST Number <span class="required">*</span></label>
                         <input type="text" placeholder="Enter GST number">
-                    </div>
-                    <div class="input-box">
-                        <label>PAN Number <span class="required">*</span></label>
-                        <input type="text" placeholder="Enter PAN number">
                     </div>
                 </div>
 
