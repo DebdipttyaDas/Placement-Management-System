@@ -159,6 +159,7 @@
 			
 			        <input type="text"
 			        class="form-control"
+			        name="salary"
 			        placeholder="e.g. INR 30k-50k">
                </div>
             </div>
