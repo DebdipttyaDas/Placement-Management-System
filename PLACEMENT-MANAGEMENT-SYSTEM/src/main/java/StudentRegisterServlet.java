@@ -87,7 +87,7 @@ public class StudentRegisterServlet extends HttpServlet {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            String insertQuery = "INSERT INTO students (full_name, college_name, department, year, cgpa, dob, email, password, resume_path, photo_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String insertQuery = "INSERT INTO students (full_name, college_name, department, year, cgpa, dob, email, password, skills, resume_path, photo_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
             try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
                  PreparedStatement ps = conn.prepareStatement(insertQuery)) {
