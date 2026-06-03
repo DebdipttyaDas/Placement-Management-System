@@ -84,15 +84,6 @@ body {
     box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
-
-/* JOB CARD */
-.job-card{
-    background:white;
-    border-radius:15px;
-    padding:25px;
-    transition:0.3s;
-}
-
 .job-card:hover{
     transform:translateY(-5px);
 }
@@ -238,4 +229,60 @@ body {
     font-size: 15px;
     width: 100%;
     background: transparent;
+}
+
+.job-card{
+    width:300px;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:20px;
+    margin:15px;
+    transition:all 0.4s ease;
+}
+
+.extra-details{
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    transition:all 0.4s ease;
+}
+
+.job-card.active .extra-details{
+    max-height:500px;
+    opacity:1;
+    margin-top:15px;
+}
+
+.job-card.active{
+    transform:translateY(-5px);
+}
+
+.view-btn,
+.apply-btn,
+.close-btn{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.view-btn,
+.apply-btn{
+    background:#0d5bd7;
+    color:white;
+}
+
+.close-btn{
+    background:#777;
+    color:white;
+}
+
+.card-container{
+    display:grid;
+    grid-template-columns:repeat(3, 300px);
+    gap:20px;
+    justify-content:center;
 }

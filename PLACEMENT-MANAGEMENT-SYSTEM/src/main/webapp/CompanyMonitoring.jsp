@@ -18,65 +18,6 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<style>
-
-.job-card{
-    width:300px;
-    background:#fff;
-    border:1px solid #ddd;
-    border-radius:10px;
-    padding:20px;
-    margin:15px;
-    transition:all 0.4s ease;
-}
-
-.extra-details{
-    max-height:0;
-    overflow:hidden;
-    opacity:0;
-    transition:all 0.4s ease;
-}
-
-.job-card.active .extra-details{
-    max-height:500px;
-    opacity:1;
-    margin-top:15px;
-}
-
-.job-card.active{
-    transform:translateY(-5px);
-}
-
-.view-btn,
-.apply-btn,
-.close-btn{
-    width:100%;
-    padding:10px;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-    margin-top:10px;
-}
-
-.view-btn,
-.apply-btn{
-    background:#0d5bd7;
-    color:white;
-}
-
-.close-btn{
-    background:#777;
-    color:white;
-}
-
-.card-container{
-    display:flex;
-    flex-wrap:wrap;
-    gap:20px;
-}
-
-</style>
-
 <script>
 function toggleCard(button){
 
