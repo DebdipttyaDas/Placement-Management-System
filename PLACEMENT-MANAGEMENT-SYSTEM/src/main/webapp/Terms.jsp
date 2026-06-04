@@ -4,14 +4,12 @@
 <html lang="en">
 
 <head>
-
-    <meta charset="UTF-80.8>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    
     <title>Terms & Conditions</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="Terms.css">
-    
 </head>
 
 <body>
