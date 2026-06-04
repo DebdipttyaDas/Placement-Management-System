@@ -18,61 +18,125 @@
 }
 
 
-/* Mobile Devices */
-@media screen and (max-width: 768px) {
+/* 1. Global Reset & Overrides for Layout Fluidity */
+body {
+    height: auto !important; /* Overrides h-screen so content isn't chopped on mobile */
+    min-height: 100vh !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-x: hidden;
+}
 
+/* Fixes the background wrapper layer to scale cleanly on long mobile views */
+body > div.min-h-screen {
+    min-height: 100vh !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+body > div.min-h-screen > div.relative {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+}
+
+/* ==========================================================================
+   2. Mobile & Small Screen Optimizations (Default / Base Styles)
+   ========================================================================== */
+
+/* Header & Navbar Scaling */
+header {
+    padding-left: 1.25rem !important;  /* Shuffs layout away from phone edges */
+    padding-right: 1.25rem !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+header h1 {
+    font-size: 1.5rem !important; /* Downscales 'CampusConnect' text so it doesn't clip */
+}
+
+header nav {
+    gap: 0.75rem !important;
+}
+
+/* Main Layout & Text Scaling */
+main {
+    padding: 1.5rem 1rem !important; /* Gives breathing room on tiny phone viewports */
+}
+
+main h1 {
+    font-size: 1.75rem !important; /* 'Welcome Back !' text scale */
+}
+
+main p b {
+    font-size: 0.8rem !important; /* Subtitle scale */
+    display: block;
+    line-height: 1.4;
+}
+
+/* Glass Card Mobile Adjustments */
+.glass-card {
+    background: rgba(255, 255, 255, 0.12) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15) !important;
+    
+    /* Responsive Width constraints */
+    width: 100% !important; 
+    max-width: 400px !important; 
+    padding: 1.25rem !important; /* Compact interior space for small screens */
+}
+
+/* Input Fields Adjustments */
+.glass-card input {
+    font-size: 1rem !important; /* Prevents iOS/Android from auto-zooming on focus */
+    padding: 0.65rem !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Prevent native dark/yellow backgrounds during autofill on mobile browsers */
+.glass-card input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(6, 71, 62, 0.5) inset !important;
+}
+
+
+/* ==========================================================================
+   3. Media Queries for Medium Devices (Tablets, iPads - 640px and up)
+   ========================================================================== */
+@media (min-width: 640px) {
     header {
-        padding: 15px;
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
     }
 
-    nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
+    header h1 {
+        font-size: 1.875rem !important; /* Returns to original 3xl size */
+    }
+
+    main h1 {
+        font-size: 2.25rem !important;
+    }
+
+    main p b {
+        font-size: 0.875rem !important;
     }
 
     .glass-card {
-        width: 90% !important;
-        max-width: 420px;
-        margin: auto;
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 1.8rem;
-    }
-
-    main {
-        padding: 20px;
+        padding: 2rem !important; /* Opens up spacing inside the form card */
     }
 }
 
-/* Small Mobile Devices */
-@media screen and (max-width: 480px) {
-
-    .glass-card {
-        width: 95% !important;
-        padding: 15px;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
-
-    p {
-        font-size: 14px;
-    }
-
-    input,
-    button {
-        font-size: 14px;
-    }
-
-    nav a {
-        font-size: 13px;
+/* ==========================================================================
+   4. Media Queries for Large Devices (Laptops, Desktops - 1024px and up)
+   ========================================================================== */
+@media (min-width: 1024px) {
+    main {
+        padding-top: 4rem !important;
+        padding-bottom: 4rem !important;
     }
 }
