@@ -10,6 +10,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="Terms.css">
+    
 </head>
 
 <body>
