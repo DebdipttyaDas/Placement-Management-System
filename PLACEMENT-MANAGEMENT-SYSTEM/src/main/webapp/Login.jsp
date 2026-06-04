@@ -52,7 +52,7 @@
 </p>
 
 <!-- Card -->
-<div class="glass-card w-full max-w-[420px] p-6 rounded-2xl">
+<div class="glass-card w-full max-w-[420px] p-6 rounded-2xl mx-auto">
 <!-- FORM START -->
 <form action="LoginServlet" method="post">
 
