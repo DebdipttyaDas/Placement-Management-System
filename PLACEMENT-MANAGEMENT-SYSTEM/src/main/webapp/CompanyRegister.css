@@ -150,6 +150,14 @@ center {
     box-sizing: border-box;
 }
 
+textarea[name="address"] {
+    width: 55%;
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 8px;
+}
+
 .input-group input:focus {
     border-color: #00b894;
     box-shadow: 0 0 10px rgba(0, 184, 148, 0.6);
