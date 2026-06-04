@@ -17,3 +17,62 @@
     box-shadow: 0 15px 20px rgba(0, 0, 0, 0);
 }
 
+
+/* Mobile Devices */
+@media screen and (max-width: 768px) {
+
+    header {
+        padding: 15px;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .glass-card {
+        width: 90% !important;
+        max-width: 420px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    main {
+        padding: 20px;
+    }
+}
+
+/* Small Mobile Devices */
+@media screen and (max-width: 480px) {
+
+    .glass-card {
+        width: 95% !important;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    input,
+    button {
+        font-size: 14px;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+}
