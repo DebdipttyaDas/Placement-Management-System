@@ -238,9 +238,8 @@ button:active {
     }
 }
 
-/* ==========================
-   MOBILE (480px and below)
-========================== */
+/* MOBILE (480px and below)*/
+
 @media screen and (max-width: 480px) {
 
     header {
