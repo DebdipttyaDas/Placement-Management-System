@@ -40,3 +40,49 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+
+/* ================= RESPONSIVE DESIGN ================= */
+
+/* Tablets */
+@media (max-width: 768px) {
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    p {
+        font-size: 0.95rem;
+    }
+
+    #chatbot-container {
+        width: 280px;
+        height: 380px;
+        right: 10px;
+    }
+}
+
+/* Mobile phones */
+
+    #chatbot-toggle {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    #chatbot-container {
+        width: 95%;
+        height: 70vh;
+        right: 2.5%;
+        bottom: 80px;
+    }
+}
