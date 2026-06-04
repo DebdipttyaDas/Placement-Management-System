@@ -141,6 +141,14 @@ center {
     font-size: 14px;
 }
 
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 14px 16px;   
+    font-size: 16px;     
+    border-radius: 8px;
+    box-sizing: border-box;
+}
 
 .input-group input:focus {
     border-color: #00b894;
