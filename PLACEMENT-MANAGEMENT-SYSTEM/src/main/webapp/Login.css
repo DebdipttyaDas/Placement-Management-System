@@ -1,7 +1,7 @@
 /* ===== Perspective (important for 3D) ===== */
 .page {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   perspective: 1200px;
 }
