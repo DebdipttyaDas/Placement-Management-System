@@ -42,7 +42,7 @@
 </header>
 
 <!-- Main -->
-<main class="flex-1 flex justify-center items-center">
+<main class="flex-1 flex justify-center items-center px-4 py-6">
 <div class="text-center">
 
 <h1 class="text-3xl font-bold text-[#000208] mb-2">Welcome Back !</h1>
