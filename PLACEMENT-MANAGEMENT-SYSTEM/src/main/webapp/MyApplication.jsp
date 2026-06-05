@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="MyApplication.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="MyApplication.js"></script>
 
 </head>
 
@@ -194,21 +195,6 @@
     </div>
 
 </div>
-
-<!-- JavaScript -->
-<script>
-function filterStatus(status) {
-    let rows = document.querySelectorAll(".table-container tbody tr");
-
-    rows.forEach(row => {
-        if (status === "all") {
-            row.style.display = "table-row";
-        } else {
-            row.style.display = row.classList.contains(status) ? "table-row" : "none";
-        }
-    });
-}
-</script>
 
 <!-- Chatbot -->
 <link rel="stylesheet" href="chatbot.css">
