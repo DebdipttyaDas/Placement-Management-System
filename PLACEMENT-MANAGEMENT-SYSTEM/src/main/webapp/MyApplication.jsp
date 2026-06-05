@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="MyApplication.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <script src="MyApplication.js"></script>
 
 </head>
@@ -153,6 +154,7 @@
                             <td><span class="status complete">Completed</span></td>
                             <td><button class="btn">View Details</button></td>
                         </tr>
+                        
                         <tr class="row applied">
                 <td class="company">
                     <div><b>Accenture</b></div>
@@ -163,6 +165,7 @@
                 <td><span class="status applied">Applied</span></td>
                 <td><button class="btn">View Details</button></td>
             </tr>
+            
         <tr class="row process">
                 <td class="company">
                     <div>
@@ -175,6 +178,7 @@
                 <td><span class="status process">In Process</span></td>
                 <td><button class="btn">View Details</button></td>
             </tr>
+            
             <tr class="row applied">
                 <td class="company">
                     <div><b>Cognizant</b></div>
@@ -185,7 +189,7 @@
                 <td><span class="status applied">Applied</span></td>
                 <td><button class="btn">View Details</button></td>
             </tr>                
-                           </tbody>
+                </tbody>
                 </table>
 
             </div>
