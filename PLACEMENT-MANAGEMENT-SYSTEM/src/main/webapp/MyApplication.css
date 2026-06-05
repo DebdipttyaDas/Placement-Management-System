@@ -839,12 +839,12 @@ tbody tr {
 
     /* FIX: Force main content area and top-bar to start exactly where the narrow sidebar ends */
     .main-area {
-        margin-left: 80px !important; 
+        margin-left: 100px !important; 
         width: calc(100% - 80px) !important;
     }
 
     .top-bar {
-        left: 100px !important;
+        left: 105px !important;
         width: calc(100% - 80px) !important;
         padding: 15px 20px !important;
     }
