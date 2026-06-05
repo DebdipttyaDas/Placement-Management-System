@@ -38,6 +38,7 @@
             <div class="main">
             
             <div class="top-search-section">
+            
                 <!-- SEARCH BAR -->
                 <div class="search-box">
                     <input type="text" placeholder="Search for job titles or companies...">
@@ -55,7 +56,7 @@
 
                 <!-- JOB CARDS -->
                 <div class="job-cards" id="job-cards-container">
-                    <!-- Jobs will be loaded here dynamically -->
+                 
                     <div style="color: #333; text-align: center; width: 100%;">Loading jobs...</div>
                 </div>
                 
@@ -137,5 +138,4 @@
         </script>
 
     </body>
-
     </html>
