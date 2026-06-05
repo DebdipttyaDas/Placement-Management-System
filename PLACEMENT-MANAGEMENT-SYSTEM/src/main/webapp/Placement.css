@@ -64,7 +64,7 @@ body {
     width: calc(100% - 220px);
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* ← change this */
+    justify-content: flex-end; 
     padding: 0 20px;
     box-sizing: border-box;
     z-index: 1000;
@@ -249,6 +249,7 @@ body {
 /*PLACEMENTS / JOB BOARDS RESPONSIVE DESIGN*/
 
 /* Tablets and Smaller Desktops (Max width: 1024px) */
+
 @media screen and (max-width: 1024px) {
  
     .sidebar {
