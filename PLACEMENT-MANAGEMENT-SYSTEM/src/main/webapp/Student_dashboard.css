@@ -1,8 +1,6 @@
-html,
-body {
-    margin: 0;
-    min-height: 100vh;
-    overflow-x: hidden;
+html {
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* ===== RESET ===== */
@@ -10,6 +8,8 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #f4f6f9;
+  overflow: hidden;
+  height: 100vh;
 }
 
 /* ===== DASHBOARD LAYOUT ===== */
@@ -55,13 +55,6 @@ body {
   background: rgba(11, 0, 0, 0.2);
 }
 
-.sidebar{
-    width:100% !important;
-}
-
-.main-area{
-    width:100% !important;
-}
 /* ===== MAIN AREA ===== */
 .main-area {
   margin-left: 220px;
@@ -739,73 +732,74 @@ body {
 }
 
 
-/* Mobile Responsive */
-@media screen and (max-width: 768px) {
+/* Mobile */
+@media (max-width: 768px) {
 
-    .dashboard-container{
-        flex-direction: column;
-    }
-
-    .sidebar{
-        width: 100%;
-        height: auto;
-        min-height: auto;
+    .content {
         padding: 15px;
     }
 
-    .sidebar ul{
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        flex-wrap: wrap;
+    .welcome-box {
+        padding: 20px;
     }
 
-    .main-area{
-        width: 100%;
-        margin-left: 0;
+    .welcome-box h1 {
+        font-size: 28px;
     }
 
-    .content{
-        padding: 10px;
-    }
-
-    .welcome-box{
+    .welcome-actions {
         flex-direction: column;
-        width: 100%;
+        gap: 10px;
     }
 
-    .readiness-box{
+    .btn-apply,
+    .btn-resume {
         width: 100%;
-        margin-top: 15px;
+        text-align: center;
     }
 
-    .stats{
-        display: grid;
+    .stats {
         grid-template-columns: 1fr;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    .deadline-item,
+    .interview-card {
+        flex-direction: column;
+        align-items: flex-start;
         gap: 10px;
     }
 
-    .dashboard-widgets{
-        flex-direction: column;
-    }
-
-    .widget-col-left,
-    .widget-col-right{
+    .dl-action,
+    .ic-actions {
         width: 100%;
     }
 
-    .card,
-    .widget-box,
-    .interview-card{
+    .btn-join {
         width: 100%;
-        box-sizing: border-box;
     }
 
-    img{
-        max-width: 100%;
+    .slideshow {
         height: auto;
     }
+
+    .slide img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    #chatbot-container {
+        width: 95%;
+        right: 10px;
+        left: 10px;
+        bottom: 80px;
+    }
 }
+
 
 /* Small Mobile */
 @media (max-width: 480px) {
