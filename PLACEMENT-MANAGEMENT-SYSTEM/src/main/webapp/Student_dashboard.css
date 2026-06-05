@@ -679,4 +679,167 @@ body {
   background: white;
 }
 
+/* ==========================================================================
+   ===== FIXED RESPONSIVE MEDIA QUERIES =====
+   ========================================================================== */
+
+/* ----- Tablets & Small Desktops (Max width: 1024px) ----- */
+@media screen and (max-width: 1024px) {
+  .welcome-box {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .welcome-text-section {
+    max-width: 100%;
+  }
+
+  .readiness-box {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .dashboard-widgets {
+    grid-template-columns: 1fr; /* Stack dashboard grid into a single column */
+  }
+}
+
+/* ----- Mobile Devices (Max width: 768px) ----- */
+@media screen and (max-width: 768px) {
+  /* Allow the screen to scroll naturally if content overflows */
+  html, body, .dashboard-container {
+    overflow: auto !important;
+    height: auto !important;
+  }
+
+  /* 1. Make the sidebar super narrow on mobile */
+  .sidebar {
+    width: 70px !important; /* Narrow width so it doesn't squish the body */
+    padding: 10px 5px !important;
+    text-align: center;
+  }
+
+  /* Hide the main text title ("Student Dashboard") to save space */
+  .sidebar h2 {
+    font-size: 11px;
+    word-break: break-all;
+    margin-bottom: 15px;
+  }
+
+  /* Adjust navigation list for tiny square buttons */
+  .sidebar ul li {
+    padding: 10px 5px !important;
+    margin: 8px 0 !important;
+    font-size: 11px; /* Smaller text to fit inside 70px */
+    text-align: center;
+    word-wrap: break-word;
+  }
+
+  /* 2. Adjust Main Body to sit perfectly next to the 70px sidebar */
+  .main-area {
+    margin-left: 70px !important; /* Matches mobile sidebar width */
+    width: calc(100% - 70px) !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .content {
+    padding: 12px;
+  }
+
+  /* ----- Stack Content Components Vertically on Mobile ----- */
+  .welcome-box {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+    padding: 20px;
+  }
+
+  .welcome-text-section {
+    max-width: 100%;
+  }
+
+  .welcome-text-section h1 {
+    font-size: 22px;
+  }
+
+  .welcome-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-apply-wrapper, .btn-apply, .btn-resume {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .readiness-box {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Stack the green counter cards vertically */
+  .stats {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Split the dashboard widgets grid into a single column layout */
+  .dashboard-widgets {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .deadline-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dl-action {
+    align-items: flex-start;
+    width: 100%;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    padding-top: 8px;
+  }
+
+  .slideshow {
+    height: 180px;
+  }
+}
+/* ----- Extra Small Mobile Viewports (Max width: 480px) ----- */
+@media screen and (max-width: 480px) {
+  .welcome-text-section h1 {
+    font-size: 20px;
+  }
+  
+  .sidebar ul li {
+    max-width: 100%; /* Let individual menu links span full width if needed */
+  }
+
+  .ic-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .ic-company {
+    font-size: 18px;
+  }
+
+  .ic-actions {
+    flex-direction: column;
+  }
+
+  .btn-more {
+    width: 100%;
+    padding: 12px;
+  }
 }
