@@ -795,17 +795,17 @@ tbody tr {
         width: 100%;
     }
 
-    /* 4. DATA TABLE HOUSING: Force independent horizontal scroll without breaking the dashboard width */
+
     .table-container {
         margin: 20px 0;
         padding: 15px;
         width: 100%;
-        overflow-x: auto; /* Adds clean horizontal swipe gesture for table on tiny screens */
+        overflow-x: auto; 
         -webkit-overflow-scrolling: touch;
     }
 
     table {
-        min-width: 600px; /* Ensures columns maintain structural spacing when sliding */
+        min-width: 600px; 
     }
     
     th, td {
@@ -813,13 +813,11 @@ tbody tr {
     }
 }
 
-/* ==========================================================================
-   ===== FIXED LAYOUT RESPONSIVE SYSTEM =====
-   ========================================================================== */
+/* FIXED LAYOUT RESPONSIVE SYSTEM */
 
-/* ----- Tablets and Laptops (Max width: 1024px) ----- */
+/*Tablets and Laptops (Max width: 1024px) */
 @media screen and (max-width: 1024px) {
-    /* Set a explicit narrow width for the sidebar */
+ 
     .sidebar {
         width: 105px !important;
         padding: 15px 5px !important;
@@ -837,7 +835,7 @@ tbody tr {
         padding: 8px 4px !important;
     }
 
-    /* FIX: Force main content area and top-bar to start exactly where the narrow sidebar ends */
+   
     .main-area {
         margin-left: 100px !important; 
         width: calc(100% - 100px) !important;
@@ -849,7 +847,7 @@ tbody tr {
         padding: 15px 20px !important;
     }
 
-    /* Re-map Stats Layout into a 2x2 grid so cards don't break boundaries */
+   
     .stats, .stats-container {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
@@ -858,19 +856,19 @@ tbody tr {
     }
 }
 
-/* ----- Mobile Devices (Max width: 768px) ----- */
+/* Mobile Devices (Max width: 768px)*/
 @media screen and (max-width: 768px) {
     body {
         overflow-x: hidden !important;
     }
 
-    /* Turn layout components into an absolute top-to-bottom vertical stack */
+   
     .dashboard-container {
         flex-direction: column !important;
         height: auto !important;
     }
 
-    /* Convert Sidebar into a clean horizontal top header */
+ 
     .sidebar {
         position: relative !important;
         width: 100% !important;
@@ -896,7 +894,7 @@ tbody tr {
         font-size: 13px !important;
     }
 
-    /* Reset layout margins entirely since the sidebar has moved out of the way */
+ 
     .main-area {
         margin-left: 0 !important;
         width: 100% !important;
@@ -911,16 +909,16 @@ tbody tr {
     }
 
     .content {
-        padding: 25px 15px !important; /* Removes the heavy desktop top spacing */
+        padding: 25px 15px !important; 
     }
 
-    /* Collapse stats cards into a clean vertical row list */
+
     .stats, .stats-container {
         grid-template-columns: 1fr !important;
         gap: 12px !important;
     }
 
-    /* Structure search controls area horizontally on mobile screen bounds */
+
     .table-header {
         flex-direction: column !important;
         align-items: stretch !important;
@@ -936,7 +934,7 @@ tbody tr {
         width: 100% !important;
     }
 
-    /* Safely allow data table container swipe navigation gestures without breaking page alignment */
+  
     .table-container {
         margin: 20px 0 !important;
         padding: 10px !important;
@@ -946,6 +944,6 @@ tbody tr {
     }
 
     table {
-        min-width: 600px !important; /* Retains text columns visibility ratio on tiny screens */
+        min-width: 600px !important; 
     }
 }
