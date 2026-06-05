@@ -679,10 +679,6 @@ body {
   background: white;
 }
 
-/* ==========================================================================
-   ===== FIXED RESPONSIVE MEDIA QUERIES =====
-   ========================================================================== */
-
 /* ----- Tablets & Small Desktops (Max width: 1024px) ----- */
 @media screen and (max-width: 1024px) {
   .welcome-box {
@@ -701,48 +697,48 @@ body {
   }
 
   .dashboard-widgets {
-    grid-template-columns: 1fr; /* Stack dashboard grid into a single column */
+    grid-template-columns: 1fr;
   }
 }
 
 /* ----- Mobile Devices (Max width: 768px) ----- */
 @media screen and (max-width: 768px) {
-  /* Allow the screen to scroll naturally if content overflows */
+ 
   html, body, .dashboard-container {
     overflow: auto !important;
     height: auto !important;
   }
 
-  /* 1. Make the sidebar super narrow on mobile */
+  
   .sidebar {
-    width: 80px !important; /* Narrow width so it doesn't squish the body */
+    width: 80px !important; 
     padding: 10px 5px !important;
     text-align: center;
   }
 
-  /* Hide the main text title ("Student Dashboard") to save space */
+  
 .sidebar h2 {
     font-size: 11px;
     margin-bottom: 15px;
     display: flex;
-    flex-direction: column; /* Stacks the words vertically */
-    align-items: center;    /* Keeps them centered in the narrow sidebar */
+    flex-direction: column; 
+    align-items: center;    
     text-align: center;
-    line-height: 1.3;       /* Adds a comfortable spacing between the two lines */
+    line-height: 1.3;      
   }
 
-  /* Adjust navigation list for tiny square buttons */
+
   .sidebar ul li {
     padding: 10px 5px !important;
     margin: 8px 0 !important;
-    font-size: 11px; /* Smaller text to fit inside 70px */
+    font-size: 11px; 
     text-align: center;
     word-wrap: break-word;
   }
 
-  /* 2. Adjust Main Body to sit perfectly next to the 70px sidebar */
+  
   .main-area {
-    margin-left: 70px !important; /* Matches mobile sidebar width */
+    margin-left: 70px !important; 
     width: calc(100% - 70px) !important;
     height: auto !important;
     overflow: visible !important;
@@ -752,7 +748,6 @@ body {
     padding: 12px;
   }
 
-  /* ----- Stack Content Components Vertically on Mobile ----- */
   .welcome-box {
     flex-direction: column;
     align-items: stretch;
@@ -785,7 +780,7 @@ body {
     box-sizing: border-box;
   }
 
-  /* Stack the green counter cards vertically */
+
   .stats {
     flex-direction: column;
     gap: 12px;
@@ -796,7 +791,7 @@ body {
     box-sizing: border-box;
   }
 
-  /* Split the dashboard widgets grid into a single column layout */
+  
   .dashboard-widgets {
     grid-template-columns: 1fr;
     gap: 15px;
@@ -825,7 +820,7 @@ body {
   }
   
   .sidebar ul li {
-    max-width: 100%; /* Let individual menu links span full width if needed */
+    max-width: 100%;
   }
 
   .ic-header {
