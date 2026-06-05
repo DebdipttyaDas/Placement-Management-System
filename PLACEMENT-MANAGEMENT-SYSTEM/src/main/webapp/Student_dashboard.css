@@ -732,74 +732,73 @@ body {
 }
 
 
-/* Mobile */
-@media (max-width: 768px) {
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
 
-    .content {
+    .dashboard-container{
+        flex-direction: column;
+    }
+
+    .sidebar{
+        width: 100%;
+        height: auto;
+        min-height: auto;
         padding: 15px;
     }
 
-    .welcome-box {
-        padding: 20px;
-    }
-
-    .welcome-box h1 {
-        font-size: 28px;
-    }
-
-    .welcome-actions {
-        flex-direction: column;
+    .sidebar ul{
+        display: flex;
+        justify-content: center;
         gap: 10px;
+        flex-wrap: wrap;
     }
 
-    .btn-apply,
-    .btn-resume {
+    .main-area{
         width: 100%;
-        text-align: center;
+        margin-left: 0;
     }
 
-    .stats {
+    .content{
+        padding: 10px;
+    }
+
+    .welcome-box{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .readiness-box{
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .stats{
+        display: grid;
         grid-template-columns: 1fr;
-    }
-
-    .card {
-        width: 100%;
-    }
-
-    .deadline-item,
-    .interview-card {
-        flex-direction: column;
-        align-items: flex-start;
         gap: 10px;
     }
 
-    .dl-action,
-    .ic-actions {
+    .dashboard-widgets{
+        flex-direction: column;
+    }
+
+    .widget-col-left,
+    .widget-col-right{
         width: 100%;
     }
 
-    .btn-join {
+    .card,
+    .widget-box,
+    .interview-card{
         width: 100%;
+        box-sizing: border-box;
     }
 
-    .slideshow {
+    img{
+        max-width: 100%;
         height: auto;
-    }
-
-    .slide img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-    }
-
-    #chatbot-container {
-        width: 95%;
-        right: 10px;
-        left: 10px;
-        bottom: 80px;
     }
 }
-
 
 /* Small Mobile */
 @media (max-width: 480px) {
