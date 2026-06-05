@@ -108,7 +108,7 @@ body {
     cursor: pointer;
 }
 
-/* ===== Content ===== */
+/* Content */
 .content {
     padding: 110px 25px 25px;
 }
@@ -122,7 +122,7 @@ body {
     margin-bottom: 20px;
 }
 
-/* ===== Stats ===== */
+/* Stats */
 .stats {
     display: flex;
     gap: 20px;
