@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="CompanyProfile.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="CompanyProfile.js"></script>
 </head>
 
 <body>
@@ -234,41 +235,5 @@
     </div>
 
 
-</body>
-</html>
-
-<script>
-    function openModal() {
-        const modal = document.getElementById('companyModal');
-        modal.classList.add('active');
-        
-    }
-
-    function closeModal() {
-        const modal = document.getElementById('companyModal');
-        modal.classList.remove('active');
-        
-    }
-
-    function handleOverlayClick(e) {
-        if (e.target === document.getElementById('companyModal')) {
-            closeModal();
-        }
-    }
-
-    // Close on Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeModal();
-    });
-
-    // Back to top button
-    window.addEventListener('scroll', function() {
-        const btn = document.getElementById('backToTop');
-        btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
-    });
-    document.getElementById('backToTop').addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-</script>
 </body>
 </html>
