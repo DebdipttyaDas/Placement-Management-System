@@ -686,7 +686,7 @@ tbody tr {
 @media screen and (max-width: 1024px) {
     /* 1. STRUCTURAL PARTS: Shrink the fixed widths slightly for medium viewports */
     .sidebar {
-        width: 100px;
+        width: 105px;
         padding: 15px 5px;
     }
     
@@ -728,7 +728,7 @@ tbody tr {
     /* Move Sidebar to the top layout block */
     .sidebar {
         position: relative;
-        width: 100%;
+        width: 105%;
         height: auto;
         padding: 15px;
     }
