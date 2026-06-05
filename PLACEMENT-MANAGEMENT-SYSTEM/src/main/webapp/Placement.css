@@ -248,7 +248,7 @@ body {
 
 /*PLACEMENTS / JOB BOARDS RESPONSIVE DESIGN*/
 
-/* ----- Tablets and Smaller Desktops (Max width: 1024px) ----- */
+/* Tablets and Smaller Desktops (Max width: 1024px) */
 @media screen and (max-width: 1024px) {
  
     .sidebar {
@@ -262,7 +262,7 @@ body {
     }
 }
 
-/* ----- Mobile Devices (Max width: 768px) ----- */
+/* Mobile Devices (Max width: 768px) */
 @media screen and (max-width: 768px) {
 
     body {
