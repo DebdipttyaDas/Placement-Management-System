@@ -343,7 +343,7 @@ body {
     }
 }
 
-/* ----- Tiny Screens / Old Mobile Devices (Max width: 480px) ----- */
+/*Tiny Screens / Old Mobile Devices (Max width: 480px) */
 @media screen and (max-width: 480px) {
     .job-filters button {
         width: 100%; 
