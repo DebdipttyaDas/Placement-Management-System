@@ -245,3 +245,109 @@ body {
     background: linear-gradient(135deg, #0ce, #004494);
     transform: scale(1.02);
 }
+
+/* ==========================================================================
+   ===== PLACEMENTS / JOB BOARDS RESPONSIVE DESIGN =====
+   ========================================================================== */
+
+/* ----- Tablets and Smaller Desktops (Max width: 1024px) ----- */
+@media screen and (max-width: 1024px) {
+    /* Narrow down the sidebar slightly to give content more breathing room */
+    .sidebar {
+        width: 180px;
+        padding: 15px;
+    }
+
+    .topbar, .main {
+        left: 180px;
+        width: calc(100% - 180px);
+    }
+}
+
+/* ----- Mobile Devices (Max width: 768px) ----- */
+@media screen and (max-width: 768px) {
+    /* Break out of absolute tracking to let the viewport handle the layout natively */
+    body {
+        overflow: auto !important;
+    }
+
+    /* 1. Reset Topbar & Sidebar layout stacks */
+    .sidebar {
+        position: static; /* Removes fixed pinning from the left */
+        width: 100%;
+        height: auto;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    .sidebar h2 {
+        margin-bottom: 15px;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    /* Turn the sidebar items into horizontal layout pills */
+    .sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        margin: 0;
+    }
+
+    .sidebar ul li {
+        margin-bottom: 0;
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    /* 2. Topbar adjustments */
+    .topbar {
+        position: static; /* Keeps it naturally stacked under or above content */
+        width: 100%;
+        height: 50px;
+        justify-content: center; /* Centers profile icons on mobile */
+        padding: 0 15px;
+    }
+
+    /* 3. Main content area recovery */
+    .main {
+        position: static; /* Let content flow down vertically */
+        width: 100%;
+        height: auto;
+        padding: 15px;
+        overflow: visible;
+    }
+
+    /* 4. Form Controls & Search Scaling */
+    .search-box {
+        padding: 15px 0;
+    }
+
+    .search-box input {
+        width: 100%; /* Force search bars to expand to readable boundaries */
+    }
+
+    .job-search input {
+        width: 100%;
+    }
+
+    /* 5. Job Cards Alignment */
+    .job-cards {
+        margin-top: 30px;
+        gap: 20px;
+    }
+
+    .job-card {
+        width: 100%; /* Let cards expand to the margins cleanly */
+        max-width: 400px; /* Stop cards from stretching to look stretched out */
+    }
+}
+
+/* ----- Tiny Screens / Old Mobile Devices (Max width: 480px) ----- */
+@media screen and (max-width: 480px) {
+    .job-filters button {
+        width: 100%; /* Stacks filter parameters to prevent awkward cropping */
+        text-align: center;
+    }
+}
