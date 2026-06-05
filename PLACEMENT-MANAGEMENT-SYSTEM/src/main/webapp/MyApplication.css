@@ -222,7 +222,7 @@ tbody tr {
     border-bottom: 1px solid #eee;
 }
 
-/* Make all table text black */
+
 .table-container th{
     color: white;
 }
@@ -277,13 +277,12 @@ tbody tr {
     color: white;
 }
 
-/* ==========================================================================
-   ===== CORE DASHBOARD COMPONENTS RESPONSIVE SYSTEM =====
-   ========================================================================== */
+/* CORE DASHBOARD COMPONENTS RESPONSIVE SYSTEM */
 
-/* ----- Tablets and Smaller Desktops (Max width: 1024px) ----- */
+/* Tablets and Smaller Desktops (Max width: 1024px) */
+
 @media screen and (max-width: 1024px) {
-    /* 1. STRUCTURAL PARTS: Shrink the fixed widths slightly for medium viewports */
+   
     .sidebar {
         width: 80px;
         padding: 15px 5px;
@@ -307,7 +306,7 @@ tbody tr {
         width: calc(100% - 80px);
     }
 
-    /* 2. STATS CONTAINER: Break from a wide row into a 2x2 grid matrix */
+
     .stats, .stats-container {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -316,15 +315,15 @@ tbody tr {
     }
 }
 
-/* ----- Mobile Smart Phones (Max width: 768px) ----- */
+/*Mobile Smart Phones (Max width: 768px) */
 @media screen and (max-width: 768px) {
-    /* 1. MAIN CONTAINER BODY PARTS */
+
     .dashboard-container {
         flex-direction: column;
         height: auto;
     }
 
-    /* Move Sidebar to the top layout block */
+
     .sidebar {
         position: relative;
         width: 100%;
@@ -349,7 +348,7 @@ tbody tr {
         padding: 8px 12px;
     }
 
-    /* Return Main Content view track back to regular screen flow */
+   
     .main-area {
         width: 100%;
         min-height: auto;
@@ -364,10 +363,10 @@ tbody tr {
     }
 
     .content {
-        padding: 25px 15px; /* Removes massive 110px top spacing padding on mobile */
+        padding: 25px 15px; 
     }
 
-    /* 2. STATS CONTAINER: Collapse cards down into a clean full-width vertical stack */
+ 
     .stats, .stats-container {
         grid-template-columns: 1fr;
         gap: 12px;
@@ -378,7 +377,7 @@ tbody tr {
         width: 100%;
     }
 
-    /* 3. CONTROLS CONTAINER: Split header title and search inputs vertically */
+  
     .table-header {
         flex-direction: column;
         align-items: stretch;
@@ -394,30 +393,28 @@ tbody tr {
         width: 100%;
     }
 
-    /* 4. DATA TABLE HOUSING: Force independent horizontal scroll without breaking the dashboard width */
+  
     .table-container {
         margin: 20px 0;
         padding: 15px;
         width: 100%;
-        overflow-x: auto; /* Adds clean horizontal swipe gesture for table on tiny screens */
+        overflow-x: auto; 
         -webkit-overflow-scrolling: touch;
     }
 
     table {
-        min-width: 600px; /* Ensures columns maintain structural spacing when sliding */
+        min-width: 600px; 
     }
     
     th, td {
         padding: 12px 10px;
     }
 }
-/* ==========================================================================
-   ===== CORE DASHBOARD COMPONENTS RESPONSIVE SYSTEM =====
-   ========================================================================== */
+/*CORE DASHBOARD COMPONENTS RESPONSIVE SYSTEM */
 
 /* ----- Tablets and Smaller Desktops (Max width: 1024px) ----- */
 @media screen and (max-width: 1024px) {
-    /* 1. STRUCTURAL PARTS: Shrink the fixed widths slightly for medium viewports */
+  
     .sidebar {
         width: 80px;
         padding: 15px 5px;
@@ -441,7 +438,7 @@ tbody tr {
         width: calc(100% - 80px);
     }
 
-    /* 2. STATS CONTAINER: Break from a wide row into a 2x2 grid matrix */
+ 
     .stats, .stats-container {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -450,7 +447,7 @@ tbody tr {
     }
 }
 
-/* ----- Mobile Smart Phones (Max width: 768px) ----- */
+/* Mobile Smart Phones (Max width: 768px) */
 @media screen and (max-width: 768px) {
     /* 1. MAIN CONTAINER BODY PARTS */
     .dashboard-container {
@@ -458,7 +455,7 @@ tbody tr {
         height: auto;
     }
 
-    /* Move Sidebar to the top layout block */
+ 
     .sidebar {
         position: relative;
         width: 100%;
@@ -483,7 +480,7 @@ tbody tr {
         padding: 8px 12px;
     }
 
-    /* Return Main Content view track back to regular screen flow */
+ 
     .main-area {
         width: 100%;
         min-height: auto;
@@ -498,10 +495,10 @@ tbody tr {
     }
 
     .content {
-        padding: 25px 15px; /* Removes massive 110px top spacing padding on mobile */
+        padding: 25px 15px;
     }
 
-    /* 2. STATS CONTAINER: Collapse cards down into a clean full-width vertical stack */
+
     .stats, .stats-container {
         grid-template-columns: 1fr;
         gap: 12px;
@@ -512,7 +509,7 @@ tbody tr {
         width: 100%;
     }
 
-    /* 3. CONTROLS CONTAINER: Split header title and search inputs vertically */
+ 
     .table-header {
         flex-direction: column;
         align-items: stretch;
@@ -528,29 +525,28 @@ tbody tr {
         width: 100%;
     }
 
-    /* 4. DATA TABLE HOUSING: Force independent horizontal scroll without breaking the dashboard width */
+   
     .table-container {
         margin: 20px 0;
         padding: 15px;
         width: 100%;
-        overflow-x: auto; /* Adds clean horizontal swipe gesture for table on tiny screens */
+        overflow-x: auto; 
         -webkit-overflow-scrolling: touch;
     }
 
     table {
-        min-width: 600px; /* Ensures columns maintain structural spacing when sliding */
+        min-width: 600px; 
     }
     
     th, td {
         padding: 12px 10px;
     }
-}/* ==========================================================================
-   ===== CORE DASHBOARD COMPONENTS RESPONSIVE SYSTEM =====
-   ========================================================================== */
+}
+/* CORE DASHBOARD COMPONENTS RESPONSIVE SYSTEM */
 
-/* ----- Tablets and Smaller Desktops (Max width: 1024px) ----- */
+/*Tablets and Smaller Desktops (Max width: 1024px)*/
 @media screen and (max-width: 1024px) {
-    /* 1. STRUCTURAL PARTS: Shrink the fixed widths slightly for medium viewports */
+  
     .sidebar {
         width: 80px;
         padding: 15px 5px;
@@ -574,7 +570,7 @@ tbody tr {
         width: calc(100% - 80px);
     }
 
-    /* 2. STATS CONTAINER: Break from a wide row into a 2x2 grid matrix */
+
     .stats, .stats-container {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -585,7 +581,7 @@ tbody tr {
 
 /* ----- Mobile Smart Phones (Max width: 768px) ----- */
 @media screen and (max-width: 768px) {
-    /* 1. MAIN CONTAINER BODY PARTS */
+   
     .dashboard-container {
         flex-direction: column;
         height: auto;
@@ -616,7 +612,7 @@ tbody tr {
         padding: 8px 12px;
     }
 
-    /* Return Main Content view track back to regular screen flow */
+   
     .main-area {
         width: 100%;
         min-height: auto;
@@ -631,10 +627,9 @@ tbody tr {
     }
 
     .content {
-        padding: 25px 15px; /* Removes massive 110px top spacing padding on mobile */
+        padding: 25px 15px;
     }
 
-    /* 2. STATS CONTAINER: Collapse cards down into a clean full-width vertical stack */
     .stats, .stats-container {
         grid-template-columns: 1fr;
         gap: 12px;
@@ -645,7 +640,7 @@ tbody tr {
         width: 100%;
     }
 
-    /* 3. CONTROLS CONTAINER: Split header title and search inputs vertically */
+ 
     .table-header {
         flex-direction: column;
         align-items: stretch;
@@ -661,12 +656,12 @@ tbody tr {
         width: 100%;
     }
 
-    /* 4. DATA TABLE HOUSING: Force independent horizontal scroll without breaking the dashboard width */
+    
     .table-container {
         margin: 20px 0;
         padding: 15px;
         width: 100%;
-        overflow-x: auto; /* Adds clean horizontal swipe gesture for table on tiny screens */
+        overflow-x: auto; 
         -webkit-overflow-scrolling: touch;
     }
 
