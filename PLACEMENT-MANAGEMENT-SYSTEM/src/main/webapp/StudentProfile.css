@@ -534,27 +534,25 @@ body {
 }
 
 
-/* ==========================================================================
-   ===== LOGOUT BUTTON RESPONSIVE FIX =====
-   ========================================================================== */
+/* RESPONSIVE */
 
 @media screen and (max-width: 1024px) {
-    /* Ensure the sidebar card calculates its 100vh accurately including padding */
+   
     .sidebar-card {
         box-sizing: border-box;
         height: 100vh;
     }
 
-    /* Reduce the rigid desktop margin so it stops pushing the button off-screen */
+    
     .sidebar-card form {
-        margin-top: auto; /* Switches to a flexible dynamic push instead of 430px */
+        margin-top: auto; 
         padding-top: 20px;
     }
 
-    /* Keep the logout button pinned perfectly at the baseline */
+  
     .logout-btn {
-        margin-top: auto; /* Pushes the button cleanly to the bottom */
-        margin-bottom: 10px; /* Gives a tiny bit of breathing room at the screen edge */
-        flex-shrink: 0; /* Stops the button from squishing on short screens */
+        margin-top: auto; 
+        margin-bottom: 10px; 
+        flex-shrink: 0;
     }
 }
