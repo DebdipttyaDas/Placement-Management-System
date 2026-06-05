@@ -715,7 +715,7 @@ body {
 
   /* 1. Make the sidebar super narrow on mobile */
   .sidebar {
-    width: 70px !important; /* Narrow width so it doesn't squish the body */
+    width: 80px !important; /* Narrow width so it doesn't squish the body */
     padding: 10px 5px !important;
     text-align: center;
   }
