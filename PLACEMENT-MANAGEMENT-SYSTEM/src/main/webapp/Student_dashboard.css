@@ -721,10 +721,14 @@ body {
   }
 
   /* Hide the main text title ("Student Dashboard") to save space */
-  .sidebar h2 {
+.sidebar h2 {
     font-size: 11px;
-    word-break: break-all;
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: column; /* Stacks the words vertically */
+    align-items: center;    /* Keeps them centered in the narrow sidebar */
+    text-align: center;
+    line-height: 1.3;       /* Adds a comfortable spacing between the two lines */
   }
 
   /* Adjust navigation list for tiny square buttons */
