@@ -3,6 +3,14 @@
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
+<%
+    if (request.getAttribute("totalStudents") == null) {
+        request.getRequestDispatcher("AdminDashboardServlet").forward(request, response);
+        return;
+    }
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -55,26 +63,26 @@
     <section class="stats-container">
         <div class="stat-card">
             <h3>Total Students</h3>
-            <p class="count">1,200</p>
-            <span class="trend">+120 this month</span>
+            <p class="count"><%= request.getAttribute("totalStudents") %></p>
+            <span class="trend"><%= request.getAttribute("studentsTrend") %></span>
         </div>
 
         <div class="stat-card">
             <h3>Total Companies</h3>
-            <p class="count">45</p>
-            <span class="trend">+6 this month</span>
+            <p class="count"><%= request.getAttribute("totalCompanies") %></p>
+            <span class="trend"><%= request.getAttribute("companiesTrend") %></span>
         </div>
 
         <div class="stat-card">
             <h3>Active Jobs</h3>
-            <p class="count">120</p>
-            <span class="trend">+15 this month</span>
+            <p class="count"><%= request.getAttribute("activeJobs") %></p>
+            <span class="trend"><%= request.getAttribute("jobsTrend") %></span>
         </div>
 
         <div class="stat-card">
             <h3>Placed Students</h3>
-            <p class="count">300</p>
-            <span class="trend">+40 this month</span>
+            <p class="count"><%= request.getAttribute("placedStudents") %></p>
+            <span class="trend"><%= request.getAttribute("placedTrend") %></span>
         </div>
     </section>
 
@@ -125,39 +133,31 @@
             </thead>
             <tbody>
                 <%
-                    try {
-                        Class.forName("com.mysql.cj.jdbc.Driver");
-                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/placement_management", "root", "root");
-                        PreparedStatement ps = conn.prepareStatement("SELECT id, company_name, industry, email FROM companies WHERE status = 'PENDING'");
-                        ResultSet rs = ps.executeQuery();
-                        boolean hasPending = false;
-                        while(rs.next()) {
+                    List<Map<String, String>> pendingCompanies = (List<Map<String, String>>) request.getAttribute("pendingCompanies");
+                    boolean hasPending = false;
+                    if (pendingCompanies != null && !pendingCompanies.isEmpty()) {
+                        for (Map<String, String> company : pendingCompanies) {
                             hasPending = true;
                 %>
                 <tr>
-                    <td><%= rs.getString("company_name") %></td>
-                    <td><%= rs.getString("industry") %></td>
-                    <td><%= rs.getString("email") %></td>
+                    <td><%= company.get("company_name") %></td>
+                    <td><%= company.get("industry") %></td>
+                    <td><%= company.get("email") %></td>
                     <td>
                         <form action="ApproveCompanyServlet" method="post" style="display:inline;">
-                            <input type="hidden" name="companyId" value="<%= rs.getInt("id") %>">
+                            <input type="hidden" name="companyId" value="<%= company.get("id") %>">
                             <button type="submit" style="padding:5px 10px; background-color:#28a745; color:white; border:none; border-radius:3px; cursor:pointer;">Approve</button>
                         </form>
                     </td>
                 </tr>
                 <%      }
-                        if (!hasPending) {
+                    }
+                    if (!hasPending) {
                 %>
                 <tr>
                     <td colspan="4" style="text-align:center;">No pending approvals</td>
                 </tr>
                 <%
-                        }
-                        rs.close();
-                        ps.close();
-                        conn.close();
-                    } catch(Exception e) {
-                        out.println("<tr><td colspan='4'>Error loading pending companies: " + e.getMessage() + "</td></tr>");
                     }
                 %>
             </tbody>
@@ -181,6 +181,22 @@
             </thead>
 
             <tbody>
+                <%
+                    List<Map<String, String>> upcomingDrives = (List<Map<String, String>>) request.getAttribute("upcomingDrives");
+                    if (upcomingDrives != null && !upcomingDrives.isEmpty()) {
+                        for (Map<String, String> drive : upcomingDrives) {
+                            String statusClass = "SCHEDULED".equalsIgnoreCase(drive.get("status")) ? "status-scheduled" : "status-upcoming";
+                %>
+                <tr>
+                    <td><%= drive.get("company_name") %></td>
+                    <td><%= drive.get("interview_round") %></td>
+                    <td><%= drive.get("interview_date") %></td>
+                    <td><span class="<%= statusClass %>"><%= drive.get("status") %></span></td>
+                </tr>
+                <%
+                        }
+                    } else {
+                %>
                 <tr>
                     <td>TCS</td>
                     <td>Software Engineer</td>
@@ -218,6 +234,9 @@
                         <td>20 Jun, 2024</td>
                         <td><span class="status-upcoming">Upcoming</span></td>
                     </tr>
+                <%
+                    }
+                %>
             </tbody>
         </table>
     </section>
@@ -231,7 +250,28 @@
         </div>
 
         <div class="notification-list">
-
+            <%
+                List<Map<String, String>> notifications = (List<Map<String, String>>) request.getAttribute("notifications");
+                if (notifications != null && !notifications.isEmpty()) {
+                    for (Map<String, String> note : notifications) {
+                        String iconClass = "fa fa-bell";
+                        if ("student".equals(note.get("type"))) {
+                            iconClass = "fa fa-user";
+                        } else if ("building".equals(note.get("type"))) {
+                            iconClass = "fa fa-building";
+                        }
+            %>
+            <div class="notification-card">
+                <i class="<%= iconClass %>"></i>
+                <div>
+                    <p><%= note.get("message") %></p>
+                    <span><%= note.get("time") %></span>
+                </div>
+            </div>
+            <%
+                    }
+                } else {
+            %>
             <div class="notification-card">
                 <i class="fa fa-bell"></i>
                 <div>
@@ -248,14 +288,16 @@
                 </div>
             </div>
 
-<div class="notification-card">
-            <i class="fa fa-building"></i>
-            <div>
-                <p>Microsoft scheduled a drive</p>
-                <span>Yesterday</span>
+            <div class="notification-card">
+                <i class="fa fa-building"></i>
+                <div>
+                    <p>Microsoft scheduled a drive</p>
+                    <span>Yesterday</span>
+                </div>
             </div>
-        </div>
-
+            <%
+                }
+            %>
         </div>
 
     </section>
@@ -263,6 +305,14 @@
 </main>
 
 <!-- Chart JS -->
+<script>
+    var barChartLabels = <%= request.getAttribute("barChartLabels") %>;
+    var barChartData = <%= request.getAttribute("barChartData") %>;
+    var pieChartLabels = <%= request.getAttribute("pieChartLabels") %>;
+    var pieChartData = <%= request.getAttribute("pieChartData") %>;
+    var lineChartLabels = <%= request.getAttribute("lineChartLabels") %>;
+    var lineChartData = <%= request.getAttribute("lineChartData") %>;
+</script>
 <script src="AdminDashboard.js"></script>
 
 <!-- Chatbot -->

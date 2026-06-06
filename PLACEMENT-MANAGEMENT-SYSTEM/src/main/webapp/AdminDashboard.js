@@ -12,11 +12,11 @@ document.addEventListener("DOMContentLoaded", function () {
             type: "bar",
 
             data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                labels: typeof barChartLabels !== 'undefined' ? barChartLabels : ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
 
                 datasets: [{
                     label: "Placement %",
-                    data: [40, 55, 60, 50, 70, 80],
+                    data: typeof barChartData !== 'undefined' ? barChartData : [40, 55, 60, 50, 70, 80],
 
                     backgroundColor: [
                         "rgba(54,162,235,0.7)",
@@ -66,10 +66,10 @@ document.addEventListener("DOMContentLoaded", function () {
             type: "pie",
 
             data: {
-                labels: ["CSE", "BCA", "MCA", "BBA", "MBA", "IT", "ECE"],
+                labels: typeof pieChartLabels !== 'undefined' ? pieChartLabels : ["CSE", "BCA", "MCA", "BBA", "MBA", "IT", "ECE"],
 
                 datasets: [{
-                    data: [40, 25, 20, 15, 10, 12, 10],
+                    data: typeof pieChartData !== 'undefined' ? pieChartData : [40, 25, 20, 15, 10, 12, 10],
 
                     backgroundColor: [
                         "#FF6384",
@@ -111,12 +111,12 @@ document.addEventListener("DOMContentLoaded", function () {
             type: "line",
 
             data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                labels: typeof lineChartLabels !== 'undefined' ? lineChartLabels : ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
 
                 datasets: [{
                     label: "Jobs Posted",
 
-                    data: [10, 20, 15, 25, 30, 35],
+                    data: typeof lineChartData !== 'undefined' ? lineChartData : [10, 20, 15, 25, 30, 35],
 
                     borderColor: "rgba(75,192,192,1)",
 

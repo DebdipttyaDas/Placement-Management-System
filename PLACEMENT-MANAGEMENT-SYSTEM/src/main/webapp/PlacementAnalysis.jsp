@@ -76,7 +76,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <h2>Analytics Dashboard</h2>
         <p>GLOBAL PERFORMANCE</p>
 
-        <h2>98.4%</h2>
+        <h2 id="global-success-rate">98.4%</h2>
 
         <span>
             Placement success rate across all vertical disciplines for 2026.
@@ -94,61 +94,50 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                 Department Performance
             </h3>
 
-            <!-- ITEM -->
-            <div class="progress-item">
-
-                <p>
-                    Computer Science & IT
-                    <span>96%</span>
-                </p>
-
-                <div class="bar">
-                    <div style="width:96%"></div>
+            <div id="department-list">
+                <!-- ITEM -->
+                <div class="progress-item">
+                    <p>
+                        Computer Science & IT
+                        <span>96%</span>
+                    </p>
+                    <div class="bar">
+                        <div style="width:96%"></div>
+                    </div>
                 </div>
 
-            </div>
-
-            <!-- ITEM -->
-            <div class="progress-item">
-
-                <p>
-                    Business Management
-                    <span>88%</span>
-                </p>
-
-                <div class="bar">
-                    <div style="width:88%"></div>
+                <!-- ITEM -->
+                <div class="progress-item">
+                    <p>
+                        Business Management
+                        <span>88%</span>
+                    </p>
+                    <div class="bar">
+                        <div style="width:88%"></div>
+                    </div>
                 </div>
 
-            </div>
-
-            <!-- ITEM -->
-            <div class="progress-item">
-
-                <p>
-                    Architecture & Design
-                    
-                    <span>92%</span>
-                </p>
-
-                <div class="bar">
-                    <div style="width:92%"></div>
+                <!-- ITEM -->
+                <div class="progress-item">
+                    <p>
+                        Architecture & Design
+                        <span>92%</span>
+                    </p>
+                    <div class="bar">
+                        <div style="width:92%"></div>
+                    </div>
                 </div>
 
-            </div>
-
-            <!-- ITEM -->
-            <div class="progress-item">
-
-                <p>
-                    Social Sciences
-                    <span>74%</span>
-                </p>
-
-                <div class="bar">
-                    <div style="width:74%"></div>
+                <!-- ITEM -->
+                <div class="progress-item">
+                    <p>
+                        Social Sciences
+                        <span>74%</span>
+                    </p>
+                    <div class="bar">
+                        <div style="width:74%"></div>
+                    </div>
                 </div>
-
             </div>
 
         </div>
@@ -162,19 +151,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             <div class="pie-wrapper">
 
-                <canvas id="pieChart"></canvas>
+                   <canvas id="pieChart"></canvas>
 
-                <div class="center-text">
+                   <div class="center-text">
 
-                    <h2>1.2k</h2>
+                       <h2 id="placed-count">1.2k</h2>
 
-                    <p>Placed</p>
+                       <p>Placed</p>
 
-                </div>
+                   </div>
 
             </div>
 
-            <p class="sector-text">
+            <p class="sector-text" id="sector-text">
                 TECH 45% • FIN 30% • EDU 15% • OTHER 10%
             </p>
 
@@ -199,7 +188,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             </div>
 
-            <span class="growth">
+            <span class="growth" id="salary-growth">
                 +12.4% Annual Growth
             </span>
 
@@ -220,7 +209,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             <p class="text-sm text-gray-500">Highest CTC</p>
 
-            <h2 class="text-4xl font-bold mt-2">$194k</h2>
+            <h2 class="text-4xl font-bold mt-2" id="highest-ctc">$194k</h2>
 
         </div>
 
@@ -228,7 +217,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             <p class="text-sm text-gray-500">Pending Offers</p>
 
-            <h2 class="text-4xl font-bold mt-2">142</h2>
+            <h2 class="text-4xl font-bold mt-2" id="pending-offers">142</h2>
 
         </div>
 
@@ -236,7 +225,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             <p class="text-sm text-gray-500">New Companies</p>
 
-            <h2 class="text-4xl font-bold mt-2">+48</h2>
+            <h2 class="text-4xl font-bold mt-2" id="new-companies">+48</h2>
 
         </div>
 
@@ -244,7 +233,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             <p class="text-sm text-gray-500">Recruiter Rating</p>
 
-            <h2 class="text-4xl font-bold mt-2">4.9</h2>
+            <h2 class="text-4xl font-bold mt-2" id="recruiter-rating">4.9</h2>
 
         </div>
 

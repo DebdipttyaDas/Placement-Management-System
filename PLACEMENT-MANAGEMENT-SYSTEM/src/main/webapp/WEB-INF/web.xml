@@ -17,6 +17,16 @@
         <url-pattern>/AdminProfileServlet</url-pattern>
     </servlet-mapping>
 
+    <!-- Admin dashboard servlet -->
+    <servlet>
+        <servlet-name>AdminDashboardServlet</servlet-name>
+        <servlet-class>AdminDashboardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminDashboardServlet</servlet-name>
+        <url-pattern>/AdminDashboardServlet</url-pattern>
+    </servlet-mapping>
+
     <!-- Approve company servlet -->
     <servlet>
         <servlet-name>ApproveCompanyServlet</servlet-name>
