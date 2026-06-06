@@ -1,6 +1,15 @@
-// ================= STUDENT =================
-function showStudent() {
+// Add this helper at the top of Login.js
+function setActiveTab(activeId) {
+  document.getElementById('tabStudent').className = 'tab-btn tab-inactive font-bold transition-all duration-200';
+  document.getElementById('tabCompany').className = 'tab-btn tab-inactive font-bold transition-all duration-200';
+  document.getElementById(activeId).className = 'tab-btn tab-active font-bold transition-all duration-200';
+}
 
+// ================= STUDENT =================
+
+function showStudent() {
+	setActiveTab('tabStudent');
+	
   // Show student input
   document.getElementById("userInput").style.display = "block";
   document.getElementById("userLabel").style.display = "block";
@@ -27,7 +36,9 @@ function showStudent() {
 
 
 // ================= COMPANY =================
+
 function showCompany() {
+	setActiveTab('tabCompany');
 
   // Hide student email input
   document.getElementById("userInput").style.display = "none";
