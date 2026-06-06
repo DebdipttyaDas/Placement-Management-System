@@ -137,8 +137,6 @@ footer {
         margin: 0;
         padding: 14px;
         border-radius: 0;
-
-        /* IMPORTANT: removes bottom gap feel */
         flex: 1;
     }
 
