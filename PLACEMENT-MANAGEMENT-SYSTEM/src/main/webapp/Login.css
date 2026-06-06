@@ -93,5 +93,8 @@
 }
 
 .tab-btn:hover {
+   color: #063831;
+}
+.tab-inactive:hover {
   color: rgba(255, 255, 255, 0.85) !important;
 }
