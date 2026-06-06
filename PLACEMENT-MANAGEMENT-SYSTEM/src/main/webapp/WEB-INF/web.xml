@@ -162,6 +162,16 @@
         <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
 
+    <!-- Placement analysis servlet -->
+    <servlet>
+        <servlet-name>PlacementAnalysisServlet</servlet-name>
+        <servlet-class>PlacementAnalysisServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PlacementAnalysisServlet</servlet-name>
+        <url-pattern>/PlacementAnalysisServlet</url-pattern>
+    </servlet-mapping>
+
     <!-- Schedule Interview -->
     <servlet>
         <servlet-name>ScheduleInterviewServlet</servlet-name>

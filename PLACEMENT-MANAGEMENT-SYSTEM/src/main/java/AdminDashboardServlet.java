@@ -25,12 +25,7 @@ public class AdminDashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // Protect page from unauthorized access
-        HttpSession session = request.getSession(false);
-        if (session == null || !"admin".equals(session.getAttribute("role"))) {
-            response.sendRedirect("Login.jsp?role=admin&error=Unauthorized access");
-            return;
-        }
+        
 
         int studentCount = 0;
         int companyCount = 0;
