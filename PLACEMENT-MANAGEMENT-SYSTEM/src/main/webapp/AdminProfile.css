@@ -108,9 +108,7 @@ body {
 }
 
 
-/* =========================
-   RESPONSIVE DESIGN
-   ========================= */
+/*RESPONSIVE DESIGN */
 
 /* Tablets */
 @media screen and (max-width: 768px) {
@@ -148,7 +146,7 @@ body {
         flex-direction: column;
         gap: 12px;
         text-align: center;
-        padding: 12px;
+        padding: 25px;
     }
 
     .nav-buttons {
