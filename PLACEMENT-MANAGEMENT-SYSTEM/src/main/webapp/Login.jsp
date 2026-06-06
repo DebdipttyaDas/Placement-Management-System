@@ -60,9 +60,15 @@
 <input type="hidden" id="role" name="role" value="student">
 
 <!-- Tabs -->
-<div class="flex justify-around border-b border-white-200 mb-4 text-sm">
-  <button type="button" onclick="showStudent()" class="text-white pb-2 hover:text-[#d0d3d9]"><b>Student</b></button>
-  <button type="button" onclick="showCompany()" class="text-white pb-2 hover:text-[#d0d3d9]"><b>Company</b></button>
+<div class="flex justify-around border-b border-white/20 mb-4 text-sm">
+  <button type="button" id="tabStudent" onclick="showStudent()"
+    class="tab-btn tab-active font-bold transition-all duration-200">
+    Student
+  </button>
+  <button type="button" id="tabCompany" onclick="showCompany()"
+    class="tab-btn tab-inactive font-bold transition-all duration-200">
+    Company
+  </button>
 </div>
 
 <!-- Username -->
@@ -102,7 +108,7 @@
 
 <!-- Button -->
 <button type="submit"
-class="w-full mt-3 py-2 rounded-lg bg-[#063831] text-white hover:scale-105 transition">
+  class="w-full mt-3 py-2 rounded-lg bg-white text-[#063831] font-bold hover:scale-105 hover:bg-[#e0fce2] transition duration-200">
   Access Portal
 </button>
 
