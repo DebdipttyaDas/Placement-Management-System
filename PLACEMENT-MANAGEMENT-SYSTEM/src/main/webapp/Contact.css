@@ -100,14 +100,25 @@ footer {
 ========================= */
 @media (max-width: 600px) {
 
-    body {
-        padding: 0;
+    html, body {
         margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
     }
 
     header {
-        padding: 25px 12px;
+        padding: 20px 12px;
         text-align: center;
+        margin: 0;
     }
 
     h1 {
@@ -117,15 +128,22 @@ footer {
 
     h2 {
         font-size: 1.2rem;
+        margin: 5px 0 0;
     }
 
-    /* FORM FIX - no leftover space */
-    form {
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-        padding: 16px;
-        border-radius: 0;
+   form {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 14px;
+    border-radius: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+        /* IMPORTANT: removes bottom gap feel */
+        flex: 1;
     }
 
     input,
@@ -133,19 +151,21 @@ footer {
         font-size: 16px;
         padding: 12px;
         width: 100%;
+        margin-bottom: 10px;
     }
 
     button {
         font-size: 16px;
         padding: 12px;
         width: 100%;
+        margin-top: 5px;
     }
 
     p {
         font-size: 0.95rem;
+        margin: 5px 0;
     }
 }
-
 /* =========================
    LARGE SCREENS
 ========================= */
