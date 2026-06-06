@@ -29,7 +29,7 @@
             <!-- TOP BAR -->
            <div class="topbar">
                 
-                <div style="display:flex; align-items:center; gap:30px;">
+                <div style="display:flex; align-items:center; gap:25px;">
                     <i class="fa fa-user-circle" style="font-size:25px;"></i>
                     <i class="fa fa-bell" style="font-size:25px;"></i>
                 </div>
