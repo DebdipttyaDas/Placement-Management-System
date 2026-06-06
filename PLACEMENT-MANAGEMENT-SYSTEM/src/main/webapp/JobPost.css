@@ -346,12 +346,13 @@ textarea{
         height: 150vh;
     }
 
-    .main-content {
-        margin-left: 220px;
-        width: calc(100% - 220px);
-        padding: 80px 15px 20px 15px;
-    }
-
+   
+.main-content {
+    margin-left: 150px;
+    width: calc(100vw - 150px);
+    padding: 80px 20px 20px 20px;
+    box-sizing: border-box;
+}
     .topbar {
         left: 150px;
         right: 0;
@@ -380,6 +381,9 @@ textarea{
         height: 160px;
     }
 }
+
+
+
 
 /* SMALL MOBILE */
 @media (max-width: 480px) {
