@@ -353,14 +353,14 @@ textarea{
     }
 
     .topbar {
-        left: 220px;
+        left: 150px;
         right: 0;
         position: fixed;
     }
 
     /* prevent overflow issues */
     body {
-        overflow-x: hidden;
+        overflow-x:hidden;
     }
 
     .form-row {
