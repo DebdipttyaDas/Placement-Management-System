@@ -54,3 +54,73 @@ ul li {
     margin-top: 20px;
     font-weight: bold;
 }
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .about-container {
+        width: 85%;
+        padding: 20px;
+    }
+
+    header {
+        padding: 18px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .about-container {
+        width: 100%;
+        margin: 15px auto;
+        padding: 18px;
+        border-radius: 8px;
+    }
+
+    header {
+        padding: 14px;
+        font-size: 1rem;
+        width:102%;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    p, ul li {
+        font-size: 0.95rem;
+    }
+}
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+    .about-container {
+        width: 100%;
+        margin: 10px auto;
+        padding: 14px;
+    }
+
+    header {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    p, ul li {
+        font-size: 0.9rem;
+    }
+}

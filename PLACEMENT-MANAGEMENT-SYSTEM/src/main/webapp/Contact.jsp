@@ -5,6 +5,7 @@
 
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <link rel="stylesheet" href="Contact.css">
   </head>
@@ -13,6 +14,9 @@
     <!-- HEADER -->
     <header>
       <h1>Contact us - CampusConnect</h1>
+       <center>
+                <a href="Login.jsp" style="color: white; text-decoration: none;">Back to Home</a>
+            </center>
     </header>
 
     <p style="text-align:center;">We are here to help you, feel free to reach out !</p>
