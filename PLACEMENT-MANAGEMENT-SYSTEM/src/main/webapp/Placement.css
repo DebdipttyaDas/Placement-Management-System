@@ -472,59 +472,54 @@ body {
 /* =========================
    MOBILE DEVICES
 ========================= */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
 
     .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 120px;
+        height: 100vh;
         padding: 10px;
+        z-index: 1000;
     }
 
     .sidebar h2 {
-        font-size: 18px;
+        font-size: 16px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .sidebar ul {
+        display: block;
     }
 
     .sidebar ul li {
-        width: 100%;
-        text-align: center;
+        padding: 8px;
+        font-size: 11px;
+        margin-bottom: 8px;
     }
 
     .topbar {
-        height: auto;
-        min-height: 50px;
-        padding: 10px;
+        left: 120px;
+        width: calc(100% - 120px);
     }
 
     .main {
+        left: 120px;
+        width: calc(100% - 120px);
         padding: 10px;
     }
 
     .search-box input,
     .job-search input {
-        padding: 12px;
-        font-size: 14px;
+        width: 100%;
     }
 
     .job-card {
-        padding: 20px;
-    }
-
-    .job-card h3 {
-        font-size: 1.2rem;
-    }
-
-    .job-card p {
-        font-size: 14px;
-    }
-
-    .job-filters {
-        flex-direction: column;
-    }
-
-    .job-filters button {
         width: 100%;
     }
 }
-
-
 /* =========================
    VERY SMALL PHONES
 ========================= */
