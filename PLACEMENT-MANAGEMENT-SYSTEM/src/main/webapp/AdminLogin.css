@@ -182,3 +182,126 @@
     transform: scale(1.05);
     background: #075046;
 }
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
+
+/* Large Tablets */
+@media screen and (max-width: 1024px) {
+    .navbar {
+        padding: 15px 25px;
+    }
+
+    .card {
+        width: 90%;
+        max-width: 400px;
+    }
+}
+
+/* Tablets */
+@media screen and (max-width: 768px) {
+
+    .navbar {
+        padding: 12px 20px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .heading {
+        font-size: 24px;
+    }
+
+    .subtext {
+        font-size: 13px;
+    }
+
+    .card {
+        width: 90%;
+        max-width: 380px;
+        height: auto;
+        padding: 25px;
+    }
+
+    .input-group input {
+        padding: 12px;
+    }
+}
+
+/* Mobile Phones */
+@media screen and (max-width: 480px) {
+
+    .navbar {
+        padding: 10px 15px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .nav-link a {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+
+    .main-container {
+        padding: 20px 10px;
+    }
+
+    .heading {
+        font-size: 22px;
+    }
+
+    .subtext {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 340px;
+        height: auto;
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .input-group label {
+        font-size: 13px;
+    }
+
+    .input-group input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .password-header {
+        font-size: 11px;
+    }
+
+    .login-btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+/* Very Small Phones */
+@media screen and (max-width: 320px) {
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .heading {
+        font-size: 20px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .input-group input {
+        padding: 8px;
+    }
+}
