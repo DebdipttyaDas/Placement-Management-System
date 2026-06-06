@@ -91,51 +91,7 @@
 
         <script src="chatbot.js"></script>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                fetchJobs();
-            });
-
-            function fetchJobs() {
-                fetch('FetchJobsServlet')
-                    .then(response => response.json())
-                    .then(data => {
-                        const container = document.getElementById('job-cards-container');
-                        container.innerHTML = ''; // Clear loading text
-
-                        if (data.length === 0) {
-                            container.innerHTML = '<div style="color: #333; text-align: center; width: 100%;">No jobs posted yet.</div>';
-                            return;
-                        }
-
-                        data.forEach(job => {
-                            const card = document.createElement('div');
-                            card.className = 'job-card';
-
-                            // Using safe rendering for fields
-                            card.innerHTML = `
-                        <h3>${job.job_title}</h3>
-                        <p class="department">${job.department}</p>
-                        <div class="tags">
-                            <span><i class="fa-solid fa-location-dot"></i> ${job.location_type}</span>
-                            <span><i class="fa-solid fa-briefcase"></i> ${job.employment_type}</span>
-                            <span><i class="fa-solid fa-money-bill-wave"></i> ${job.salary_range}</span>
-                        </div>
-                        <button onclick="viewJobDetails('${job.job_title}')">Apply Now</button>
-                    `;
-                            container.appendChild(card);
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Error fetching jobs:', error);
-                        document.getElementById('job-cards-container').innerHTML = '<div style="color: red; text-align: center; width: 100%;">Error loading jobs. Please try again later.</div>';
-                    });
-            }
-
-            function viewJobDetails(title) {
-                alert("Applying for: " + title + "\n\nIn a real scenario, this would open a modal or navigate to a details page.");
-            }
-        </script>
+        <script src="Placement.js"></script>
 
     </body>
     </html>
