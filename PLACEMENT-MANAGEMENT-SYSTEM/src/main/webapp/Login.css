@@ -76,3 +76,22 @@
         font-size: 13px;
     }
 }
+.tab-active {
+  background-color: #ffffff;
+  color: #063831 !important;
+  border-radius: 8px;
+  padding: 5px 20px;
+  border-bottom: none;
+}
+
+.tab-inactive {
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.5) !important;
+  border-radius: 8px;
+  padding: 5px 20px;
+  border-bottom: none;
+}
+
+.tab-btn:hover {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
