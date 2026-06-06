@@ -28,6 +28,7 @@ pageEncoding="UTF-8"%>
 </head>
 
 <body>
+<div class="cards-container">
        <div class="job-card">
 
     <h3>Software Engineering Intern</h3>
@@ -56,7 +57,7 @@ pageEncoding="UTF-8"%>
         </button>
 
     </div>
-
+</div>
 </div>
 </body>
 </html>
