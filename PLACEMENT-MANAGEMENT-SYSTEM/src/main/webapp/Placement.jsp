@@ -58,7 +58,7 @@
                 <!-- JOB CARDS -->
                 <div class="job-cards" id="job-cards-container">
                  
-                    <div style="color: #333; text-align: center; width: 100%;">Loading jobs...</div>
+                    
                 </div>
                 
              </div>   
