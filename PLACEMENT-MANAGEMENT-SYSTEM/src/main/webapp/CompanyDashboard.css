@@ -558,8 +558,8 @@ svg { display: inline-block; vertical-align: middle; }
     }
 
     .menu li {
-        justify-content: ;
-        padding: 14px 8px;
+        justify-content: 
+        padding 14px 8px;
     }
 
     .menu li span,
@@ -617,8 +617,6 @@ svg { display: inline-block; vertical-align: middle; }
 
     .view-actions {
         flex-wrap: wrap;
-    }
-
     .drive-top {
         flex-direction: column;
         align-items: flex-start;
