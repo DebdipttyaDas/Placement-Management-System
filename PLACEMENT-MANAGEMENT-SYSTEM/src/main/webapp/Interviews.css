@@ -994,3 +994,124 @@ html, body {
 .mock-ai-btn:hover i {
     transform: rotate(15deg) scale(1.2);
 }
+
+
+
+
+
+/* =========================================================
+   RESPONSIVE (FIX ONLY - NO DESIGN CHANGES)
+========================================================= */
+
+@media (max-width: 1024px) {
+
+    /* prevent horizontal overflow */
+    body, html {
+        overflow-x: hidden;
+    }
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+
+    .topbar {
+        left: 0;
+    }
+
+    .sidebar-right {
+        width: 260px; /* FIXED (was 320 without px) */
+    }
+}
+
+/* =========================================================
+   TABLET / MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    /* SIDEBAR -> hidden (keeps design intact, no squeezing) */
+    .sidebar {
+        display: none;
+    }
+
+    /* MAIN CONTENT becomes full width */
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 90px 16px 20px 16px; /* keeps topbar space */
+    }
+
+    /* TOPBAR stays fixed clean */
+    .topbar {
+        left: 0;
+        right: 0;
+        height: 70px;
+        padding: 0 16px;
+    }
+
+    /* STACK LAYOUT */
+    .content {
+        flex-direction: column;
+    }
+
+    /* RIGHT SIDEBAR becomes full width block */
+    .sidebar-right {
+        width: 100%;
+        display: flex;
+    }
+
+    .stats {
+        flex-direction: column;
+    }
+
+    /* SCHEDULE spacing fix */
+    .schedule {
+        width: 100%;
+    }
+
+    /* TOOLBAR wraps instead of breaking layout */
+    .toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .right-actions {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .topbar h2 {
+        font-size: 18px;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+
+    .slot {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .time {
+        width: auto;
+    }
+
+    .card {
+        width: 100%;
+    }
+}
