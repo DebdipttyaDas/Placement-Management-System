@@ -38,7 +38,7 @@
         <div class="topbar">
             <h2>Company Dashboard</h2>
             <div class="user-profile">
-                <a href="CompanyProfile.jsp">
+                <a href="CompanyProfileServlet">
                     <i class="fa fa-user-circle"></i>
                 </a>
                 <i class="fa fa-bell bell"></i>

@@ -12,47 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-/**
- * Demo Database Creation Scripts:
- * 
- * CREATE DATABASE IF NOT EXISTS placement_management;
- * USE placement_management;
- * 
- * CREATE TABLE IF NOT EXISTS Register (
- *     COMPANY_ID INT AUTO_INCREMENT PRIMARY KEY,
- *     COMPANY_NAME VARCHAR(100) NOT NULL,
- *     COMPANY_CODE VARCHAR(50) UNIQUE NOT NULL,
- *     INDUSTRY VARCHAR(100),
- *     COMPANY_TYPE VARCHAR(50),
- *     COMPANY_EMAIL VARCHAR(100) NOT NULL,
- *     PASSWORD VARCHAR(10) NOT NULL
- * );
- * 
- * CREATE TABLE IF NOT EXISTS COMPANY_CONTACT_DETAILS (
- *     COMPANY_ID INT PRIMARY KEY,
- *     COMPANY_PHONENO VARCHAR(20),
- *     COMPANY_WEBSITE_LINK VARCHAR(255),
- *     FOREIGN KEY (COMPANY_ID) REFERENCES Register(COMPANY_ID) ON DELETE CASCADE
- * );
- * 
- * CREATE TABLE IF NOT EXISTS COMPANY_ADDRESS_DETAILS (
- *     COMPANY_ID INT PRIMARY KEY,
- *     COMPANY_ADDRESS VARCHAR(255),
- *     CITY VARCHAR(100),
- *     STATE VARCHAR(100),
- *     COUNTRY VARCHAR(100),
- *     PINCODE VARCHAR(20),
- *     FOREIGN KEY (COMPANY_ID) REFERENCES Register(COMPANY_ID) ON DELETE CASCADE
- * );
- * 
- * CREATE TABLE IF NOT EXISTS COMPANY_LEGAL_INFO (
- *     COMPANY_ID INT PRIMARY KEY,
- *     REGISTRATION_NUM VARCHAR(100),
- *     PAN_NUM VARCHAR(100), -- Maps to CIN
- *     LICENSE_NUM VARCHAR(100),
- *     FOREIGN KEY (COMPANY_ID) REFERENCES Register(COMPANY_ID) ON DELETE CASCADE
- * );
- */
+
 @WebServlet("/CompanyProfileServlet")
 public class CompanyProfileServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -67,7 +27,7 @@ public class CompanyProfileServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         if (!isCompanyLoggedIn(session)) {
-            response.sendRedirect("Login.jsp?role=company");
+            response.sendRedirect("CompanyProfile.jsp?role=company");
             return;
         }
 
@@ -81,15 +41,13 @@ public class CompanyProfileServlet extends HttpServlet {
             try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
                 Integer companyId = getCompanyIdByCode(conn, companyCode);
                 if (companyId != null) {
-                    session.setAttribute("companyId", companyId);
                     loadProfileIntoRequest(conn, companyId, request);
                 }
             }
         } catch (Exception e) {
-            System.err.println("Database load failed (will fallback to session): " + e.getMessage());
+            System.err.println("Database load failed: " + e.getMessage());
         }
 
-        copySessionToRequest(session, request);
         request.getRequestDispatcher("CompanyProfile.jsp").forward(request, response);
     }
 
@@ -151,7 +109,6 @@ public class CompanyProfileServlet extends HttpServlet {
             request.setAttribute("licenseNum", licenseNum);
             request.setAttribute("gstNum", gstNum);
             request.setAttribute("errorMessage", "All required profile fields must be filled.");
-            copySessionToRequest(session, request);
             request.getRequestDispatcher("CompanyProfile.jsp").forward(request, response);
             return;
         }
@@ -174,7 +131,6 @@ public class CompanyProfileServlet extends HttpServlet {
             request.setAttribute("licenseNum", licenseNum);
             request.setAttribute("gstNum", gstNum);
             request.setAttribute("errorMessage", "Password must be at most 10 characters (per database schema).");
-            copySessionToRequest(session, request);
             request.getRequestDispatcher("CompanyProfile.jsp").forward(request, response);
             return;
         }
@@ -225,29 +181,18 @@ public class CompanyProfileServlet extends HttpServlet {
         }
 
         if (companyId == null) {
-            companyId = (Integer) session.getAttribute("companyId");
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                try (Connection conn1 = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+                    companyId = getCompanyIdByCode(conn1, companyCode);
+                }
+            } catch (Exception e) {
+                System.err.println("Failed to fetch companyId from database: " + e.getMessage());
+            }
             if (companyId == null) {
                 companyId = (int) (Math.random() * 10000);
             }
         }
-
-        session.setAttribute("companyId", companyId);
-        session.setAttribute("companyName", companyName);
-        session.setAttribute("industry", industry);
-        session.setAttribute("companyType", companyType);
-        session.setAttribute("companyEmail", companyEmail);
-        session.setAttribute("companyPhone", companyPhone);
-        session.setAttribute("companyWebsite", companyWebsite);
-        session.setAttribute("companyLinkedin", companyLinkedin);
-        session.setAttribute("companyAddress", companyAddress);
-        session.setAttribute("city", city);
-        session.setAttribute("state", state);
-        session.setAttribute("country", country);
-        session.setAttribute("pincode", pincode);
-        session.setAttribute("cin", cin);
-        session.setAttribute("registrationNum", registrationNum);
-        session.setAttribute("licenseNum", licenseNum);
-        session.setAttribute("gstNum", gstNum);
 
         request.setAttribute("companyName", companyName);
         request.setAttribute("industry", industry);
@@ -269,7 +214,7 @@ public class CompanyProfileServlet extends HttpServlet {
         if (dbSuccess) {
             request.setAttribute("successMessage", "Company profile saved successfully.");
         } else {
-            request.setAttribute("successMessage", "Company profile updated in session (database offline).");
+            request.setAttribute("errorMessage", "Failed to save company profile (database offline).");
         }
 
         request.getRequestDispatcher("CompanyProfile.jsp").forward(request, response);
@@ -359,22 +304,7 @@ public class CompanyProfileServlet extends HttpServlet {
         }
     }
 
-    private void copySessionToRequest(HttpSession session, HttpServletRequest request) {
-        if (session == null) return;
-        String[] attributes = {
-            "companyName", "companyCode", "industry", "companyType", "companyEmail", "companyPhone", 
-            "companyWebsite", "companyLinkedin", "companyAddress", "city", "state", 
-            "country", "pincode", "cin", "registrationNum", "licenseNum", "gstNum"
-        };
-        for (String attr : attributes) {
-            if (request.getAttribute(attr) == null) {
-                Object val = session.getAttribute(attr);
-                if (val != null) {
-                    request.setAttribute(attr, val);
-                }
-            }
-        }
-    }
+
 
     private int insertRegister(Connection conn, String companyName, String companyCode, String industry,
             String companyType, String companyEmail, String password) throws SQLException {
