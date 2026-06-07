@@ -259,7 +259,6 @@ body {
 }
 
 .view-btn,
-.apply-btn,
 .close-btn{
     width:100%;
     padding:10px;
@@ -269,8 +268,7 @@ body {
     margin-top:10px;
 }
 
-.view-btn,
-.apply-btn{
+.view-btn{
     background:#0d5bd7;
     color:white;
 }

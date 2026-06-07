@@ -147,10 +147,6 @@ try{
                                 <%= rs.getString("applicationDeadline") %>
                             </p>
 
-                            <button class="apply-btn">
-                                Apply Now
-                            </button>
-
                             <button class="close-btn"
                                     onclick="toggleCard(this)">
                                 Close Details
