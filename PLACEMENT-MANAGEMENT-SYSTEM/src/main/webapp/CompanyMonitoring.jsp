@@ -5,7 +5,9 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Company Monitoring</title>
 
 <!-- Tailwind -->
@@ -23,8 +25,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 </head>
 
 <body>
-
-<div class="page-container">
 
     <!-- SIDEBAR -->
     <nav class="sidebar">
@@ -58,7 +58,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                 <!-- SEARCH -->
                 <div class="search-bar">
                     <i class="fa fa-search search-icon"></i>
-
                     <input
                         type="text"
                         id="companySearch"
@@ -185,8 +184,6 @@ finally{
         </div>
 
     </div>
-
-</div>
 
 </body>
 </html>
