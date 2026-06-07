@@ -361,4 +361,31 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    /* =========================================================
+       RESPONSIVE SIDEBAR TOGGLE
+    ========================================================= */
+    var sidebar = document.getElementById("sidebar");
+    var sidebarToggle = document.getElementById("sidebarToggleBtn");
+    var closeSidebar = document.getElementById("closeSidebarBtn");
+
+    if (sidebarToggle && sidebar) {
+        sidebarToggle.addEventListener("click", function () {
+            sidebar.classList.add("show");
+        });
+    }
+
+    if (closeSidebar && sidebar) {
+        closeSidebar.addEventListener("click", function () {
+            sidebar.classList.remove("show");
+        });
+    }
+
+    document.addEventListener("click", function (e) {
+        if (sidebar && sidebar.classList.contains("show")) {
+            if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+                sidebar.classList.remove("show");
+            }
+        }
+    });
+
 });

@@ -31,6 +31,7 @@ body {
   padding: 15px;
   overflow: hidden;
   box-sizing: border-box;
+  transition: transform 0.3s ease-in-out;
 }
 
 .sidebar h2 {
@@ -678,7 +679,4 @@ body {
   border-radius: 20px;
   background: white;
 }
-
-
-
 

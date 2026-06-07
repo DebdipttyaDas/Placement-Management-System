@@ -22,7 +22,11 @@
     <div class="container">
 
         <!-- SIDEBAR -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
+
+            <button class="close-sidebar-btn" id="closeSidebarBtn" aria-label="Close Sidebar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
 
             <br><br><br>
 
@@ -71,6 +75,10 @@
 
             <!-- TOPBAR -->
             <div class="topbar">
+
+                <button class="sidebar-toggle" id="sidebarToggleBtn" aria-label="Toggle Sidebar">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
 
                 <h2>Interviews</h2>
 
