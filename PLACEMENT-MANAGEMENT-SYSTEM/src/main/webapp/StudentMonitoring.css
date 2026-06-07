@@ -487,261 +487,226 @@ td {
     transform: scale(0.96);
 }
 /* RESPONSIVE */
-/* =====================================
-   RESPONSIVE FOR ALL DEVICES
-===================================== */
+/* ==========================================================================
+   ===== THE COMPLETE COMPREHENSIVE RESPONSIVE STACK FOR ALL DEVICES =====
+   ========================================================================== */
 
-/* Large Laptops */
-@media screen and (max-width: 1400px) {
-
-    .welcome-box {
-        padding: 25px;
+/* --------------------------------------------------------------------------
+   1. TABLETS & PORTRAIT IPADS (Max-width: 991px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 991px) {
+    /* Release global window height locks to allow native vertical scrolling */
+    html, body, .container, .main-content {
+        height: auto !important;
+        overflow: visible !important;
+        overflow-y: auto !important;
     }
 
-    .dashboard-widgets {
-        gap: 15px;
-    }
-
-    .slideshow {
-        height: 350px;
-    }
-}
-
-/* Laptops */
-@media screen and (max-width: 1200px) {
-
+    /* Narrow down the sidebar footprint so the content gets more breathing room */
     .sidebar {
-        width: 190px;
+        width: 180px !important;
+        padding: 15px !important;
     }
 
-    .main-area {
-        margin-left: 190px;
-        width: calc(100% - 190px);
+    .sidebar h2 {
+        font-size: 18px !important;
+        margin-bottom: 25px !important;
     }
 
-    .welcome-text-section h1 {
-        font-size: 28px;
+    .menu li {
+        padding: 10px 12px !important;
+        margin-bottom: 8px !important;
     }
 
-    .readiness-box {
-        width: 260px;
+    .menu a {
+        font-size: 14px !important;
     }
 
-    .slideshow {
-        height: 300px;
-    }
-}
-
-/* Tablets */
-@media screen and (max-width: 992px) {
-
-    .sidebar {
-        width: 170px;
+    /* Shift the main workspace panel to sit perfectly next to the 180px sidebar */
+    .main-content {
+        margin-left: 180px !important;
+        width: calc(100% - 180px) !important;
+        padding-top: 75px !important;
     }
 
-    .main-area {
-        margin-left: 150px;
-        width: calc(100% - 150px);
+    /* Recalculate topbar left coordinate mapping */
+    .topbar {
+        left: 180px !important;
+        padding: 15px 20px !important;
     }
 
-    .welcome-box {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
-
-    .welcome-text-section {
-        max-width: 100%;
-    }
-
-    .readiness-box {
-        width: 100%;
-        box-sizing: border-box;
-    }
-
+    /* Compress the 3-column stats cards into a stable 2-column configuration grid */
     .stats {
-        flex-wrap: wrap;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px !important;
     }
 
-    .card {
-        min-width: 200px;
+    /* Let the colored/blue card span beautifully across the layout width */
+    .card.blue {
+        grid-column: span 2 !important;
     }
 
-    .dashboard-widgets {
-        grid-template-columns: 1fr;
-    }
-
-    .slideshow {
-        height: 260px;
+    /* Compress input boxes slightly so they don't pop out of the viewport bounds */
+    .filters input {
+        width: 240px !important;
     }
 }
 
-/* Mobile Landscape */
+
+/* --------------------------------------------------------------------------
+   2. STANDARD MOBILE PHONES (Max-width: 768px)
+   -------------------------------------------------------------------------- */
 @media screen and (max-width: 768px) {
-
+    /* Narrow sidebar further to accommodate portrait screens */
     .sidebar {
-        width: 90px;
-        padding: 10px 5px;
+        width: 140px !important;
+        padding: 15px 8px !important;
     }
 
     .sidebar h2 {
-        font-size: 14px;
+        font-size: 14px !important;
+        text-align: center;
+        margin-bottom: 20px !important;
     }
 
-    .sidebar ul li {
-        font-size: 11px;
-        padding: 8px 5px;
+    .menu li {
+        padding: 8px !important;
+        border-radius: 6px !important;
     }
 
-    .main-area {
-        margin-left: 90px;
-        width: calc(100% - 90px);
+    .menu a {
+        font-size: 12px !important;
     }
 
-    .content {
-        padding: 12px;
+    /* Reposition main panels and top bar to accommodate the 140px sidebar */
+    .main-content {
+        margin-left: 140px !important;
+        width: calc(100% - 140px) !important;
     }
 
-    .welcome-box {
-        padding: 15px;
+    .topbar {
+        left: 140px !important;
+        padding: 12px 15px !important;
     }
 
-    .welcome-text-section h1 {
-        font-size: 22px;
+    .topbar h2 {
+        font-size: 15px !important;
     }
 
-    .welcome-text-section p {
-        font-size: 13px;
+    /* Tighten content container outer spacing margins */
+    .stats, .header, .table-container {
+        margin: 12px !important;
     }
 
+    /* Collapse the metric boxes layout into a 1-column layout stream */
     .stats {
-        flex-direction: column;
-        gap: 12px;
+        grid-template-columns: 1fr !important;
     }
 
-    .card {
-        width: 100%;
+    .card.blue {
+        grid-column: span 1 !important;
     }
 
-    .widget-box {
-        padding: 15px;
+    .card h2 {
+        font-size: 26px !important;
     }
 
-    .slideshow {
-        height: 220px;
+    /* Stack filter controls and action items vertically */
+    .header {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+    }
+
+    .title h1 {
+        font-size: 24px !important;
+    }
+
+    /* Force interactive search and filter elements to expand to 100% width */
+    .filters {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 8px !important;
+        width: 100% !important;
+    }
+
+    .filters input, 
+    .filters select {
+        width: 100% !important;
+    }
+
+    /* Safeguard data logs with responsive fluid overflow scroll properties */
+    .table-container {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
     }
 
     table {
-        display: block;
-        overflow-x: auto;
-        width: 100%;
+        min-width: 500px;
     }
 }
 
-/*Mobile portrait*/
+
+/* --------------------------------------------------------------------------
+   3. SMALL MOBILE PHONES (Max-width: 480px)
+   -------------------------------------------------------------------------- */
 @media screen and (max-width: 480px) {
-
+    /* For ultra-narrow viewports, squeeze the sidebar text sizes to ensure it stays anchored */
     .sidebar {
-        width: 108px;
-        padding: 6px;
-        box-sizing: border-box;
-    }
-
-    .main-area {
-        margin-left: 108px;
-        width: calc(100% - 108px);
-        box-sizing: border-box;
-        overflow-x: hidden;
-    }
-
-    .content {
-        padding: 10px;
-        box-sizing: border-box;
+        width: 110px !important;
+        padding: 12px 5px !important;
     }
 
     .sidebar h2 {
-        font-size: 15px;
-        line-height: 1.3;
+        font-size: 12px !important;
+        word-wrap: break-word;
     }
 
-    .sidebar ul li {
-        font-size: 10px;
-        padding: 6px 4px;
-        margin: 5px 0;
+    .menu a {
+        font-size: 11px !important;
     }
 
-    .stats {
-        flex-direction: column;
-        gap: 10px;
+    /* Remap main frame dimensions next to the mini 110px sidebar */
+    .main-content {
+        margin-left: 110px !important;
+        width: calc(100% - 110px) !important;
     }
 
-    .card {
-        width: 100%;
-        box-sizing: border-box;
+    .topbar {
+        left: 110px !important;
+        padding: 10px !important;
     }
 
-    .dashboard-widgets {
-        grid-template-columns: 1fr;
+    .topbar h2 {
+        font-size: 13px !important;
     }
 
-    .widget-box {
-        width: 100%;
-        padding: 12px;
-        box-sizing: border-box;
+    .top-icons {
+        gap: 10px !important;
     }
 
-    .welcome-box {
-        flex-direction: column;
-        padding: 12px;
-        gap: 12px;
+    .top-icons i {
+        font-size: 18px !important;
     }
 
-    .welcome-text-section {
-        max-width: 100%;
+    /* Scale metrics sizes smoothly to maintain balanced content boxes */
+    .card h2 {
+        font-size: 22px !important;
     }
 
-    .readiness-box {
-        width: 100%;
-        box-sizing: border-box;
+    .card h5 {
+        font-size: 10px !important;
     }
 
-    .slideshow {
-        width: 100%;
-        height: 180px;
+    .title h1 {
+        font-size: 20px !important;
     }
 
-    table {
-        display: block;
-        overflow-x: auto;
-        width: 100%;
-    }
-}
-
-/* Very Small Phones */
-@media screen and (max-width: 360px) {
-
-    .sidebar {
-        width: 60px;
-    }
-
-    .main-area {
-        margin-left: 60px;
-        width: calc(100% - 60px);
-    }
-
-    .sidebar h2 {
-        font-size: 10px;
-    }
-
-    .sidebar ul li {
-        font-size: 8px;
-    }
-
-    .welcome-text-section h1 {
-        font-size: 16px;
-    }
-
-    .slideshow {
-        height: 150px;
+    /* Condense row metrics down inside footer blocks */
+    .table-footer {
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 10px !important;
+        font-size: 12px !important;
     }
 }
