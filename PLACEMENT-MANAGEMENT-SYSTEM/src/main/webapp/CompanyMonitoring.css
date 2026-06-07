@@ -284,3 +284,39 @@ body {
     gap:20px;
     justify-content:center;
 }
+/* Responsive card grid */
+.card-container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Fluid job card */
+.job-card {
+    width: 100%;
+}
+
+/* Fix search bar */
+.search-bar {
+    margin-left: 0;
+    max-width: 100%;
+}
+
+/* Tablet & Mobile breakpoint */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .main-area {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .company-box {
+        padding: 20px;
+    }
+}
