@@ -58,6 +58,114 @@
                 <!-- JOB CARDS -->
                 <div class="job-cards" id="job-cards-container">
                  
+                    <%
+
+Connection conn = null;
+Statement st = null;
+ResultSet rs = null;
+
+try{
+
+    Class.forName("com.mysql.cj.jdbc.Driver");
+
+    conn = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/placement_management",
+        "root",
+        "root"
+    );
+
+    st = conn.createStatement();
+
+    rs = st.executeQuery(
+        "SELECT * FROM jobs ORDER BY id DESC"
+    );
+
+    while(rs.next()){
+
+%>
+
+                    <div class="job-card">
+
+                        <div class="tags">
+
+                            <h2 class="company-name">
+                                <%= rs.getString("companyName") %>
+                            </h2>
+
+                            <p>
+                                <strong>
+                                    <%= rs.getString("jobTitle") %>
+                                </strong>
+                            </p>
+
+                            <p>
+                                <%= rs.getString("employmentType") %>
+                            </p>
+
+                        </div>
+
+                        <button class="view-btn"
+                                onclick="toggleCard(this)">
+                            View Details
+                        </button>
+
+                        <div class="extra-details">
+
+                            <p>
+                                <strong>Department:</strong>
+                                <%= rs.getString("department") %>
+                            </p>
+
+                            <p>
+                                <strong>Location Type:</strong>
+                                <%= rs.getString("LocationType") %>
+                            </p>
+
+                            <p>
+                                <strong>Location:</strong>
+                                <%= rs.getString("Location") %>
+                            </p>
+
+                            <p>
+                                <strong>Salary:</strong>
+                                <%= rs.getString("salary") %>
+                            </p>
+
+                            <p>
+                                <strong>Deadline:</strong>
+                                <%= rs.getString("applicationDeadline") %>
+                            </p>
+
+                            <button class="close-btn"
+                                    onclick="toggleCard(this)">
+                                Close Details
+                            </button>
+
+                        </div>
+
+                    </div>
+
+<%
+    }
+}
+catch(Exception e){
+    out.println("<p style='color:red'>Error : " + e.getMessage() + "</p>");
+}
+finally{
+
+    try{
+        if(rs != null) rs.close();
+    }catch(Exception e){}
+
+    try{
+        if(st != null) st.close();
+    }catch(Exception e){}
+
+    try{
+        if(conn != null) conn.close();
+    }catch(Exception e){}
+}
+%>
                     
                 </div>
                 
