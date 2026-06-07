@@ -487,22 +487,19 @@ td {
     transform: scale(0.96);
 }
 /* RESPONSIVE */
-/* ==========================================================================
-   ===== THE COMPLETE COMPREHENSIVE RESPONSIVE STACK FOR ALL DEVICES =====
-   ========================================================================== */
 
 /* --------------------------------------------------------------------------
    1. TABLETS & PORTRAIT IPADS (Max-width: 991px)
    -------------------------------------------------------------------------- */
 @media screen and (max-width: 991px) {
-    /* Release global window height locks to allow native vertical scrolling */
+  
     html, body, .container, .main-content {
         height: auto !important;
         overflow: visible !important;
         overflow-y: auto !important;
     }
 
-    /* Narrow down the sidebar footprint so the content gets more breathing room */
+   
     .sidebar {
         width: 180px !important;
         padding: 15px !important;
@@ -522,31 +519,28 @@ td {
         font-size: 14px !important;
     }
 
-    /* Shift the main workspace panel to sit perfectly next to the 180px sidebar */
+ 
     .main-content {
         margin-left: 180px !important;
         width: calc(100% - 180px) !important;
         padding-top: 75px !important;
     }
 
-    /* Recalculate topbar left coordinate mapping */
     .topbar {
         left: 180px !important;
         padding: 15px 20px !important;
     }
 
-    /* Compress the 3-column stats cards into a stable 2-column configuration grid */
     .stats {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 15px !important;
     }
 
-    /* Let the colored/blue card span beautifully across the layout width */
     .card.blue {
         grid-column: span 2 !important;
     }
 
-    /* Compress input boxes slightly so they don't pop out of the viewport bounds */
+    
     .filters input {
         width: 240px !important;
     }
@@ -557,7 +551,7 @@ td {
    2. STANDARD MOBILE PHONES (Max-width: 768px)
    -------------------------------------------------------------------------- */
 @media screen and (max-width: 768px) {
-    /* Narrow sidebar further to accommodate portrait screens */
+ 
     .sidebar {
         width: 140px !important;
         padding: 15px 8px !important;
@@ -578,7 +572,6 @@ td {
         font-size: 16px !important;
     }
 
-    /* Reposition main panels and top bar to accommodate the 140px sidebar */
     .main-content {
         margin-left: 140px !important;
         width: calc(100% - 140px) !important;
@@ -593,12 +586,12 @@ td {
         font-size: 15px !important;
     }
 
-    /* Tighten content container outer spacing margins */
+
     .stats, .header, .table-container {
         margin: 12px !important;
     }
 
-    /* Collapse the metric boxes layout into a 1-column layout stream */
+
     .stats {
         grid-template-columns: 1fr !important;
     }
@@ -611,7 +604,7 @@ td {
         font-size: 26px !important;
     }
 
-    /* Stack filter controls and action items vertically */
+
     .header {
         flex-direction: column !important;
         align-items: stretch !important;
@@ -622,7 +615,6 @@ td {
         font-size: 24px !important;
     }
 
-    /* Force interactive search and filter elements to expand to 100% width */
     .filters {
         flex-direction: column !important;
         align-items: stretch !important;
@@ -635,7 +627,7 @@ td {
         width: 100% !important;
     }
 
-    /* Safeguard data logs with responsive fluid overflow scroll properties */
+    
     .table-container {
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch;
@@ -651,7 +643,7 @@ td {
    3. SMALL MOBILE PHONES (Max-width: 480px)
    -------------------------------------------------------------------------- */
 @media screen and (max-width: 480px) {
-    /* For ultra-narrow viewports, squeeze the sidebar text sizes to ensure it stays anchored */
+ 
     .sidebar {
         width: 110px !important;
         padding: 12px 5px !important;
@@ -689,7 +681,7 @@ td {
         font-size: 18px !important;
     }
 
-    /* Scale metrics sizes smoothly to maintain balanced content boxes */
+ 
     .card h2 {
         font-size: 22px !important;
     }
@@ -702,7 +694,6 @@ td {
         font-size: 20px !important;
     }
 
-    /* Condense row metrics down inside footer blocks */
     .table-footer {
         flex-direction: column !important;
         gap: 10px !important;
