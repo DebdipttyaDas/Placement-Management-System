@@ -35,8 +35,11 @@
       <div class="main-area">
 
         <!-- TOP BAR -->
-        <div style="display:flex; justify-content:flex-end; padding:15px; background:#03352f; color:white; position:sticky; top:0; z-index:100;">
-          <div style="display:flex; align-items:center; gap:30px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:15px; background:#03352f; color:white; position:sticky; top:0; z-index:100;">
+          <button class="sidebar-toggle-btn" id="sidebar-toggle" style="background:none; border:none; color:white; font-size:24px; cursor:pointer;" aria-label="Toggle Sidebar">
+            &#9776;
+          </button>
+          <div style="display:flex; align-items:center; gap:30px; margin-left: auto;">
             <a href="StudentProfile.jsp">
               <i class="fa fa-user-circle" style="font-size:25px; color:white;"></i>
             </a>
@@ -367,6 +370,24 @@
     </div>
 
     <script src="chatbot.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const toggleBtn = document.getElementById('sidebar-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        if (toggleBtn && sidebar) {
+          toggleBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            sidebar.classList.toggle('active');
+          });
+          document.addEventListener('click', function(e) {
+            if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+              sidebar.classList.remove('active');
+            }
+          });
+        }
+      });
+    </script>
 
   </body>
 

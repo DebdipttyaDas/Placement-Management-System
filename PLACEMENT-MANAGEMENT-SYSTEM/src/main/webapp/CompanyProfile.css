@@ -765,9 +765,9 @@ body {
         padding: 60px 4%;
     }
 
-    /* KEEP 2 COLUMN CARDS */
+    /* STACK TO 1 COLUMN ON MOBILE & TABLET */
     .card-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 20px;
     }
 
@@ -836,9 +836,8 @@ body {
         font-size: 28px;
     }
 
-    /* KEEP ORIGINAL 2-COLUMN CARD DESIGN */
     .card-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 12px;
     }
 
@@ -871,9 +870,8 @@ body {
         font-size: 13px;
     }
 
-    /* KEEP MODAL 2 COLUMN */
     .modal-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 12px;
     }
 
