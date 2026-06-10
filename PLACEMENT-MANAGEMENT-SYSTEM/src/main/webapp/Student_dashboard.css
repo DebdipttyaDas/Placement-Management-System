@@ -31,7 +31,6 @@ body {
   padding: 15px;
   overflow: hidden;
   box-sizing: border-box;
-  transition: transform 0.3s ease-in-out;
 }
 
 .sidebar h2 {
@@ -679,4 +678,51 @@ body {
   border-radius: 20px;
   background: white;
 }
+
+
+/* ===== RESPONSIVE HAMBURGER & LAYOUT ===== */
+.sidebar-toggle-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidebar-toggle-btn {
+    display: block;
+  }
+  .sidebar {
+    left: -220px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+  .sidebar.active {
+    left: 0;
+  }
+  .main-area {
+    margin-left: 0;
+    width: 100%;
+  }
+  .welcome-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .welcome-text-section {
+    max-width: 100%;
+  }
+  .readiness-box {
+    width: 100%;
+  }
+  .stats {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .dashboard-widgets {
+    grid-template-columns: 1fr;
+  }
+  .slideshow {
+    height: 250px;
+  }
+}
+
+
 

@@ -28,9 +28,11 @@
             </div>
 
             <!-- TOP BAR -->
-           <div class="topbar">
-                
-                <div style="display:flex; align-items:center; gap:25px;">
+           <div class="topbar" style="display:flex; justify-content:space-between; align-items:center;">
+                <button class="sidebar-toggle-btn" id="sidebar-toggle" style="background:none; border:none; color:white; font-size:24px; cursor:pointer;" aria-label="Toggle Sidebar">
+                    &#9776;
+                </button>
+                <div style="display:flex; align-items:center; gap:25px; margin-left: auto;">
                     <i class="fa fa-user-circle" style="font-size:25px;"></i>
                     <i class="fa fa-bell" style="font-size:25px;"></i>
                 </div>
@@ -202,6 +204,24 @@ finally{
         <script src="chatbot.js"></script>
 
         <script src="Placement.js"></script>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            const toggleBtn = document.getElementById('sidebar-toggle');
+            const sidebar = document.querySelector('.sidebar');
+            if (toggleBtn && sidebar) {
+              toggleBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sidebar.classList.toggle('active');
+              });
+              document.addEventListener('click', function(e) {
+                if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+                  sidebar.classList.remove('active');
+                }
+              });
+            }
+          });
+        </script>
 
     </body>
     </html>

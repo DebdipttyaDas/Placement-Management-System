@@ -535,24 +535,45 @@ body {
 
 
 /* RESPONSIVE */
+.sidebar-toggle-btn {
+    display: none;
+}
 
 @media screen and (max-width: 1024px) {
-   
     .sidebar-card {
         box-sizing: border-box;
         height: 100vh;
     }
-
-    
     .sidebar-card form {
         margin-top: auto; 
         padding-top: 20px;
     }
-
-  
     .logout-btn {
         margin-top: auto; 
         margin-bottom: 10px; 
         flex-shrink: 0;
     }
 }
+
+@media screen and (max-width: 768px) {
+    .sidebar-toggle-btn {
+        display: block;
+    }
+    .sidebar-card {
+        position: fixed;
+        top: 0;
+        left: -220px;
+        width: 220px;
+        height: 100vh;
+        transition: left 0.3s ease;
+        z-index: 1001;
+    }
+    .sidebar-card.active {
+        left: 0;
+    }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding-top: 20px;
+    }
+}

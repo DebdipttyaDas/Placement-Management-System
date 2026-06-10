@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"
   import="java.sql.*" %>
+  <!--  Hii  -->
 
   <!DOCTYPE html>
   <html lang="en">
@@ -20,10 +21,7 @@
     <div class="dashboard-container">
 
       <!-- LEFT SIDEBAR -->
-      <div class="sidebar" id="sidebar">
-        <button class="close-sidebar-btn" id="closeSidebarBtn" aria-label="Close Sidebar">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+      <div class="sidebar">
         <h2>Student Dashboard</h2>
 
         <ul>
@@ -37,11 +35,11 @@
       <div class="main-area">
 
         <!-- TOP BAR -->
-        <div class="topbar">
-          <button class="sidebar-toggle" id="sidebarToggleBtn" aria-label="Toggle Sidebar">
-            <i class="fa-solid fa-bars"></i>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:15px; background:#03352f; color:white; position:sticky; top:0; z-index:100;">
+          <button class="sidebar-toggle-btn" id="sidebar-toggle" style="background:none; border:none; color:white; font-size:24px; cursor:pointer;" aria-label="Toggle Sidebar">
+            &#9776;
           </button>
-          <div class="top-icons">
+          <div style="display:flex; align-items:center; gap:30px; margin-left: auto;">
             <a href="StudentProfile.jsp">
               <i class="fa fa-user-circle" style="font-size:25px; color:white;"></i>
             </a>
@@ -346,34 +344,6 @@
       }
       setInterval(checkMeetingExpiry, 60000);
       checkMeetingExpiry();
-
-      // Responsive Sidebar Toggle
-      document.addEventListener("DOMContentLoaded", function () {
-        var sidebar = document.getElementById("sidebar");
-        var sidebarToggle = document.getElementById("sidebarToggleBtn");
-        var closeSidebar = document.getElementById("closeSidebarBtn");
-
-        if (sidebarToggle && sidebar) {
-          sidebarToggle.addEventListener("click", function (e) {
-            e.stopPropagation();
-            sidebar.classList.add("show");
-          });
-        }
-
-        if (closeSidebar && sidebar) {
-          closeSidebar.addEventListener("click", function () {
-            sidebar.classList.remove("show");
-          });
-        }
-
-        document.addEventListener("click", function (e) {
-          if (sidebar && sidebar.classList.contains("show")) {
-            if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
-              sidebar.classList.remove("show");
-            }
-          }
-        });
-      });
     </script>
 
     <!-- Chatbot -->
@@ -400,6 +370,24 @@
     </div>
 
     <script src="chatbot.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const toggleBtn = document.getElementById('sidebar-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        if (toggleBtn && sidebar) {
+          toggleBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            sidebar.classList.toggle('active');
+          });
+          document.addEventListener('click', function(e) {
+            if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+              sidebar.classList.remove('active');
+            }
+          });
+        }
+      });
+    </script>
 
   </body>
 

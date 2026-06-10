@@ -289,64 +289,51 @@ body {
     }
 }
 
-/* Mobile Devices (Max width: 768px) - Sidebar stays on left */
+/* Mobile/Tablet Devices (Max width: 768px) */
+.sidebar-toggle-btn {
+    display: none;
+}
+
 @media screen and (max-width: 768px) {
     body {
         overflow-x: hidden;
         overflow-y: auto;
     }
 
-    /* Sidebar stays on left side - NOT at top */
+    .sidebar-toggle-btn {
+        display: block;
+    }
+
     .sidebar {
         position: fixed;
         top: 0;
-        left: 0;
-        width: 80px;
+        left: -220px;
+        width: 220px;
         height: 100vh;
-        padding: 15px 8px;
+        padding: 20px;
+        transition: left 0.3s ease;
         z-index: 1001;
     }
 
-    .sidebar h2 {
-        font-size: 12px;
-        text-align: center;
-        margin-bottom: 20px;
+    .sidebar.active {
+        left: 0;
     }
 
-    .sidebar ul {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        padding: 0;
-    }
-
-    .sidebar ul li {
-        margin: 0;
-        padding: 8px 6px;
-        font-size: 11px;
-        text-align: center;
-        width: 100%;
-    }
-
-    /* Topbar stays on right side of sidebar */
     .topbar {
         position: fixed;
         top: 0;
-        left: 80px;
-        width: calc(100% - 80px);
+        left: 0;
+        width: 100%;
         height: 50px;
-        justify-content: flex-end;
         padding: 0 15px;
         z-index: 1000;
     }
 
-    /* Main content area - stays to the right of sidebar */
     .main {
         position: absolute;
         top: 50px;
-        left: 80px;
-        width: calc(100% - 80px);
+        left: 0;
+        width: 100%;
         height: auto;
         min-height: calc(100vh - 50px);
         padding: 15px;
@@ -354,7 +341,16 @@ body {
         overflow-y: auto;
     }
 
-    /* Search boxes full width */
+    .card-container {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .job-card {
+        width: 100%;
+        margin: 10px 0;
+    }
+
     .search-box {
         padding: 15px 0;
     }
@@ -364,7 +360,6 @@ body {
         width: 100%;
     }
 
-    /* JOB FILTERS - FULLY VISIBLE */
     .job-filters {
         display: flex !important;
         flex-wrap: wrap !important;
@@ -384,7 +379,6 @@ body {
         flex-shrink: 0;
     }
     
-    /* Job section */
     .job-section {
         overflow: visible;
         display: block;
@@ -394,35 +388,13 @@ body {
 
 /* Small Mobile Devices (Max width: 480px) */
 @media screen and (max-width: 480px) {
-    .sidebar {
-        width: 70px;
-        padding: 10px 5px;
-    }
-    
-    .sidebar h2 {
-        font-size: 10px;
-    }
-    
-    .sidebar ul li {
-        padding: 6px 4px;
-        font-size: 9px;
-    }
-    
     .topbar {
-        left: 70px;
-        width: calc(100% - 70px);
         height: 45px;
     }
     
     .main {
         top: 45px;
-        left: 70px;
-        width: calc(100% - 70px);
         padding: 10px;
-    }
-    
-    .job-filters {
-        gap: 8px;
     }
     
     .job-filters button {
@@ -431,52 +403,20 @@ body {
         font-size: 11px;
     }
     
-    .job-card {
-        padding: 15px;
-    }
-    
     .job-card h3 {
-        font-size: 1rem;
-    }
-    
-    .search-box input,
-    .job-search input {
-        padding: 10px;
+        font-size: 1.2rem;
     }
 }
 
 /* Very Small Phones (Max width: 360px) */
 @media screen and (max-width: 360px) {
-    .sidebar {
-        width: 60px;
-        padding: 8px 4px;
-    }
-    
-    .sidebar h2 {
-        font-size: 9px;
-    }
-    
-    .sidebar ul li {
-        padding: 5px 3px;
-        font-size: 8px;
-    }
-    
-    .topbar {
-        left: 60px;
-        width: calc(100% - 60px);
-    }
-    
-    .main {
-        left: 60px;
-        width: calc(100% - 60px);
-    }
-    
     .job-filters button {
         min-width: 55px;
         padding: 5px 10px;
         font-size: 10px;
     }
 }
+
 
 /* Large Desktops (Min width: 1440px) */
 @media screen and (min-width: 1440px) {

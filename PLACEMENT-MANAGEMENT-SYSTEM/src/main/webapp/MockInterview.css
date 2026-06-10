@@ -619,3 +619,42 @@ select.form-control {
     from { transform: translateY(50px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
+
+/* ===== RESPONSIVE MEDIA QUERIES ===== */
+.sidebar-toggle-btn {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar-toggle-btn {
+        display: block;
+        margin-right: 15px;
+    }
+    .sidebar {
+        left: -250px;
+        transition: left 0.3s ease;
+        z-index: 1001;
+    }
+    .sidebar.active {
+        left: 0;
+    }
+    .main-container {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+    header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .setup-grid {
+        grid-template-columns: 1fr;
+    }
+    .results-header {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+}

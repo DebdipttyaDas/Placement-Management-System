@@ -84,7 +84,7 @@ a:hover {
     p {
         font-size: 1rem;
     }
-}
+
     #chatbot-toggle {
         width: 50px;
         height: 50px;
@@ -98,3 +98,4 @@ a:hover {
         right: 2.5%;
         bottom: 80px;
     }
+}

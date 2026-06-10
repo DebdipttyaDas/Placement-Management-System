@@ -547,6 +547,20 @@ td {
 }
 
 
+.sidebar-toggle-btn {
+    display: none;
+}
+
+@media(max-width:700px){
+    .sidebar-toggle-btn {
+        display: block;
+    }
+
+    .mobile-header {
+        display: flex !important;
+    }
+
+
 /* --------------------------------------------------------------------------
    2. STANDARD MOBILE PHONES (Max-width: 768px)
    -------------------------------------------------------------------------- */
@@ -557,10 +571,32 @@ td {
         padding: 15px 8px !important;
     }
 
+
     .sidebar h2 {
         font-size: 20px !important;
         text-align: center;
         margin-bottom: 20px !important;
+
+    .sidebar{
+        position: fixed;
+        top: 0;
+        left: -240px;
+        width: 240px;
+        height: 100vh;
+        z-index: 1001;
+        transition: left 0.3s ease;
+        overflow-y: auto;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding-top: 80px !important;
+
     }
 
     .menu li {
@@ -700,4 +736,6 @@ td {
         padding: 10px !important;
         font-size: 12px !important;
     }
+}
+}
 }
