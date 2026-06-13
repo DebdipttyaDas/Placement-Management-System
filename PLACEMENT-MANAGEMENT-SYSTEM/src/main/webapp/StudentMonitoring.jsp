@@ -34,6 +34,12 @@ pageEncoding="UTF-8"%>
     <!-- Main Content -->
 
     <div class="main-content">
+        <header class="mobile-header" style="display:none; align-items:center; background:#06473e; padding:15px; position:sticky; top:0; z-index:100;">
+            <button class="sidebar-toggle-btn" id="sidebar-toggle" style="background:none; border:none; color:white; font-size:24px; cursor:pointer;" aria-label="Toggle Sidebar">
+                &#9776;
+            </button>
+            <h2 class="mobile-logo" style="color:white; font-size:18px; font-weight:bold; margin-left: 10px;">Student Monitoring</h2>
+        </header>
 
         <!-- Stats Cards -->
 
@@ -184,5 +190,24 @@ pageEncoding="UTF-8"%>
 </div>
 </div>
 </div>
+
+<script>
+  (function() {
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        sidebar.classList.toggle('active');
+      });
+      document.addEventListener('click', function(e) {
+        if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+          sidebar.classList.remove('active');
+        }
+      });
+    }
+  })();
+</script>
+
 </body>
 </html>

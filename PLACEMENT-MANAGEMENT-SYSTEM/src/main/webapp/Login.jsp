@@ -24,14 +24,19 @@
 <div class="relative z-10 flex flex-col h-full">
 
 <!-- Navbar -->
-<header class="flex justify-between items-center px-10 py-4 bg-[#06473e]">
+<header class="flex justify-between items-center px-10 py-4 bg-[#06473e] relative">
 
   <h1 class="text-3xl font-bold text-[#ffffff] tracking-wide transition duration-300 hover:scale-105 hover:text-[#ffffff]">
     CampusConnect
   </h1>
 
+  <!-- Hamburger Button -->
+  <button id="hamburger-btn" class="block md:hidden text-white focus:outline-none text-2xl" aria-label="Toggle Menu">
+    &#9776;
+  </button>
+
 <!-- Nav Links -->
-  <nav class="flex space-x-5 text-sm items-center">
+  <nav id="nav-menu" class="hidden md:flex space-x-5 text-sm items-center">
     <a href="About.jsp" class="text-[#ffffff] hover:text-[#ffffff]">About</a>
     <a href="Contact.jsp" class="text-[#ffffff] hover:text-[#ffffff]">Contact</a>
     <a href="AdminLogin.jsp" class="bg-[#688783] text-white px-3 py-1 rounded-md hover:bg-[#5a7571]">
@@ -39,7 +44,33 @@
     </a>
   </nav>
 
+  <script>
+    (function() {
+      const hamburger = document.getElementById('hamburger-btn');
+      const navMenu = document.getElementById('nav-menu');
+      if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (navMenu.classList.contains('hidden')) {
+            navMenu.classList.remove('hidden');
+            navMenu.classList.add('flex', 'flex-col', 'absolute', 'top-full', 'left-0', 'right-0', 'bg-[#06473e]', 'p-5', 'z-50', 'space-y-4', 'space-x-0', 'items-start', 'border-t', 'border-[#0a5e53]');
+          } else {
+            navMenu.classList.add('hidden');
+            navMenu.classList.remove('flex', 'flex-col', 'absolute', 'top-full', 'left-0', 'right-0', 'bg-[#06473e]', 'p-5', 'z-50', 'space-y-4', 'space-x-0', 'items-start', 'border-t', 'border-[#0a5e53]');
+          }
+        });
+        document.addEventListener('click', function(e) {
+          if (!navMenu.classList.contains('hidden') && !navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+            navMenu.classList.add('hidden');
+            navMenu.classList.remove('flex', 'flex-col', 'absolute', 'top-full', 'left-0', 'right-0', 'bg-[#06473e]', 'p-5', 'z-50', 'space-y-4', 'space-x-0', 'items-start', 'border-t', 'border-[#0a5e53]');
+          }
+        });
+      }
+    })();
+  </script>
+
 </header>
+
 
 <!-- Main -->
 <main class="flex-1 flex justify-center items-center px-4 py-6">

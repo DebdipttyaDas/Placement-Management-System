@@ -23,16 +23,6 @@
 
     header {
         padding: 15px;
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-    }
-
-    nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
     }
 
     .glass-card {

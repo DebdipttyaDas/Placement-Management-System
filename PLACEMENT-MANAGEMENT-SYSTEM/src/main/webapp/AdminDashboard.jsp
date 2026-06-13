@@ -52,9 +52,12 @@
 
     <!-- Top Bar -->
     <header class="top-bar">
+        <button class="sidebar-toggle-btn" id="sidebar-toggle" style="background:none; border:none; color:black; font-size:24px; cursor:pointer;" aria-label="Toggle Sidebar">
+            &#9776;
+        </button>
         <h1>Welcome Admin!</h1>
 
-        <div class="user-profile">
+        <div class="user-profile" style="margin-left: auto;">
             <a href="AdminProfile.jsp">
                 <i class="fa fa-user-circle" style="font-size:25px; color:black;"></i>
             </a>
@@ -341,6 +344,24 @@
 </div>
 
 <script src="chatbot.js"></script>
+
+<script>
+  (function() {
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        sidebar.classList.toggle('active');
+      });
+      document.addEventListener('click', function(e) {
+        if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+          sidebar.classList.remove('active');
+        }
+      });
+    }
+  })();
+</script>
 
 </body>
 </html>

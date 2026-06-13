@@ -33,8 +33,11 @@
       <div class="main-content">
 
         <!-- HEADER CARD -->
-        <div class="header-card">
-          <div class="header-left">
+        <div class="header-card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
+          <div class="header-left" style="display:flex; align-items:center; gap:15px;">
+            <button class="sidebar-toggle-btn" id="sidebar-toggle" style="background:none; border:none; color:black; font-size:24px; cursor:pointer;" aria-label="Toggle Sidebar">
+                &#9776;
+            </button>
             <h1>Profile Settings</h1>
           </div>
 
@@ -238,6 +241,24 @@
     </div>
 
     <script src="chatbot.js"></script>
+
+    <script>
+      (function() {
+        const toggleBtn = document.getElementById('sidebar-toggle');
+        const sidebar = document.querySelector('.sidebar-card');
+        if (toggleBtn && sidebar) {
+          toggleBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            sidebar.classList.toggle('active');
+          });
+          document.addEventListener('click', function(e) {
+            if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+              sidebar.classList.remove('active');
+            }
+          });
+        }
+      })();
+    </script>
 
   </body>
 

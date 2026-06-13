@@ -68,7 +68,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <!-- HEADER -->
 
     
-    <div class="topbar"></div>
+    <div class="topbar" style="display:flex; align-items:center; padding-left:15px;">
+        <button class="sidebar-toggle-btn" id="sidebar-toggle" style="background:none; border:none; color:white; font-size:24px; cursor:pointer;" aria-label="Toggle Sidebar">
+            &#9776;
+        </button>
+    </div>
     
 <div class="page-content">
     <!-- PERFORMANCE -->
@@ -271,6 +275,24 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 </div>
 
 <script src="chatbot.js"></script>
+
+<script>
+  (function() {
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        sidebar.classList.toggle('active');
+      });
+      document.addEventListener('click', function(e) {
+        if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+          sidebar.classList.remove('active');
+        }
+      });
+    }
+  })();
+</script>
 
 </body>
 </html>

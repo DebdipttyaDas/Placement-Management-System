@@ -303,32 +303,30 @@ tr {
     }
 }
 
+.sidebar-toggle-btn {
+    display: none;
+}
+
 /* Tablets */
 @media screen and (max-width: 768px) {
-
-    body {
-        flex-direction: column;
+    .sidebar-toggle-btn {
+        display: block;
     }
 
     .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        padding: 15px;
-    }
-
-    .nav-menu {
+        position: fixed;
+        top: 0;
+        left: -230px;
+        width: 230px;
+        height: 100vh;
+        transition: left 0.3s ease;
+        z-index: 1001;
         display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
+        flex-direction: column;
     }
 
-    .nav-menu li {
-        margin: 0;
-    }
-
-    .logout-btn {
-        margin-top: 15px;
+    .sidebar.active {
+        left: 0;
     }
 
     .main-content {
@@ -338,9 +336,11 @@ tr {
     }
 
     .top-bar {
-        flex-direction: column;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
         gap: 15px;
-        align-items: stretch;
     }
 
     .search-input {

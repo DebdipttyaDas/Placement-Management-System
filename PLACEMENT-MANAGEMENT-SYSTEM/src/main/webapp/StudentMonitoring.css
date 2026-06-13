@@ -503,15 +503,42 @@ td {
     }
 }
 
+.sidebar-toggle-btn {
+    display: none;
+}
+
 @media(max-width:700px){
+    .sidebar-toggle-btn {
+        display: block;
+    }
+
+    .mobile-header {
+        display: flex !important;
+    }
 
     .container{
         flex-direction:column;
     }
 
     .sidebar{
-        width:100%;
-        min-height:auto;
+        position: fixed;
+        top: 0;
+        left: -240px;
+        width: 240px;
+        height: 100vh;
+        z-index: 1001;
+        transition: left 0.3s ease;
+        overflow-y: auto;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding-top: 80px !important;
     }
 
     .stats{
