@@ -359,3 +359,66 @@ body {
     margin-left:25px;
 }
 
+/* ===== RESPONSIVE MEDIA QUERIES ===== */
+.sidebar-toggle-btn {
+    display: none;
+}
+
+@media screen and (max-width: 1150px) {
+    .grid-cols-2 {
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+    }
+    .card.mt-6 {
+        width: 100%;
+    }
+    .line-wrapper, #lineChart {
+        width: 100% !important;
+    }
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr) !important;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar-toggle-btn {
+        display: block;
+    }
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -240px;
+        width: 240px;
+        height: 100vh;
+        transition: left 0.3s ease;
+        z-index: 1001;
+        display: flex;
+        flex-direction: column;
+    }
+    .sidebar.active {
+        left: 0;
+    }
+    .main {
+        margin-left: 0;
+        width: 100%;
+    }
+    .topbar {
+        left: 0;
+        width: 100%;
+    }
+    .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+    .grid-cols-4 {
+        grid-template-columns: 1fr !important;
+    }
+    .logout {
+        padding-top: 100px;
+    }
+    .logout button {
+        margin-top: 50px;
+    }
+}
+
+

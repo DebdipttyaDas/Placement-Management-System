@@ -206,7 +206,7 @@ finally{
         <script src="Placement.js"></script>
 
         <script>
-          document.addEventListener("DOMContentLoaded", function() {
+          (function() {
             const toggleBtn = document.getElementById('sidebar-toggle');
             const sidebar = document.querySelector('.sidebar');
             if (toggleBtn && sidebar) {
@@ -220,7 +220,7 @@ finally{
                 }
               });
             }
-          });
+          })();
         </script>
 
     </body>

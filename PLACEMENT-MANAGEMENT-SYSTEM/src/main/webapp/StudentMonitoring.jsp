@@ -192,7 +192,7 @@ pageEncoding="UTF-8"%>
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+  (function() {
     const toggleBtn = document.getElementById('sidebar-toggle');
     const sidebar = document.querySelector('.sidebar');
     if (toggleBtn && sidebar) {
@@ -206,7 +206,7 @@ pageEncoding="UTF-8"%>
         }
       });
     }
-  });
+  })();
 </script>
 
 </body>

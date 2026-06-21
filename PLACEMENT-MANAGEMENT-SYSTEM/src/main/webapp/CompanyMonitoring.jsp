@@ -137,7 +137,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+  (function() {
     const toggleBtn = document.getElementById('sidebar-toggle');
     const sidebar = document.querySelector('.sidebar');
     if (toggleBtn && sidebar) {
@@ -151,7 +151,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         }
       });
     }
-  });
+  })();
 </script>
 
 </body>

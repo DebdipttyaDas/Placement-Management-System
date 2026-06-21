@@ -33,8 +33,11 @@
     <div class="main-area">
 
         <!-- ===== TOP BAR ===== -->
-        <div class="top-bar">
-            <div class="top-icons">
+        <div class="top-bar" style="display:flex; justify-content:space-between; align-items:center;">
+            <button class="sidebar-toggle-btn" id="sidebar-toggle" style="background:none; border:none; color:white; font-size:24px; cursor:pointer;" aria-label="Toggle Sidebar">
+                &#9776;
+            </button>
+            <div class="top-icons" style="margin-left: auto;">
 
                 <a href="StudentProfile.jsp">
                     <i class="fa fa-user-circle" style="color: white;"></i>
@@ -224,6 +227,24 @@
 </div>
 
 <script src="chatbot.js"></script>
+
+<script>
+  (function() {
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        sidebar.classList.toggle('active');
+      });
+      document.addEventListener('click', function(e) {
+        if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+          sidebar.classList.remove('active');
+        }
+      });
+    }
+  })();
+</script>
 
 </body>
 </html>

@@ -45,7 +45,7 @@
   </nav>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    (function() {
       const hamburger = document.getElementById('hamburger-btn');
       const navMenu = document.getElementById('nav-menu');
       if (hamburger && navMenu) {
@@ -66,7 +66,7 @@
           }
         });
       }
-    });
+    })();
   </script>
 
 </header>
