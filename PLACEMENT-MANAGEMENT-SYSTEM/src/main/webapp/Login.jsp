@@ -128,7 +128,7 @@
 <div class="text-left mb-3">
   <div class="flex justify-between text-xs text-white">
     <label>PASSWORD</label>
-    <a href="#" class="text-white hover:underline">Forgot?</a>
+    <a href="Forgetpassword.jsp" class="text-white hover:underline">Forgot?</a>
   </div>
 
   <input type="password" name="password"
