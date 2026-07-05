@@ -12,10 +12,10 @@
 
 <!-- External CSS -->
 <link rel="stylesheet" href="Login.css">
-<link rel="stylesheet" href="ForgotPassword.css">
+<link rel="stylesheet" href="Forgetpassword.css">
 
 <!-- JS -->
-<script src="ForgotPassword.js" defer></script>
+<script src="Forgetpassword.js" defer></script>
 
 </head>
 
