@@ -13,7 +13,7 @@
 <!-- External CSS -->
 <link rel="stylesheet" href="Login.css">
 <link rel="stylesheet" href="Forgetpassword.css">
-<link rel="stylesheet" href="VerifyCode.css">
+<link rel="stylesheet" href="Verifycode.css">
 
 <!-- JS -->
 <script src="VerifyCode.js" defer></script>
