@@ -1,0 +1,34 @@
+/* ===== Verify Code Page Specific Styles ===== */
+
+/* Reuses .glass-card, .page, and media queries from Login.css.
+   Add any Verify-Code-only overrides below. */
+
+#verifyForm p {
+  line-height: 1.4;
+}
+
+#codeInput {
+  letter-spacing: 0.5em;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+#codeInput::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: normal;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+/* Small Mobile Devices */
+@media screen and (max-width: 480px) {
+  #verifyForm p {
+    font-size: 12px;
+  }
+
+  #codeInput {
+    letter-spacing: 0.35em;
+    font-size: 1.1rem;
+  }
+}
