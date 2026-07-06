@@ -65,9 +65,8 @@
 <form action="Forgetpasswordservlet" method="post" id="forgotForm">
 
 <p class="text-white text-xs text-left mb-4 opacity-80">
-  Enter the email address associated with your account and we'll send you a link to reset your password.
-</p>
-
+ Enter the email address associated with your account and we'll send you a verification code to reset your password.
+ </p>
 <!-- Email -->
 <div class="text-left mb-3">
   <label class="text-xs text-white">EMAIL</label>
@@ -80,7 +79,7 @@
 <!-- Button -->
 <button type="submit"
   class="w-full mt-3 py-2 rounded-lg bg-white text-[#063831] font-bold hover:scale-105 hover:bg-[#e0fce2] transition duration-200">
-  Send Reset Link
+  Send Reset code
 </button>
 
 </form>
