@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/ResetPasswordServlet")
+@WebServlet("/Resetpasswordservlet")
 public class Resetpasswordservlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -53,7 +53,8 @@ public class Resetpasswordservlet extends HttpServlet {
         boolean updated = updatePassword(role, email, newPassword);
 
         if (!updated) {
-            request.setAttribute("error", "Something went wrong updating your password. Please try again.");
+            request.setAttribute("error", "Failed to update password. Please try again.");
+            request.setAttribute("showAlert", true);
             request.getRequestDispatcher("Resetpassword.jsp").forward(request, response);
             return;
         }
@@ -63,8 +64,10 @@ public class Resetpasswordservlet extends HttpServlet {
         session.removeAttribute("resetRole");
         session.removeAttribute("resetVerified");
 
-        request.setAttribute("successMessage", "Your password has been updated. Please log in.");
-        request.getRequestDispatcher("Login.jsp").forward(request, response);
+        // Forward back to ResetPassword.jsp with a success flag. The page's
+        // own JS will show the popup and then redirect to Login.jsp itself.
+        request.setAttribute("showSuccess", true);
+        request.getRequestDispatcher("Resetpassword.jsp").forward(request, response);
     }
 
     @Override
