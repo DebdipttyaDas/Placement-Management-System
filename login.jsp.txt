@@ -1,0 +1,155 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%@ page import="java.sql.*" %>
+
+<%
+String msg = "";
+
+if(request.getMethod().equalsIgnoreCase("POST")){
+
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
+
+    try{
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+
+        Connection con = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/your_database",
+            "root",
+            "password");
+
+        PreparedStatement ps = con.prepareStatement(
+            "SELECT * FROM users WHERE username=? AND password=?");
+
+        ps.setString(1, username);
+        ps.setString(2, password);
+
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next()){
+
+            session.setAttribute("username", username);
+            response.sendRedirect("home.jsp");
+
+        }else{
+
+            msg = "Invalid Username or Password";
+
+        }
+
+        con.close();
+
+    }catch(Exception e){
+        out.println(e);
+    }
+
+}
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>Login</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f2f2f2;
+}
+
+.container{
+
+width:350px;
+margin:100px auto;
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 0 10px gray;
+
+}
+
+input{
+
+width:100%;
+padding:10px;
+margin:10px 0;
+
+}
+
+button{
+
+width:100%;
+padding:10px;
+background:#007BFF;
+color:white;
+border:none;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#0056b3;
+
+}
+
+.error{
+
+color:red;
+text-align:center;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2 align="center">Login</h2>
+
+<form method="post">
+
+<input type="text"
+name="username"
+placeholder="Username"
+required>
+
+<input type="password"
+name="password"
+placeholder="Password"
+required>
+
+<button type="submit">Login</button>
+
+</form>
+
+<p class="error"><%=msg %></p>
+
+<%
+if(msg.equals("Invalid Username or Password")){
+%>
+
+<p align="center">
+<a href="forgotPassword.jsp">
+Forgot Password?
+</a>
+</p>
+
+<%
+}
+%>
+
+</div>
+
+</body>
+
+</html>
