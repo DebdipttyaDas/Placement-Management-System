@@ -21,4 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+
+  // Server-side failure (e.g. DB update failed) is signaled via a data
+  // attribute on <body>, set by ResetPassword.jsp based on the servlet's
+  // "showAlert" request attribute.
+  if (document.body.dataset.showErrorAlert === "true") {
+    alert("Failed to update password. Please try again.");
+  }
 });
