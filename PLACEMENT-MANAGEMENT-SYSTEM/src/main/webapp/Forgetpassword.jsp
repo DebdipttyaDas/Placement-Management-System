@@ -62,7 +62,7 @@
 <div class="glass-card w-full max-w-[420px] p-6 rounded-2xl mx-auto">
 
 <!-- FORM START -->
-<form action="ForgotPasswordServlet" method="post" id="forgotForm">
+<form action="Forgetpasswordservlet" method="post" id="forgotForm">
 
 <p class="text-white text-xs text-left mb-4 opacity-80">
   Enter the email address associated with your account and we'll send you a link to reset your password.
