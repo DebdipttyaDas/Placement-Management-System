@@ -43,7 +43,7 @@
 <!-- Card -->
 <div class="glass-card w-full max-w-[420px] p-6 rounded-2xl mx-auto">
 
-<form action="VerifyCodeServlet" method="post" id="verifyForm">
+<form action="Verifycodeservlet" method="post" id="verifyForm">
 
 <p class="text-white text-xs text-left mb-4 opacity-80">
   Enter the 6-digit verification code we emailed you. It expires in 10 minutes.
