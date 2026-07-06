@@ -63,11 +63,6 @@ a:hover {
         font-size: 0.95rem;
     }
 
-    #chatbot-container {
-        width: 280px;
-        height: 380px;
-        right: 10px;
-    }
 }
 
 /* Mobile phones */
@@ -85,17 +80,4 @@ a:hover {
         font-size: 1rem;
     }
 
-    #chatbot-toggle {
-        width: 50px;
-        height: 50px;
-        bottom: 15px;
-        right: 15px;
-    }
-
-    #chatbot-container {
-        width: 95%;
-        height: 70vh;
-        right: 2.5%;
-        bottom: 80px;
-    }
 }

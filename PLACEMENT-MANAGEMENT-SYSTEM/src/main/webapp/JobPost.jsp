@@ -17,9 +17,7 @@
     <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-    <!-- Chatbot -->
-    
-    <link rel="stylesheet" href="chatbot.css">
+
    
 </head>
 
@@ -293,28 +291,7 @@
 <!-- SCRIPT -->
 <script src="Jobpost.js"></script>
 
-<!-- Chatbot -->
-<div id="chatbot-toggle">
-    <i class="fas fa-robot"></i>
-</div>
 
-<div id="chatbot-container">
-    <div class="chatbot-header">
-        <h3>AI Assistant</h3>
-        <button class="chatbot-close">&times;</button>
-    </div>
-    <div class="chatbot-messages">
-        <!-- Messages will be added here -->
-    </div>
-    <div class="chatbot-input-area">
-        <input type="text" class="chatbot-input" placeholder="Type your message...">
-        <button class="chatbot-send">
-            <i class="fas fa-paper-plane"></i>
-        </button>
-    </div>
-</div>
-
-<script src="chatbot.js"></script>
 
 <script>
   (function() {

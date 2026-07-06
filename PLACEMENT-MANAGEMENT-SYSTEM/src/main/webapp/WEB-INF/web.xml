@@ -37,15 +37,7 @@
         <url-pattern>/ApproveCompanyServlet</url-pattern>
     </servlet-mapping>
 
-    <!-- Chatbot servlet -->
-    <servlet>
-        <servlet-name>ChatbotServlet</servlet-name>
-        <servlet-class>ChatbotServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ChatbotServlet</servlet-name>
-        <url-pattern>/ChatbotServlet</url-pattern>
-    </servlet-mapping>
+
 
     <!-- Company profile servlets -->
     <servlet>
