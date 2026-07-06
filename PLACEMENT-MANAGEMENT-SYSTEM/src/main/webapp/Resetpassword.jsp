@@ -22,8 +22,11 @@
 
 <%
 Boolean showAlert = (Boolean) request.getAttribute("showAlert");
+Boolean showSuccess = (Boolean) request.getAttribute("showSuccess");
 %>
-<body class="h-screen flex flex-col relative" data-show-error-alert="<%= (showAlert != null && showAlert) ? "true" : "false" %>">
+<body class="h-screen flex flex-col relative"
+      data-show-error-alert="<%= (showAlert != null && showAlert) ? "true" : "false" %>"
+      data-show-success-alert="<%= (showSuccess != null && showSuccess) ? "true" : "false" %>">
 
 <div class="min-h-screen bg-[#cefad0]">
 <div class="relative z-10 flex flex-col h-full">
