@@ -13,6 +13,10 @@
 <!-- External CSS -->
 <link rel="stylesheet" href="Login.css">
 <link rel="stylesheet" href="Forgetpassword.css">
+<link rel="stylesheet" href="Resetpassword.css">
+
+<!-- JS -->
+<script src="Resetpassword.js" defer></script>
 
 </head>
 
@@ -81,23 +85,5 @@ if(error != null){
 
 </div>
 </div>
-
-<script>
-document.getElementById("resetForm").addEventListener("submit", function (e) {
-  const pw = document.getElementById("newPassword").value;
-  const confirm = document.getElementById("confirmPassword").value;
-
-  if (pw.length < 6) {
-    alert("Password must be at least 6 characters.");
-    e.preventDefault();
-    return;
-  }
-  if (pw !== confirm) {
-    alert("Passwords do not match.");
-    e.preventDefault();
-  }
-});
-</script>
-
 </body>
 </html>
