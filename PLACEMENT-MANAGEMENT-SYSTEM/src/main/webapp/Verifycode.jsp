@@ -13,6 +13,10 @@
 <!-- External CSS -->
 <link rel="stylesheet" href="Login.css">
 <link rel="stylesheet" href="Forgetpassword.css">
+<link rel="stylesheet" href="VerifyCode.css">
+
+<!-- JS -->
+<script src="VerifyCode.js" defer></script>
 
 </head>
 
