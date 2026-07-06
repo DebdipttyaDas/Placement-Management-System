@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
+	  
       if (pw !== confirm) {
         alert("Passwords do not match.");
         e.preventDefault();
