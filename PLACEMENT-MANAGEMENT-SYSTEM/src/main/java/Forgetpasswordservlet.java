@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -54,11 +57,9 @@ public class Forgetpasswordservlet extends HttpServlet {
             session.setAttribute("resetCode", code);
             session.setAttribute("resetCodeExpiry", System.currentTimeMillis() + CODE_VALID_MILLIS);
 
-            try {
-                EmailUtil.sendVerificationCode(email, code);
-            } catch (MessagingException e) {
-                System.err.println("Failed to send verification email: " + e.getMessage());
-                request.setAttribute("error", "Could not send the email right now. Please try again shortly.");
+            boolean success = triggerN8NWorkflow(email, code);
+            if (!success) {
+                request.setAttribute("error", "Could not send the verification code. Please try again later.");
                 request.getRequestDispatcher("Forgetpassword.jsp").forward(request, response);
                 return;
             }
@@ -70,7 +71,7 @@ public class Forgetpasswordservlet extends HttpServlet {
 
         request.setAttribute("successMessage",
                 "If an account exists for " + email + ", a verification code has been sent.");
-        request.getRequestDispatcher("VerifyCode.jsp").forward(request, response);
+        request.getRequestDispatcher("Verifycode.jsp").forward(request, response);
     }
 
     @Override
@@ -83,6 +84,31 @@ public class Forgetpasswordservlet extends HttpServlet {
         SecureRandom random = new SecureRandom();
         int code = 100000 + random.nextInt(900000); // 6-digit code, no leading zero issues
         return String.valueOf(code);
+    }
+
+    private boolean triggerN8NWorkflow(String email, String code) {
+        try {
+            URL url = new URL("http://localhost:5678/webhook/forget-password");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setDoOutput(true);
+
+            String jsonPayload = String.format("{\"email\":\"%s\",\"code\":\"%s\"}", email, code);
+
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] input = jsonPayload.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            int responseCode = conn.getResponseCode();
+            return responseCode >= 200 && responseCode <= 299;
+        } catch (Exception e) {
+            System.err.println("Error calling n8n forget-password webhook: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**

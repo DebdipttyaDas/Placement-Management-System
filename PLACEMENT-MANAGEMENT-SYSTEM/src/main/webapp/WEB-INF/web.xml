@@ -162,6 +162,34 @@
         <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
 
+    <!-- Forgot Password servlets -->
+    <servlet>
+        <servlet-name>Forgetpasswordservlet</servlet-name>
+        <servlet-class>Forgetpasswordservlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Forgetpasswordservlet</servlet-name>
+        <url-pattern>/Forgetpasswordservlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Verifycodeservlet</servlet-name>
+        <servlet-class>Verifycodeservlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Verifycodeservlet</servlet-name>
+        <url-pattern>/VerifyCodeServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Resetpasswordservlet</servlet-name>
+        <servlet-class>Resetpasswordservlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Resetpasswordservlet</servlet-name>
+        <url-pattern>/ResetPasswordServlet</url-pattern>
+    </servlet-mapping>
+
     <!-- Placement analysis servlet -->
     <servlet>
         <servlet-name>PlacementAnalysisServlet</servlet-name>
