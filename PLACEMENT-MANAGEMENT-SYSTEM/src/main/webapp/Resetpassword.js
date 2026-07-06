@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-	  
       if (pw !== confirm) {
         alert("Passwords do not match.");
         e.preventDefault();
@@ -28,5 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // "showAlert" request attribute.
   if (document.body.dataset.showErrorAlert === "true") {
     alert("Failed to update password. Please try again.");
+  }
+
+  // Server-side success is signaled the same way. Show the popup, then
+  // send the user to the login page.
+  if (document.body.dataset.showSuccessAlert === "true") {
+    alert("Password updated successfully! Please log in.");
+    window.location.href = "Login.jsp";
   }
 });
