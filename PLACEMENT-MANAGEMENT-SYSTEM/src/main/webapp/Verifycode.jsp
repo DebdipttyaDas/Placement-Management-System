@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="Verifycode.css">
 
 <!-- JS -->
-<script src="VerifyCode.js" defer></script>
+<script src="Verifycode.js" defer></script>
 
 </head>
 
