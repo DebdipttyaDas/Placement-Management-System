@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,10 +15,6 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/CompanyProfileServlet")
 public class CompanyProfileServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,8 +32,7 @@ public class CompanyProfileServlet extends HttpServlet {
         }
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+        	try (Connection conn = DBUtil.getConnection()) { 
                 Integer companyId = getCompanyIdByCode(conn, companyCode);
                 if (companyId != null) {
                     loadProfileIntoRequest(conn, companyId, request);
@@ -49,7 +43,7 @@ public class CompanyProfileServlet extends HttpServlet {
         }
 
         request.getRequestDispatcher("CompanyProfile.jsp").forward(request, response);
-    }
+        }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -139,8 +133,7 @@ public class CompanyProfileServlet extends HttpServlet {
         Integer companyId = null;
         boolean dbSuccess = false;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        	conn = DBUtil.getConnection();
             conn.setAutoCommit(false);
 
             companyId = getCompanyIdByCode(conn, companyCode);
@@ -182,8 +175,7 @@ public class CompanyProfileServlet extends HttpServlet {
 
         if (companyId == null) {
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                try (Connection conn1 = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+            	try (Connection conn1 = DBUtil.getConnection()) {
                     companyId = getCompanyIdByCode(conn1, companyCode);
                 }
             } catch (Exception e) {

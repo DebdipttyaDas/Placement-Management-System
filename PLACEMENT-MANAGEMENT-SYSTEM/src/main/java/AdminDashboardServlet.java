@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +14,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/AdminDashboardServlet")
 public class AdminDashboardServlet extends HttpServlet {
@@ -196,18 +194,9 @@ public class AdminDashboardServlet extends HttpServlet {
             throws ServletException, IOException {
         doGet(request, response);
     }
-
+    
     private Connection getConnection() throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        try {
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/placement_management", "root", "root");
-        } catch (SQLException e1) {
-            try {
-                return DriverManager.getConnection("jdbc:mysql://localhost:3306/placement_management", "root", "password");
-            } catch (SQLException e2) {
-                return DriverManager.getConnection("jdbc:mysql://localhost:3306/placement_management", "root", "");
-            }
-        }
+        return DBUtil.getConnection();
     }
 
     private int getTableCount(Connection conn, String tableName) {
