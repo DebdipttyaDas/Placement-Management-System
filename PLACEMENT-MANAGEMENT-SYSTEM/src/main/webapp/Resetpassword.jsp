@@ -20,7 +20,10 @@
 
 </head>
 
-<body class="h-screen flex flex-col relative">
+<%
+Boolean showAlert = (Boolean) request.getAttribute("showAlert");
+%>
+<body class="h-screen flex flex-col relative" data-show-error-alert="<%= (showAlert != null && showAlert) ? "true" : "false" %>">
 
 <div class="min-h-screen bg-[#cefad0]">
 <div class="relative z-10 flex flex-col h-full">
@@ -43,7 +46,7 @@
 <!-- Card -->
 <div class="glass-card w-full max-w-[420px] p-6 rounded-2xl mx-auto">
 
-<form action="Resetpasswordservlet" method="post" id="resetForm">
+<form action="ResetPasswordServlet" method="post" id="resetForm">
 
 <!-- New Password -->
 <div class="text-left mb-3">
