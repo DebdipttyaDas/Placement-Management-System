@@ -4,7 +4,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -18,10 +17,6 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/Forgetpasswordservlet")
 public class Forgetpasswordservlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
 
     private static final String EMAIL_REGEX = "^[^ ]+@[^ ]+\\.[a-zA-Z]{2,}$";
     private static final long CODE_VALID_MILLIS = 10 * 60 * 1000; // 10 minutes
@@ -130,8 +125,8 @@ public class Forgetpasswordservlet extends HttpServlet {
         };
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+            
+            try (Connection conn = DBUtil.getConnection()) {
                 for (String[] t : tables) {
                     String table = t[0];
                     String column = t[1];

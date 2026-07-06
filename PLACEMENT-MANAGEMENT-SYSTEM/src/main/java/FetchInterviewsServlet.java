@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import jakarta.servlet.ServletException;
@@ -13,10 +12,6 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/FetchInterviewsServlet")
 public class FetchInterviewsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
 
     private static final int STUDENT_LIMIT = 10;
 
@@ -34,7 +29,6 @@ public class FetchInterviewsServlet extends HttpServlet {
         json.append("[");
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
 
             if (fetchAll) {
                 appendInterviews(json,
@@ -83,7 +77,7 @@ public class FetchInterviewsServlet extends HttpServlet {
             String studentFullName, String companyName) throws Exception {
         boolean first = true;
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection conn = DBUtil.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
 
             if (studentEmail != null && studentFullName != null) {
@@ -143,8 +137,8 @@ public class FetchInterviewsServlet extends HttpServlet {
             return "";
         }
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            
+            try (Connection conn = DBUtil.getConnection();
                     PreparedStatement ps = conn.prepareStatement(
                             "SELECT full_name FROM students WHERE email = ?")) {
                 ps.setString(1, studentEmail);
@@ -173,8 +167,8 @@ public class FetchInterviewsServlet extends HttpServlet {
             return null;
         }
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+
+            try (Connection conn = DBUtil.getConnection();
                     PreparedStatement ps = conn.prepareStatement(
                             "SELECT company_name FROM companies WHERE company_code = ?")) {
                 ps.setString(1, companyCode);
