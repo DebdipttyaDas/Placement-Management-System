@@ -1,9 +1,7 @@
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,11 +14,6 @@ import jakarta.servlet.http.HttpSession;
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    // Database configuration
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -32,7 +25,6 @@ public class LoginServlet extends HttpServlet {
         String companyCode = request.getParameter("companyCode");
 
         if ("company".equals(role)) {
-            // Use company specific fields if provided
             if (companyCode != null && !companyCode.trim().isEmpty()) {
                 email = companyCode;
             }
@@ -42,12 +34,17 @@ public class LoginServlet extends HttpServlet {
         // ADMIN LOGIN
         // ----------------------------------------------------------------
         if ("admin".equals(role)) {
+
             if (isValidUser("admin", email, password)) {
+
                 HttpSession session = request.getSession();
                 session.setAttribute("user", email);
                 session.setAttribute("role", role);
+
                 response.sendRedirect("AdminDashboard.jsp");
+
             } else {
+
                 request.setAttribute("error", "Invalid admin credentials");
                 request.getRequestDispatcher("Login.jsp?role=admin").forward(request, response);
             }
@@ -57,7 +54,9 @@ public class LoginServlet extends HttpServlet {
         // STUDENT LOGIN
         // ----------------------------------------------------------------
         else if ("student".equals(role)) {
+
             if (isValidUser("student", email, password)) {
+
                 HttpSession session = request.getSession();
                 session.setAttribute("user", email);
                 session.setAttribute("role", role);
@@ -65,31 +64,39 @@ public class LoginServlet extends HttpServlet {
 
                 String studentName = "Student";
                 String studentFullName = "";
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-                         PreparedStatement ps = conn.prepareStatement(
-                                 "SELECT full_name FROM students WHERE email = ?")) {
-                        ps.setString(1, email);
-                        try (ResultSet rs = ps.executeQuery()) {
-                            if (rs.next()) {
-                                String fullName = rs.getString("full_name");
-                                if (fullName != null && !fullName.trim().isEmpty()) {
-                                    studentFullName = fullName.trim();
-                                    studentName = studentFullName.split("\\s+")[0];
-                                }
+
+                try (Connection conn = DBUtil.getConnection();
+                     PreparedStatement ps = conn.prepareStatement(
+                             "SELECT full_name FROM students WHERE email = ?")) {
+
+                    ps.setString(1, email);
+
+                    try (ResultSet rs = ps.executeQuery()) {
+
+                        if (rs.next()) {
+
+                            String fullName = rs.getString("full_name");
+
+                            if (fullName != null && !fullName.trim().isEmpty()) {
+
+                                studentFullName = fullName.trim();
+                                studentName = studentFullName.split("\\s+")[0];
                             }
                         }
                     }
+
                 } catch (Exception e) {
                     System.err.println("Error fetching student name: " + e.getMessage());
                 }
+
                 session.setAttribute("studentName", studentName);
                 session.setAttribute("studentFullName", studentFullName);
                 session.setAttribute("profileComplete", 80);
 
                 response.sendRedirect("Student_dashboard.jsp");
+
             } else {
+
                 request.setAttribute("error", "Invalid student credentials");
                 request.getRequestDispatcher("Login.jsp?role=student").forward(request, response);
             }
@@ -99,36 +106,46 @@ public class LoginServlet extends HttpServlet {
         // COMPANY LOGIN
         // ----------------------------------------------------------------
         else if ("company".equals(role)) {
+
             if (isValidUser("company", email, password)) {
+
                 HttpSession session = request.getSession();
                 session.setAttribute("user", email);
                 session.setAttribute("role", role);
                 session.setAttribute("companyCode", email);
 
                 String companyName = "";
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-                         PreparedStatement ps = conn.prepareStatement(
-                                 "SELECT company_name FROM companies WHERE company_code = ?")) {
-                        ps.setString(1, email);
-                        try (ResultSet rs = ps.executeQuery()) {
-                            if (rs.next() && rs.getString("company_name") != null) {
-                                companyName = rs.getString("company_name").trim();
-                            }
+
+                try (Connection conn = DBUtil.getConnection();
+                     PreparedStatement ps = conn.prepareStatement(
+                             "SELECT company_name FROM companies WHERE company_code = ?")) {
+
+                    ps.setString(1, email);
+
+                    try (ResultSet rs = ps.executeQuery()) {
+
+                        if (rs.next() && rs.getString("company_name") != null) {
+                            companyName = rs.getString("company_name").trim();
                         }
                     }
+
                 } catch (Exception e) {
                     System.err.println("Error fetching company name: " + e.getMessage());
                 }
+
                 session.setAttribute("companyName", companyName);
 
                 response.sendRedirect("CompanyDashboard.jsp");
+
             } else {
+
                 request.setAttribute("error", "Invalid company credentials");
                 request.getRequestDispatcher("Login.jsp?role=company").forward(request, response);
             }
-        } else {
+        }
+
+        else {
+
             request.setAttribute("error", "Invalid role specified");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
@@ -138,45 +155,48 @@ public class LoginServlet extends HttpServlet {
     // Database Validation Method
     // ----------------------------------------------------------------
     private boolean isValidUser(String role, String identifier, String password) {
+
         boolean isValid = false;
         String query = "";
 
         switch (role) {
-            case "admin":
-                query = "SELECT * FROM admin WHERE username = ? AND password = ?";
-                break;
-            case "student":
-                query = "SELECT * FROM students WHERE email = ? AND password = ?";
-                break;
-            case "company":
-                query = "SELECT * FROM companies WHERE company_code = ? AND password = ?";
-                break;
-            default:
-                return false;
+
+        case "admin":
+            query = "SELECT * FROM admin WHERE username = ? AND password = ?";
+            break;
+
+        case "student":
+            query = "SELECT * FROM students WHERE email = ? AND password = ?";
+            break;
+
+        case "company":
+            query = "SELECT * FROM companies WHERE company_code = ? AND password = ?";
+            break;
+
+        default:
+            return false;
         }
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
 
-            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-                    PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, identifier);
+            ps.setString(2, password);
 
-                ps.setString(1, identifier);
-                ps.setString(2, password);
+            try (ResultSet rs = ps.executeQuery()) {
 
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        isValid = true;
-                    }
+                if (rs.next()) {
+                    isValid = true;
                 }
             }
-        } catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC Driver not found: " + e.getMessage());
-        } catch (SQLException e) {
+
+        } catch (Exception e) {
             System.err.println("Database connection error: " + e.getMessage());
         }
 
-        if (!isValid && "admin".equals(role) && "admin".equals(identifier) && "admin".equals(password)) {
+        if (!isValid && "admin".equals(role)
+                && "admin".equals(identifier)
+                && "admin".equals(password)) {
             return true;
         }
 
