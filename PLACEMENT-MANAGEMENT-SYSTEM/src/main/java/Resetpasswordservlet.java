@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/ResetPasswordServlet")
-public class ResetPasswordServlet extends HttpServlet {
+public class Resetpasswordservlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
@@ -40,13 +40,13 @@ public class ResetPasswordServlet extends HttpServlet {
 
         if (newPassword == null || newPassword.length() < 6) {
             request.setAttribute("error", "Password must be at least 6 characters.");
-            request.getRequestDispatcher("ResetPassword.jsp").forward(request, response);
+            request.getRequestDispatcher("Resetpassword.jsp").forward(request, response);
             return;
         }
 
         if (!newPassword.equals(confirmPassword)) {
             request.setAttribute("error", "Passwords do not match.");
-            request.getRequestDispatcher("ResetPassword.jsp").forward(request, response);
+            request.getRequestDispatcher("Resetpassword.jsp").forward(request, response);
             return;
         }
 
@@ -54,7 +54,7 @@ public class ResetPasswordServlet extends HttpServlet {
 
         if (!updated) {
             request.setAttribute("error", "Something went wrong updating your password. Please try again.");
-            request.getRequestDispatcher("ResetPassword.jsp").forward(request, response);
+            request.getRequestDispatcher("Resetpassword.jsp").forward(request, response);
             return;
         }
 
