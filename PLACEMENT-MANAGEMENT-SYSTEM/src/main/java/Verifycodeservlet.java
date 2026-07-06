@@ -26,20 +26,20 @@ public class Verifycodeservlet extends HttpServlet {
         // session expired/was never set) - treat any entry as invalid.
         if (actualCode == null || resetEmail == null || expiry == null) {
             request.setAttribute("error", "Invalid or expired code. Please request a new one.");
-            request.getRequestDispatcher("VerifyCode.jsp").forward(request, response);
+            request.getRequestDispatcher("Verifycode.jsp").forward(request, response);
             return;
         }
 
         if (System.currentTimeMillis() > expiry) {
             clearResetSession(session);
             request.setAttribute("error", "This code has expired. Please request a new one.");
-            request.getRequestDispatcher("VerifyCode.jsp").forward(request, response);
+            request.getRequestDispatcher("Verifycode.jsp").forward(request, response);
             return;
         }
 
         if (enteredCode == null || !enteredCode.trim().equals(actualCode)) {
             request.setAttribute("error", "Incorrect code. Please try again.");
-            request.getRequestDispatcher("VerifyCode.jsp").forward(request, response);
+            request.getRequestDispatcher("Verifycode.jsp").forward(request, response);
             return;
         }
 
@@ -49,7 +49,7 @@ public class Verifycodeservlet extends HttpServlet {
         session.removeAttribute("resetCode");
         session.removeAttribute("resetCodeExpiry");
 
-        request.getRequestDispatcher("ResetPassword.jsp").forward(request, response);
+        request.getRequestDispatcher("Resetpassword.jsp").forward(request, response);
     }
 
     @Override
