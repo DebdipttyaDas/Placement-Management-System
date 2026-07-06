@@ -43,7 +43,7 @@
 <!-- Card -->
 <div class="glass-card w-full max-w-[420px] p-6 rounded-2xl mx-auto">
 
-<form action="ResetPasswordServlet" method="post" id="resetForm">
+<form action="Resetpasswordservlet" method="post" id="resetForm">
 
 <!-- New Password -->
 <div class="text-left mb-3">
