@@ -73,7 +73,7 @@
 
                             <label>PASSWORD</label>
 
-                            <a href="#">Forgot?</a>
+                            <a href="Forgetpassword.jsp">Forgot?</a>
 
                         </div>
 
