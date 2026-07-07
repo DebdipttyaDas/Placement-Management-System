@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MockInterviewDAO {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
     private static boolean tablesInitialized = false;
 
     public MockInterviewDAO() {
@@ -13,19 +12,8 @@ public class MockInterviewDAO {
     }
 
     // Direct connection method requested to be included inside suitable file
-    public Connection getConnection() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        try {
-            return DriverManager.getConnection(DB_URL, "root", "root");
-        } catch (SQLException e) {
-            // Fallback password
-            try {
-                return DriverManager.getConnection(DB_URL, "root", "password");
-            } catch (SQLException ex) {
-                // Secondary fallback if both fail
-                return DriverManager.getConnection(DB_URL, "root", "");
-            }
-        }
+    public Connection getConnection() throws Exception {
+        return DBUtil.getConnection();
     }
 
     private synchronized void initializeDatabaseTables() {

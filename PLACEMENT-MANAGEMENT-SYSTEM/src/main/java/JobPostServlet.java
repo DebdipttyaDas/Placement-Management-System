@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,10 +17,6 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/JobPostServlet")
 public class JobPostServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    // Database configuration
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
-    private static final String DB_USER = "root";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -69,8 +64,9 @@ public class JobPostServlet extends HttpServlet {
                     }
                 }
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (Exception e) {
             System.err.println("JobPostServlet: Database error: " + e.getMessage());
+            e.printStackTrace();
         }
 
         if (isSuccess) {
@@ -80,17 +76,8 @@ public class JobPostServlet extends HttpServlet {
         }
     }
 
-    private Connection getConnection() throws ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        String[] passes = {"root", "password", ""};
-        for (String pass : passes) {
-            try {
-                return DriverManager.getConnection(DB_URL, DB_USER, pass);
-            } catch (SQLException e) {
-                // Try next password fallback
-            }
-        }
-        return null;
+    private Connection getConnection() throws Exception {
+        return DBUtil.getConnection();
     }
 
     private void checkAndPrepareDatabaseSchema(Connection conn) {

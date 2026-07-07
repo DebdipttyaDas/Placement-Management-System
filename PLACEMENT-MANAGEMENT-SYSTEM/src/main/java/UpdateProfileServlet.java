@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -36,20 +35,14 @@ public class UpdateProfileServlet extends HttpServlet {
             if (!uploadDir.exists()) uploadDir.mkdir();
             photoPart.write(uploadPath + java.io.File.separator + fileName);
         }
-
-        // Database configuration
-        String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
-        String DB_USER = "root";
-        String DB_PASSWORD = "root";
         
         boolean isUpdated = false;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
             // Update the record based on email, which should be unique to the user
             String updateQuery = "UPDATE students SET full_name = ?, password = ?, department = ?, cgpa = ?, languages = ?, skills = ? WHERE email = ?";
             
-            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            try (Connection conn = DBUtil.getConnection();
                  PreparedStatement ps = conn.prepareStatement(updateQuery)) {
                 
                 ps.setString(1, name);

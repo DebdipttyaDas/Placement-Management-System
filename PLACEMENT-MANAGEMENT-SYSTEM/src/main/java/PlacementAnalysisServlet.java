@@ -1,14 +1,11 @@
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -158,32 +155,7 @@ public class PlacementAnalysisServlet extends HttpServlet {
     }
 
     private Connection getConnection() throws Exception {
-        Properties props = new Properties();
-        try (InputStream input = PlacementAnalysisServlet.class.getClassLoader()
-                                           .getResourceAsStream("db.properties")) {
-            if (input != null) {
-                props.load(input);
-                String url = props.getProperty("url");
-                String username = props.getProperty("username");
-                String password = props.getProperty("password");
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                return DriverManager.getConnection(url, username, password);
-            }
-        } catch (Exception e) {
-            // Ignore and fall back to local connection options
-        }
-
-        // Fallback connections (localhost options)
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        try {
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/placement_management", "root", "root");
-        } catch (SQLException e1) {
-            try {
-                return DriverManager.getConnection("jdbc:mysql://localhost:3306/placement_management", "root", "password");
-            } catch (SQLException e2) {
-                return DriverManager.getConnection("jdbc:mysql://localhost:3306/placement_management", "root", "");
-            }
-        }
+        return DBUtil.getConnection();
     }
 
     private int getTableCount(Connection conn, String tableName) {

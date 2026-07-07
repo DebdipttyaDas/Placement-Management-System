@@ -4,7 +4,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -18,7 +17,6 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/Forgetpasswordservlet")
 public class Forgetpasswordservlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
 
 
     private static final String EMAIL_REGEX = "^[^ ]+@[^ ]+\\.[a-zA-Z]{2,}$";

@@ -69,13 +69,7 @@ ResultSet rs = null;
 
 try{
 
-    Class.forName("com.mysql.cj.jdbc.Driver");
-
-    conn = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/placement_management",
-        "root",
-        "root"
-    );
+	conn = DBUtil.getConnection();
 
     st = conn.createStatement();
 

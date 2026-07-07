@@ -3,7 +3,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.stream.Collectors;
@@ -16,10 +15,6 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/ScheduleInterviewServlet")
 public class ScheduleInterviewServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
 
     private static final String N8N_WEBHOOK_URL = "http://localhost:5678/webhook/schedule-interview";
 
@@ -78,8 +73,9 @@ public class ScheduleInterviewServlet extends HttpServlet {
     private void insertInterviewSlot(String companyName, String studentName, String studentEmail,
             String interviewerName, String interviewDate, String interviewTime, int duration,
             String interviewRound, String meetLink) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+    	
+    	try (Connection conn = DBUtil.getConnection()) {
+    	
             String sql = "INSERT INTO interview_slots (company_name, student_name, student_email, "
                     + "interviewer_name, interview_date, interview_time, duration, interview_round, meet_link, status) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -126,8 +122,7 @@ public class ScheduleInterviewServlet extends HttpServlet {
             return "";
         }
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        	try (Connection conn = DBUtil.getConnection();
                     PreparedStatement ps = conn.prepareStatement(
                             "SELECT email FROM students WHERE LOWER(TRIM(full_name)) = LOWER(TRIM(?))")) {
                 ps.setString(1, studentName.trim());
