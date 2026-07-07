@@ -19,9 +19,7 @@ import jakarta.servlet.http.HttpSession;
 public class Forgetpasswordservlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
+
 
     private static final String EMAIL_REGEX = "^[^ ]+@[^ ]+\\.[a-zA-Z]{2,}$";
     private static final long CODE_VALID_MILLIS = 10 * 60 * 1000; // 10 minutes
@@ -46,9 +44,22 @@ public class Forgetpasswordservlet extends HttpServlet {
         }
 
         email = email.trim();
-        String role = findRoleForEmail(email);
 
+        // Check if logged in user's email matches
         HttpSession session = request.getSession();
+        String loggedInUser = (session != null) ? (String) session.getAttribute("user") : null;
+        String loggedInRole = (session != null) ? (String) session.getAttribute("role") : null;
+
+        if (loggedInUser != null && loggedInRole != null) {
+            String registeredEmail = getRegisteredEmail(loggedInRole, loggedInUser);
+            if (registeredEmail == null || !registeredEmail.equalsIgnoreCase(email)) {
+                request.setAttribute("error", "The entered email does not match your registered email.");
+                request.getRequestDispatcher("Forgetpassword.jsp").forward(request, response);
+                return;
+            }
+        }
+
+        String role = findRoleForEmail(email);
 
         if (role != null) {
             String code = generateCode();
@@ -129,29 +140,56 @@ public class Forgetpasswordservlet extends HttpServlet {
             {"admin", "email", "admin"}
         };
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-                for (String[] t : tables) {
-                    String table = t[0];
-                    String column = t[1];
-                    String roleName = t[2];
-                    String query = "SELECT 1 FROM " + table + " WHERE " + column + " = ?";
-                    try (PreparedStatement ps = conn.prepareStatement(query)) {
-                        ps.setString(1, email);
-                        try (ResultSet rs = ps.executeQuery()) {
-                            if (rs.next()) {
-                                return roleName;
-                            }
+        try (Connection conn = DBUtil.getConnection()) {
+            for (String[] t : tables) {
+                String table = t[0];
+                String column = t[1];
+                String roleName = t[2];
+                String query = "SELECT 1 FROM " + table + " WHERE " + column + " = ?";
+                try (PreparedStatement ps = conn.prepareStatement(query)) {
+                    ps.setString(1, email);
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            return roleName;
                         }
-                    } catch (Exception tableIssue) {
-                        // Table might not have an `email` column yet - skip and try the next one
-                        System.err.println("Skipping table '" + table + "': " + tableIssue.getMessage());
                     }
+                } catch (Exception tableIssue) {
+                    // Table might not have an `email` column yet - skip and try the next one
+                    System.err.println("Skipping table '" + table + "': " + tableIssue.getMessage());
                 }
             }
         } catch (Exception e) {
             System.err.println("Error checking email across tables: " + e.getMessage());
+        }
+        return null;
+    }
+
+    private String getRegisteredEmail(String role, String identifier) {
+        String query = "";
+        switch (role) {
+            case "student":
+                query = "SELECT email FROM students WHERE email = ?";
+                break;
+            case "company":
+                query = "SELECT email FROM companies WHERE company_code = ?";
+                break;
+            case "admin":
+                query = "SELECT email FROM admin WHERE username = ?";
+                break;
+            default:
+                return null;
+        }
+
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, identifier);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("email");
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error fetching registered email: " + e.getMessage());
         }
         return null;
     }

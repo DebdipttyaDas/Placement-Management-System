@@ -41,6 +41,17 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!emailPattern.test(email)) {
         alert("Enter a valid email address");
         e.preventDefault();
+        return;
+      }
+
+      // Check if logged in and if entered email matches registered email
+      const isLoggedIn = document.body.dataset.loggedIn === "true";
+      if (isLoggedIn) {
+        const registeredEmail = document.body.dataset.registeredEmail;
+        if (email.toLowerCase() !== registeredEmail.toLowerCase()) {
+          alert("The entered email does not match your registered email.");
+          e.preventDefault();
+        }
       }
     });
   }

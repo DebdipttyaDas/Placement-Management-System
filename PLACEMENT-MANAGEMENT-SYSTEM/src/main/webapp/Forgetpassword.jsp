@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.sql.*" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +20,52 @@
 
 </head>
 
-<body class="h-screen flex flex-col relative">
+<%
+HttpSession sess = request.getSession(false);
+String loggedInUser = (sess != null) ? (String) sess.getAttribute("user") : null;
+String loggedInRole = (sess != null) ? (String) sess.getAttribute("role") : null;
+String registeredEmail = null;
+if (loggedInUser != null && loggedInRole != null) {
+    String query = "";
+    if ("student".equals(loggedInRole)) {
+        query = "SELECT email FROM students WHERE email = ?";
+    } else if ("company".equals(loggedInRole)) {
+        query = "SELECT email FROM companies WHERE company_code = ?";
+    } else if ("admin".equals(loggedInRole)) {
+        query = "SELECT email FROM admin WHERE username = ?";
+    }
+    
+    if (!query.isEmpty()) {
+        try {
+            java.util.Properties prop = new java.util.Properties();
+            try (java.io.InputStream input = getClass().getClassLoader().getResourceAsStream("db.properties")) {
+                if (input != null) {
+                    prop.load(input);
+                    String dbUrl = prop.getProperty("url");
+                    String dbUser = prop.getProperty("username");
+                    String dbPassword = prop.getProperty("password");
+                    
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+                         PreparedStatement ps = conn.prepareStatement(query)) {
+                        ps.setString(1, loggedInUser);
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                registeredEmail = rs.getString("email");
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("JSP database error: " + e.getMessage());
+        }
+    }
+}
+%>
+<body class="h-screen flex flex-col relative"
+      data-logged-in="<%= (registeredEmail != null) ? "true" : "false" %>"
+      data-registered-email="<%= (registeredEmail != null) ? registeredEmail : "" %>">
 
 <div class="min-h-screen bg-[#cefad0]">
 <div class="relative z-10 flex flex-col h-full">

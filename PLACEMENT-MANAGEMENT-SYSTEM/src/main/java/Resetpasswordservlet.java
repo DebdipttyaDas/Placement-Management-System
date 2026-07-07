@@ -1,7 +1,7 @@
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/Resetpasswordservlet")
+@WebServlet({"/ResetPasswordServlet", "/Resetpasswordservlet"})
 public class Resetpasswordservlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -90,34 +90,26 @@ public class Resetpasswordservlet extends HttpServlet {
      * the same way before storing it.
      */
     private boolean updatePassword(String role, String email, String newPassword) {
-        String table;
-        switch (role) {
-            case "student":
-                table = "students";
-                break;
-            case "company":
-                table = "companies";
-                break;
-            case "admin":
-                table = "admin";
-                break;
-            default:
-                return false;
-        }
-
-        String query = "UPDATE " + table + " SET password = ? WHERE email = ?";
-
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-                 PreparedStatement ps = conn.prepareStatement(query)) {
-                ps.setString(1, newPassword);
-                ps.setString(2, email);
-                int rows = ps.executeUpdate();
-                return rows > 0;
+            URL url = new URL("http://localhost:5678/webhook/update-password");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setDoOutput(true);
+
+            String jsonPayload = String.format("{\"email\":\"%s\",\"role\":\"%s\",\"newPassword\":\"%s\"}", email, role, newPassword);
+
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] input = jsonPayload.getBytes("utf-8");
+                os.write(input, 0, input.length);
             }
+
+            int responseCode = conn.getResponseCode();
+            return responseCode >= 200 && responseCode <= 299;
         } catch (Exception e) {
-            System.err.println("Error updating password for role '" + role + "': " + e.getMessage());
+            System.err.println("Error calling n8n update-password webhook: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
