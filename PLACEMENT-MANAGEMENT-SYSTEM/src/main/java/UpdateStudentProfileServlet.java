@@ -4,7 +4,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,10 +26,6 @@ import jakarta.servlet.http.Part;
 )
 public class UpdateStudentProfileServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -83,8 +78,7 @@ public class UpdateStudentProfileServlet extends HttpServlet {
         }
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+        	try (Connection conn = DBUtil.getConnection()) {
                 boolean hasPhoneColumn = hasColumn(conn, "students", "phone");
 
                 String selectQuery = "SELECT full_name, college_name, department, cgpa, dob, email, password, languages, skills, photo_path";
@@ -195,7 +189,7 @@ public class UpdateStudentProfileServlet extends HttpServlet {
 
                 response.sendRedirect("Student_dashboard.jsp?profileUpdated=true");
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (Exception e) {
             throw new ServletException("Unable to update student profile", e);
         }
     }

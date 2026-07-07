@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,11 +23,6 @@ import jakarta.servlet.http.Part;
 )
 public class StudentRegisterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    // Database configuration
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
     
     // Upload directory path
     private static final String UPLOAD_DIR = "uploads";
@@ -85,11 +79,10 @@ public class StudentRegisterServlet extends HttpServlet {
 
         // Perform Database Insertion
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
             
             String insertQuery = "INSERT INTO students (full_name, college_name, department, year, cgpa, dob, email, password, skills, resume_path, photo_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
-            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            try (Connection conn = DBUtil.getConnection();
                  PreparedStatement ps = conn.prepareStatement(insertQuery)) {
                 
                 ps.setString(1, fullName);
@@ -109,10 +102,9 @@ public class StudentRegisterServlet extends HttpServlet {
                     isRegistered = true;
                 }
             }
-        } catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC Driver not found: " + e.getMessage());
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.err.println("Database connection error: " + e.getMessage());
+            e.printStackTrace();
         }
 
         // Handle Response
