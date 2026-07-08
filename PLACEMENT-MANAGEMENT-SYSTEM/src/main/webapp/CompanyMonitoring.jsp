@@ -75,8 +75,18 @@ Statement st = null;
 ResultSet rs = null;
 
 try{
-
-    conn = DBUtil.getConnection();
+    java.util.Properties prop = new java.util.Properties();
+    try (java.io.InputStream input = getClass().getClassLoader().getResourceAsStream("db.properties")) {
+        if (input != null) {
+            prop.load(input);
+            String dbUrl = prop.getProperty("url");
+            String dbUser = prop.getProperty("username");
+            String dbPassword = prop.getProperty("password");
+            
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+        }
+    }
 
     st = conn.createStatement();
 
