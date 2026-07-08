@@ -22,7 +22,7 @@ public class FetchJobsServlet extends HttpServlet {
         StringBuilder json = new StringBuilder();
         json.append("[");
         
-        String sql = "SELECT * FROM jobs";
+        String sql = "SELECT * FROM JOB_DETAILS";
 
         try (Connection conn = DBUtil.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -36,14 +36,14 @@ public class FetchJobsServlet extends HttpServlet {
                 }
                 first = false;
 
-                String title = escapeJson(rs.getString("job_title"));
+                String title = escapeJson(rs.getString("jobTitle"));
                 String department = escapeJson(rs.getString("department"));
-                String employmentType = escapeJson(rs.getString("employment_type"));
-                String locationType = escapeJson(rs.getString("location_type"));
-                String salary = escapeJson(rs.getString("salary_range"));
+                String employmentType = escapeJson(rs.getString("employmentType"));
+                String locationType = escapeJson(rs.getString("LocationType"));
+                String salary = escapeJson(rs.getString("salary"));
                 
-                // job_description could contain html tags since it is formatted by contenteditable in JobPost.jsp
-                String description = escapeJson(rs.getString("job_description"));
+                // jobDescription could contain html tags since it is formatted by contenteditable in JobPost.jsp
+                String description = escapeJson(rs.getString("jobDescription"));
 
                 json.append("{")
                         .append("\"job_title\":\"").append(title).append("\",")

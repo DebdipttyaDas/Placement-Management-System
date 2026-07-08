@@ -77,118 +77,135 @@ public class UpdateStudentProfileServlet extends HttpServlet {
             }
         }
 
-        try {
-        	try (Connection conn = DBUtil.getConnection()) {
-                boolean hasPhoneColumn = hasColumn(conn, "students", "phone");
+        try (Connection conn = DBUtil.getConnection()) {
+            conn.setAutoCommit(false);
 
-                String selectQuery = "SELECT full_name, college_name, department, cgpa, dob, email, password, languages, skills, photo_path";
-                if (hasPhoneColumn) {
-                    selectQuery += ", phone";
-                }
-                selectQuery += " FROM students WHERE email = ?";
+            int studentId = -1;
+            String currentFullName = null;
+            String currentDob = null;
+            String currentStoredEmail = null;
+            String currentPassword = null;
+            String currentPhone = null;
 
-                String currentFullName = null;
-                String currentCollegeName = null;
-                String currentDepartment = null;
-                String currentCgpa = null;
-                String currentDob = null;
-                String currentStoredEmail = null;
-                String currentPassword = null;
-                String currentLanguages = null;
-                String currentSkills = null;
-                String currentPhotoPath = null;
-                String currentPhone = null;
-
-                try (PreparedStatement selectStmt = conn.prepareStatement(selectQuery)) {
-                    selectStmt.setString(1, currentEmail);
-                    try (ResultSet rs = selectStmt.executeQuery()) {
-                        if (rs.next()) {
-                            currentFullName = rs.getString("full_name");
-                            currentCollegeName = rs.getString("college_name");
-                            currentDepartment = rs.getString("department");
-                            currentCgpa = rs.getString("cgpa");
-                            currentDob = rs.getString("dob");
-                            currentStoredEmail = rs.getString("email");
-                            currentPassword = rs.getString("password");
-                            currentLanguages = rs.getString("languages");
-                            currentSkills = rs.getString("skills");
-                            currentPhotoPath = rs.getString("photo_path");
-                            if (hasPhoneColumn) {
-                                currentPhone = rs.getString("phone");
-                            }
-                        } else {
-                            response.sendRedirect("StudentProfile.jsp?error=student_not_found");
-                            return;
-                        }
-                    }
-                }
-
-                String finalFullName = !isBlank(name) ? name : currentFullName;
-                String finalEmail = !isBlank(email) ? email : currentStoredEmail;
-                String finalPassword = !isBlank(password) ? password : currentPassword;
-                String finalCollege = !isBlank(college) ? college : currentCollegeName;
-                String finalDepartment = !isBlank(department) ? department : currentDepartment;
-                String finalCgpa = !isBlank(dgpa) ? dgpa : currentCgpa;
-                String finalDob = !isBlank(dob) ? dob : currentDob;
-                String finalLanguages = !isBlank(languages) ? languages : currentLanguages;
-                String finalSkills = !isBlank(skills) ? skills : currentSkills;
-                String finalPhotoPath = !isBlank(photoPath) ? photoPath : currentPhotoPath;
-                String finalPhone = !isBlank(phone) ? phone : currentPhone;
-
-                StringBuilder updateQuery = new StringBuilder();
-                updateQuery.append("UPDATE students SET ")
-                           .append("full_name = ?, ")
-                           .append("college_name = ?, ")
-                           .append("department = ?, ")
-                           .append("cgpa = ?, ")
-                           .append("dob = ?, ")
-                           .append("email = ?, ")
-                           .append("password = ?, ")
-                           .append("languages = ?, ")
-                           .append("skills = ?, ")
-                           .append("photo_path = ?");
-
-                if (hasPhoneColumn) {
-                    updateQuery.append(", phone = ?");
-                }
-
-                updateQuery.append(" WHERE email = ?");
-
-                try (PreparedStatement updateStmt = conn.prepareStatement(updateQuery.toString())) {
-                    int index = 1;
-                    updateStmt.setString(index++, finalFullName);
-                    updateStmt.setString(index++, finalCollege);
-                    updateStmt.setString(index++, finalDepartment);
-                    updateStmt.setString(index++, finalCgpa);
-                    updateStmt.setString(index++, finalDob);
-                    updateStmt.setString(index++, finalEmail);
-                    updateStmt.setString(index++, finalPassword);
-                    updateStmt.setString(index++, finalLanguages);
-                    updateStmt.setString(index++, finalSkills);
-                    updateStmt.setString(index++, finalPhotoPath);
-                    if (hasPhoneColumn) {
-                        updateStmt.setString(index++, finalPhone);
-                    }
-                    updateStmt.setString(index, currentEmail);
-
-                    int rowsUpdated = updateStmt.executeUpdate();
-                    if (rowsUpdated <= 0) {
-                        response.sendRedirect("StudentProfile.jsp?error=update_failed");
+            try (PreparedStatement ps = conn.prepareStatement("SELECT STUDENT_ID, fullName, dob, email, password, phone FROM STUDENT WHERE email = ?")) {
+                ps.setString(1, currentEmail);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        studentId = rs.getInt("STUDENT_ID");
+                        currentFullName = rs.getString("fullName");
+                        currentDob = rs.getString("dob");
+                        currentStoredEmail = rs.getString("email");
+                        currentPassword = rs.getString("password");
+                        currentPhone = rs.getString("phone");
+                    } else {
+                        response.sendRedirect("StudentProfile.jsp?error=student_not_found");
                         return;
                     }
                 }
+            }
 
-                if (session != null) {
-                    session.setAttribute("studentEmail", finalEmail);
-                    session.setAttribute("user", finalEmail);
-                    session.setAttribute("studentFullName", finalFullName != null ? finalFullName : "");
-                    if (!isBlank(finalFullName)) {
-                        session.setAttribute("studentName", finalFullName.split("\\s+")[0]);
+            String currentCollegeName = null;
+            String currentDepartment = null;
+            String currentDgpa = null;
+
+            try (PreparedStatement ps = conn.prepareStatement("SELECT collegeName, department, dgpa FROM ACCADEMIC_DETAILS WHERE STUDENT_ID = ?")) {
+                ps.setInt(1, studentId);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        currentCollegeName = rs.getString("collegeName");
+                        currentDepartment = rs.getString("department");
+                        currentDgpa = String.valueOf(rs.getDouble("dgpa"));
                     }
                 }
-
-                response.sendRedirect("Student_dashboard.jsp?profileUpdated=true");
             }
+
+            String currentLanguages = null;
+            String currentSkills = null;
+
+            try (PreparedStatement ps = conn.prepareStatement("SELECT languages, skills FROM STUDENT_SKILLS WHERE STUDENT_ID = ?")) {
+                ps.setInt(1, studentId);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        currentLanguages = rs.getString("languages");
+                        currentSkills = rs.getString("skills");
+                    }
+                }
+            }
+
+            String finalFullName = !isBlank(name) ? name : currentFullName;
+            String finalEmail = !isBlank(email) ? email : currentStoredEmail;
+            String finalPassword = !isBlank(password) ? password : currentPassword;
+            String finalCollege = !isBlank(college) ? college : currentCollegeName;
+            String finalDepartment = !isBlank(department) ? department : currentDepartment;
+            String finalDgpa = !isBlank(dgpa) ? dgpa : currentDgpa;
+            String finalDob = !isBlank(dob) ? dob : currentDob;
+            String finalLanguages = !isBlank(languages) ? languages : currentLanguages;
+            String finalSkills = !isBlank(skills) ? skills : currentSkills;
+            String finalPhone = !isBlank(phone) ? phone : currentPhone;
+
+            // Update STUDENT
+            try (PreparedStatement ps = conn.prepareStatement("UPDATE STUDENT SET fullName = ?, dob = ?, email = ?, password = ?, phone = ? WHERE STUDENT_ID = ?")) {
+                ps.setString(1, finalFullName);
+                ps.setString(2, finalDob);
+                ps.setString(3, finalEmail);
+                ps.setString(4, finalPassword);
+                ps.setString(5, finalPhone);
+                ps.setInt(6, studentId);
+                ps.executeUpdate();
+            }
+
+            // Update ACADEMIC_DETAILS
+            double dgpaVal = 0.0;
+            try {
+                dgpaVal = Double.parseDouble(finalDgpa);
+            } catch (Exception e) {
+                // Ignore
+            }
+            try (PreparedStatement ps = conn.prepareStatement("UPDATE ACCADEMIC_DETAILS SET collegeName = ?, department = ?, dgpa = ? WHERE STUDENT_ID = ?")) {
+                ps.setString(1, finalCollege != null ? finalCollege : "Unknown College");
+                ps.setString(2, finalDepartment != null ? finalDepartment : "CSE");
+                ps.setDouble(3, dgpaVal);
+                ps.setInt(4, studentId);
+                ps.executeUpdate();
+            }
+
+            // Update STUDENT_SKILLS
+            // Parse finalSkills comma-separated strings to JSON array
+            StringBuilder jsonSkills = new StringBuilder("[");
+            if (finalSkills != null && !finalSkills.trim().isEmpty()) {
+                if (finalSkills.trim().startsWith("[")) {
+                    // Already JSON
+                    jsonSkills.append(finalSkills.trim().substring(1, finalSkills.trim().length() - 1));
+                } else {
+                    String[] arr = finalSkills.split(",");
+                    for (int i = 0; i < arr.length; i++) {
+                        if (i > 0) jsonSkills.append(",");
+                        jsonSkills.append("\"").append(arr[i].trim().replace("\"", "\\\"")).append("\"");
+                    }
+                }
+            }
+            jsonSkills.append("]");
+
+            try (PreparedStatement ps = conn.prepareStatement("UPDATE STUDENT_SKILLS SET languages = ?, skills = ? WHERE STUDENT_ID = ?")) {
+                ps.setString(1, finalLanguages != null ? finalLanguages : "English");
+                ps.setString(2, jsonSkills.toString());
+                ps.setInt(3, studentId);
+                ps.executeUpdate();
+            }
+
+            conn.commit();
+
+            if (session != null) {
+                session.setAttribute("studentEmail", finalEmail);
+                session.setAttribute("user", finalEmail);
+                session.setAttribute("studentFullName", finalFullName != null ? finalFullName : "");
+                if (!isBlank(finalFullName)) {
+                    session.setAttribute("studentName", finalFullName.split("\\s+")[0]);
+                }
+            }
+
+            response.sendRedirect("Student_dashboard.jsp?profileUpdated=true");
+
         } catch (Exception e) {
             throw new ServletException("Unable to update student profile", e);
         }

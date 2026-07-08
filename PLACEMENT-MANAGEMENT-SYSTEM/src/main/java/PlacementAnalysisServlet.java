@@ -36,10 +36,10 @@ public class PlacementAnalysisServlet extends HttpServlet {
         Map<String, Integer> deptCounts = new HashMap<>();
 
         try (Connection conn = getConnection()) {
-            studentCount = getTableCount(conn, "students");
-            companyCount = getTableCount(conn, "companies");
-            jobCount = getTableCount(conn, "jobs");
-            interviewCount = getTableCount(conn, "interview_slots");
+            studentCount = getTableCount(conn, "STUDENT");
+            companyCount = getTableCount(conn, "BASIC_DETAILS");
+            jobCount = getTableCount(conn, "JOB_DETAILS");
+            interviewCount = getTableCount(conn, "INTERVIEW");
             mockInterviewCount = getTableCount(conn, "mock_interviews");
             maxSalary = getHighestSalary(conn);
             deptCounts = getDeptCounts(conn);
@@ -172,13 +172,13 @@ public class PlacementAnalysisServlet extends HttpServlet {
     }
 
     private int getHighestSalary(Connection conn) {
-        String sql = "SELECT salary_range FROM jobs";
+        String sql = "SELECT salary FROM JOB_DETAILS";
         int maxSalary = 194; // base 194k
         try (PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             Pattern p = Pattern.compile("(\\d+)\\s*[kK]?");
             while (rs.next()) {
-                String salaryStr = rs.getString("salary_range");
+                String salaryStr = rs.getString("salary");
                 if (salaryStr != null) {
                     Matcher m = p.matcher(salaryStr);
                     while (m.find()) {
@@ -201,7 +201,7 @@ public class PlacementAnalysisServlet extends HttpServlet {
 
     private Map<String, Integer> getDeptCounts(Connection conn) {
         Map<String, Integer> counts = new HashMap<>();
-        String sql = "SELECT department, COUNT(*) FROM students GROUP BY department";
+        String sql = "SELECT department, COUNT(*) FROM ACCADEMIC_DETAILS GROUP BY department";
         try (PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {

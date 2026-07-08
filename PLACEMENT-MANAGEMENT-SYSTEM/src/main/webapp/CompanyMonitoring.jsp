@@ -76,18 +76,12 @@ ResultSet rs = null;
 
 try{
 
-    Class.forName("com.mysql.cj.jdbc.Driver");
-
-    conn = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/placement_management",
-        "root",
-        "root"
-    );
+    conn = DBUtil.getConnection();
 
     st = conn.createStatement();
 
     rs = st.executeQuery(
-        "SELECT * FROM jobs ORDER BY id DESC"
+        "SELECT * FROM JOB_DETAILS ORDER BY JOB_ID DESC"
     );
 
     while(rs.next()){

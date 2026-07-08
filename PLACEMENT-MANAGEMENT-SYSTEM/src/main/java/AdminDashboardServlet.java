@@ -37,19 +37,19 @@ public class AdminDashboardServlet extends HttpServlet {
 
         try (Connection conn = getConnection()) {
             // 1. Fetch table counts
-            studentCount = getTableCount(conn, "students");
-            companyCount = getTableCount(conn, "companies");
-            jobCount = getTableCount(conn, "jobs");
-            interviewCount = getTableCount(conn, "interview_slots");
+            studentCount = getTableCount(conn, "STUDENT");
+            companyCount = getTableCount(conn, "BASIC_DETAILS");
+            jobCount = getTableCount(conn, "JOB_DETAILS");
+            interviewCount = getTableCount(conn, "INTERVIEW");
 
             // 2. Fetch pending company approvals
-            String pendingSql = "SELECT id, company_name, industry, email FROM companies WHERE status = 'PENDING' ORDER BY id DESC";
+            String pendingSql = "SELECT b.COMPANY_ID AS id, b.companyName, b.industry, c.companyEmail AS email FROM BASIC_DETAILS b JOIN COMPANY_CONTACT_DETAILS c ON b.COMPANY_ID = c.COMPANY_ID WHERE b.STATUS = 'PENDING' ORDER BY b.COMPANY_ID DESC";
             try (PreparedStatement ps = conn.prepareStatement(pendingSql);
                  ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Map<String, String> company = new HashMap<>();
                     company.put("id", String.valueOf(rs.getInt("id")));
-                    company.put("company_name", rs.getString("company_name"));
+                    company.put("company_name", rs.getString("companyName"));
                     company.put("industry", rs.getString("industry"));
                     company.put("email", rs.getString("email"));
                     pendingCompanies.add(company);
@@ -57,21 +57,21 @@ public class AdminDashboardServlet extends HttpServlet {
             }
 
             // 3. Fetch upcoming drives
-            String drivesSql = "SELECT company_name, interview_round, interview_date, status FROM interview_slots ORDER BY interview_date DESC LIMIT 5";
+            String drivesSql = "SELECT COMPANY_NAME, INTERVIEW_TITLE, INTERVIEW_DATE FROM INTERVIEW ORDER BY INTERVIEW_DATE DESC LIMIT 5";
             try (PreparedStatement ps = conn.prepareStatement(drivesSql);
                  ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Map<String, String> drive = new HashMap<>();
-                    drive.put("company_name", rs.getString("company_name"));
-                    drive.put("interview_round", rs.getString("interview_round"));
-                    drive.put("interview_date", rs.getString("interview_date"));
-                    drive.put("status", rs.getString("status"));
+                    drive.put("company_name", rs.getString("COMPANY_NAME"));
+                    drive.put("interview_round", rs.getString("INTERVIEW_TITLE"));
+                    drive.put("interview_date", String.valueOf(rs.getDate("INTERVIEW_DATE")));
+                    drive.put("status", "Scheduled");
                     upcomingDrives.add(drive);
                 }
             }
 
             // 4. Fetch department counts for students
-            String deptSql = "SELECT department, COUNT(*) as cnt FROM students GROUP BY department";
+            String deptSql = "SELECT department, COUNT(*) as cnt FROM ACCADEMIC_DETAILS GROUP BY department";
             try (PreparedStatement ps = conn.prepareStatement(deptSql);
                  ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -84,39 +84,39 @@ public class AdminDashboardServlet extends HttpServlet {
 
             // 5. Build Notifications list dynamically from database activity
             // Get latest registered student
-            String notificationStudentSql = "SELECT full_name FROM students ORDER BY email DESC LIMIT 1";
+            String notificationStudentSql = "SELECT fullName FROM STUDENT ORDER BY email DESC LIMIT 1";
             try (PreparedStatement ps = conn.prepareStatement(notificationStudentSql);
                  ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Map<String, String> note = new HashMap<>();
                     note.put("type", "student");
-                    note.put("message", "New student registered: " + rs.getString("full_name"));
+                    note.put("message", "New student registered: " + rs.getString("fullName"));
                     note.put("time", "2 hours ago");
                     recentNotifications.add(note);
                 }
             }
 
             // Get latest posted job
-            String notificationJobSql = "SELECT job_title, department FROM jobs ORDER BY id DESC LIMIT 1";
+            String notificationJobSql = "SELECT jobTitle, department FROM JOB_DETAILS ORDER BY JOB_ID DESC LIMIT 1";
             try (PreparedStatement ps = conn.prepareStatement(notificationJobSql);
                  ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Map<String, String> note = new HashMap<>();
                     note.put("type", "bell");
-                    note.put("message", "New job posted: " + rs.getString("job_title") + " (" + rs.getString("department") + ")");
+                    note.put("message", "New job posted: " + rs.getString("jobTitle") + " (" + rs.getString("department") + ")");
                     note.put("time", "5 hours ago");
                     recentNotifications.add(note);
                 }
             }
 
             // Get latest registered company
-            String notificationCompanySql = "SELECT company_name FROM companies ORDER BY id DESC LIMIT 1";
+            String notificationCompanySql = "SELECT companyName FROM BASIC_DETAILS ORDER BY COMPANY_ID DESC LIMIT 1";
             try (PreparedStatement ps = conn.prepareStatement(notificationCompanySql);
                  ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Map<String, String> note = new HashMap<>();
                     note.put("type", "building");
-                    note.put("message", "New company registered: " + rs.getString("company_name"));
+                    note.put("message", "New company registered: " + rs.getString("companyName"));
                     note.put("time", "Yesterday");
                     recentNotifications.add(note);
                 }

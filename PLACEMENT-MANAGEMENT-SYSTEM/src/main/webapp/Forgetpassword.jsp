@@ -28,11 +28,11 @@ String registeredEmail = null;
 if (loggedInUser != null && loggedInRole != null) {
     String query = "";
     if ("student".equals(loggedInRole)) {
-        query = "SELECT email FROM students WHERE email = ?";
+        query = "SELECT email FROM STUDENT WHERE email = ?";
     } else if ("company".equals(loggedInRole)) {
-        query = "SELECT email FROM companies WHERE company_code = ?";
+        query = "SELECT c.companyEmail AS email FROM COMPANY_CONTACT_DETAILS c JOIN BASIC_DETAILS b ON c.COMPANY_ID = b.COMPANY_ID WHERE b.companyCode = ?";
     } else if ("admin".equals(loggedInRole)) {
-        query = "SELECT email FROM admin WHERE username = ?";
+        query = "SELECT email FROM ADMIN_PROFILE WHERE userName = ?";
     }
     
     if (!query.isEmpty()) {

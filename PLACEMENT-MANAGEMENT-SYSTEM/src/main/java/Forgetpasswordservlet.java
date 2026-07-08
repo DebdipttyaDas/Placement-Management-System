@@ -132,28 +132,26 @@ public class Forgetpasswordservlet extends HttpServlet {
      * silently and move on to the next table (see catch block below).
      */
     private String findRoleForEmail(String email) {
-        String[][] tables = {
-            {"students", "email", "student"},
-            {"companies", "email", "company"},
-            {"admin", "email", "admin"}
-        };
-
         try (Connection conn = DBUtil.getConnection()) {
-            for (String[] t : tables) {
-                String table = t[0];
-                String column = t[1];
-                String roleName = t[2];
-                String query = "SELECT 1 FROM " + table + " WHERE " + column + " = ?";
-                try (PreparedStatement ps = conn.prepareStatement(query)) {
-                    ps.setString(1, email);
-                    try (ResultSet rs = ps.executeQuery()) {
-                        if (rs.next()) {
-                            return roleName;
-                        }
-                    }
-                } catch (Exception tableIssue) {
-                    // Table might not have an `email` column yet - skip and try the next one
-                    System.err.println("Skipping table '" + table + "': " + tableIssue.getMessage());
+            // Check student
+            try (PreparedStatement ps = conn.prepareStatement("SELECT 1 FROM STUDENT WHERE email = ?")) {
+                ps.setString(1, email);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) return "student";
+                }
+            }
+            // Check company
+            try (PreparedStatement ps = conn.prepareStatement("SELECT 1 FROM COMPANY_CONTACT_DETAILS WHERE companyEmail = ?")) {
+                ps.setString(1, email);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) return "company";
+                }
+            }
+            // Check admin
+            try (PreparedStatement ps = conn.prepareStatement("SELECT 1 FROM ADMIN_PROFILE WHERE email = ?")) {
+                ps.setString(1, email);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) return "admin";
                 }
             }
         } catch (Exception e) {
@@ -166,13 +164,13 @@ public class Forgetpasswordservlet extends HttpServlet {
         String query = "";
         switch (role) {
             case "student":
-                query = "SELECT email FROM students WHERE email = ?";
+                query = "SELECT email FROM STUDENT WHERE email = ?";
                 break;
             case "company":
-                query = "SELECT email FROM companies WHERE company_code = ?";
+                query = "SELECT companyEmail AS email FROM COMPANY_CONTACT_DETAILS c JOIN BASIC_DETAILS b ON c.COMPANY_ID = b.COMPANY_ID WHERE b.companyCode = ?";
                 break;
             case "admin":
-                query = "SELECT email FROM admin WHERE username = ?";
+                query = "SELECT email FROM ADMIN_PROFILE WHERE userName = ?";
                 break;
             default:
                 return null;

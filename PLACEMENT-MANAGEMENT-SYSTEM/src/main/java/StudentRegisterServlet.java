@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,32 +79,80 @@ public class StudentRegisterServlet extends HttpServlet {
         boolean isRegistered = false;
 
         // Perform Database Insertion
-        try {
+        try (Connection conn = DBUtil.getConnection()) {
+            conn.setAutoCommit(false);
             
-            String insertQuery = "INSERT INTO students (full_name, college_name, department, year, cgpa, dob, email, password, skills, resume_path, photo_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String insertStudent = "INSERT INTO STUDENT (fullName, dob, email, password, phone, photo, resume) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            int studentId = -1;
             
-            try (Connection conn = DBUtil.getConnection();
-                 PreparedStatement ps = conn.prepareStatement(insertQuery)) {
-                
+            Part photoPart = request.getPart("photo");
+            Part resumePart = request.getPart("resume");
+            byte[] photoBytes = (photoPart != null && photoPart.getSize() > 0) ? photoPart.getInputStream().readAllBytes() : new byte[0];
+            byte[] resumeBytes = (resumePart != null && resumePart.getSize() > 0) ? resumePart.getInputStream().readAllBytes() : new byte[0];
+            
+            String phone = request.getParameter("phone");
+            if (phone == null || phone.trim().isEmpty()) {
+                phone = "0000000000";
+            }
+            
+            try (PreparedStatement ps = conn.prepareStatement(insertStudent, java.sql.Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, fullName);
-                ps.setString(2, collegeName);
-                ps.setString(3, department);
-                ps.setString(4, year);
-                ps.setString(5, cgpa);
-                ps.setString(6, dob);
-                ps.setString(7, email);
-                ps.setString(8, password);
-                ps.setString(9, combinedSkills);
-                ps.setString(10, resumeFileName);
-                ps.setString(11, photoFileName);
+                ps.setString(2, dob != null ? dob : "2000-01-01");
+                ps.setString(3, email);
+                ps.setString(4, password);
+                ps.setString(5, phone);
+                ps.setBytes(6, photoBytes);
+                ps.setBytes(7, resumeBytes);
                 
-                int rowsAffected = ps.executeUpdate();
-                if (rowsAffected > 0) {
-                    isRegistered = true;
+                ps.executeUpdate();
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        studentId = rs.getInt(1);
+                    }
                 }
             }
+            
+            if (studentId != -1) {
+                // Insert Academic Details
+                String insertAcademic = "INSERT INTO ACCADEMIC_DETAILS (STUDENT_ID, collegeName, department, dgpa) VALUES (?, ?, ?, ?)";
+                double dgpaVal = 0.0;
+                try {
+                    dgpaVal = Double.parseDouble(cgpa);
+                } catch (Exception e) {
+                    // Ignore
+                }
+                
+                try (PreparedStatement ps = conn.prepareStatement(insertAcademic)) {
+                    ps.setInt(1, studentId);
+                    ps.setString(2, collegeName != null ? collegeName : "Unknown College");
+                    ps.setString(3, department != null ? department : "CSE");
+                    ps.setDouble(4, dgpaVal);
+                    ps.executeUpdate();
+                }
+                
+                // Insert Student Skills
+                String insertSkills = "INSERT INTO STUDENT_SKILLS (STUDENT_ID, languages, skills) VALUES (?, ?, ?)";
+                StringBuilder jsonSkills = new StringBuilder("[");
+                for (int i = 0; i < skillsList.size(); i++) {
+                    if (i > 0) jsonSkills.append(",");
+                    jsonSkills.append("\"").append(skillsList.get(i).replace("\"", "\\\"")).append("\"");
+                }
+                jsonSkills.append("]");
+                
+                try (PreparedStatement ps = conn.prepareStatement(insertSkills)) {
+                    ps.setInt(1, studentId);
+                    ps.setString(2, "English"); // default language
+                    ps.setString(3, jsonSkills.toString());
+                    ps.executeUpdate();
+                }
+                
+                conn.commit();
+                isRegistered = true;
+            } else {
+                conn.rollback();
+            }
         } catch (Exception e) {
-            System.err.println("Database connection error: " + e.getMessage());
+            System.err.println("StudentRegisterServlet: Error during registration: " + e.getMessage());
             e.printStackTrace();
         }
 

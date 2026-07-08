@@ -40,28 +40,38 @@ public class JobPostServlet extends HttpServlet {
 
         boolean isSuccess = false;
 
+        jakarta.servlet.http.HttpSession session = request.getSession();
+        String companyCode = (String) session.getAttribute("companyCode");
+
         try (Connection conn = getConnection()) {
             if (conn != null) {
-                // Ensure table and columns exist
-                checkAndPrepareDatabaseSchema(conn);
+                Integer companyId = fetchCompanyId(conn, companyCode);
+                if (companyId == null) {
+                    companyId = getDefaultCompanyId(conn);
+                }
 
-                String insertQuery = "INSERT INTO jobs (job_title, department, employment_type, location_type, salary_range, job_description, company_name, location, application_deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                if (companyId != null) {
+                    String insertQuery = "INSERT INTO JOB_DETAILS (COMPANY_ID, companyName, jobTitle, department, employmentType, LocationType, Location, salary, applicationDeadline, jobDescription) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-                try (PreparedStatement ps = conn.prepareStatement(insertQuery)) {
-                    ps.setString(1, jobTitle);
-                    ps.setString(2, department);
-                    ps.setString(3, employmentType);
-                    ps.setString(4, locationType);
-                    ps.setString(5, salaryRange);
-                    ps.setString(6, jobDescription);
-                    ps.setString(7, companyName);
-                    ps.setString(8, location);
-                    ps.setString(9, applicationDeadline);
+                    try (PreparedStatement ps = conn.prepareStatement(insertQuery)) {
+                        ps.setInt(1, companyId);
+                        ps.setString(2, companyName != null && !companyName.trim().isEmpty() ? companyName : "Demo Company");
+                        ps.setString(3, jobTitle);
+                        ps.setString(4, department);
+                        ps.setString(5, employmentType);
+                        ps.setString(6, locationType);
+                        ps.setString(7, location);
+                        ps.setString(8, salaryRange);
+                        ps.setString(9, applicationDeadline);
+                        ps.setString(10, jobDescription);
 
-                    int rowsAffected = ps.executeUpdate();
-                    if (rowsAffected > 0) {
-                        isSuccess = true;
+                        int rowsAffected = ps.executeUpdate();
+                        if (rowsAffected > 0) {
+                            isSuccess = true;
+                        }
                     }
+                } else {
+                    System.err.println("JobPostServlet: No company found in BASIC_DETAILS.");
                 }
             }
         } catch (Exception e) {
@@ -80,58 +90,32 @@ public class JobPostServlet extends HttpServlet {
         return DBUtil.getConnection();
     }
 
-    private void checkAndPrepareDatabaseSchema(Connection conn) {
-        try {
-            DatabaseMetaData dbm = conn.getMetaData();
-            
-            // Check if jobs table exists
-            try (ResultSet rs = dbm.getTables(null, null, "jobs", null)) {
-                if (!rs.next()) {
-                    // Create jobs table
-                    try (Statement stmt = conn.createStatement()) {
-                        String sql = "CREATE TABLE jobs (" +
-                                "id INT AUTO_INCREMENT PRIMARY KEY," +
-                                "company_name VARCHAR(255)," +
-                                "job_title VARCHAR(255) NOT NULL," +
-                                "employment_type VARCHAR(100)," +
-                                "department VARCHAR(100)," +
-                                "location_type VARCHAR(100)," +
-                                "location VARCHAR(255)," +
-                                "salary_range VARCHAR(100)," +
-                                "application_deadline VARCHAR(100)," +
-                                "job_description TEXT" +
-                                ")";
-                        stmt.executeUpdate(sql);
-                        System.out.println("JobPostServlet: jobs table created successfully.");
-                    }
-                } else {
-                    // Table exists, check and add missing columns
-                    try (Statement stmt = conn.createStatement()) {
-                        List<String> currentCols = new ArrayList<>();
-                        try (ResultSet cols = dbm.getColumns(null, null, "jobs", null)) {
-                            while (cols.next()) {
-                                currentCols.add(cols.getString("COLUMN_NAME").toLowerCase());
-                            }
-                        }
-                        
-                        if (!currentCols.contains("company_name") && !currentCols.contains("companyname")) {
-                            stmt.executeUpdate("ALTER TABLE jobs ADD COLUMN company_name VARCHAR(255)");
-                        }
-                        if (!currentCols.contains("location")) {
-                            stmt.executeUpdate("ALTER TABLE jobs ADD COLUMN location VARCHAR(255)");
-                        }
-                        if (!currentCols.contains("application_deadline") && !currentCols.contains("applicationdeadline")) {
-                            stmt.executeUpdate("ALTER TABLE jobs ADD COLUMN application_deadline VARCHAR(100)");
-                        }
-                        if (!currentCols.contains("job_description") && !currentCols.contains("jobdescription")) {
-                            stmt.executeUpdate("ALTER TABLE jobs ADD COLUMN job_description TEXT");
-                        }
-                    }
+    private Integer fetchCompanyId(Connection conn, String companyCode) {
+        if (companyCode == null) return null;
+        String sql = "SELECT COMPANY_ID FROM BASIC_DETAILS WHERE companyCode = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, companyCode);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("COMPANY_ID");
                 }
             }
-        } catch (SQLException e) {
-            System.err.println("JobPostServlet: Error verifying/updating database schema: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("JobPostServlet: Error fetching COMPANY_ID: " + e.getMessage());
         }
+        return null;
+    }
+
+    private Integer getDefaultCompanyId(Connection conn) {
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT COMPANY_ID FROM BASIC_DETAILS LIMIT 1")) {
+            if (rs.next()) {
+                return rs.getInt("COMPANY_ID");
+            }
+        } catch (Exception e) {
+            // Ignore
+        }
+        return null;
     }
 
     private String normalizeEditorHtml(String jobDescription) {

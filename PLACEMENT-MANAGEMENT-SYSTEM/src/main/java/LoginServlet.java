@@ -65,17 +65,17 @@ public class LoginServlet extends HttpServlet {
                 String studentName = "Student";
                 String studentFullName = "";
 
-                try (Connection conn = DBUtil.getConnection();
-                     PreparedStatement ps = conn.prepareStatement(
-                             "SELECT full_name FROM students WHERE email = ?")) {
+                 try (Connection conn = DBUtil.getConnection();
+                      PreparedStatement ps = conn.prepareStatement(
+                              "SELECT fullName FROM STUDENT WHERE email = ?")) {
 
-                    ps.setString(1, email);
+                     ps.setString(1, email);
 
-                    try (ResultSet rs = ps.executeQuery()) {
+                     try (ResultSet rs = ps.executeQuery()) {
 
-                        if (rs.next()) {
+                         if (rs.next()) {
 
-                            String fullName = rs.getString("full_name");
+                             String fullName = rs.getString("fullName");
 
                             if (fullName != null && !fullName.trim().isEmpty()) {
 
@@ -116,16 +116,16 @@ public class LoginServlet extends HttpServlet {
 
                 String companyName = "";
 
-                try (Connection conn = DBUtil.getConnection();
-                     PreparedStatement ps = conn.prepareStatement(
-                             "SELECT company_name FROM companies WHERE company_code = ?")) {
+                 try (Connection conn = DBUtil.getConnection();
+                      PreparedStatement ps = conn.prepareStatement(
+                              "SELECT companyName FROM BASIC_DETAILS WHERE companyCode = ?")) {
 
-                    ps.setString(1, email);
+                     ps.setString(1, email);
 
-                    try (ResultSet rs = ps.executeQuery()) {
+                     try (ResultSet rs = ps.executeQuery()) {
 
-                        if (rs.next() && rs.getString("company_name") != null) {
-                            companyName = rs.getString("company_name").trim();
+                         if (rs.next() && rs.getString("companyName") != null) {
+                             companyName = rs.getString("companyName").trim();
                         }
                     }
 
@@ -162,15 +162,15 @@ public class LoginServlet extends HttpServlet {
         switch (role) {
 
         case "admin":
-            query = "SELECT * FROM admin WHERE username = ? AND password = ?";
+            query = "SELECT * FROM ADMIN_PROFILE WHERE userName = ? AND password = ?";
             break;
 
         case "student":
-            query = "SELECT * FROM students WHERE email = ? AND password = ?";
+            query = "SELECT * FROM STUDENT WHERE email = ? AND password = ?";
             break;
 
         case "company":
-            query = "SELECT * FROM companies WHERE company_code = ? AND password = ?";
+            query = "SELECT * FROM BASIC_DETAILS WHERE companyCode = ? AND password = ? AND STATUS = 'APPROVED'";
             break;
 
         default:

@@ -34,7 +34,7 @@ public class ApproveCompanyServlet extends HttpServlet {
         try (Connection conn = DBUtil.getConnection()) {
 
             // Get company details
-            String selectQuery = "SELECT email, company_name FROM companies WHERE id = ?";
+            String selectQuery = "SELECT c.companyEmail AS email, b.companyName FROM BASIC_DETAILS b JOIN COMPANY_CONTACT_DETAILS c ON b.COMPANY_ID = c.COMPANY_ID WHERE b.COMPANY_ID = ?";
 
             try (PreparedStatement psSelect = conn.prepareStatement(selectQuery)) {
 
@@ -44,7 +44,7 @@ public class ApproveCompanyServlet extends HttpServlet {
 
                     if (rs.next()) {
                         companyEmail = rs.getString("email");
-                        companyName = rs.getString("company_name");
+                        companyName = rs.getString("companyName");
                     }
                 }
             }
@@ -53,7 +53,7 @@ public class ApproveCompanyServlet extends HttpServlet {
 
                 // Update status and company code
                 String updateQuery =
-                        "UPDATE companies SET status = 'APPROVED', company_code = ? WHERE id = ?";
+                        "UPDATE BASIC_DETAILS SET STATUS = 'APPROVED', companyCode = ? WHERE COMPANY_ID = ?";
 
                 try (PreparedStatement psUpdate = conn.prepareStatement(updateQuery)) {
 

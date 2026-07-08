@@ -75,21 +75,35 @@ public class ScheduleInterviewServlet extends HttpServlet {
             String interviewRound, String meetLink) throws Exception {
     	
     	try (Connection conn = DBUtil.getConnection()) {
-    	
-            String sql = "INSERT INTO interview_slots (company_name, student_name, student_email, "
-                    + "interviewer_name, interview_date, interview_time, duration, interview_round, meet_link, status) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            Integer companyId = null;
+            try (PreparedStatement ps = conn.prepareStatement("SELECT COMPANY_ID FROM BASIC_DETAILS WHERE companyName = ? LIMIT 1")) {
                 ps.setString(1, companyName);
-                ps.setString(2, studentName);
-                ps.setString(3, studentEmail != null ? studentEmail : "");
-                ps.setString(4, interviewerName);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        companyId = rs.getInt("COMPANY_ID");
+                    }
+                }
+            }
+            if (companyId == null) {
+                try (PreparedStatement ps = conn.prepareStatement("SELECT COMPANY_ID FROM BASIC_DETAILS LIMIT 1");
+                     ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        companyId = rs.getInt("COMPANY_ID");
+                    }
+                }
+            }
+
+            String sql = "INSERT INTO INTERVIEW (COMPANY_ID, INTERVIEW_TITLE, COMPANY_NAME, STUDENT_NAME, INTERVIEW_DATE, INTERVIEW_TIME, INTERVIEWER_NAME, MEETING_LINK) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                if (companyId != null) ps.setInt(1, companyId); else ps.setNull(1, java.sql.Types.INTEGER);
+                ps.setString(2, interviewRound);
+                ps.setString(3, companyName);
+                ps.setString(4, studentName);
                 ps.setString(5, interviewDate);
                 ps.setString(6, interviewTime);
-                ps.setInt(7, duration);
-                ps.setString(8, interviewRound);
-                ps.setString(9, meetLink);
-                ps.setString(10, "SCHEDULED");
+                ps.setString(7, interviewerName);
+                ps.setString(8, meetLink);
                 ps.executeUpdate();
             }
         }
@@ -124,7 +138,7 @@ public class ScheduleInterviewServlet extends HttpServlet {
         try {
         	try (Connection conn = DBUtil.getConnection();
                     PreparedStatement ps = conn.prepareStatement(
-                            "SELECT email FROM students WHERE LOWER(TRIM(full_name)) = LOWER(TRIM(?))")) {
+                            "SELECT email FROM STUDENT WHERE LOWER(TRIM(fullName)) = LOWER(TRIM(?))")) {
                 ps.setString(1, studentName.trim());
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {

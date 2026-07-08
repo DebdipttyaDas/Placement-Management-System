@@ -32,21 +32,20 @@ public class FetchInterviewsServlet extends HttpServlet {
 
             if (fetchAll) {
                 appendInterviews(json,
-                        "SELECT * FROM interview_slots ORDER BY interview_date ASC, interview_time ASC",
+                        "SELECT * FROM INTERVIEW ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC",
                         null, null, null);
             } else if ("student".equals(role)) {
                 String studentEmail = getStudentEmail(session);
                 String studentFullName = getStudentFullName(session, studentEmail);
-                if (studentEmail == null || studentEmail.isEmpty()) {
+                if (studentFullName == null || studentFullName.isEmpty()) {
                     json.append("]");
                     response.getWriter().print(json.toString());
                     return;
                 }
                 appendInterviews(json,
-                        "SELECT * FROM interview_slots WHERE student_email = ? "
-                                + "OR LOWER(TRIM(student_name)) = LOWER(TRIM(?)) "
-                                + "ORDER BY interview_date ASC, interview_time ASC LIMIT " + STUDENT_LIMIT,
-                        studentEmail, studentFullName, null);
+                        "SELECT * FROM INTERVIEW WHERE LOWER(TRIM(STUDENT_NAME)) = LOWER(TRIM(?)) "
+                                + "ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC LIMIT " + STUDENT_LIMIT,
+                        null, studentFullName, null);
             } else if ("company".equals(role)) {
                 String companyName = getCompanyName(session);
                 if (companyName == null || companyName.isEmpty()) {
@@ -55,8 +54,8 @@ public class FetchInterviewsServlet extends HttpServlet {
                     return;
                 }
                 appendInterviews(json,
-                        "SELECT * FROM interview_slots WHERE company_name = ? "
-                                + "ORDER BY interview_date ASC, interview_time ASC",
+                        "SELECT * FROM INTERVIEW WHERE COMPANY_NAME = ? "
+                                + "ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC",
                         null, null, companyName);
             } else {
                 json.append("]");
@@ -80,9 +79,8 @@ public class FetchInterviewsServlet extends HttpServlet {
         try (Connection conn = DBUtil.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            if (studentEmail != null && studentFullName != null) {
-                ps.setString(1, studentEmail);
-                ps.setString(2, studentFullName);
+            if (studentFullName != null) {
+                ps.setString(1, studentFullName);
             } else if (companyName != null) {
                 ps.setString(1, companyName);
             }
@@ -101,16 +99,15 @@ public class FetchInterviewsServlet extends HttpServlet {
 
     private void appendInterviewObject(StringBuilder json, ResultSet rs) throws Exception {
         json.append("{")
-                .append("\"company_name\":\"").append(escapeJson(rs.getString("company_name"))).append("\",")
-                .append("\"interview_date\":\"").append(escapeJson(rs.getString("interview_date"))).append("\",")
-                .append("\"interview_time\":\"").append(escapeJson(rs.getString("interview_time"))).append("\",")
-                .append("\"interview_round\":\"").append(escapeJson(rs.getString("interview_round"))).append("\",")
+                .append("\"company_name\":\"").append(escapeJson(rs.getString("COMPANY_NAME"))).append("\",")
+                .append("\"interview_date\":\"").append(escapeJson(rs.getString("INTERVIEW_DATE"))).append("\",")
+                .append("\"interview_time\":\"").append(escapeJson(rs.getString("INTERVIEW_TIME"))).append("\",")
+                .append("\"interview_round\":\"").append(escapeJson(rs.getString("INTERVIEW_TITLE"))).append("\",")
                 .append("\"meet_link\":\"").append(escapeJson(
-                        rs.getString("meet_link") != null ? rs.getString("meet_link") : "#")).append("\",")
-                .append("\"student_name\":\"").append(escapeJson(rs.getString("student_name"))).append("\",")
-                .append("\"student_email\":\"").append(escapeJson(
-                        rs.getString("student_email") != null ? rs.getString("student_email") : "")).append("\",")
-                .append("\"interviewer_name\":\"").append(escapeJson(rs.getString("interviewer_name"))).append("\"")
+                        rs.getString("MEETING_LINK") != null ? rs.getString("MEETING_LINK") : "#")).append("\",")
+                .append("\"student_name\":\"").append(escapeJson(rs.getString("STUDENT_NAME"))).append("\",")
+                .append("\"student_email\":\"").append("").append("\",")
+                .append("\"interviewer_name\":\"").append(escapeJson(rs.getString("INTERVIEWER_NAME"))).append("\"")
                 .append("}");
     }
 
@@ -140,11 +137,11 @@ public class FetchInterviewsServlet extends HttpServlet {
             
             try (Connection conn = DBUtil.getConnection();
                     PreparedStatement ps = conn.prepareStatement(
-                            "SELECT full_name FROM students WHERE email = ?")) {
+                            "SELECT fullName FROM STUDENT WHERE email = ?")) {
                 ps.setString(1, studentEmail);
                 try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next() && rs.getString("full_name") != null) {
-                        return rs.getString("full_name").trim();
+                    if (rs.next() && rs.getString("fullName") != null) {
+                        return rs.getString("fullName").trim();
                     }
                 }
             }
@@ -170,11 +167,11 @@ public class FetchInterviewsServlet extends HttpServlet {
 
             try (Connection conn = DBUtil.getConnection();
                     PreparedStatement ps = conn.prepareStatement(
-                            "SELECT company_name FROM companies WHERE company_code = ?")) {
+                            "SELECT companyName FROM BASIC_DETAILS WHERE companyCode = ?")) {
                 ps.setString(1, companyCode);
                 try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next() && rs.getString("company_name") != null) {
-                        return rs.getString("company_name").trim();
+                    if (rs.next() && rs.getString("companyName") != null) {
+                        return rs.getString("companyName").trim();
                     }
                 }
             }
