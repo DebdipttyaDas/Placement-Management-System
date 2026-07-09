@@ -62,7 +62,7 @@
 
                 <div class="input-group">
                     <label>CIN</label>
-                    <input type="text" name="licenseNumber" placeholder="Enter CIN" required>
+                    <input type="text" name="cin" placeholder="Enter CIN" required>
                 </div>
 
                 <!-- Row 4: Email + Password -->

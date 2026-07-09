@@ -18,6 +18,8 @@ public class ApproveCompanyServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String companyIdStr = request.getParameter("companyId");
+        
+        System.out.println("Company ID from request = " + companyIdStr); // debug
 
         if (companyIdStr == null || companyIdStr.trim().isEmpty()) {
             response.sendRedirect("AdminDashboard.jsp?error=Invalid Company ID");
