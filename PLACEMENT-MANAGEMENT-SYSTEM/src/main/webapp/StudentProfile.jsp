@@ -1,5 +1,78 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.sql.*" %>
+<%!
+    private Connection getJspConnection() throws Exception {
+        java.util.Properties prop = new java.util.Properties();
+        try (java.io.InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties")) {
+            if (input != null) prop.load(input);
+        }
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        return DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
+    }
+%>
+<%
+    HttpSession sess = request.getSession(false);
+    String userEmail = (sess != null) ? (String) sess.getAttribute("studentEmail") : null;
+    if (userEmail == null && sess != null) {
+        userEmail = (String) sess.getAttribute("user");
+    }
 
+    if (userEmail == null) {
+        response.sendRedirect("Login.jsp?role=student");
+        return;
+    }
+
+    String dbName = "";
+    String dbEmail = userEmail;
+    String dbPhone = "";
+    String dbDob = "";
+    String dbCollege = "";
+    String dbDepartment = "";
+    String dbDgpa = "";
+    String dbLanguages = "";
+    String dbSkillsJson = "[]";
+    byte[] dbPhoto = null;
+
+    try (Connection conn = getJspConnection()) {
+        String sql = "SELECT s.fullName, s.dob, s.email, s.phone, s.photo, "
+                   + "a.collegeName, a.department, a.dgpa, "
+                   + "k.languages, k.skills "
+                   + "FROM STUDENT s "
+                   + "LEFT JOIN ACCADEMIC_DETAILS a ON s.STUDENT_ID = a.STUDENT_ID "
+                   + "LEFT JOIN STUDENT_SKILLS k ON s.STUDENT_ID = k.STUDENT_ID "
+                   + "WHERE s.email = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, userEmail);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    dbName = rs.getString("fullName");
+                    dbDob = rs.getString("dob");
+                    dbEmail = rs.getString("email");
+                    dbPhone = rs.getString("phone");
+                    dbPhoto = rs.getBytes("photo");
+                    
+                    dbCollege = rs.getString("collegeName");
+                    dbDepartment = rs.getString("department");
+                    double dgpaVal = rs.getDouble("dgpa");
+                    dbDgpa = dgpaVal > 0 ? String.valueOf(dgpaVal) : "";
+                    
+                    dbLanguages = rs.getString("languages");
+                    dbSkillsJson = rs.getString("skills");
+                    if (dbSkillsJson == null || dbSkillsJson.trim().isEmpty()) {
+                        dbSkillsJson = "[]";
+                    }
+                }
+            }
+        }
+    } catch (Exception e) {
+        System.err.println("Error loading profile: " + e.getMessage());
+    }
+
+    String photoBase64 = null;
+    if (dbPhoto != null && dbPhoto.length > 0) {
+        photoBase64 = java.util.Base64.getEncoder().encodeToString(dbPhoto);
+    }
+%>
   <!DOCTYPE html>
   <html lang="en">
 
@@ -60,8 +133,9 @@
 
             <div class="avatar-box">
               <img id="profilePreview"
-                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ccc'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>"
-                alt="Profile Preview">
+                src="<%= photoBase64 != null ? "data:image/jpeg;base64," + photoBase64 : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ccc'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>" %>"
+                alt="Profile Preview"
+                style="<%= photoBase64 != null ? "width:100%; height:100%; border-radius:50%; object-fit:cover;" : "" %>">
             </div>
 
             <input type="file" name="photo" id="photoInput" class="upload-btn" accept="image/png, image/jpeg">
@@ -71,11 +145,11 @@
           <div class="card">
             <h2>Personal Information</h2>
             <div class="form-grid">
-              <input type="text" name="name" placeholder="Your name">
-              <input type="email" name="email" placeholder="Your email">
+              <input type="text" name="name" placeholder="Your name" value="<%= dbName != null ? dbName : "" %>">
+              <input type="email" name="email" placeholder="Your email" value="<%= dbEmail != null ? dbEmail : "" %>">
               <input type="password" name="password" placeholder="Your password">
-              <input type="tel" name="phone" placeholder="Phone number">
-              <input class="full-width" type="date" name="dob" placeholder="Date of birth">
+              <input type="tel" name="phone" placeholder="Phone number" value="<%= dbPhone != null ? dbPhone : "" %>">
+              <input class="full-width" type="date" name="dob" placeholder="Date of birth" value="<%= dbDob != null ? dbDob : "" %>">
             </div>
           </div>
 
@@ -83,9 +157,9 @@
           <div class="card">
             <h2>Academic Details</h2>
             <div class="form-grid">
-              <input type="text" name="college" placeholder="College name">
-              <input type="text" name="department" placeholder="Department">
-              <input type="text" name="dgpa" placeholder="DGPA">
+              <input type="text" name="college" placeholder="College name" value="<%= dbCollege != null ? dbCollege : "" %>">
+              <input type="text" name="department" placeholder="Department" value="<%= dbDepartment != null ? dbDepartment : "" %>">
+              <input type="text" name="dgpa" placeholder="DGPA" value="<%= dbDgpa != null ? dbDgpa : "" %>">
             </div>
           </div>
 
@@ -93,7 +167,7 @@
           <div class="card">
             <h2>Languages Known</h2>
 
-            <input type="text" name="languages" placeholder="English, Bengali, Hindi">
+            <input type="text" name="languages" placeholder="English, Bengali, Hindi" value="<%= dbLanguages != null ? dbLanguages : "" %>">
           </div>
 
           <!-- SKILLS -->
@@ -154,6 +228,26 @@
 
     <script>
       let skillsArray = [];
+
+      try {
+          const loadedSkills = <%= dbSkillsJson %>;
+          if (Array.isArray(loadedSkills)) {
+              loadedSkills.forEach(skillStr => {
+                  if (skillStr.includes(':')) {
+                      const parts = skillStr.split(':');
+                      skillsArray.push({ name: parts[0], level: parts[1] });
+                  } else {
+                      skillsArray.push({ name: skillStr, level: 'Beginner' });
+                  }
+              });
+          }
+      } catch (e) {
+          console.error("Error parsing pre-loaded skills:", e);
+      }
+
+      document.addEventListener("DOMContentLoaded", function() {
+          updateSkillsUI();
+      });
 
       function openSkillModal() {
         document.getElementById('skillModal').classList.add('show');

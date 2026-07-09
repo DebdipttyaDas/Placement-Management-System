@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"
   import="java.sql.*" %>
+<%!
+    private Connection getJspConnection() throws Exception {
+        java.util.Properties prop = new java.util.Properties();
+        try (java.io.InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties")) {
+            if (input != null) prop.load(input);
+        }
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        return DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
+    }
+%>
   <!--  Hii  -->
 
   <!DOCTYPE html>
@@ -21,15 +31,19 @@
     <div class="dashboard-container">
 
       <!-- LEFT SIDEBAR -->
-      <div class="sidebar">
-        <h2>Student Dashboard</h2>
-        
-
-        <ul>
-          <li><a href="Student_dashboard.jsp" style="text-decoration: none; color:white;">Dashboard</a></li>
-          <li><a href="Placement.jsp" style="text-decoration: none; color:white;">Placements</a></li>
-          <li><a href="MyApplication.jsp" style="text-decoration: none; color:white;">My Applications</a></li>
-        </ul>
+      <div class="sidebar" style="display:flex; flex-direction:column; justify-content:space-between; height:100vh; box-sizing:border-box; padding-bottom:20px;">
+        <div>
+          <h2>Student Dashboard</h2>
+          <ul>
+            <li><a href="Student_dashboard.jsp" style="text-decoration: none; color:white;">Dashboard</a></li>
+            <li><a href="Placement.jsp" style="text-decoration: none; color:white;">Placements</a></li>
+            <li><a href="MyApplication.jsp" style="text-decoration: none; color:white;">My Applications</a></li>
+          </ul>
+        </div>
+        <!-- Logout -->
+        <form action="LogoutServlet" method="post" style="width:100%;">
+          <button type="submit" style="width:100%; padding:10px; background:#1d6b61; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:16px; transition: 0.3s ease;">Logout</button>
+        </form>
       </div>
 
       <!-- MAIN AREA -->
@@ -232,15 +246,13 @@
   if (sessionUser != null) {
     dashboardStudentEmail = sessionUser.toString();
     try {
-      Class.forName("com.mysql.cj.jdbc.Driver");
-      try (Connection conn = DriverManager.getConnection(
-              "jdbc:mysql://localhost:3306/placement_management", "root", "password");
+      try (Connection conn = getJspConnection();
            PreparedStatement ps = conn.prepareStatement(
-              "SELECT full_name FROM students WHERE email = ?")) {
+              "SELECT fullName FROM STUDENT WHERE email = ?")) {
         ps.setString(1, dashboardStudentEmail);
         try (ResultSet rs = ps.executeQuery()) {
-          if (rs.next() && rs.getString("full_name") != null) {
-            dashboardStudentFullName = rs.getString("full_name").trim();
+          if (rs.next() && rs.getString("fullName") != null) {
+            dashboardStudentFullName = rs.getString("fullName").trim();
           }
         }
       }

@@ -56,21 +56,12 @@ public class UpdateStudentProfileServlet extends HttpServlet {
         String skills = trim(request.getParameter("skills"));
 
         Part photoPart = request.getPart("photo");
-        String photoPath = null;
+        byte[] photoBytes = null;
 
         if (photoPart != null && photoPart.getSize() > 0) {
             String fileName = sanitizeFileName(photoPart.getSubmittedFileName());
             if (!isBlank(fileName) && isValidImage(fileName)) {
-                String uniqueName = "student_" + UUID.randomUUID() + "_" + fileName;
-                String uploadDirPath = getServletContext().getRealPath("/uploads");
-                if (uploadDirPath == null) {
-                    uploadDirPath = Paths.get(System.getProperty("user.dir"), "uploads").toString();
-                }
-                Path uploadDir = Paths.get(uploadDirPath);
-                Files.createDirectories(uploadDir);
-                Path targetPath = uploadDir.resolve(uniqueName);
-                photoPart.write(targetPath.toString());
-                photoPath = "uploads/" + uniqueName;
+                photoBytes = photoPart.getInputStream().readAllBytes();
             } else {
                 response.sendRedirect("StudentProfile.jsp?error=invalid_photo");
                 return;
@@ -87,7 +78,22 @@ public class UpdateStudentProfileServlet extends HttpServlet {
             String currentPassword = null;
             String currentPhone = null;
 
-            try (PreparedStatement ps = conn.prepareStatement("SELECT STUDENT_ID, fullName, dob, email, password, phone FROM STUDENT WHERE email = ?")) {
+            String currentCollegeName = null;
+            String currentDepartment = null;
+            String currentDgpa = null;
+
+            String currentLanguages = null;
+            String currentSkills = null;
+
+            String sql = "SELECT s.STUDENT_ID, s.fullName, s.dob, s.email, s.password, s.phone, "
+                       + "a.collegeName, a.department, a.dgpa, "
+                       + "k.languages, k.skills "
+                       + "FROM STUDENT s "
+                       + "LEFT JOIN ACCADEMIC_DETAILS a ON s.STUDENT_ID = a.STUDENT_ID "
+                       + "LEFT JOIN STUDENT_SKILLS k ON s.STUDENT_ID = k.STUDENT_ID "
+                       + "WHERE s.email = ?";
+
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, currentEmail);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
@@ -97,37 +103,16 @@ public class UpdateStudentProfileServlet extends HttpServlet {
                         currentStoredEmail = rs.getString("email");
                         currentPassword = rs.getString("password");
                         currentPhone = rs.getString("phone");
-                    } else {
-                        response.sendRedirect("StudentProfile.jsp?error=student_not_found");
-                        return;
-                    }
-                }
-            }
 
-            String currentCollegeName = null;
-            String currentDepartment = null;
-            String currentDgpa = null;
-
-            try (PreparedStatement ps = conn.prepareStatement("SELECT collegeName, department, dgpa FROM ACCADEMIC_DETAILS WHERE STUDENT_ID = ?")) {
-                ps.setInt(1, studentId);
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
                         currentCollegeName = rs.getString("collegeName");
                         currentDepartment = rs.getString("department");
                         currentDgpa = String.valueOf(rs.getDouble("dgpa"));
-                    }
-                }
-            }
 
-            String currentLanguages = null;
-            String currentSkills = null;
-
-            try (PreparedStatement ps = conn.prepareStatement("SELECT languages, skills FROM STUDENT_SKILLS WHERE STUDENT_ID = ?")) {
-                ps.setInt(1, studentId);
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
                         currentLanguages = rs.getString("languages");
                         currentSkills = rs.getString("skills");
+                    } else {
+                        response.sendRedirect("StudentProfile.jsp?error=student_not_found");
+                        return;
                     }
                 }
             }
@@ -144,13 +129,24 @@ public class UpdateStudentProfileServlet extends HttpServlet {
             String finalPhone = !isBlank(phone) ? phone : currentPhone;
 
             // Update STUDENT
-            try (PreparedStatement ps = conn.prepareStatement("UPDATE STUDENT SET fullName = ?, dob = ?, email = ?, password = ?, phone = ? WHERE STUDENT_ID = ?")) {
+            String updateStudentSql;
+            if (photoBytes != null) {
+                updateStudentSql = "UPDATE STUDENT SET fullName = ?, dob = ?, email = ?, password = ?, phone = ?, photo = ? WHERE STUDENT_ID = ?";
+            } else {
+                updateStudentSql = "UPDATE STUDENT SET fullName = ?, dob = ?, email = ?, password = ?, phone = ? WHERE STUDENT_ID = ?";
+            }
+            try (PreparedStatement ps = conn.prepareStatement(updateStudentSql)) {
                 ps.setString(1, finalFullName);
                 ps.setString(2, finalDob);
                 ps.setString(3, finalEmail);
                 ps.setString(4, finalPassword);
                 ps.setString(5, finalPhone);
-                ps.setInt(6, studentId);
+                if (photoBytes != null) {
+                    ps.setBytes(6, photoBytes);
+                    ps.setInt(7, studentId);
+                } else {
+                    ps.setInt(6, studentId);
+                }
                 ps.executeUpdate();
             }
 

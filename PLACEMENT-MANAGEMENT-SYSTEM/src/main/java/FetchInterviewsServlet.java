@@ -29,40 +29,40 @@ public class FetchInterviewsServlet extends HttpServlet {
         json.append("[");
 
         try {
-
-            if (fetchAll) {
-                appendInterviews(json,
-                        "SELECT * FROM INTERVIEW ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC",
-                        null, null, null);
-            } else if ("student".equals(role)) {
-                String studentEmail = getStudentEmail(session);
-                String studentFullName = getStudentFullName(session, studentEmail);
-                if (studentFullName == null || studentFullName.isEmpty()) {
+            try (Connection conn = DBUtil.getConnection()) {
+                if (fetchAll) {
+                    appendInterviews(conn, json,
+                            "SELECT * FROM INTERVIEW ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC",
+                            null, null, null);
+                } else if ("student".equals(role)) {
+                    String studentEmail = getStudentEmail(session);
+                    String studentFullName = getStudentFullName(conn, session, studentEmail);
+                    if (studentFullName == null || studentFullName.isEmpty()) {
+                        json.append("]");
+                        response.getWriter().print(json.toString());
+                        return;
+                    }
+                    appendInterviews(conn, json,
+                            "SELECT * FROM INTERVIEW WHERE LOWER(TRIM(STUDENT_NAME)) = LOWER(TRIM(?)) "
+                                    + "ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC LIMIT " + STUDENT_LIMIT,
+                            null, studentFullName, null);
+                } else if ("company".equals(role)) {
+                    String companyName = getCompanyName(conn, session);
+                    if (companyName == null || companyName.isEmpty()) {
+                        json.append("]");
+                        response.getWriter().print(json.toString());
+                        return;
+                    }
+                    appendInterviews(conn, json,
+                            "SELECT * FROM INTERVIEW WHERE COMPANY_NAME = ? "
+                                    + "ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC",
+                            null, null, companyName);
+                } else {
                     json.append("]");
                     response.getWriter().print(json.toString());
                     return;
                 }
-                appendInterviews(json,
-                        "SELECT * FROM INTERVIEW WHERE LOWER(TRIM(STUDENT_NAME)) = LOWER(TRIM(?)) "
-                                + "ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC LIMIT " + STUDENT_LIMIT,
-                        null, studentFullName, null);
-            } else if ("company".equals(role)) {
-                String companyName = getCompanyName(session);
-                if (companyName == null || companyName.isEmpty()) {
-                    json.append("]");
-                    response.getWriter().print(json.toString());
-                    return;
-                }
-                appendInterviews(json,
-                        "SELECT * FROM INTERVIEW WHERE COMPANY_NAME = ? "
-                                + "ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC",
-                        null, null, companyName);
-            } else {
-                json.append("]");
-                response.getWriter().print(json.toString());
-                return;
             }
-
             json.append("]");
             response.getWriter().print(json.toString());
         } catch (Exception e) {
@@ -72,12 +72,11 @@ public class FetchInterviewsServlet extends HttpServlet {
         }
     }
 
-    private void appendInterviews(StringBuilder json, String sql, String studentEmail,
+    private void appendInterviews(Connection conn, StringBuilder json, String sql, String studentEmail,
             String studentFullName, String companyName) throws Exception {
         boolean first = true;
 
-        try (Connection conn = DBUtil.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
             if (studentFullName != null) {
                 ps.setString(1, studentFullName);
@@ -122,7 +121,7 @@ public class FetchInterviewsServlet extends HttpServlet {
         return email;
     }
 
-    private String getStudentFullName(HttpSession session, String studentEmail) {
+    private String getStudentFullName(Connection conn, HttpSession session, String studentEmail) {
         if (session == null) {
             return "";
         }
@@ -135,8 +134,7 @@ public class FetchInterviewsServlet extends HttpServlet {
         }
         try {
             
-            try (Connection conn = DBUtil.getConnection();
-                    PreparedStatement ps = conn.prepareStatement(
+            try (PreparedStatement ps = conn.prepareStatement(
                             "SELECT fullName FROM STUDENT WHERE email = ?")) {
                 ps.setString(1, studentEmail);
                 try (ResultSet rs = ps.executeQuery()) {
@@ -151,7 +149,7 @@ public class FetchInterviewsServlet extends HttpServlet {
         return "";
     }
 
-    private String getCompanyName(HttpSession session) {
+    private String getCompanyName(Connection conn, HttpSession session) {
         if (session == null) {
             return null;
         }
@@ -165,8 +163,7 @@ public class FetchInterviewsServlet extends HttpServlet {
         }
         try {
 
-            try (Connection conn = DBUtil.getConnection();
-                    PreparedStatement ps = conn.prepareStatement(
+            try (PreparedStatement ps = conn.prepareStatement(
                             "SELECT companyName FROM BASIC_DETAILS WHERE companyCode = ?")) {
                 ps.setString(1, companyCode);
                 try (ResultSet rs = ps.executeQuery()) {

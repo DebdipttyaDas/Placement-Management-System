@@ -24,6 +24,10 @@ public class CompanyRegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
+        String website = request.getParameter("website");
+        String registrationNumber = request.getParameter("registrationNumber");
+        String licenseNumber = request.getParameter("licenseNumber");
+        String address = request.getParameter("address");
 
         boolean isRegistered = false;
 
@@ -54,7 +58,7 @@ public class CompanyRegisterServlet extends HttpServlet {
                     ps.setInt(1, companyId);
                     ps.setString(2, phone != null ? phone : "");
                     ps.setString(3, email != null ? email : "");
-                    ps.setString(4, ""); // Website default
+                    ps.setString(4, website != null ? website : "");
                     ps.setString(5, ""); // LinkedIn default
                     ps.executeUpdate();
                 }
@@ -63,7 +67,7 @@ public class CompanyRegisterServlet extends HttpServlet {
                 String insertAddress = "INSERT INTO COMPANY_ADDRESS_DETAILS (COMPANY_ID, companyAddress, city, state, country, pincode) VALUES (?, ?, ?, ?, ?, ?)";
                 try (PreparedStatement ps = conn.prepareStatement(insertAddress)) {
                     ps.setInt(1, companyId);
-                    ps.setString(2, "Not Provided");
+                    ps.setString(2, address != null ? address : "Not Provided");
                     ps.setString(3, "Not Provided");
                     ps.setString(4, "Not Provided");
                     ps.setString(5, "Not Provided");
@@ -75,9 +79,9 @@ public class CompanyRegisterServlet extends HttpServlet {
                 String insertLegal = "INSERT INTO COMPANY_LEGAL_INFO (COMPANY_ID, cin, registrationNum, licenseNum, gstNum) VALUES (?, ?, ?, ?, ?)";
                 try (PreparedStatement ps = conn.prepareStatement(insertLegal)) {
                     ps.setInt(1, companyId);
-                    ps.setString(2, "Not Provided");
-                    ps.setString(3, "Not Provided");
-                    ps.setString(4, "Not Provided");
+                    ps.setString(2, licenseNumber != null ? licenseNumber : "Not Provided");
+                    ps.setString(3, registrationNumber != null ? registrationNumber : "Not Provided");
+                    ps.setString(4, licenseNumber != null ? licenseNumber : "Not Provided");
                     ps.setString(5, "Not Provided");
                     ps.executeUpdate();
                 }

@@ -49,14 +49,7 @@
         <url-pattern>/CompanyProfileServlet</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>UpdateCompanyProfileServlet</servlet-name>
-        <servlet-class>UpdateCompanyProfileServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UpdateCompanyProfileServlet</servlet-name>
-        <url-pattern>/UpdateCompanyProfileServlet</url-pattern>
-    </servlet-mapping>
+
 
     <!-- Company registration -->
     <servlet>
@@ -217,31 +210,7 @@
         <url-pattern>/StudentRegisterServlet</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>StudentProfileServlet</servlet-name>
-        <servlet-class>StudentProfileServlet</servlet-class>
-        <multipart-config>
-            <max-file-size>512000</max-file-size>              <!-- 500KB -->
-            <max-request-size>1048576</max-request-size>       <!-- 1MB -->
-            <file-size-threshold>1048576</file-size-threshold> <!-- 1MB -->
-        </multipart-config>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>StudentProfileServlet</servlet-name>
-        <url-pattern>/StudentProfileServlet</url-pattern>
-    </servlet-mapping>
 
-    <servlet>
-        <servlet-name>UpdateProfileServlet</servlet-name>
-        <servlet-class>UpdateProfileServlet</servlet-class>
-        <multipart-config>
-            <max-file-size>2097152</max-file-size>             <!-- 2MB -->
-        </multipart-config>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UpdateProfileServlet</servlet-name>
-        <url-pattern>/UpdateProfileServlet</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>UpdateStudentProfileServlet</servlet-name>

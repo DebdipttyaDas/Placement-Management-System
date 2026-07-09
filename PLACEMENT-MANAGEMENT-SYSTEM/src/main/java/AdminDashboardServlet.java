@@ -84,7 +84,7 @@ public class AdminDashboardServlet extends HttpServlet {
 
             // 5. Build Notifications list dynamically from database activity
             // Get latest registered student
-            String notificationStudentSql = "SELECT fullName FROM STUDENT ORDER BY email DESC LIMIT 1";
+            String notificationStudentSql = "SELECT fullName FROM STUDENT ORDER BY STUDENT_ID DESC LIMIT 1";
             try (PreparedStatement ps = conn.prepareStatement(notificationStudentSql);
                  ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

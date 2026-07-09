@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
                pageEncoding="UTF-8" import="java.sql.*"  %>
+<%!
+    private Connection getJspConnection() throws Exception {
+        java.util.Properties prop = new java.util.Properties();
+        try (java.io.InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties")) {
+            if (input != null) prop.load(input);
+        }
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        return DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
+    }
+%>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -17,14 +27,19 @@
         <div class="dashboard-container">
 
             <!-- LEFT SIDEBAR -->
-            <div class="sidebar">
-                <h2>Placements</h2>
-
-                <ul>
-                    <li><a href="Student_dashboard.jsp" style="text-decoration:none; color:white">Dashboard</a></li>
-                    <li><a href="Placement.jsp" style="text-decoration:none; color:white">Placements</a></li>
-                    <li><a href="MyApplication.jsp" style="text-decoration:none; color:white">My Applications</a></li>
-                </ul>
+            <div class="sidebar" style="display:flex; flex-direction:column; justify-content:space-between; height:100vh; box-sizing:border-box; padding-bottom:20px; position:fixed; left:0; top:0;">
+                <div>
+                    <h2>Placements</h2>
+                    <ul>
+                        <li><a href="Student_dashboard.jsp" style="text-decoration:none; color:white">Dashboard</a></li>
+                        <li><a href="Placement.jsp" style="text-decoration:none; color:white">Placements</a></li>
+                        <li><a href="MyApplication.jsp" style="text-decoration:none; color:white">My Applications</a></li>
+                    </ul>
+                </div>
+                <!-- Logout -->
+                <form action="LogoutServlet" method="post" style="width:100%;">
+                    <button type="submit" style="width:100%; padding:10px; background:#1d6b61; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:16px; transition: 0.3s ease;">Logout</button>
+                </form>
             </div>
 
             <!-- TOP BAR -->
@@ -69,12 +84,12 @@ ResultSet rs = null;
 
 try{
 
-	conn = DBUtil.getConnection();
+	conn = getJspConnection();
 
     st = conn.createStatement();
 
     rs = st.executeQuery(
-        "SELECT * FROM jobs ORDER BY id DESC"
+        "SELECT * FROM JOB_DETAILS ORDER BY JOB_ID DESC"
     );
 
     while(rs.next()){
@@ -132,6 +147,17 @@ try{
                                 <strong>Deadline:</strong>
                                 <%= rs.getString("applicationDeadline") %>
                             </p>
+
+                            <form action="ApplyJobServlet" method="post" style="margin-top: 10px; display: inline-block;">
+                                <input type="hidden" name="companyName" value="<%= rs.getString("companyName") %>">
+                                <input type="hidden" name="jobTitle" value="<%= rs.getString("jobTitle") %>">
+                                <input type="hidden" name="department" value="<%= rs.getString("department") %>">
+                                <input type="hidden" name="employmentType" value="<%= rs.getString("employmentType") %>">
+                                <input type="hidden" name="locationType" value="<%= rs.getString("LocationType") %>">
+                                <input type="hidden" name="location" value="<%= rs.getString("Location") %>">
+                                <input type="hidden" name="salary" value="<%= rs.getString("salary") %>">
+                                <button type="submit" style="padding: 8px 15px; background-color: #06473e; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 14px; transition: 0.3s; margin-right: 10px;">Apply Now</button>
+                            </form>
 
                             <button class="close-btn"
                                     onclick="toggleCard(this)">
