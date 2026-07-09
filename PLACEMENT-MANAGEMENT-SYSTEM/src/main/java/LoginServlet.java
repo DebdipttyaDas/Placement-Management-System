@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("AdminDashboard.jsp");
             } else {
                 request.setAttribute("error", "Invalid admin credentials");
-                request.getRequestDispatcher("Login.jsp?role=admin").forward(request, response);
+                request.getRequestDispatcher("Login.jsp?role=admin").forward(request, response); 
             }
         }
 
