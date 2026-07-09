@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var companyTypeField = document.querySelector('input[name="companyType"]');
         var websiteField = document.querySelector('input[name="website"]');
         var registrationNumberField = document.querySelector('input[name="registrationNumber"]');
-        var licenseNumberField = document.querySelector('input[name="licenseNumber"]');
+        var licenseNumberField = document.querySelector('input[name="cin"]');
         var emailField = document.querySelector('input[name="email"]');
         var passwordField = document.querySelector('input[name="password"]');
         var addressField = document.querySelector('textarea[name="address"]');
@@ -69,8 +69,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // 6. Validate License Number
-        if (!licenseNumber) {
-            alert("Please enter the company license number.");
+        if (!cin) {
+            alert("Please enter the company CIN number.");
             event.preventDefault();
             return;
         }
