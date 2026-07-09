@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,24 +24,30 @@ public class AdminDashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
-
         int studentCount = 0;
         int companyCount = 0;
         int jobCount = 0;
-        int interviewCount = 0;
+        int placedCount = 0;
 
         List<Map<String, String>> pendingCompanies = new ArrayList<>();
         List<Map<String, String>> upcomingDrives = new ArrayList<>();
         List<Map<String, String>> recentNotifications = new ArrayList<>();
-        Map<String, Integer> deptCounts = new HashMap<>();
+
+        List<String> barLabels = new ArrayList<>();
+        List<Integer> barData = new ArrayList<>();
+
+        List<String> pieLabels = new ArrayList<>();
+        List<Integer> pieData = new ArrayList<>();
+
+        List<String> lineLabels = new ArrayList<>();
+        List<Integer> lineData = new ArrayList<>();
 
         try (Connection conn = getConnection()) {
-            // 1. Fetch table counts
+            // 1. Fetch counts
             studentCount = getTableCount(conn, "STUDENT");
             companyCount = getTableCount(conn, "BASIC_DETAILS");
             jobCount = getTableCount(conn, "JOB_DETAILS");
-            interviewCount = getTableCount(conn, "INTERVIEW");
+            placedCount = getUniqueAppliedStudentsCount(conn);
 
             // 2. Fetch pending company approvals
             String pendingSql = "SELECT b.COMPANY_ID AS id, b.companyName, b.industry, c.companyEmail AS email FROM BASIC_DETAILS b JOIN COMPANY_CONTACT_DETAILS c ON b.COMPANY_ID = c.COMPANY_ID WHERE b.STATUS = 'PENDING' ORDER BY b.COMPANY_ID DESC";
@@ -70,20 +77,7 @@ public class AdminDashboardServlet extends HttpServlet {
                 }
             }
 
-            // 4. Fetch department counts for students
-            String deptSql = "SELECT department, COUNT(*) as cnt FROM ACCADEMIC_DETAILS GROUP BY department";
-            try (PreparedStatement ps = conn.prepareStatement(deptSql);
-                 ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    String dept = rs.getString("department");
-                    if (dept != null) {
-                        deptCounts.put(dept.trim().toUpperCase(), rs.getInt("cnt"));
-                    }
-                }
-            }
-
-            // 5. Build Notifications list dynamically from database activity
-            // Get latest registered student
+            // 4. Notifications from database
             String notificationStudentSql = "SELECT fullName FROM STUDENT ORDER BY STUDENT_ID DESC LIMIT 1";
             try (PreparedStatement ps = conn.prepareStatement(notificationStudentSql);
                  ResultSet rs = ps.executeQuery()) {
@@ -91,12 +85,11 @@ public class AdminDashboardServlet extends HttpServlet {
                     Map<String, String> note = new HashMap<>();
                     note.put("type", "student");
                     note.put("message", "New student registered: " + rs.getString("fullName"));
-                    note.put("time", "2 hours ago");
+                    note.put("time", "Just now");
                     recentNotifications.add(note);
                 }
             }
 
-            // Get latest posted job
             String notificationJobSql = "SELECT jobTitle, department FROM JOB_DETAILS ORDER BY JOB_ID DESC LIMIT 1";
             try (PreparedStatement ps = conn.prepareStatement(notificationJobSql);
                  ResultSet rs = ps.executeQuery()) {
@@ -104,12 +97,11 @@ public class AdminDashboardServlet extends HttpServlet {
                     Map<String, String> note = new HashMap<>();
                     note.put("type", "bell");
                     note.put("message", "New job posted: " + rs.getString("jobTitle") + " (" + rs.getString("department") + ")");
-                    note.put("time", "5 hours ago");
+                    note.put("time", "Just now");
                     recentNotifications.add(note);
                 }
             }
 
-            // Get latest registered company
             String notificationCompanySql = "SELECT companyName FROM BASIC_DETAILS ORDER BY COMPANY_ID DESC LIMIT 1";
             try (PreparedStatement ps = conn.prepareStatement(notificationCompanySql);
                  ResultSet rs = ps.executeQuery()) {
@@ -117,76 +109,135 @@ public class AdminDashboardServlet extends HttpServlet {
                     Map<String, String> note = new HashMap<>();
                     note.put("type", "building");
                     note.put("message", "New company registered: " + rs.getString("companyName"));
-                    note.put("time", "Yesterday");
+                    note.put("time", "Just now");
                     recentNotifications.add(note);
+                }
+            }
+
+            // 5. Dynamic Time Windows for Charts
+            java.time.LocalDate today = java.time.LocalDate.now();
+
+            // Placement Rate Bar Chart (Applications count)
+            for (int i = 5; i >= 0; i--) {
+                java.time.LocalDate d = today.minusMonths(i);
+                String monthName = d.getMonth().getDisplayName(java.time.format.TextStyle.SHORT, java.util.Locale.ENGLISH);
+                barLabels.add(monthName);
+                
+                int monthVal = d.getMonthValue();
+                int yearVal = d.getYear();
+                String appCountSql = "SELECT COUNT(*) FROM APPLICATION WHERE MONTH(submitted) = ? AND YEAR(submitted) = ?";
+                try (PreparedStatement ps = conn.prepareStatement(appCountSql)) {
+                    ps.setInt(1, monthVal);
+                    ps.setInt(2, yearVal);
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            barData.add(rs.getInt(1));
+                        } else {
+                            barData.add(0);
+                        }
+                    }
+                }
+            }
+
+            // Students per Department Pie Chart
+            String deptSql = "SELECT department, COUNT(*) as cnt FROM ACCADEMIC_DETAILS GROUP BY department";
+            try (PreparedStatement ps = conn.prepareStatement(deptSql);
+                 ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    String dept = rs.getString("department");
+                    if (dept != null && !dept.trim().isEmpty()) {
+                        pieLabels.add(dept.trim().toUpperCase());
+                        pieData.add(rs.getInt("cnt"));
+                    }
+                }
+            }
+
+            // Job Postings Line Chart (Jobs count by deadline month)
+            for (int i = 5; i >= 0; i--) {
+                java.time.LocalDate d = today.minusMonths(i);
+                String monthName = d.getMonth().getDisplayName(java.time.format.TextStyle.SHORT, java.util.Locale.ENGLISH);
+                lineLabels.add(monthName);
+                
+                int monthVal = d.getMonthValue();
+                int yearVal = d.getYear();
+                String datePrefix = String.format("%04d-%02d-%%", yearVal, monthVal);
+                String jobCountSql = "SELECT COUNT(*) FROM JOB_DETAILS WHERE applicationDeadline LIKE ?";
+                try (PreparedStatement ps = conn.prepareStatement(jobCountSql)) {
+                    ps.setString(1, datePrefix);
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            lineData.add(rs.getInt(1));
+                        } else {
+                            lineData.add(0);
+                        }
+                    }
                 }
             }
 
         } catch (Exception e) {
             System.err.println("AdminDashboardServlet: Database error: " + e.getMessage());
+            e.printStackTrace();
         }
 
-        // Calculate dynamic dashboard stats with realistic baselines
-        int totalStudents = 1200 + studentCount;
-        int totalCompanies = 45 + companyCount;
-        int activeJobs = 120 + jobCount;
-        int placedStudents = 300 + (int) (studentCount * 0.25);
+        String studentsTrend = "+" + studentCount + " registered";
+        String companiesTrend = "+" + companyCount + " registered";
+        String jobsTrend = "+" + jobCount + " active";
+        String placedTrend = "+" + placedCount + " placed";
 
-        String studentsTrend = "+" + (120 + studentCount) + " this month";
-        String companiesTrend = "+" + (6 + companyCount) + " this month";
-        String jobsTrend = "+" + (15 + jobCount) + " this month";
-        String placedTrend = "+" + (40 + (int)(studentCount * 0.1)) + " this month";
+        boolean isAjax = request.getParameter("ajax") != null;
 
-        // Set counts and trends as request attributes
-        request.setAttribute("totalStudents", formatNumber(totalStudents));
-        request.setAttribute("totalCompanies", formatNumber(totalCompanies));
-        request.setAttribute("activeJobs", formatNumber(activeJobs));
-        request.setAttribute("placedStudents", formatNumber(placedStudents));
+        if (isAjax) {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            PrintWriter out = response.getWriter();
 
-        request.setAttribute("studentsTrend", studentsTrend);
-        request.setAttribute("companiesTrend", companiesTrend);
-        request.setAttribute("jobsTrend", jobsTrend);
-        request.setAttribute("placedTrend", placedTrend);
+            StringBuilder sb = new StringBuilder();
+            sb.append("{")
+              .append("\"totalStudents\":\"").append(formatNumber(studentCount)).append("\",")
+              .append("\"totalCompanies\":\"").append(formatNumber(companyCount)).append("\",")
+              .append("\"activeJobs\":\"").append(formatNumber(jobCount)).append("\",")
+              .append("\"placedStudents\":\"").append(formatNumber(placedCount)).append("\",")
+              .append("\"studentsTrend\":\"").append(studentsTrend).append("\",")
+              .append("\"companiesTrend\":\"").append(companiesTrend).append("\",")
+              .append("\"jobsTrend\":\"").append(jobsTrend).append("\",")
+              .append("\"placedTrend\":\"").append(placedTrend).append("\",")
+              .append("\"pendingCompanies\":").append(listToJson(pendingCompanies)).append(",")
+              .append("\"upcomingDrives\":").append(listToJson(upcomingDrives)).append(",")
+              .append("\"notifications\":").append(listToJson(recentNotifications)).append(",")
+              .append("\"barChartLabels\":").append(toJsonArray(barLabels)).append(",")
+              .append("\"barChartData\":").append(toJsonArrayOfInts(barData)).append(",")
+              .append("\"pieChartLabels\":").append(toJsonArray(pieLabels)).append(",")
+              .append("\"pieChartData\":").append(toJsonArrayOfInts(pieData)).append(",")
+              .append("\"lineChartLabels\":").append(toJsonArray(lineLabels)).append(",")
+              .append("\"lineChartData\":").append(toJsonArrayOfInts(lineData))
+              .append("}");
 
-        // Lists
-        request.setAttribute("pendingCompanies", pendingCompanies);
-        request.setAttribute("upcomingDrives", upcomingDrives);
-        request.setAttribute("notifications", recentNotifications);
+            out.print(sb.toString());
+        } else {
+            // Set counts and trends as request attributes for initial render
+            request.setAttribute("totalStudents", formatNumber(studentCount));
+            request.setAttribute("totalCompanies", formatNumber(companyCount));
+            request.setAttribute("activeJobs", formatNumber(jobCount));
+            request.setAttribute("placedStudents", formatNumber(placedCount));
 
-        // Chart 1: Placement Rate per month (Bar Chart)
-        int offset = studentCount > 0 ? (studentCount % 5) : 0;
-        List<String> barLabels = Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun");
-        List<Integer> barData = Arrays.asList(40 + offset, 55 + offset, 60 + offset, 50 + offset, 70 + offset, 80 + offset);
-        request.setAttribute("barChartLabels", toJsonArray(barLabels));
-        request.setAttribute("barChartData", toJsonArrayOfInts(barData));
+            request.setAttribute("studentsTrend", studentsTrend);
+            request.setAttribute("companiesTrend", companiesTrend);
+            request.setAttribute("jobsTrend", jobsTrend);
+            request.setAttribute("placedTrend", placedTrend);
 
-        // Chart 2: Students per Department (Pie Chart)
-        List<String> pieLabels = Arrays.asList("CSE", "BCA", "MCA", "BBA", "MBA", "IT", "ECE");
-        List<Integer> pieData = new ArrayList<>();
-        for (String label : pieLabels) {
-            int count = deptCounts.getOrDefault(label, 0);
-            // Add baseline to make the dashboard visually rich and populated
-            if ("CSE".equals(label)) count += 40;
-            else if ("BCA".equals(label)) count += 25;
-            else if ("MCA".equals(label)) count += 20;
-            else if ("BBA".equals(label)) count += 15;
-            else if ("MBA".equals(label)) count += 10;
-            else if ("IT".equals(label)) count += 12;
-            else if ("ECE".equals(label)) count += 10;
-            pieData.add(count);
+            request.setAttribute("pendingCompanies", pendingCompanies);
+            request.setAttribute("upcomingDrives", upcomingDrives);
+            request.setAttribute("notifications", recentNotifications);
+
+            request.setAttribute("barChartLabels", toJsonArray(barLabels));
+            request.setAttribute("barChartData", toJsonArrayOfInts(barData));
+            request.setAttribute("pieChartLabels", toJsonArray(pieLabels));
+            request.setAttribute("pieChartData", toJsonArrayOfInts(pieData));
+            request.setAttribute("lineChartLabels", toJsonArray(lineLabels));
+            request.setAttribute("lineChartData", toJsonArrayOfInts(lineData));
+
+            request.getRequestDispatcher("AdminDashboard.jsp").forward(request, response);
         }
-        request.setAttribute("pieChartLabels", toJsonArray(pieLabels));
-        request.setAttribute("pieChartData", toJsonArrayOfInts(pieData));
-
-        // Chart 3: Job Postings (Monthly) (Line Chart)
-        int jobsOffset = jobCount > 0 ? jobCount : 0;
-        List<String> lineLabels = Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun");
-        List<Integer> lineData = Arrays.asList(10 + jobsOffset / 5, 20 + jobsOffset / 4, 15 + jobsOffset / 3, 25 + jobsOffset / 2, 30 + jobsOffset, 35 + jobsOffset);
-        request.setAttribute("lineChartLabels", toJsonArray(lineLabels));
-        request.setAttribute("lineChartData", toJsonArrayOfInts(lineData));
-
-        // Forward to the JSP
-        request.getRequestDispatcher("AdminDashboard.jsp").forward(request, response);
     }
 
     @Override
@@ -207,7 +258,20 @@ public class AdminDashboardServlet extends HttpServlet {
                 return rs.getInt(1);
             }
         } catch (SQLException e) {
-            // Ignore if table does not exist
+            // Ignore (table may not exist yet)
+        }
+        return 0;
+    }
+
+    private int getUniqueAppliedStudentsCount(Connection conn) {
+        String sql = "SELECT COUNT(DISTINCT STUDENT_ID) FROM APPLICATION";
+        try (PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            // Ignore
         }
         return 0;
     }
@@ -217,6 +281,36 @@ public class AdminDashboardServlet extends HttpServlet {
             return String.format("%,d", number);
         }
         return String.valueOf(number);
+    }
+
+    private String listToJson(List<Map<String, String>> list) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < list.size(); i++) {
+            if (i > 0) sb.append(",");
+            sb.append(mapToJson(list.get(i)));
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    private String mapToJson(Map<String, String> map) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        int count = 0;
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (count > 0) sb.append(",");
+            sb.append("\"").append(escapeJson(entry.getKey())).append("\":\"")
+              .append(escapeJson(entry.getValue())).append("\"");
+            count++;
+        }
+        sb.append("}");
+        return sb.toString();
+    }
+
+    private String escapeJson(String s) {
+        if (s == null) return "";
+        return s.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n").replace("\r", "\\r");
     }
 
     private String toJsonArray(List<String> list) {

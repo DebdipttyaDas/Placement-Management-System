@@ -58,7 +58,11 @@ public class ScheduleInterviewServlet extends HttpServlet {
                         interviewDate, interviewTime, duration, interviewRound, meetLink);
             }
 
-            notifyN8n(requestBody);
+            String n8nPayload = requestBody.trim();
+            if (n8nPayload.endsWith("}")) {
+                n8nPayload = n8nPayload.substring(0, n8nPayload.length() - 1) + ", \"meet_link\": \"" + escapeJson(meetLink) + "\"}";
+            }
+            notifyN8n(n8nPayload);
 
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write("{\"success\": true, \"message\": \"Interview slot scheduled successfully.\", "

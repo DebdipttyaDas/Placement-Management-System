@@ -61,6 +61,16 @@
         <url-pattern>/CompanyRegisterServlet</url-pattern>
     </servlet-mapping>
 
+    <!-- Apply Job servlet -->
+    <servlet>
+        <servlet-name>ApplyJobServlet</servlet-name>
+        <servlet-class>ApplyJobServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ApplyJobServlet</servlet-name>
+        <url-pattern>/ApplyJobServlet</url-pattern>
+    </servlet-mapping>
+
     <!-- Contact servlet -->
     <servlet>
         <servlet-name>ContactServlet</servlet-name>
