@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Get Values
         const adminName = document.querySelector('input[name="adminName"]').value.trim();
 
-        const username = document.querySelector('input[name="username"]').value.trim();
+        const username = document.querySelector('input[name="userName"]').value.trim();
 
         const email = document.querySelector('input[name="email"]').value.trim();
 

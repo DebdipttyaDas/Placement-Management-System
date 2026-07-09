@@ -37,6 +37,9 @@ public class StudentRegisterServlet extends HttpServlet {
         String department = request.getParameter("department");
         String year = request.getParameter("year");
         String cgpa = request.getParameter("cgpa");
+        if (cgpa == null || cgpa.isEmpty()) {
+            cgpa = request.getParameter("dgpa");
+        }
         String dob = request.getParameter("dob");
         String email = request.getParameter("email");
         String password = request.getParameter("password");

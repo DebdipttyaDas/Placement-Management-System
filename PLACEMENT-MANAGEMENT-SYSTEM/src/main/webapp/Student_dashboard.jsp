@@ -232,15 +232,13 @@
   if (sessionUser != null) {
     dashboardStudentEmail = sessionUser.toString();
     try {
-      Class.forName("com.mysql.cj.jdbc.Driver");
-      try (Connection conn = DriverManager.getConnection(
-              "jdbc:mysql://localhost:3306/placement_management", "root", "password");
+      try (Connection conn = DBUtil.getConnection();
            PreparedStatement ps = conn.prepareStatement(
-              "SELECT full_name FROM students WHERE email = ?")) {
+              "SELECT fullName FROM STUDENT WHERE email = ?")) {
         ps.setString(1, dashboardStudentEmail);
         try (ResultSet rs = ps.executeQuery()) {
-          if (rs.next() && rs.getString("full_name") != null) {
-            dashboardStudentFullName = rs.getString("full_name").trim();
+          if (rs.next() && rs.getString("fullName") != null) {
+            dashboardStudentFullName = rs.getString("fullName").trim();
           }
         }
       }

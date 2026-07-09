@@ -1,4 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.sql.*" %>
+<%
+    HttpSession sess = request.getSession(false);
+    String sessionUser = (sess != null) ? (String) sess.getAttribute("user") : null;
+    if (sessionUser == null) {
+        response.sendRedirect("Login.jsp?role=admin");
+        return;
+    }
+
+    String dbAdminName = "";
+    String dbUserName = sessionUser;
+    String dbEmail = "";
+    String dbPhone = "";
+
+    try (Connection conn = DBUtil.getConnection()) {
+        String sql = "SELECT adminName, userName, email, phone FROM ADMIN_PROFILE WHERE userName = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, sessionUser);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    dbAdminName = rs.getString("adminName");
+                    dbUserName = rs.getString("userName");
+                    dbEmail = rs.getString("email");
+                    dbPhone = rs.getString("phone");
+                }
+            }
+        }
+    } catch (Exception e) {
+        System.err.println("Error loading admin profile: " + e.getMessage());
+    }
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,19 +64,19 @@
         <form id="adminProfileForm" action="AdminProfileServlet" method="post">
 
             <label>Admin Name</label>
-            <input type="text" name="adminName" placeholder="Enter Admin Name" required>
+            <input type="text" name="adminName" placeholder="Enter Admin Name" value="<%= dbAdminName %>" required>
 
             <label>Username</label>
-            <input type="text" name="userName" placeholder="Enter Username" required>
+            <input type="text" name="userName" placeholder="Enter Username" value="<%= dbUserName %>" required>
 
             <label>Email</label>
-            <input type="email" name="email" placeholder="Enter Email" required>
+            <input type="email" name="email" placeholder="Enter Email" value="<%= dbEmail %>" required>
 
             <label>Password</label>
             <input type="password" name="password" placeholder="Enter Password">
 
             <label>Phone Number</label>
-            <input type="number" name="phone" placeholder="Enter Phone Number">
+            <input type="text" name="phone" placeholder="Enter Phone Number" value="<%= dbPhone %>">
 
         </form>
         <!-- FORM END -->

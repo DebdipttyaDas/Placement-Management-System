@@ -46,9 +46,6 @@ public class JobPostServlet extends HttpServlet {
         try (Connection conn = getConnection()) {
             if (conn != null) {
                 Integer companyId = fetchCompanyId(conn, companyCode);
-                if (companyId == null) {
-                    companyId = getDefaultCompanyId(conn);
-                }
 
                 if (companyId != null) {
                     String insertQuery = "INSERT INTO JOB_DETAILS (COMPANY_ID, companyName, jobTitle, department, employmentType, LocationType, Location, salary, applicationDeadline, jobDescription) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -71,7 +68,7 @@ public class JobPostServlet extends HttpServlet {
                         }
                     }
                 } else {
-                    System.err.println("JobPostServlet: No company found in BASIC_DETAILS.");
+                    System.err.println("JobPostServlet: No company found in BASIC_DETAILS for companyCode: " + companyCode);
                 }
             }
         } catch (Exception e) {
@@ -102,18 +99,6 @@ public class JobPostServlet extends HttpServlet {
             }
         } catch (Exception e) {
             System.err.println("JobPostServlet: Error fetching COMPANY_ID: " + e.getMessage());
-        }
-        return null;
-    }
-
-    private Integer getDefaultCompanyId(Connection conn) {
-        try (Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT COMPANY_ID FROM BASIC_DETAILS LIMIT 1")) {
-            if (rs.next()) {
-                return rs.getInt("COMPANY_ID");
-            }
-        } catch (Exception e) {
-            // Ignore
         }
         return null;
     }
