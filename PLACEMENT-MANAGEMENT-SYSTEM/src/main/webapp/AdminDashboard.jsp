@@ -68,26 +68,26 @@
     <section class="stats-container">
         <div class="stat-card">
             <h3>Total Students</h3>
-            <p class="count"><%= request.getAttribute("totalStudents") %></p>
-            <span class="trend"><%= request.getAttribute("studentsTrend") %></span>
+            <p class="count" id="total-students"><%= request.getAttribute("totalStudents") %></p>
+            <span class="trend" id="students-trend"><%= request.getAttribute("studentsTrend") %></span>
         </div>
 
         <div class="stat-card">
             <h3>Total Companies</h3>
-            <p class="count"><%= request.getAttribute("totalCompanies") %></p>
-            <span class="trend"><%= request.getAttribute("companiesTrend") %></span>
+            <p class="count" id="total-companies"><%= request.getAttribute("totalCompanies") %></p>
+            <span class="trend" id="companies-trend"><%= request.getAttribute("companiesTrend") %></span>
         </div>
 
         <div class="stat-card">
             <h3>Active Jobs</h3>
-            <p class="count"><%= request.getAttribute("activeJobs") %></p>
-            <span class="trend"><%= request.getAttribute("jobsTrend") %></span>
+            <p class="count" id="active-jobs"><%= request.getAttribute("activeJobs") %></p>
+            <span class="trend" id="jobs-trend"><%= request.getAttribute("jobsTrend") %></span>
         </div>
 
         <div class="stat-card">
             <h3>Placed Students</h3>
-            <p class="count"><%= request.getAttribute("placedStudents") %></p>
-            <span class="trend"><%= request.getAttribute("placedTrend") %></span>
+            <p class="count" id="placed-students"><%= request.getAttribute("placedStudents") %></p>
+            <span class="trend" id="placed-trend"><%= request.getAttribute("placedTrend") %></span>
         </div>
     </section>
 
@@ -136,7 +136,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="pending-companies-tbody">
                 <%
                     List<Map<String, String>> pendingCompanies = (List<Map<String, String>>) request.getAttribute("pendingCompanies");
                     boolean hasPending = false;
@@ -185,7 +185,7 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody id="upcoming-drives-tbody">
                 <%
                     List<Map<String, String>> upcomingDrives = (List<Map<String, String>>) request.getAttribute("upcomingDrives");
                     if (upcomingDrives != null && !upcomingDrives.isEmpty()) {
@@ -254,7 +254,7 @@
             <button>View All</button>
         </div>
 
-        <div class="notification-list">
+        <div class="notification-list" id="notifications-list">
             <%
                 List<Map<String, String>> notifications = (List<Map<String, String>>) request.getAttribute("notifications");
                 if (notifications != null && !notifications.isEmpty()) {

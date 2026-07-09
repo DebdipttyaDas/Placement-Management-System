@@ -20,7 +20,7 @@
     },
     {
       "parameters": {
-        "sendTo": "={{$json.email}}",
+        "sendTo": "={{$json.body.email}}",
         "subject": "Your Company Registration is Approved!",
         "message": "={{'Hello ' + $json.body.companyName + ',<br><br>Your registration has been approved. Your Company Code is: <b>' + $json.body.companyCode + '</b><br><br>Please use this code to login.'}}",
         "options": {

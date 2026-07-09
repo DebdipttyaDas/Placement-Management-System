@@ -14,10 +14,6 @@ import jakarta.servlet.http.HttpSession;
 public class Resetpasswordservlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

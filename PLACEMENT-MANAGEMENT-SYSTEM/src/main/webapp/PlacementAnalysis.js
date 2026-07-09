@@ -4,6 +4,8 @@
 
 document.addEventListener("DOMContentLoaded", function() {
   fetchAnalyticsData();
+  // Continuously update from database every 5 seconds
+  setInterval(fetchAnalyticsData, 5000);
 });
 
 function fetchAnalyticsData() {
@@ -96,74 +98,88 @@ function updateDashboardData(data) {
 }
 
 // ── 1. Pie / Doughnut Chart ────────────────────────────────────
+var pieChartInstance = null;
 function initPieChart(dataValues, labels) {
   var ctx = document.getElementById("pieChart");
   if (!ctx) return;
 
   labels = labels || ["Tech", "Finance", "Edu", "Other"];
 
-  new Chart(ctx, {
-    type: "doughnut",
-    data: {
-      labels: labels,
-      datasets: [{
-        data: dataValues,
-        backgroundColor: ["#123D8D", "#E16B6B", "#D48A3B", "#E5E7EB"],
-        borderWidth: 0
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      cutout: "72%",
-      plugins: {
-        legend: { display: false }
+  if (pieChartInstance) {
+    pieChartInstance.data.labels = labels;
+    pieChartInstance.data.datasets[0].data = dataValues;
+    pieChartInstance.update();
+  } else {
+    pieChartInstance = new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: labels,
+        datasets: [{
+          data: dataValues,
+          backgroundColor: ["#123D8D", "#E16B6B", "#D48A3B", "#E5E7EB"],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: "72%",
+        plugins: {
+          legend: { display: false }
+        }
       }
-    }
-  });
+    });
+  }
 }
 
 // ── 2. Line Chart ──────────────────────────────────────────────
+var lineChartInstance = null;
 function initLineChart(dataValues, labels) {
   var ctx = document.getElementById("lineChart");
   if (!ctx) return;
 
   labels = labels || ["Q1\n23", "Q2\n23", "Q3\n23", "Q4\n23", "Q1\n24"];
 
-  new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: labels,
-      datasets: [{
-        data: dataValues,
-        borderColor: "#8AA0C8",
-        backgroundColor: "rgba(138,160,200,0.08)",
-        fill: true,
-        tension: 0.5,
-        pointRadius: 0,
-        borderWidth: 3
-      }]
-    },
-    options: {
-      responsive: false,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false }
+  if (lineChartInstance) {
+    lineChartInstance.data.labels = labels;
+    lineChartInstance.data.datasets[0].data = dataValues;
+    lineChartInstance.update();
+  } else {
+    lineChartInstance = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [{
+          data: dataValues,
+          borderColor: "#8AA0C8",
+          backgroundColor: "rgba(138,160,200,0.08)",
+          fill: true,
+          tension: 0.5,
+          pointRadius: 0,
+          borderWidth: 3
+        }]
       },
-      scales: {
-        x: {
-          grid: { color: "#EAEAEA", drawBorder: false },
-          ticks: { color: "#666", font: { size: 11 } },
-          border: { display: false }
+      options: {
+        responsive: false,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
         },
-        y: {
-          display: false,
-          grid: { display: false },
-          border: { display: false }
+        scales: {
+          x: {
+            grid: { color: "#EAEAEA", drawBorder: false },
+            ticks: { color: "#666", font: { size: 11 } },
+            border: { display: false }
+          },
+          y: {
+            display: false,
+            grid: { display: false },
+            border: { display: false }
+          }
         }
       }
-    }
-  });
+    });
+  }
 }
 
 function esc(str) {

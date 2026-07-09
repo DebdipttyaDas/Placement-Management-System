@@ -69,7 +69,7 @@
       "parameters": {
         "sendTo": "={{$node[\"Webhook\"].json[\"body\"][\"student_email\"]}}",
         "subject": "=Interview Scheduled - {{$node[\"Webhook\"].json[\"body\"][\"company_name\"]}}",
-        "message": "=Hello {{$node[\"Webhook\"].json[\"body\"][\"student_name\"]}},\n\nYour interview has been scheduled successfully.\n\nCompany: {{$node[\"Webhook\"].json[\"body\"][\"company_name\"]}}\nRound: {{$node[\"Webhook\"].json[\"body\"][\"interview_round\"]}}\nDate: {{$node[\"Webhook\"].json[\"body\"][\"interview_date\"]}}\nTime: {{$node[\"Webhook\"].json[\"body\"][\"interview_time\"]}}\n\nJoin Meeting: {{$node[\"Google Calendar\"].json[\"conferenceData\"][\"entryPoints\"][0][\"uri\"]}}\n\nBest of luck.\nPlacement Cell",
+        "message": "=Hello {{$node[\"Webhook\"].json[\"body\"][\"student_name\"]}},\n\nYour interview has been scheduled successfully.\n\nCompany: {{$node[\"Webhook\"].json[\"body\"][\"company_name\"]}}\nRound: {{$node[\"Webhook\"].json[\"body\"][\"interview_round\"]}}\nDate: {{$node[\"Webhook\"].json[\"body\"][\"interview_date\"]}}\nTime: {{$node[\"Webhook\"].json[\"body\"][\"interview_time\"]}}\n\nJoin Meeting: {{$node[\"Webhook\"].json[\"body\"][\"meet_link\"]}}\n\nBest of luck.\nPlacement Cell",
         "options": {}
       },
       "id": "08320e17-a9d8-403a-9fcb-900d7a803018",
@@ -102,7 +102,7 @@
             },
             {
               "name": "meetLink",
-              "value": "={{$node[\"Google Calendar\"].json[\"conferenceData\"][\"entryPoints\"][0][\"uri\"]}}"
+              "value": "={{$node[\"Webhook\"].json[\"body\"][\"meet_link\"]}}"
             },
             {
               "name": "eventId",
@@ -140,17 +140,6 @@
       ]
     },
     "Google Calendar": {
-      "main": [
-        [
-          {
-            "node": "MySQL",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "MySQL": {
       "main": [
         [
           {
