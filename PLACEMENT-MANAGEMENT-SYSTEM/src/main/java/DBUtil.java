@@ -14,6 +14,7 @@ public class DBUtil {
         try {
         	
         	Class.forName("com.mysql.cj.jdbc.Driver");  
+        	
 
             Properties prop = new Properties();
 
