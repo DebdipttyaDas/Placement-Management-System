@@ -27,7 +27,9 @@
             <li><a href="PlacementAnalysis.jsp" style="text-decoration:none;color:white;">Placement Analysis</a></li>
         </ul>
         <div class="logout">
-            <button>Logout</button>
+            <form action="LogoutServlet" method="post" style="width: 100%;">
+                <button type="submit" style="width: 100%;">Logout</button>
+            </form>
         </div>
     </div>
     <!-- END SIDEBAR -->
@@ -60,7 +62,7 @@
                 <span class="particle"></span>
                 <div>
                     <div class="hero-label">Company Dashboard</div>
-                    <h1>Hello, Google Recruiting</h1>
+                    <h1>Hello, <%= session.getAttribute("companyName") != null ? session.getAttribute("companyName") : "Recruiting Partner" %></h1>
                     <p>Here is your recruitment overview for the current placement season.</p>
                 </div>
                 <div class="hero-content">

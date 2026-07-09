@@ -60,11 +60,11 @@
 
     <!-- LOGOUT -->
     <div class="logout">
-
-        <button>
-            Logout
-        </button>
-
+        <form action="LogoutServlet" method="post" style="width: 100%;">
+            <button type="submit" style="width: 100%;">
+                Logout
+            </button>
+        </form>
     </div>
 
 </div>

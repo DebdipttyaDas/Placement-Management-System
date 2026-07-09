@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.sql.*" %>
+<%!
+    private Connection getJspConnection() throws Exception {
+        java.util.Properties prop = new java.util.Properties();
+        try (java.io.InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties")) {
+            if (input != null) prop.load(input);
+        }
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        return DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
+    }
+%>
 <%
     HttpSession sess = request.getSession(false);
     String sessionUser = (sess != null) ? (String) sess.getAttribute("user") : null;
@@ -13,7 +23,7 @@
     String dbEmail = "";
     String dbPhone = "";
 
-    try (Connection conn = DBUtil.getConnection()) {
+    try (Connection conn = getJspConnection()) {
         String sql = "SELECT adminName, userName, email, phone FROM ADMIN_PROFILE WHERE userName = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, sessionUser);

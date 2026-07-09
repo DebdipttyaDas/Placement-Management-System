@@ -23,6 +23,17 @@
 
     <hr>
 
+    <!-- SUCCESS/ERROR MESSAGE -->
+    <%
+      String msg = (String) request.getAttribute("message");
+      if (msg != null) {
+          String color = msg.contains("successfully") ? "green" : "red";
+    %>
+      <p style="color: <%= color %>; text-align: center; font-weight: bold; margin-top: 10px;"><%= msg %></p>
+    <%
+      }
+    %>
+
     <!-- FORM -->
     <h2>Send a Message</h2>
 

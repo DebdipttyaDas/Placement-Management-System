@@ -53,11 +53,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     </ul>
 <!-- LOGOUT -->
     <div class="logout">
-
-        <button>
-            Logout
-        </button>
-
+        <form action="LogoutServlet" method="post" style="width: 100%;">
+            <button type="submit" style="width: 100%;">
+                Logout
+            </button>
+        </form>
     </div>
     
 </div>
