@@ -97,7 +97,7 @@ public class Forgetpasswordservlet extends HttpServlet {
 
     private boolean triggerN8NWorkflow(String email, String code) {
         try {
-            URL url = new URL("http://localhost:5678/webhook/forget-password");
+            URL url = new URL("http://localhost:5678/webhook-test/forget-password");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json; utf-8");

@@ -87,7 +87,7 @@ public class Resetpasswordservlet extends HttpServlet {
      */
     private boolean updatePassword(String role, String email, String newPassword) {
         try {
-            URL url = new URL("http://localhost:5678/webhook/update-password");
+            URL url = new URL("http://localhost:5678/webhook-test/update-password");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json; utf-8");

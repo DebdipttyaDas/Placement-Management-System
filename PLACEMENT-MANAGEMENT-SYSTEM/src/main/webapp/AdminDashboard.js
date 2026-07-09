@@ -260,7 +260,7 @@ function fetchDashboardUpdates() {
 // =========================
 // UI Animation Listeners
 // =========================
-function attachApprovalListeners() {
+/*function attachApprovalListeners() {
     const approveButtons = document.querySelectorAll("#pending-companies-tbody button");
     approveButtons.forEach(button => {
         if (!button.dataset.listenerAttached) {
@@ -273,7 +273,7 @@ function attachApprovalListeners() {
             });
         }
     });
-}
+}*/
 
 function attachNotificationHoverEffects() {
     const notifications = document.querySelectorAll(".notification-card");
