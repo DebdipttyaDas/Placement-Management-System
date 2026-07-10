@@ -208,12 +208,8 @@ body {
     color:white;
 }
 
-.card-container{
-    display:grid;
-    grid-template-columns:repeat(3, 300px);
-    gap:20px;
-    justify-content:center;
-}
+
+
 
 /* CARD TEXT */
 .job-card h3 {
@@ -421,7 +417,10 @@ body {
 /* Large Desktops (Min width: 1440px) */
 @media screen and (min-width: 1440px) {
     .job-cards {
-        gap: 40px;
+         display: grid;
+		grid-template-columns: repeat(3, 1fr);
+	    gap: 25px;
+		padding: 20px;
     }
 
     .job-card {
