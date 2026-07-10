@@ -9,6 +9,7 @@
         Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
     }
+
 %>
   <!DOCTYPE html>
   <html lang="en">
