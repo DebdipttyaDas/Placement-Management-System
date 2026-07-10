@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 markInvalid(resumeInput);
                 isValid = false;
             } else if (resume.size > 65 * 1024) {
-                alert("Resume size must be less than 500KB.");
+                alert("Resume size must be less than 65KB.");
                 markInvalid(resumeInput);
                 isValid = false;
             }
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 markInvalid(photoInput);
                 isValid = false;
             } else if (photo.size > 65 * 1024) {
-                alert("Photo size must be less than 100KB.");
+                alert("Photo size must be less than 65KB.");
                 markInvalid(photoInput);
                 isValid = false;
             }

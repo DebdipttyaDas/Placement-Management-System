@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             if (file.size > 65 * 1024) {
-                alert("Uploaded image must be smaller than 500KB.");
+                alert("Uploaded image must be smaller than 65KB.");
                 this.value = "";
                 return;
             }
