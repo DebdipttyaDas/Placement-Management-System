@@ -26,7 +26,6 @@ pageEncoding="UTF-8"%>
             <li><a href="AdminDashboard.jsp" style="text-decoration: none; color: white;">Dashboard</a></li>
             <li><a href="CompanyMonitoring.jsp" style="text-decoration: none; color: white;">Company Monitoring</a></li>
             <li class="active">Student Monitoring</li>
-            <li><a href="#" style="text-decoration: none; color: white;">Notifications</a></li>
         </ul>
     </div>
 
