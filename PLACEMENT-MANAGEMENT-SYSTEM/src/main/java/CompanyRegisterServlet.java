@@ -30,18 +30,21 @@ public class CompanyRegisterServlet extends HttpServlet {
         String address = request.getParameter("address");
 
         boolean isRegistered = false;
+        String companyCode = "";
 
         try (Connection conn = DBUtil.getConnection()) {
             conn.setAutoCommit(false);
 
-            String insertBasic = "INSERT INTO BASIC_DETAILS (companyName, industry, companyType, companyCode, password, STATUS) VALUES (?, ?, ?, NULL, ?, 'PENDING')";
+            companyCode = CodeGenerator.generateCompanyCode();
+            String insertBasic = "INSERT INTO BASIC_DETAILS (companyName, industry, companyType, companyCode, password, STATUS) VALUES (?, ?, ?, ?, ?, 'PENDING')";
             int companyId = -1;
 
             try (PreparedStatement ps = conn.prepareStatement(insertBasic, java.sql.Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, companyName);
                 ps.setString(2, industry);
                 ps.setString(3, companyType);
-                ps.setString(4, password);
+                ps.setString(4, companyCode);
+                ps.setString(5, password);
 
                 ps.executeUpdate();
                 try (ResultSet rs = ps.getGeneratedKeys()) {
@@ -99,6 +102,9 @@ public class CompanyRegisterServlet extends HttpServlet {
 
         // Handle Response
         if (isRegistered) {
+
+            // Trigger registration success webhook/workflow
+            WebhookUtil.triggerWorkflow(email, companyName, companyCode);
 
             request.setAttribute("successMessage",
                     "Company Registration Successful! Please wait for Admin approval.");

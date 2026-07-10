@@ -1,5 +1,5 @@
 {
-  "name": "Company Approval Email Workflow",
+  "name": "Company Registration Email Workflow",
   "nodes": [
     {
       "parameters": {
@@ -21,8 +21,8 @@
     {
       "parameters": {
         "sendTo": "={{$json.body.email}}",
-        "subject": "Your Company Registration is Approved!",
-        "message": "={{'Hello ' + $json.body.companyName + ',<br><br>Your registration has been approved. Your Company Code is: <b>' + $json.body.companyCode + '</b><br><br>Please use this code to login.'}}",
+        "subject": "Your Company Registration is Successful!",
+        "message": "={{'Hello ' + $json.body.companyName + ',<br><br>Your company registration is successful. Your Company Code is: <b>' + $json.body.companyCode + '</b><br><br>Please use this code to login once your account is approved by the admin.'}}",
         "options": {
           "appendAttribution": false
         }
