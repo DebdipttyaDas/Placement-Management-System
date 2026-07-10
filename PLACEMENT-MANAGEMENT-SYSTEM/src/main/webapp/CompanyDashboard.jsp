@@ -74,48 +74,6 @@
             </div>
             <!-- END Hero -->
 
-            <!-- Stats -->
-            <div class="stats-row">
-                <div class="stat-card">
-                    <div class="stat-icon blue">
-                        <svg width="22" height="22" fill="none" stroke="#2251d3" stroke-width="2" viewBox="0 0 24 24">
-                            <rect x="2" y="7" width="20" height="14" rx="2"/>
-                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="stat-label">Active Drives</div>
-                        <div class="stat-value">3</div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon indigo">
-                        <svg width="22" height="22" fill="none" stroke="#7c3aed" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="stat-label">Total Applicants</div>
-                        <div class="stat-value">1,248</div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon pink">
-                        <svg width="22" height="22" fill="none" stroke="#db2777" stroke-width="2" viewBox="0 0 24 24">
-                            <circle cx="9" cy="7" r="4"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="stat-label">Hires This Season</div>
-                        <div class="stat-value">42</div>
-                    </div>
-                </div>
-            </div>
-            <!-- END Stats -->
-
             <!-- Main Grid -->
             <div class="main-grid">
 

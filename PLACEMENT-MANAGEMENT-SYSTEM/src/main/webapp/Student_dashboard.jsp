@@ -79,7 +79,7 @@
                 <div class="btn-apply-wrapper">
                   <a href="Placement.jsp" class="btn-apply"><i class="fa fa-briefcase"></i> Apply to Jobs</a>
                 </div>
-                <a href="#" class="btn-resume"><i class="fa fa-file-alt"></i> My Resume</a>
+                
               </div>
             </div>
 
@@ -122,13 +122,6 @@
                 </div>
 
               </div>
-          </div>
-
-          <!-- STATS -->
-          <div class="stats">
-            <div class="card"><b>Applied Jobs:</b> 5</div>
-            <div class="card"><b>Shortlisted:</b> 2</div>
-            <div class="card"><b>Open Jobs:</b> 12</div>
           </div>
 
           <!-- DASHBOARD WIDGETS -->

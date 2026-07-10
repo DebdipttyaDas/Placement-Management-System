@@ -34,31 +34,6 @@
       }
     %>
 
-    <!-- FORM -->
-    <h2>Send a Message</h2>
-
-    <div class="container">
-      <form action="ContactServlet" method="post">
-
-        <label>Name:</label><br>
-        <input type="text" name="name"><br><br>
-
-        <label>Email:</label><br>
-        <input type="email" name="email"><br><br>
-
-        <label>Subject:</label><br>
-        <input type="text" name="subject"><br><br>
-
-        <label>Message:</label><br>
-        <textarea name="message" rows="5" cols="30"></textarea><br><br>
-
-        <button type="submit">Send</button>
-
-      </form>
-    </div>
-
-    <hr>
-
     <!-- CONTACT INFO -->
     <h2>Contact Information</h2>
 
