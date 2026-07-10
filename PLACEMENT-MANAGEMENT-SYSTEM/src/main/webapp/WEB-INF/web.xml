@@ -37,7 +37,15 @@
         <url-pattern>/ApproveCompanyServlet</url-pattern>
     </servlet-mapping>
 
-
+    <!-- Review Applications servlet -->
+    <servlet>
+        <servlet-name>ReviewApplicationsServlet</servlet-name>
+        <servlet-class>ReviewApplicationsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReviewApplicationsServlet</servlet-name>
+        <url-pattern>/ReviewApplicationsServlet</url-pattern>
+    </servlet-mapping>
 
     <!-- Company profile servlets -->
     <servlet>
@@ -235,6 +243,8 @@
         <servlet-name>UpdateStudentProfileServlet</servlet-name>
         <url-pattern>/UpdateStudentProfileServlet</url-pattern>
     </servlet-mapping>
+
+
 
     <session-config>
         <session-timeout>30</session-timeout>

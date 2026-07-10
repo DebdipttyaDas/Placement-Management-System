@@ -79,7 +79,9 @@
                 <div class="btn-apply-wrapper">
                   <a href="Placement.jsp" class="btn-apply"><i class="fa fa-briefcase"></i> Apply to Jobs</a>
                 </div>
-                
+                <button class="mock-ai-btn" id="openMockInterviewBtn">
+                  <i class="fa-solid fa-robot"></i> Mock Interview AI
+                </button>
               </div>
             </div>
 
@@ -366,6 +368,17 @@
             if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
               sidebar.classList.remove('active');
             }
+          });
+        }
+      })();
+    </script>
+
+    <script>
+      (function() {
+        const mockBtn = document.getElementById("openMockInterviewBtn");
+        if (mockBtn) {
+          mockBtn.addEventListener("click", function () {
+            window.location.href = "MockInterview.jsp";
           });
         }
       })();

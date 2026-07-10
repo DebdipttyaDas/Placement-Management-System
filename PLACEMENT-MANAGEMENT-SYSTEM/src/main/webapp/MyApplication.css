@@ -252,6 +252,16 @@ tbody tr {
     color: #2ecc71;
 }
 
+.approved {
+    background: #e1f5fe;
+    color: #0288d1;
+}
+
+.rejected {
+    background: #ffebee;
+    color: #c62828;
+}
+
 .process {
     background: #fff4e5;
     color: #f39c12;

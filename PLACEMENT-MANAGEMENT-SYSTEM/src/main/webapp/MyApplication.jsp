@@ -22,6 +22,9 @@
     }
 
     int totalApplications = 0;
+    int appliedCount = 0;
+    int approvedCount = 0;
+    int rejectedCount = 0;
     List<Map<String, String>> appsList = new ArrayList<>();
     
     try (Connection conn = getJspConnection()) {
@@ -35,7 +38,7 @@
             }
         }
         if (studentId != null) {
-            String sql = "SELECT companyName, jobTitle, department, employmentType, LocationType, Location, salary, submitted FROM APPLICATION WHERE STUDENT_ID = ? ORDER BY APPLICATION_ID DESC";
+            String sql = "SELECT companyName, jobTitle, department, employmentType, LocationType, Location, salary, submitted, status FROM APPLICATION WHERE STUDENT_ID = ? ORDER BY APPLICATION_ID DESC";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setInt(1, studentId);
                 try (ResultSet rs = ps.executeQuery()) {
@@ -48,6 +51,20 @@
                         app.put("LocationType", rs.getString("LocationType"));
                         app.put("Location", rs.getString("Location"));
                         app.put("salary", rs.getString("salary"));
+                        
+                        String statusVal = rs.getString("status");
+                        if (statusVal == null || statusVal.isEmpty()) {
+                            statusVal = "Applied";
+                        }
+                        app.put("status", statusVal);
+
+                        if (statusVal.equalsIgnoreCase("Approved")) {
+                            approvedCount++;
+                        } else if (statusVal.equalsIgnoreCase("Rejected")) {
+                            rejectedCount++;
+                        } else {
+                            appliedCount++;
+                        }
                         
                         java.sql.Timestamp ts = rs.getTimestamp("submitted");
                         String dateStr = "";
@@ -131,32 +148,32 @@
                  <div class="card">
                      <div class="icon blue"><i class="fa-solid fa-file"></i></div>
                      <div class="text">
-                         <h2><%= totalApplications %></h2>
-                         <p>Total Applications</p>
+                          <h2><%= totalApplications %></h2>
+                          <p>Total Applications</p>
                      </div>
                  </div>
  
                  <div class="card">
                      <div class="icon green"><i class="fa-solid fa-paper-plane"></i></div>
                      <div class="text">
-                         <h2><%= totalApplications %></h2>
-                         <p>Applied</p>
+                          <h2><%= appliedCount %></h2>
+                          <p>Applied</p>
                      </div>
                  </div>
  
                  <div class="card">
-                     <div class="icon orange"><i class="fa-solid fa-clock"></i></div>
+                     <div class="icon orange"><i class="fa-solid fa-circle-check"></i></div>
                      <div class="text">
-                         <h2>0</h2>
-                         <p>In Process</p>
+                          <h2><%= approvedCount %></h2>
+                          <p>Approved</p>
                      </div>
                  </div>
  
                  <div class="card">
-                     <div class="icon purple"><i class="fa-solid fa-check"></i></div>
+                     <div class="icon purple"><i class="fa-solid fa-circle-xmark"></i></div>
                      <div class="text">
-                         <h2>0</h2>
-                         <p>Completed</p>
+                          <h2><%= rejectedCount %></h2>
+                          <p>Rejected</p>
                      </div>
                  </div>
  
@@ -173,8 +190,8 @@
                         <select onchange="filterStatus(this.value)">
                             <option value="all">All Status</option>
                             <option value="applied">Applied</option>
-                            <option value="process">In Process</option>
-                            <option value="complete">Completed</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
                         </select>
                     </div>
                 </div>
@@ -201,14 +218,14 @@
                      <% } else {
                          for (Map<String, String> app : appsList) {
                      %>
-                         <tr class="row applied">
+                         <tr class="row <%= app.get("status").toLowerCase() %>">
                              <td class="company">
                                  <div><b><%= app.get("companyName") %></b></div>
                              </td>
                              <td><%= app.get("jobTitle") %></td>
                              <td><%= app.get("companyName") %> Campus Hiring</td>
                              <td><%= app.get("submitted") %></td>
-                             <td><span class="status applied">Applied</span></td>
+                             <td><span class="status <%= app.get("status").toLowerCase() %>"><%= app.get("status") %></span></td>
                              <td><button class="btn" onclick="alert('Company: <%= app.get("companyName") %>\nRole: <%= app.get("jobTitle") %>\nDepartment: <%= app.get("department") %>\nSalary: <%= app.get("salary") %>\nLocation: <%= app.get("Location") %> (<%= app.get("LocationType") %>)')">View Details</button></td>
                          </tr>
                      <% 

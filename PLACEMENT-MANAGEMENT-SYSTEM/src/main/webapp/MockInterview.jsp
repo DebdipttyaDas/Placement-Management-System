@@ -32,10 +32,7 @@
                 <a href="#"><i class="fa-solid fa-graduation-cap"></i> Mock Interview</a>
             </li>
             <li class="menu-item">
-                <a href="Interviews.jsp"><i class="fa-solid fa-calendar-days"></i> Back to Schedule</a>
-            </li>
-            <li class="menu-item">
-                <a href="CompanyDashboard.jsp"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="Student_dashboard.jsp"><i class="fa-solid fa-house"></i> Student Dashboard</a>
             </li>
         </ul>
     </div>

@@ -678,4 +678,169 @@ svg { display: inline-block; vertical-align: middle; }
     .drive-footer {
         justify-content: flex-start;
     }
-}
+}
+
+/* =========================================================
+   REVIEW APPLICATIONS MODAL
+========================================================= */
+.review-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+    z-index: 9999;
+}
+
+.review-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.review-modal {
+    width: 800px;
+    max-width: 94%;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transform: translateY(30px) scale(0.95);
+    transition: 0.35s ease;
+}
+
+.review-modal-overlay.active .review-modal {
+    transform: translateY(0) scale(1);
+}
+
+.review-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    background: #06473e;
+    color: white;
+}
+
+.review-modal-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.close-review-modal-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.close-review-modal-btn:hover {
+    transform: rotate(90deg);
+}
+
+.review-modal-body {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.application-form-card {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+}
+
+.application-form-card h3 {
+    font-size: 16px;
+    color: var(--text-primary);
+    margin-bottom: 15px;
+    border-bottom: 2px solid #06473e;
+    padding-bottom: 8px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-field label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+.form-field span {
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    border-top: 1px solid var(--border);
+    padding-top: 15px;
+}
+
+.btn-approve {
+    background: #15803d;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.btn-approve:hover {
+    background: #166534;
+}
+
+.btn-reject {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.btn-reject:hover {
+    background: #b91c1c;
+}
+
+.no-apps-message {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+    font-size: 15px;
+}
+

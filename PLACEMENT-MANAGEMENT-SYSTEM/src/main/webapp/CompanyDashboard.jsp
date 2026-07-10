@@ -69,7 +69,7 @@
                     <button class="btn btn-white" onclick="window.location.href='JobPost.jsp'">+ Post new jobs</button>
                 </div>
                 <div class="hero-actions">
-                    <button class="btn btn-white">Review Applications</button>
+                    <button class="btn btn-white" id="reviewApplicationsBtn">Review Applications</button>
                 </div>
             </div>
             <!-- END Hero -->
@@ -86,147 +86,11 @@
                             <button class="view-btn" onclick="hideDrives()">Hide All</button>
                         </div>
                     </div>
-
-                    <!-- Drive Card 1 -->
-                    <div class="drive-card">
-                        <div class="drive-top">
-                            <div class="drive-title">Software Engineer – New Grad</div>
-                            <span class="badge badge-active">Active</span>
+                    <div id="activeDrivesContainer">
+                        <div style="padding: 20px; text-align: center; color: #64748b;">
+                            <i class="fa fa-spinner fa-spin" style="font-size:24px; color:#06473e;"></i> Loading active drives...
                         </div>
-                        <div class="drive-meta">Bangalore, India • Full-time</div>
-                        <div class="pipeline-header">
-                            <span class="pipeline-label">Pipeline Progress</span>
-                            <span class="pipeline-total">850 Total Applicants</span>
-                        </div>
-                        <div class="pipeline-bar">
-                            <div class="seg-applied" style="width:40%"></div>
-                            <div class="seg-tech" style="width:30%"></div>
-                            <div class="seg-hr" style="width:20%"></div>
-                            <div class="seg-offers" style="width:10%"></div>
-                        </div>
-                        <div class="drive-footer"><a class="manage-link" href="#">Manage Drive</a></div>
                     </div>
-
-                    <!-- Drive Card 2 -->
-                    <div class="drive-card extra-drive">
-                        <div class="drive-top">
-                            <div class="drive-title">Data Analyst Intern</div>
-                            <span class="badge badge-active">Active</span>
-                        </div>
-                        <div class="drive-meta">Hyderabad, India • Internship</div>
-                        <div class="pipeline-header">
-                            <span class="pipeline-label">Pipeline Progress</span>
-                            <span class="pipeline-total">520 Total Applicants</span>
-                        </div>
-                        <div class="pipeline-bar">
-                            <div class="seg-applied" style="width:45%"></div>
-                            <div class="seg-tech" style="width:25%"></div>
-                            <div class="seg-hr" style="width:20%"></div>
-                            <div class="seg-offers" style="width:10%"></div>
-                        </div>
-                        <div class="drive-footer"><a class="manage-link" href="#">Manage Drive</a></div>
-                    </div>
-
-                    <!-- Drive Card 3 -->
-                    <div class="drive-card extra-drive">
-                        <div class="drive-top">
-                            <div class="drive-title">UI/UX Designer</div>
-                            <span class="badge badge-closing">Closing Soon</span>
-                        </div>
-                        <div class="drive-meta">Pune, India • Full-time</div>
-                        <div class="pipeline-header">
-                            <span class="pipeline-label">Pipeline Progress</span>
-                            <span class="pipeline-total">310 Total Applicants</span>
-                        </div>
-                        <div class="pipeline-bar">
-                            <div class="seg-applied" style="width:50%"></div>
-                            <div class="seg-tech" style="width:20%"></div>
-                            <div class="seg-hr" style="width:20%"></div>
-                            <div class="seg-offers" style="width:10%"></div>
-                        </div>
-                        <div class="drive-footer"><a class="manage-link" href="#">Manage Drive</a></div>
-                    </div>
-
-                    <!-- Drive Card 4 -->
-                    <div class="drive-card extra-drive">
-                        <div class="drive-top">
-                            <div class="drive-title">Cyber Security Analyst</div>
-                            <span class="badge badge-active">Active</span>
-                        </div>
-                        <div class="drive-meta">Kolkata, India • Full-time</div>
-                        <div class="pipeline-header">
-                            <span class="pipeline-label">Pipeline Progress</span>
-                            <span class="pipeline-total">640 Total Applicants</span>
-                        </div>
-                        <div class="pipeline-bar">
-                            <div class="seg-applied" style="width:42%"></div>
-                            <div class="seg-tech" style="width:30%"></div>
-                            <div class="seg-hr" style="width:18%"></div>
-                            <div class="seg-offers" style="width:10%"></div>
-                        </div>
-                        <div class="drive-footer"><a class="manage-link" href="#">Manage Drive</a></div>
-                    </div>
-
-                    <!-- Drive Card 5 -->
-                    <div class="drive-card extra-drive">
-                        <div class="drive-top">
-                            <div class="drive-title">Cloud Engineer</div>
-                            <span class="badge badge-active">Active</span>
-                        </div>
-                        <div class="drive-meta">Chennai, India • Full-time</div>
-                        <div class="pipeline-header">
-                            <span class="pipeline-label">Pipeline Progress</span>
-                            <span class="pipeline-total">780 Total Applicants</span>
-                        </div>
-                        <div class="pipeline-bar">
-                            <div class="seg-applied" style="width:38%"></div>
-                            <div class="seg-tech" style="width:32%"></div>
-                            <div class="seg-hr" style="width:20%"></div>
-                            <div class="seg-offers" style="width:10%"></div>
-                        </div>
-                        <div class="drive-footer"><a class="manage-link" href="#">Manage Drive</a></div>
-                    </div>
-
-                    <!-- Drive Card 6 -->
-                    <div class="drive-card extra-drive">
-                        <div class="drive-top">
-                            <div class="drive-title">AI/ML Engineer</div>
-                            <span class="badge badge-closing">Closing Soon</span>
-                        </div>
-                        <div class="drive-meta">Bengaluru, India • Full-time</div>
-                        <div class="pipeline-header">
-                            <span class="pipeline-label">Pipeline Progress</span>
-                            <span class="pipeline-total">1,120 Total Applicants</span>
-                        </div>
-                        <div class="pipeline-bar">
-                            <div class="seg-applied" style="width:48%"></div>
-                            <div class="seg-tech" style="width:26%"></div>
-                            <div class="seg-hr" style="width:16%"></div>
-                            <div class="seg-offers" style="width:10%"></div>
-                        </div>
-                        <div class="drive-footer"><a class="manage-link" href="#">Manage Drive</a></div>
-                    </div>
-
-                    <!-- Drive Card 7 -->
-                    <div class="drive-card extra-drive">
-                        <div class="drive-top">
-                            <div class="drive-title">Frontend Developer</div>
-                            <span class="badge badge-active">Active</span>
-                        </div>
-                        <div class="drive-meta">Remote • Full-time</div>
-                        <div class="pipeline-header">
-                            <span class="pipeline-label">Pipeline Progress</span>
-                            <span class="pipeline-total">460 Total Applicants</span>
-                        </div>
-                        <div class="pipeline-bar">
-                            <div class="seg-applied" style="width:44%"></div>
-                            <div class="seg-tech" style="width:29%"></div>
-                            <div class="seg-hr" style="width:17%"></div>
-                            <div class="seg-offers" style="width:10%"></div>
-                        </div>
-                        <div class="drive-footer"><a class="manage-link" href="#">Manage Drive</a></div>
-                    </div>
-
                 </div>
                 <!-- END LEFT -->
 
@@ -262,10 +126,6 @@
 </div>
 <!-- END CONTAINER -->
 
-<script src="CompanyDashboard.js"></script>
-
-
-
 <script>
   (function() {
     const toggleBtn = document.getElementById('sidebar-toggle');
@@ -284,5 +144,24 @@
   })();
 </script>
 
+<!-- REVIEW APPLICATIONS MODAL -->
+<div class="review-modal-overlay" id="reviewApplicationsModal">
+    <div class="review-modal">
+        <div class="review-modal-header">
+            <h2>Review Job Applications</h2>
+            <button class="close-review-modal-btn" id="closeReviewModalBtn">&times;</button>
+        </div>
+        <div class="review-modal-body">
+            <div id="applicationsLoader" style="display:none; text-align:center; padding:20px;">
+                <i class="fa fa-spinner fa-spin" style="font-size:24px; color:#06473e;"></i> Loading applications...
+            </div>
+            <div id="applicationsContainer">
+                <!-- Dynamically loaded table will be here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="CompanyDashboard.js"></script>
 </body>
 </html>
