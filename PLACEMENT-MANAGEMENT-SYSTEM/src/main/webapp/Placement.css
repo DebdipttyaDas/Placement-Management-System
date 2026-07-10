@@ -90,7 +90,7 @@ body {
 }
 
 .top-search-section {
-    max-height: 220px;
+    max-height: 800px;
     overflow-y: auto;
     overflow-x: hidden;
 }
