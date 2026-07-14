@@ -37,23 +37,13 @@ if (loggedInUser != null && loggedInRole != null) {
     
     if (!query.isEmpty()) {
         try {
-            java.util.Properties prop = new java.util.Properties();
-            try (java.io.InputStream input = getClass().getClassLoader().getResourceAsStream("db.properties")) {
-                if (input != null) {
-                    prop.load(input);
-                    String dbUrl = prop.getProperty("url");
-                    String dbUser = prop.getProperty("username");
-                    String dbPassword = prop.getProperty("password");
-                    
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-                         PreparedStatement ps = conn.prepareStatement(query)) {
-                        ps.setString(1, loggedInUser);
-                        try (ResultSet rs = ps.executeQuery()) {
-                            if (rs.next()) {
-                                registeredEmail = rs.getString("email");
-                            }
-                        }
+            Class<?> dbUtilClass = Class.forName("DBUtil");
+            try (Connection conn = (Connection) dbUtilClass.getMethod("getConnection").invoke(null);
+                 PreparedStatement ps = conn.prepareStatement(query)) {
+                ps.setString(1, loggedInUser);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        registeredEmail = rs.getString("email");
                     }
                 }
             }

@@ -86,27 +86,8 @@ public class Resetpasswordservlet extends HttpServlet {
      * the same way before storing it.
      */
     private boolean updatePassword(String role, String email, String newPassword) {
-        try {
-            URL url = new URL("http://localhost:5678/webhook/update-password");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setDoOutput(true);
-
-            String jsonPayload = String.format("{\"email\":\"%s\",\"role\":\"%s\",\"newPassword\":\"%s\"}", email, role, newPassword);
-
-            try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = jsonPayload.getBytes("utf-8");
-                os.write(input, 0, input.length);
-            }
-
-            int responseCode = conn.getResponseCode();
-            return responseCode >= 200 && responseCode <= 299;
-        } catch (Exception e) {
-            System.err.println("Error calling n8n update-password webhook: " + e.getMessage());
-            e.printStackTrace();
-            return false;
-        }
+        String jsonPayload = String.format("{\"email\":\"%s\",\"role\":\"%s\",\"newPassword\":\"%s\"}", email, role, newPassword);
+        WebhookService.WebhookResult result = WebhookService.sendPost("/webhook/update-password", jsonPayload);
+        return result.success;
     }
 }

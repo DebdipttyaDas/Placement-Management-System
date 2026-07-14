@@ -22,7 +22,6 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/EvaluateMockInterviewServlet")
 public class EvaluateMockInterviewServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final String N8N_WEBHOOK_URL = "http://localhost:5678/webhook/mock-interview";
 
     private final MockInterviewDAO dao = new MockInterviewDAO();
 
@@ -127,27 +126,11 @@ public class EvaluateMockInterviewServlet extends HttpServlet {
 
         try {
             // 2. Call n8n Webhook
-            URL url = new URL(N8N_WEBHOOK_URL);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setDoOutput(true);
-
-            try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = payloadBuilder.toString().getBytes("utf-8");
-                os.write(input, 0, input.length);
+            WebhookService.WebhookResult result = WebhookService.sendPost("/webhook/mock-interview", payloadBuilder.toString());
+            if (!result.success) {
+                throw new IOException(result.errorMessage != null ? result.errorMessage : "n8n responded with error code: " + result.statusCode);
             }
-
-            int responseCode = conn.getResponseCode();
-            if (responseCode < 200 || responseCode >= 300) {
-                throw new IOException("n8n responded with error code: " + responseCode);
-            }
-
-            String n8nResponse;
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
-                n8nResponse = br.lines().collect(Collectors.joining(System.lineSeparator()));
-            }
+            String n8nResponse = result.responseBody;
 
             // 3. Parse n8n response:
             // Extract overall score

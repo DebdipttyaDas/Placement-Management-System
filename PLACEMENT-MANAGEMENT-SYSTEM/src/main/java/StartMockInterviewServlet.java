@@ -20,7 +20,6 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/StartMockInterviewServlet")
 public class StartMockInterviewServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final String N8N_WEBHOOK_URL = "http://localhost:5678/webhook/mock-interview";
 
     private final MockInterviewDAO dao = new MockInterviewDAO();
 
@@ -83,33 +82,17 @@ public class StartMockInterviewServlet extends HttpServlet {
 
         // 2. Trigger n8n Webhook to generate questions
         try {
-            URL url = new URL(N8N_WEBHOOK_URL);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setDoOutput(true);
-
             String jsonPayload = String.format(
                 "{\"action\":\"generate\",\"jobRole\":\"%s\",\"difficulty\":\"%s\",\"numQuestions\":%d}",
                 escapeJsonString(jobRole), escapeJsonString(difficulty), numQuestions
             );
 
-            try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = jsonPayload.getBytes("utf-8");
-                os.write(input, 0, input.length);
+            WebhookService.WebhookResult result = WebhookService.sendPost("/webhook/mock-interview", jsonPayload);
+            if (!result.success) {
+                throw new IOException(result.errorMessage != null ? result.errorMessage : "n8n responded with error code: " + result.statusCode);
             }
 
-            int responseCode = conn.getResponseCode();
-            if (responseCode < 200 || responseCode >= 300) {
-                // Fallback / standard questions if n8n is offline or returns error
-                throw new IOException("n8n responded with error code: " + responseCode);
-            }
-
-            String n8nResponse;
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
-                n8nResponse = br.lines().collect(Collectors.joining(System.lineSeparator()));
-            }
+            String n8nResponse = result.responseBody;
 
             // Parse response from n8n (JSON array of strings)
             List<String> generatedQuestions = parseJsonStringArray(n8nResponse);

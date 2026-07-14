@@ -2,14 +2,9 @@
   import="java.sql.*" %>
 <%!
     private Connection getJspConnection() throws Exception {
-        java.util.Properties prop = new java.util.Properties();
-        try (java.io.InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties")) {
-            if (input != null) prop.load(input);
-        }
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
+        Class<?> dbUtilClass = Class.forName("DBUtil");
+        return (Connection) dbUtilClass.getMethod("getConnection").invoke(null);
     }
-
 %>
   <!DOCTYPE html>
   <html lang="en">

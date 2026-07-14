@@ -10,27 +10,25 @@ public class DBUtil {
     private static String password;
 
     static {
-
         try {
-        	
-        	Class.forName("com.mysql.cj.jdbc.Driver");  
-        	
-
+            Class.forName("com.mysql.cj.jdbc.Driver");  
             Properties prop = new Properties();
-
             InputStream input = DBUtil.class.getClassLoader()
-                    .getResourceAsStream("db.properties");
-            
+                    .getResourceAsStream("config.properties");
             if (input == null) {
-                throw new RuntimeException("db.properties file not found.");
+                throw new RuntimeException("config.properties file not found.");
             }
-
             prop.load(input);
 
-            url = prop.getProperty("url");
-            username = prop.getProperty("username");
-            password = prop.getProperty("password");            
+            String host = prop.getProperty("AIVEN_HOST");
+            String port = prop.getProperty("AIVEN_PORT");
+            String dbName = prop.getProperty("AIVEN_DATABASE");
+            username = prop.getProperty("AIVEN_USERNAME");
+            password = prop.getProperty("AIVEN_PASSWORD");
+            String sslEnabled = prop.getProperty("SSL_ENABLED");
 
+            url = "jdbc:mysql://" + host + ":" + port + "/" + dbName + "?sslMode=" + 
+                  ("true".equalsIgnoreCase(sslEnabled) ? "REQUIRED" : "DISABLED");
         } catch (Exception e) {
             e.printStackTrace();
         }

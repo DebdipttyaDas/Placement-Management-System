@@ -16,8 +16,6 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ScheduleInterviewServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private static final String N8N_WEBHOOK_URL = "http://localhost:5678/webhook/schedule-interview";
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -106,25 +104,7 @@ public class ScheduleInterviewServlet extends HttpServlet {
     }
 
     private void notifyN8n(String requestBody) {
-        try {
-            URL url = new URL(N8N_WEBHOOK_URL);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setConnectTimeout(3000);
-            conn.setReadTimeout(3000);
-            conn.setDoOutput(true);
-
-            try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = requestBody.getBytes("utf-8");
-                os.write(input, 0, input.length);
-            }
-
-            conn.getResponseCode();
-        } catch (Exception e) {
-            System.out.println("n8n webhook notification skipped: " + e.getMessage());
-        }
+        WebhookService.sendPost("/webhook/schedule-interview", requestBody);
     }
 
     private String lookupStudentEmailByName(Connection conn, String studentName) {

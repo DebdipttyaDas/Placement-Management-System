@@ -96,28 +96,9 @@ public class Forgetpasswordservlet extends HttpServlet {
     }
 
     private boolean triggerN8NWorkflow(String email, String code) {
-        try {
-            URL url = new URL("http://localhost:5678/webhook/forget-password");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setDoOutput(true);
-
-            String jsonPayload = String.format("{\"email\":\"%s\",\"code\":\"%s\"}", email, code);
-
-            try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = jsonPayload.getBytes("utf-8");
-                os.write(input, 0, input.length);
-            }
-
-            int responseCode = conn.getResponseCode();
-            return responseCode >= 200 && responseCode <= 299;
-        } catch (Exception e) {
-            System.err.println("Error calling n8n forget-password webhook: " + e.getMessage());
-            e.printStackTrace();
-            return false;
-        }
+        String jsonPayload = String.format("{\"email\":\"%s\",\"code\":\"%s\"}", email, code);
+        WebhookService.WebhookResult result = WebhookService.sendPost("/webhook/forget-password", jsonPayload);
+        return result.success;
     }
 
     /**
