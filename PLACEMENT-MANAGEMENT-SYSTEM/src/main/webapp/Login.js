@@ -1,139 +1,231 @@
-// Add this helper at the top of Login.js
+// ======================
+// Common Elements
+// ======================
+
+const emailSection = () => document.getElementById("emailSection");
+const companySection = () => document.getElementById("companySection");
+
+// ======================
+// Tab Active
+// ======================
+
 function setActiveTab(activeId) {
-  document.getElementById('tabStudent').className = 'tab-btn tab-inactive font-bold transition-all duration-200';
-  document.getElementById('tabCompany').className = 'tab-btn tab-inactive font-bold transition-all duration-200';
-  document.getElementById(activeId).className = 'tab-btn tab-active font-bold transition-all duration-200';
+
+    document.getElementById("tabStudent").className =
+        "tab-btn tab-inactive font-bold transition-all duration-200";
+
+    document.getElementById("tabCompany").className =
+        "tab-btn tab-inactive font-bold transition-all duration-200";
+
+    document.getElementById(activeId).className =
+        "tab-btn tab-active font-bold transition-all duration-200";
 }
 
-// ================= STUDENT =================
+// ======================
+// Show / Hide Sections
+// ======================
+
+function showEmailSection() {
+
+    emailSection().classList.remove("hidden-section");
+    emailSection().classList.add("visible-section");
+}
+
+function hideEmailSection() {
+
+    emailSection().classList.remove("visible-section");
+    emailSection().classList.add("hidden-section");
+}
+
+function showCompanySection() {
+
+    companySection().classList.remove("hidden-section");
+    companySection().classList.add("visible-section");
+}
+
+function hideCompanySection() {
+
+    companySection().classList.remove("visible-section");
+    companySection().classList.add("hidden-section");
+}
+
+// ======================
+// STUDENT
+// ======================
 
 function showStudent() {
-	setActiveTab('tabStudent');
-	
-  // Show student input
-  document.getElementById("userInput").style.display = "block";
-  document.getElementById("userLabel").style.display = "block";
 
-  // Hide company section
-  document.getElementById("companyForm").style.display = "none";
+    setActiveTab("tabStudent");
 
-  // Labels + placeholders
-  document.getElementById("userLabel").innerText = "EMAIL";
-  document.getElementById("userInput").placeholder = "Enter your email";
+    showEmailSection();
+    hideCompanySection();
 
-  // ✅ Reset password placeholder
-  document.querySelector('input[name="password"]').placeholder = "Enter your password";
+    document.getElementById("userLabel").innerText = "EMAIL";
 
-  // Footer
-  document.getElementById("footerText").innerText = "New student?";
-  document.getElementById("footerLink").style.display = "inline";
-  document.getElementById("footerLink").href = "StudentRegister.jsp";
-  document.getElementById("footerLink").innerText = "Create new Account";
+    document.getElementById("userInput").placeholder =
+        "Enter your email";
 
-  // Role
-  document.getElementById("role").value = "student";
+    document.querySelector('input[name="password"]').placeholder =
+        "Enter your password";
+
+    document.getElementById("footerText").innerText =
+        "New student?";
+
+    document.getElementById("footerLink").style.display = "inline";
+
+    document.getElementById("footerLink").href =
+        "StudentRegister.jsp";
+
+    document.getElementById("footerLink").innerText =
+        "Create new Account";
+
+    document.getElementById("role").value = "student";
 }
 
-
-// ================= COMPANY =================
+// ======================
+// COMPANY
+// ======================
 
 function showCompany() {
-	setActiveTab('tabCompany');
 
-  // Hide student email input
-  document.getElementById("userInput").style.display = "none";
-  document.getElementById("userLabel").style.display = "none";
+    setActiveTab("tabCompany");
 
-  // Show company section
-  document.getElementById("companyForm").style.display = "block";
+    hideEmailSection();
+    showCompanySection();
 
-  // ✅ Use same password field (no duplicate)
-  document.querySelector('input[name="password"]').placeholder = "Enter company password";
+    document.querySelector('input[name="password"]').placeholder =
+        "Enter company password";
 
-  // Footer
-  document.getElementById("footerText").innerText = "New company?";
-  document.getElementById("footerLink").style.display = "inline";
-  document.getElementById("footerLink").href = "CompanyRegister.jsp";
-  document.getElementById("footerLink").innerText = "Create new Account";
+    document.getElementById("footerText").innerText =
+        "New company?";
 
-  // Role
-  document.getElementById("role").value = "company";
+    document.getElementById("footerLink").style.display = "inline";
+
+    document.getElementById("footerLink").href =
+        "CompanyRegister.jsp";
+
+    document.getElementById("footerLink").innerText =
+        "Create new Account";
+
+    document.getElementById("role").value = "company";
 }
 
-// ================= ADMIN =================
+// ======================
+// ADMIN
+// ======================
+
 function showAdmin() {
 
-  // Show username input
-  document.getElementById("userInput").style.display = "block";
-  document.getElementById("userLabel").style.display = "block";
+    showEmailSection();
+    hideCompanySection();
 
-  // Hide company section
-  document.getElementById("companyForm").style.display = "none";
+    document.getElementById("userLabel").innerText =
+        "ADMIN USERNAME";
 
-  // Labels + placeholders
-  document.getElementById("userLabel").innerText = "ADMIN USERNAME";
-  document.getElementById("userInput").placeholder = "Enter admin username";
+    document.getElementById("userInput").placeholder =
+        "Enter admin username";
 
-  // ✅ Reset password placeholder
-  document.querySelector('input[name="password"]').placeholder = "Enter admin password";
+    document.querySelector('input[name="password"]').placeholder =
+        "Enter admin password";
 
-  // Hide footer
-  document.getElementById("footerText").innerText = "";
-  document.getElementById("footerLink").style.display = "none";
+    document.getElementById("footerText").innerText = "";
 
-  // Role
-  document.getElementById("role").value = "admin";
+    document.getElementById("footerLink").style.display = "none";
+
+    document.getElementById("role").value = "admin";
 }
 
+// ======================
+// Initial Page
+// ======================
 
-// ================= FORM VALIDATION =================
+window.onload = function () {
+
+    const role =
+        new URLSearchParams(window.location.search).get("role");
+
+    if (role === "company") {
+
+        showCompany();
+
+    } else if (role === "admin") {
+
+        showAdmin();
+
+    } else {
+
+        showStudent();
+    }
+};
+
+// ======================
+// Validation
+// ======================
+
 document.addEventListener("DOMContentLoaded", function () {
 
-  const form = document.querySelector("form");
+    const form = document.querySelector("form");
 
-  form.addEventListener("submit", function (e) {
+    form.addEventListener("submit", function (e) {
 
-    const role = document.getElementById("role").value;
-    const userInput = document.getElementById("userInput").value.trim();
-    const password = document.querySelector('input[name="password"]').value.trim();
-    const companyCode = document.querySelector('input[name="companyCode"]');
+        const role =
+            document.getElementById("role").value;
 
-    // ===== STUDENT & ADMIN =====
-    if (role === "student" || role === "admin") {
-      if (userInput === "" || password === "") {
-        alert("Please fill all fields");
-        e.preventDefault();
-        return;
-      }
+        const email =
+            document.getElementById("userInput").value.trim();
 
-      // Email validation for student
-      if (role === "student") {
-        const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-        if (!emailPattern.test(userInput)) {
-          alert("Enter valid email");
-          e.preventDefault();
-          return;
+        const password =
+            document.querySelector('input[name="password"]').value.trim();
+
+        const companyCode =
+            document.querySelector('input[name="companyCode"]').value.trim();
+
+        if (role === "student") {
+
+            if (email === "" || password === "") {
+
+                alert("Please fill all fields.");
+                e.preventDefault();
+                return;
+            }
+
+            const pattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!pattern.test(email)) {
+
+                alert("Enter a valid email.");
+                e.preventDefault();
+                return;
+            }
         }
-      }
-    }
 
-    // ===== COMPANY =====
-    if (role === "company") {
-      const code = companyCode.value.trim();
+        if (role === "company") {
 
-      if (code === "" || password === "") {
-        alert("Enter company code and password");
-        e.preventDefault();
-        return;
-      }
-    }
+            if (companyCode === "" || password === "") {
 
-    // ===== PASSWORD LENGTH =====
-    if (password.length < 4) {
-      alert("Password must be at least 4 characters");
-      e.preventDefault();
-    }
+                alert("Please enter company code and password.");
+                e.preventDefault();
+                return;
+            }
+        }
 
-  });
+        if (role === "admin") {
+
+            if (email === "" || password === "") {
+
+                alert("Please fill all fields.");
+                e.preventDefault();
+                return;
+            }
+        }
+
+        if (password.length < 4) {
+
+            alert("Password must contain at least 4 characters.");
+            e.preventDefault();
+        }
+
+    });
 
 });

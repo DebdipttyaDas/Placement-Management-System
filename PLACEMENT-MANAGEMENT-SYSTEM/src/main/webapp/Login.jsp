@@ -74,6 +74,7 @@
 
 <!-- Main -->
 <main class="flex-1 flex justify-center items-center px-4 py-6">
+
 <div class="text-center">
 
 <h1 class="text-3xl font-bold text-[#000208] mb-2">Welcome Back !</h1>
@@ -83,7 +84,7 @@
 </p>
 
 <!-- Card -->
-<div class="glass-card w-full max-w-[420px] p-6 rounded-2xl mx-auto">
+<div class="glass-card w-full max-w-[420px] min-h-[300px] p-6 rounded-2xl mx-auto">
 <!-- FORM START -->
 <form action="LoginServlet" method="post">
 
@@ -91,7 +92,7 @@
 <input type="hidden" id="role" name="role" value="student">
 
 <!-- Tabs -->
-<div class="flex justify-around border-b border-white/20 mb-4 text-sm">
+<div class="flex justify-around text-sm mb-4">
   <button type="button" id="tabStudent" onclick="showStudent()"
     class="tab-btn tab-active font-bold transition-all duration-200">
     Student
@@ -103,19 +104,33 @@
 </div>
 
 <!-- Username -->
-<div class="text-left mb-3">
-  <label id="userLabel" class="text-xs text-white">EMAIL</label>
+<!-- Email Section -->
+<div id="emailSection" class="form-section">
 
-  <input id="userInput" name="email" type="text" style="color: white;"
-    placeholder="Enter your email"
-    class="w-full mt-1 p-2 rounded-md bg-white/10 border border-black-200 text-white placeholder-white-400 focus:outline-none focus:ring-2 focus:ring-white-400">
+    <div class="text-left mb-3">
+
+        <label id="userLabel"
+               class="text-xs text-white">
+            EMAIL
+        </label>
+
+        <input
+            id="userInput"
+            name="email"
+            type="text"
+            placeholder="Enter your email"
+            style="color:white;"
+            class="w-full mt-1 p-2 rounded-md bg-white/10 border border-black-200 text-white placeholder-white-400 focus:outline-none focus:ring-2 focus:ring-white-400">
+
+    </div>
+
 </div>
 
 
 <!-- Company Form -->
-<div id="companyForm" style="display:none;">
+<div id="companySection" class="form-section hidden-section">
 
-  <div class="text-left mb-3">
+  <div class="text-left mb-4">
     <label class="text-xs text-white">COMPANY CODE</label>
     <input type="text"  style="color: white;" name="companyCode"
       placeholder="Enter company code"
@@ -125,7 +140,7 @@
 </div>
 
 <!-- Password -->
-<div class="text-left mb-3">
+<div class="text-left mb-4">
   <div class="flex justify-between text-xs text-white">
     <label>PASSWORD</label>
     <a href="Forgetpassword.jsp" class="text-white hover:underline">Forgot?</a>
@@ -188,6 +203,7 @@ window.onload = function() {
 </script>
 </div>
 </div>
+</main>>
 </div>
 </div>
 </body>
