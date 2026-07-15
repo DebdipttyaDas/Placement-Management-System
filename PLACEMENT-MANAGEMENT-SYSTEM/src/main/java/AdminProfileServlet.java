@@ -31,9 +31,21 @@ public class AdminProfileServlet extends HttpServlet {
         String password = request.getParameter("password");
         String phone = request.getParameter("phone");
 
+        if (password != null && !password.trim().isEmpty() && password.trim().length() > 10) {
+            request.setAttribute("message", "Password must be at most 10 characters.");
+            request.getRequestDispatcher("AdminProfile.jsp").forward(request, response);
+            return;
+        }
+
         boolean isUpdated = false;
 
-        String updateQuery = "UPDATE ADMIN_PROFILE SET adminName = ?, userName = ?, email = ?, password = ?, phone = ? WHERE userName = ?";
+        String updateQuery;
+        boolean hasPassword = (password != null && !password.trim().isEmpty());
+        if (hasPassword) {
+            updateQuery = "UPDATE ADMIN_PROFILE SET adminName = ?, userName = ?, email = ?, password = ?, phone = ? WHERE userName = ?";
+        } else {
+            updateQuery = "UPDATE ADMIN_PROFILE SET adminName = ?, userName = ?, email = ?, phone = ? WHERE userName = ?";
+        }
 
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(updateQuery)) {
@@ -41,9 +53,14 @@ public class AdminProfileServlet extends HttpServlet {
             ps.setString(1, adminName);
             ps.setString(2, userName);
             ps.setString(3, email);
-            ps.setString(4, password);
-            ps.setString(5, phone);
-            ps.setString(6, sessionUser);
+            if (hasPassword) {
+                ps.setString(4, password.trim());
+                ps.setString(5, phone);
+                ps.setString(6, sessionUser);
+            } else {
+                ps.setString(4, phone);
+                ps.setString(5, sessionUser);
+            }
 
             int rows = ps.executeUpdate();
 

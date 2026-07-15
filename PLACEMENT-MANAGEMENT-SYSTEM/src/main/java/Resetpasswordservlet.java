@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -46,6 +48,12 @@ public class Resetpasswordservlet extends HttpServlet {
             return;
         }
 
+        if (newPassword.length() > 10) {
+            request.setAttribute("error", "Password must be at most 10 characters.");
+            request.getRequestDispatcher("Resetpassword.jsp").forward(request, response);
+            return;
+        }
+
         boolean updated = updatePassword(role, email, newPassword);
 
         if (!updated) {
@@ -86,8 +94,40 @@ public class Resetpasswordservlet extends HttpServlet {
      * the same way before storing it.
      */
     private boolean updatePassword(String role, String email, String newPassword) {
+        boolean dbUpdated = false;
+        String query = "";
+
+        if ("student".equalsIgnoreCase(role)) {
+            query = "UPDATE STUDENT SET password = ? WHERE email = ?";
+        } else if ("company".equalsIgnoreCase(role)) {
+            query = "UPDATE BASIC_DETAILS SET password = ? WHERE COMPANY_ID = (SELECT COMPANY_ID FROM COMPANY_CONTACT_DETAILS WHERE companyEmail = ?)";
+        } else if ("admin".equalsIgnoreCase(role)) {
+            query = "UPDATE ADMIN_PROFILE SET password = ? WHERE email = ?";
+        }
+
+        if (!query.isEmpty()) {
+            try (Connection conn = DBUtil.getConnection();
+                 PreparedStatement ps = conn.prepareStatement(query)) {
+                ps.setString(1, newPassword);
+                ps.setString(2, email);
+                int rows = ps.executeUpdate();
+                if (rows > 0) {
+                    dbUpdated = true;
+                }
+            } catch (Exception e) {
+                System.err.println("Direct database password update failed: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+
+        // Trigger the webhook as well, but do not fail the request if the webhook fails/is offline
         String jsonPayload = String.format("{\"email\":\"%s\",\"role\":\"%s\",\"newPassword\":\"%s\"}", email, role, newPassword);
-        WebhookService.WebhookResult result = WebhookService.sendPost("/webhook/update-password", jsonPayload);
-        return result.success;
+        try {
+            WebhookService.WebhookResult result = WebhookService.sendPost("/webhook/update-password", jsonPayload);
+            return dbUpdated || result.success;
+        } catch (Exception e) {
+            System.err.println("Webhook update-password failed: " + e.getMessage());
+            return dbUpdated;
+        }
     }
 }

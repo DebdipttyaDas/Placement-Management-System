@@ -101,6 +101,30 @@
       <!-- Main Content -->
       <div class="main-content">
 
+        <!-- Error Message display -->
+        <%
+            String errorMsg = request.getParameter("error");
+            if (errorMsg != null) {
+                String displayMsg = "";
+                if ("invalid_photo".equals(errorMsg)) {
+                    displayMsg = "Please upload a valid image (JPG only).";
+                } else if ("password_too_long".equals(errorMsg)) {
+                    displayMsg = "Password must be at most 10 characters.";
+                } else if ("student_not_found".equals(errorMsg)) {
+                    displayMsg = "Student profile not found.";
+                } else if ("missing_session".equals(errorMsg)) {
+                    displayMsg = "Session expired. Please log in again.";
+                } else {
+                    displayMsg = errorMsg;
+                }
+        %>
+            <div style="color: #ef4444; background-color: #fef2f2; padding: 12px 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #fee2e2; font-family: sans-serif; font-weight: 500;">
+                <%= displayMsg %>
+            </div>
+        <%
+            }
+        %>
+
         <!-- HEADER CARD -->
         <div class="header-card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
           <div class="header-left" style="display:flex; align-items:center; gap:15px;">

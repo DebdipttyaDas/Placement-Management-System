@@ -108,6 +108,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("New password must be at least 6 characters long.");
                 markInvalid(passwordInput);
                 isValid = false;
+            } else if (password.length > 10) {
+                alert("New password must be at most 10 characters long.");
+                markInvalid(passwordInput);
+                isValid = false;
             } else if (confirmInput && password !== confirmPassword) {
                 alert("Passwords do not match! Please make sure both password fields are identical.");
                 markInvalid(passwordInput);

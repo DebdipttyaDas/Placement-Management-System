@@ -55,6 +55,11 @@ public class UpdateStudentProfileServlet extends HttpServlet {
         String languages = trim(request.getParameter("languages"));
         String skills = trim(request.getParameter("skills"));
 
+        if (!isBlank(password) && password.length() > 10) {
+            response.sendRedirect("StudentProfile.jsp?error=password_too_long");
+            return;
+        }
+
         Part photoPart = request.getPart("photo");
         byte[] photoBytes = null;
 
