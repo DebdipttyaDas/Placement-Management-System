@@ -16,14 +16,36 @@
 /* ===== PAGE BACKGROUND ===== */
 .page-container {
     min-height: 100vh;
-    background: #cefad0;
+    position: relative;
+
+    background-image: url("images/admbg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    overflow: hidden;
+}
+
+.page-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter:blur(15px);
+
+    z-index: 1;
 }
 
 /* ===== WRAPPER ===== */
 .main-wrapper {
+    position: relative;
+    z-index: 2;
+
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100vh;
 }
 
 /* ===== NAVBAR ===== */
@@ -31,8 +53,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 40px;
-    background: #06473e;
+    padding: 8px 40px;
+    background: #183D3D;
 }
 
 .logo {
@@ -42,7 +64,12 @@
     letter-spacing: 1px;      
     transition: 0.3s;         
 }
-
+@font-face {
+    font-family: 'ComicRelief-Bold';
+    src: url('fonts/ComicRelief-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 /* Desktop hover only */
 @media (hover: hover) {
     .logo:hover {
@@ -90,13 +117,13 @@
 .heading {
     font-size: 28px;
     font-weight: bold;
-    color: #000;
+    color: #F5F5DC;
     margin-bottom: 8px;
 }
 
 .subtext {
     font-size: 14px;
-    color: #000;
+    color: #F5F5DC;
     margin-bottom: 20px;
 }
 

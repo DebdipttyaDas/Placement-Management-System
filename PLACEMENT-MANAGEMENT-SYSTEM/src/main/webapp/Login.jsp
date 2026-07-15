@@ -20,13 +20,13 @@
 
 <body class="h-screen flex flex-col relative">
 
-<div class="min-h-screen bg-[#cefad0]">
-<div class="relative z-10 flex flex-col h-full">
+<div class="page-bg">
+<div class="page-content flex flex-col h-full">
 
 <!-- Navbar -->
-<header class="flex justify-between items-center px-10 py-4 bg-[#06473e] relative">
+<header class="flex justify-between items-center px-10 py-3 bg-[#183D3D] relative">
 
-  <h1 class="text-3xl font-bold text-[#ffffff] tracking-wide transition duration-300 hover:scale-105 hover:text-[#ffffff]">
+  <h1 class="logo-font text-3xl font-bold text-[#ffffff] tracking-wide transition duration-300 hover:scale-105" style="font-family: 'ComicRelief-Bold', sans-serif;">
     CampusConnect
   </h1>
 
@@ -77,9 +77,9 @@
 
 <div class="text-center">
 
-<h1 class="text-3xl font-bold text-[#000208] mb-2">Welcome Back !</h1>
+<h1 class="text-3xl font-bold text-[#F5F5DC] mb-2">Welcome Back !</h1>
 
-<p class="text-[#000208] text-sm mb-6">
+<p class="text-[#F5F5DC] text-md mb-6">
 <b>Unlock Your Potential, Where Dreams Meet Their Destination.</b>
 </p>
 

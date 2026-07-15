@@ -95,12 +95,12 @@ if (loggedInUser != null && loggedInRole != null) {
 </p>
 
 <!-- Card -->
-<div class="glass-card w-full max-w-[420px] p-6 rounded-2xl mx-auto">
+<div class="glass-card w-full max-w-[420px] p-4 rounded-2xl mx-auto">
 
 <!-- FORM START -->
 <form action="Forgetpasswordservlet" method="post" id="forgotForm">
-
-<p class="text-white text-xs text-left mb-4 opacity-80">
+<br>
+<p class="text-white text-xs text-left mb-3 opacity-80">
  Enter the email address associated with your account and we'll send you a verification code to reset your password.
  </p>
 <!-- Email -->
@@ -122,7 +122,7 @@ if (loggedInUser != null && loggedInRole != null) {
 <!-- FORM END -->
 
 <!-- Footer -->
-<div class="mt-4 text-xs text-white">
+<div class="mt-3 text-xs text-white">
   <span>Remembered your password?</span>
   <a href="Login.jsp" class="text-white hover:underline">
     Back to Login

@@ -23,7 +23,7 @@
     <!-- Navbar -->
     <header class="navbar">
 
-        <h1 class="logo">CampusConnect</h1>
+        <h1 class="logo" style="font-family: 'ComicRelief-Bold', sans-serif;">CampusConnect</h1>
 
         <div class="nav-link">
             <a href="Login.jsp">Back to home</a>

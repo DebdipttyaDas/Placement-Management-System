@@ -50,7 +50,7 @@ Boolean showSuccess = (Boolean) request.getAttribute("showSuccess");
 <div class="glass-card w-full max-w-[420px] p-6 rounded-2xl mx-auto">
 
 <form action="ResetPasswordServlet" method="post" id="resetForm">
-
+<br>
 <!-- New Password -->
 <div class="text-left mb-3">
   <label class="text-xs text-white">NEW PASSWORD</label>
