@@ -90,7 +90,7 @@ body {
 }
 
 .top-search-section {
-    max-height: 800px;
+    max-height: none;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -166,7 +166,7 @@ body {
     background:#fff;
     border:1px solid #ddd;
     border-radius:10px;
-    padding:20px;
+    padding:14px;
     margin:15px;
     transition:all 0.4s ease;
 }

@@ -94,16 +94,13 @@ form {
 }
 
 /* Full width elements */
-form > div:nth-last-child(4),
-form > div:nth-last-child(3),
-form > div:nth-last-child(2),
-form > div:nth-last-child(1) {
-  grid-column: span 2;
+.full-width{
+    grid-column: 1 / -1;
 }
 
 /* ===== LABEL ===== */
 label {
-  font-size: 14px;
+  font-size: 14px; 
   color: #333;
 }
 

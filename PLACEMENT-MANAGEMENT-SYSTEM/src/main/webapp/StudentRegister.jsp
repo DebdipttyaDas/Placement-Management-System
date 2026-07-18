@@ -109,24 +109,24 @@
         
 
         <!-- Resume -->
-        <div>
+        <div class="full-width">
           <label style="color: #ffffff;"><h3>Upload Resume</h3></label>
           <input type="file" name="resume">
         </div>
 
         <!-- Photo -->
-        <div>
+        <div class="full-width">
           <label style="color: #ffffff;"><h3>Upload Photo</h3></label>
           <input type="file" name="photo">
         </div>
 
         <!-- Submit -->
-        <div>
+        <div class="full-width">
           <button type="submit">Register</button>
         </div>
 
         <!-- Terms -->
-        <div class="terms">
+        <div class="terms full-width">
           <!-- changed html → jsp (if you convert it) -->
           <a href="Terms.jsp">Terms & Conditions and Privacy Policy</a>
         </div>
@@ -136,7 +136,7 @@
         String errorMessage = (String) request.getAttribute("errorMessage");
         if(errorMessage != null){
         %>
-        <p style="color: red; margin-top: 10px;"><%= errorMessage %></p>
+        <p class="error-message full-width" style="color: red; margin-top: 10px;"><%= errorMessage %></p>
         <%
         }
         %>
