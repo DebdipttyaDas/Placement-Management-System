@@ -1,5 +1,81 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.sql.*, java.util.*" %>
+<%!
+    private Connection getJspConnection() throws Exception {
+        Class<?> dbUtilClass = Class.forName("DBUtil");
+        return (Connection) dbUtilClass.getMethod("getConnection").invoke(null);
+    }
+    
+    private String getInitials(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            return "ST";
+        }
+        String[] parts = name.trim().split("\\s+");
+        if (parts.length >= 2) {
+            return (parts[0].substring(0, 1) + parts[1].substring(0, 1)).toUpperCase();
+        }
+        return name.substring(0, Math.min(2, name.length())).toUpperCase();
+    }
+%>
+<%
+    int totalStudents = 0;
+    int pendingReviews = 0;
+    List<Map<String, String>> studentList = new ArrayList<>();
+    
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    
+    try {
+        conn = getJspConnection();
+        
+        // Fetch total student count
+        try (Statement st = conn.createStatement();
+             ResultSet rsTotal = st.executeQuery("SELECT COUNT(*) FROM STUDENT")) {
+            if (rsTotal.next()) {
+                totalStudents = rsTotal.getInt(1);
+            }
+        }
+        
+        // Fetch pending reviews count
+        try (Statement st = conn.createStatement();
+             ResultSet rsPending = st.executeQuery("SELECT COUNT(*) FROM APPLICATION WHERE status IS NULL OR status = '' OR status = 'Applied'")) {
+            if (rsPending.next()) {
+                pendingReviews = rsPending.getInt(1);
+            }
+        }
+        
+        // Fetch all students with academic details
+        String sql = "SELECT s.STUDENT_ID, s.fullName, s.email, s.phone, a.department, a.dgpa "
+                   + "FROM STUDENT s "
+                   + "LEFT JOIN ACCADEMIC_DETAILS a ON s.STUDENT_ID = a.STUDENT_ID "
+                   + "ORDER BY s.STUDENT_ID DESC";
+        ps = conn.prepareStatement(sql);
+        rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            Map<String, String> stud = new HashMap<>();
+            stud.put("id", String.valueOf(rs.getInt("STUDENT_ID")));
+            stud.put("fullName", rs.getString("fullName") != null ? rs.getString("fullName") : "Unknown");
+            stud.put("email", rs.getString("email") != null ? rs.getString("email") : "N/A");
+            stud.put("phone", rs.getString("phone") != null ? rs.getString("phone") : "N/A");
+            
+            String dept = rs.getString("department");
+            stud.put("department", dept != null ? dept : "N/A");
+            
+            double gpaVal = rs.getDouble("dgpa");
+            stud.put("gpa", rs.wasNull() ? "N/A" : String.format("%.2f", gpaVal));
+            
+            studentList.add(stud);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (rs != null) try { rs.close(); } catch (Exception e) {}
+        if (ps != null) try { ps.close(); } catch (Exception e) {}
+        if (conn != null) try { conn.close(); } catch (Exception e) {}
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +122,7 @@ pageEncoding="UTF-8"%>
 
             <div class="card">
                 <h5>TOTAL STUDENTS</h5>
-                <h2>1,248 <span>+12%</span></h2>
+                <h2><%= totalStudents %></h2>
             </div>
 
             <div class="card blue">
@@ -57,7 +133,7 @@ pageEncoding="UTF-8"%>
 
             <div class="card">
                 <h5>PENDING REVIEWS</h5>
-                <h2>45 <span style="color:#d97706;">Priority</span></h2>
+                <h2><%= pendingReviews %> <span style="color:#d97706;">Priority</span></h2>
             </div>
 
         </div>
@@ -98,7 +174,7 @@ pageEncoding="UTF-8"%>
 
 </div>
 
-
+</div>
 
         <!-- Table -->
 
@@ -109,80 +185,49 @@ pageEncoding="UTF-8"%>
                 <th>Student Name</th>
                 <th>Department</th>
                 <th>GPA</th>
-                <th>Status</th>
-                <th class="text-right">Actions</th>
+                <th>Email</th>
+                <th>Phone</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <div class="student">
-                        <div class="student-avatar">MC</div>
-                        <div>
-                            <h4>Marcus Chen</h4>
-                            <p>Senior Year</p>
+            <% if (studentList.isEmpty()) { %>
+                <tr>
+                    <td colspan="5" style="text-align: center; padding: 20px; color: #64748b;">
+                        No registered students found in the database.
+                    </td>
+                </tr>
+            <% } else {
+                for (Map<String, String> stud : studentList) {
+                    String initials = getInitials(stud.get("fullName"));
+            %>
+                <tr>
+                    <td>
+                        <div class="student">
+                            <div class="student-avatar"><%= initials %></div>
+                            <div>
+                                <h4><%= stud.get("fullName") %></h4>
+                                <p>Student ID: <%= stud.get("id") %></p>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td>EEE</td>
-                <td><span class="gpa">3.92</span></td>
-                <td><span class="status active-status">ACTIVE</span></td>
-                <td class="text-right"><i class="fa fa-ellipsis-h action-icon"></i></td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="student">
-                        <div class="student-avatar">ER</div>
-                        <div>
-                            <h4>Elena Rodriguez</h4>
-                            <p>Junior Year</p>
-                        </div>
-                    </div>
-                </td>
-                <td>Computer Science</td>
-                <td><span class="gpa">3.75</span></td>
-                <td><span class="status pending-status">PENDING</span></td>
-                <td class="text-right"><i class="fa fa-ellipsis-h action-icon"></i></td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="student">
-                        <div class="student-avatar">JV</div>
-                        <div>
-                            <h4>Julian Vance</h4>
-                            <p>Senior Year</p>
-                        </div>
-                    </div>
-                </td>
-                <td>BCA</td>
-                <td><span class="gpa">3.88</span></td>
-                <td><span class="status active-status">ACTIVE</span></td>
-                <td class="text-right"><i class="fa fa-ellipsis-h action-icon"></i></td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="student">
-                        <div class="student-avatar">SJ</div>
-                        <div>
-                            <h4>Sarah Jenkins</h4>
-                            <p>Sophomore</p>
-                        </div>
-                    </div>
-                </td>
-                <td>BBA</td>
-                <td><span class="gpa">3.61</span></td>
-                <td><span class="status pending-status">PENDING</span></td>
-                <td class="text-right"><i class="fa fa-ellipsis-h action-icon"></i></td>
-            </tr>
+                    </td>
+                    <td><%= stud.get("department") %></td>
+                    <td><span class="gpa"><%= stud.get("gpa") %></span></td>
+                    <td><span style="color: #64748b; font-weight: 500;"><%= stud.get("email") %></span></td>
+                    <td style="color: #64748b; font-weight: 500;"><%= stud.get("phone") %></td>
+                </tr>
+            <% 
+                } 
+            }
+            %>
         </tbody>
     </table>
 
     <!-- Footer is now safely outside the table tag, but inside the main container -->
     <div class="table-footer">
-        <p>Showing <strong>1-4</strong> of <strong>1,248</strong> students</p>
+        <p>Showing <strong><%= Math.min(1, studentList.size()) %>-<%= studentList.size() %></strong> of <strong><%= totalStudents %></strong> students</p>
         <div class="pagination">
-            <button class="btn-page" type="button">&lt;</button>
-            <button class="btn-page" type="button">&gt;</button>
+            <button class="btn-page" type="button" onclick="alert('First Page')">&lt;</button>
+            <button class="btn-page" type="button" onclick="alert('Last Page')">&gt;</button>
         </div>
     </div>
    </div>

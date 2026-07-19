@@ -41,7 +41,8 @@
           "id": "yTS4NIQeNJphvSuk",
           "name": "Gmail account"
         }
-      }
+      },
+      "continueOnFail": true
     }
   ],
   "pinData": {},

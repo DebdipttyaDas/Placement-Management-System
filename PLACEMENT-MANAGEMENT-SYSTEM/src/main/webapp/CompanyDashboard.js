@@ -241,8 +241,8 @@ function initReviewApplications() {
                             '</div>' +
                         '</div>' +
                         '<div class="form-actions">' +
-                            '<button type="button" class="btn-approve" onclick="approveApplication(' + app.applicationId + ')">Approval</button>' +
-                            '<button type="button" class="btn-reject" onclick="rejectApplication(' + app.applicationId + ')">Rejection</button>' +
+                            '<button type="button" class="btn-approve" onclick="approveApplication(' + app.applicationId + ')"><i class="fa fa-check-circle"></i> Accept</button>' +
+                            '<button type="button" class="btn-reject" onclick="rejectApplication(' + app.applicationId + ')"><i class="fa fa-times-circle"></i> Reject</button>' +
                         '</div>' +
                     '</div>';
                 });

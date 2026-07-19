@@ -32,7 +32,7 @@ public class FetchInterviewsServlet extends HttpServlet {
             try (Connection conn = DBUtil.getConnection()) {
                 if (fetchAll) {
                     appendInterviews(conn, json,
-                            "SELECT * FROM INTERVIEW ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC",
+                            "SELECT * FROM INTERVIEW WHERE INTERVIEW_DATE >= CURDATE() ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC",
                             null, null, null);
                 } else if ("student".equals(role)) {
                     String studentEmail = getStudentEmail(session);
@@ -44,7 +44,7 @@ public class FetchInterviewsServlet extends HttpServlet {
                     }
                     appendInterviews(conn, json,
                             "SELECT * FROM INTERVIEW WHERE LOWER(TRIM(STUDENT_NAME)) = LOWER(TRIM(?)) "
-                                    + "ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC LIMIT " + STUDENT_LIMIT,
+                                    + "AND INTERVIEW_DATE >= CURDATE() ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC LIMIT " + STUDENT_LIMIT,
                             null, studentFullName, null);
                 } else if ("company".equals(role)) {
                     String companyName = getCompanyName(conn, session);
@@ -54,7 +54,7 @@ public class FetchInterviewsServlet extends HttpServlet {
                         return;
                     }
                     appendInterviews(conn, json,
-                            "SELECT * FROM INTERVIEW WHERE COMPANY_NAME = ? "
+                            "SELECT * FROM INTERVIEW WHERE COMPANY_NAME = ? AND INTERVIEW_DATE >= CURDATE() "
                                     + "ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC",
                             null, null, companyName);
                 } else {
