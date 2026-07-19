@@ -1,0 +1,72 @@
+{
+  "name": "Student Rejection Email Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reject-student",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6f8dec5b-3659-4f90-b94b-b6da1d89e68e",
+      "webhookId": "e404e8a9-6750-4811-8f2e-b3e415e73ec3"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{$json.body.email}}",
+        "subject": "=Application Update: {{$json.body.jobTitle}} at {{$json.body.companyName}}",
+        "message": "={{'Hello ' + $json.body.fullName + ',<br><br>Thank you for your interest in the <b>' + $json.body.jobTitle + '</b> position at <b>' + $json.body.companyName + '</b>.<br><br>We appreciate the time you took to apply and share your credentials with us. However, after careful review, we regret to inform you that we will not be moving forward with your application at this time.<br><br>We wish you all the best in your career pursuits and future endeavors.<br><br>Best regards,<br>' + $json.body.companyName + ' Recruitment Team'}}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "name": "Gmail",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [
+        256,
+        0
+      ],
+      "id": "31cd002f-d988-4752-8b18-494021afe0e7",
+      "webhookId": "c5efe598-6833-4f6b-b099-224ed710465e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "yTS4NIQeNJphvSuk",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "045d8922-d728-4a59-a839-5a6ee8ef197c",
+  "meta": {
+    "instanceId": "e4e2f7975557a5ddd11af4d3b47dd7e1e612dcf7d60795a71c1a5221c0d15057"
+  },
+  "id": "JbUT7Bj4MqJX4KgH",
+  "tags": []
+}

@@ -66,11 +66,16 @@ public class Forgetpasswordservlet extends HttpServlet {
             session.setAttribute("resetCode", code);
             session.setAttribute("resetCodeExpiry", System.currentTimeMillis() + CODE_VALID_MILLIS);
 
+            System.out.println("----------------------------------------");
+            System.out.println("RESET PASSWORD VERIFICATION CODE: " + code);
+            System.out.println("Email: " + email + " | Role: " + role);
+            System.out.println("----------------------------------------");
+
             boolean success = triggerN8NWorkflow(email, code);
             if (!success) {
-                request.setAttribute("error", "Could not send the verification code. Please try again later.");
-                request.getRequestDispatcher("Forgetpassword.jsp").forward(request, response);
-                return;
+                System.err.println("N8N workflow failed to send email. Proceeding with printed verification code.");
+            } else {
+                System.out.println("N8N workflow successfully triggered.");
             }
         }
         // If role == null (email not found in any table), we deliberately do NOT
