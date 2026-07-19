@@ -102,12 +102,13 @@
         <div class="section">
 
             <div class="section-title">
-                Company Name 
+                <%--Company Name 
                 <input type="text"
                 id="companyName"
                 name="companyName"
                 class="form-control"
-                placeholder="Enter Company name ">
+                placeholder="Enter Company name ">--%>
+                <h2> <%= session.getAttribute("companyName") != null ? session.getAttribute("companyName") : "Recruiting Partner" %></h2>
             </div>
 
 <div class="form-row">
@@ -123,7 +124,7 @@
         required>
     </div>
 
-    <div class="form-group">
+   <div class="form-group">
 
                     <label>Employment Type</label>
 
@@ -145,14 +146,11 @@
 
                     <select id="department" name="department" class="form-control">
                         <option>Select Department</option>
-                        <option>CSE</option>
-                        <option>ECE</option>
-                        <option>EEE</option>
                         <option>IT</option>
-                        <option>BCA</option>
-                        <option>MCA</option>
-                        <option>BBA</option>
-                        <option>MBA</option>
+                        <option>Engineering</option>
+                        <option>Marketing</option>
+                        <option>Finance</option>
+                        <option>Medical</option>
                     </select>
 
                 </div>

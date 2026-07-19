@@ -66,7 +66,7 @@
                     <button>Engineering</button>
                     <button>Marketing</button>
                     <button>Medical</button>
-                    <button>HR</button>
+                    <button>Finance</button>
                 </div>
 
                 <!-- JOB CARDS -->
