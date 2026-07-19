@@ -102,12 +102,6 @@
         <div class="section">
 
             <div class="section-title">
-                <%--Company Name 
-                <input type="text"
-                id="companyName"
-                name="companyName"
-                class="form-control"
-                placeholder="Enter Company name ">--%>
                 <h2> <%= session.getAttribute("companyName") != null ? session.getAttribute("companyName") : "Recruiting Partner" %></h2>
             </div>
 

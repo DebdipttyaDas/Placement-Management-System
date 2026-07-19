@@ -150,13 +150,13 @@ body {
     backdrop-filter: blur(5px);
 }
 
-.job-filters button:first-child {
+.job-filters button.active-filter {
     background-color: #0df;
     color: #000;
-    border: none;
+    border: 1px solid #0df;
 }
 
-.job-filters button:hover:not(:first-child) {
+.job-filters button:hover:not(.active-filter) {
     background-color: rgba(0,0,0,0.1);
 }
 
@@ -168,14 +168,14 @@ body {
     border-radius:10px;
     padding:14px;
     margin:15px;
-    transition:all 0.4s ease;
+    transition:transform .3s ease, box-shadow .3s ease;
 }
 
 .extra-details{
     max-height:0;
     overflow:hidden;
     opacity:0;
-    transition:all 0.4s ease;
+    transition:max-height .4s ease, opacity .4s ease;
 }
 
 .job-card.active .extra-details{
