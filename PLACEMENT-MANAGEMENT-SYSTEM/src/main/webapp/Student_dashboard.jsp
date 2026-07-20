@@ -131,32 +131,81 @@
               <div class="widget-box deadlines-box">
                 <div class="widget-header">
                   <h3><i class="fa-regular fa-clock"></i> Upcoming Deadlines</h3>
-                  <a href="#" class="view-all">View All</a>
+                  <a href="Placement.jsp" class="view-all">View All</a>
                 </div>
 
+                <%
+                  boolean hasDeadlines = false;
+                  try (Connection conn = getJspConnection()) {
+                      String dlSql = "SELECT companyName, jobTitle, applicationDeadline "
+                                   + "FROM JOB_DETAILS "
+                                   + "WHERE STR_TO_DATE(applicationDeadline, '%Y-%m-%d') >= CURDATE() "
+                                   + "ORDER BY STR_TO_DATE(applicationDeadline, '%Y-%m-%d') ASC "
+                                   + "LIMIT 3";
+                      try (PreparedStatement psDl = conn.prepareStatement(dlSql);
+                           ResultSet rsDl = psDl.executeQuery()) {
+                          while (rsDl.next()) {
+                              hasDeadlines = true;
+                              String compName = rsDl.getString("companyName");
+                              String title = rsDl.getString("jobTitle");
+                              String deadlineStr = rsDl.getString("applicationDeadline");
+                              
+                              String timeLeft = deadlineStr;
+                              try {
+                                  java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                                  java.util.Date deadlineDate = sdf.parse(deadlineStr);
+                                  
+                                  // Clear time parts for date-only comparison
+                                  java.util.Calendar calToday = java.util.Calendar.getInstance();
+                                  calToday.set(java.util.Calendar.HOUR_OF_DAY, 0);
+                                  calToday.set(java.util.Calendar.MINUTE, 0);
+                                  calToday.set(java.util.Calendar.SECOND, 0);
+                                  calToday.set(java.util.Calendar.MILLISECOND, 0);
+                                  java.util.Date todayDate = calToday.getTime();
+                                  
+                                  long diffMs = deadlineDate.getTime() - todayDate.getTime();
+                                  long diffDays = diffMs / (1000 * 60 * 60 * 24);
+                                  
+                                  if (diffDays == 0) {
+                                      timeLeft = "Today";
+                                  } else if (diffDays == 1) {
+                                      timeLeft = "Tomorrow";
+                                  } else {
+                                      timeLeft = diffDays + " days left";
+                                  }
+                              } catch (Exception e) {
+                                  // fallback if parsing fails
+                              }
+                              
+                              String initials = compName != null && compName.length() >= 2 ? compName.substring(0, 2).toUpperCase() : "CO";
+                %>
                 <div class="deadline-item">
-                  <div class="dl-icon stripe-icon"><i class="fa-brands fa-stripe-s"></i></div>
-                  <div class="dl-info">
-                    <h4>Stripe</h4>
-                    <p>Software Engineer Intern</p>
+                  <div class="dl-icon" style="background:#e0f2fe; color:#0369a1; display:grid; place-items:center; font-weight:bold; font-size:14px; border-radius:8px; width:40px; height:40px; flex-shrink:0;">
+                    <%= initials %>
                   </div>
-                  <div class="dl-action">
-                    <span class="time-left">2 hours left</span>
-                    <a href="#" class="btn-text">APPLY NOW</a>
+                  <div class="dl-info" style="margin-left: 12px; flex: 1;">
+                    <h4><%= compName %></h4>
+                    <p><%= title %></p>
+                  </div>
+                  <div class="dl-action" style="text-align: right;">
+                    <span class="time-left" style="display:block; font-size:12px; color:#ef4444; font-weight:600; margin-bottom:4px;"><%= timeLeft %></span>
+                    <a href="Placement.jsp" class="btn-text" style="font-size:11px; font-weight:700; color:#0d6e60; text-decoration:none;">APPLY NOW</a>
                   </div>
                 </div>
-
-                <div class="deadline-item">
-                  <div class="dl-icon meta-icon"><i class="fa-brands fa-meta"></i></div>
-                  <div class="dl-info">
-                    <h4>Meta</h4>
-                    <p>Product Design Associate</p>
-                  </div>
-                  <div class="dl-action">
-                    <span class="time-normal">Tomorrow</span>
-                    <span class="status-draft">IN DRAFT</span>
-                  </div>
+                <%
+                          }
+                      }
+                  } catch (Exception e) {
+                      e.printStackTrace();
+                  }
+                  if (!hasDeadlines) {
+                %>
+                <div style="padding: 20px; text-align: center; color: #64748b; font-size: 14px;">
+                  No upcoming deadlines at this time.
                 </div>
+                <%
+                  }
+                %>
               </div>
 
               <!-- Career Tip -->

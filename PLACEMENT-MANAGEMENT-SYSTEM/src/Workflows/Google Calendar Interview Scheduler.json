@@ -3,37 +3,20 @@
   "nodes": [
     {
       "parameters": {
-        "pollTimes": {
-          "item": [
-            {
-              "mode": "everyMinute"
-            }
-          ]
-        },
-        "documentId": {
-          "__rl": true,
-          "mode": "list",
-          "value": "1jSfGnVPscZGeZvUlvOyPxeghd870am4C3mK73xSRodU",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jSfGnVPscZGeZvUlvOyPxeghd870am4C3mK73xSRodU/edit?usp=drivesdk",
-          "cachedResultName": "Hiring Prospects"
-        },
-        "sheetName": {
-          "__rl": true,
-          "mode": "list",
-          "value": "gid=0",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jSfGnVPscZGeZvUlvOyPxeghd870am4C3mK73xSRodU/edit#gid=0",
-          "cachedResultName": "Foglio1"
-        },
+        "httpMethod": "POST",
+        "path": "calendar-schedule-interview",
+        "responseMode": "lastNode",
         "options": {}
       },
       "id": "52adb453-8cb6-4122-8191-ae2cc5b7469a",
-      "name": "Google Sheets Trigger",
-      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
       "position": [
         0,
         0
       ],
-      "typeVersion": 1
+      "webhookId": "calendar-schedule-interview-webhook"
     },
     {
       "parameters": {
@@ -64,7 +47,7 @@
     },
     {
       "parameters": {
-        "sendTo": "={{ $('Google Sheets Trigger').item.json.EMAIL }}",
+        "sendTo": "={{ $('Webhook').item.json.body.email }}",
         "subject": "Interview Details",
         "emailType": "text",
         "message": "={{ $json.output.body }}",
@@ -84,17 +67,18 @@
           "id": "yTS4NIQeNJphvSuk",
           "name": "Gmail account"
         }
-      }
+      },
+      "continueOnFail": true
     },
     {
       "parameters": {
         "promptType": "define",
-        "text": "={{ $('Google Sheets Trigger').item.json.NAME }}\n\n{{ $('Google Sheets Trigger').item.json.EDUCATIONAL}}\n\nLink for calendar: {{ $json.htmlLink }}\n\nMy name is Surya, I'm from Techdome",
+        "text": "={{ $('Webhook').item.json.body.name || $('Webhook').item.json.body.fullName }}\n\n{{ $('Webhook').item.json.body.educational || $('Webhook').item.json.body.department }}\n\nLink for calendar: {{ $json.htmlLink }}\n\nBest regards,\nPlacement Cell",
         "hasOutputParser": true,
         "messages": {
           "messageValues": [
             {
-              "message": "You are a helpful email writing assistant. You take the information I provide you with and write a personlised email to the candidate we are calling in for an interview. The goal is to send an email with Google Calendar Link. Be straight to the point. The email should start with a 15-20 word opening statement, then details to the link and then signature "
+              "message": "You are a helpful email writing assistant. You take the information I provide you with and write a personalised email to the candidate we are calling in for an interview. The goal is to send an email with Google Calendar Link. Be straight to the point. The email should start with a 15-20 word opening statement, then details to the link and then signature"
             }
           ]
         },
@@ -196,7 +180,7 @@
         ]
       ]
     },
-    "Google Sheets Trigger": {
+    "Webhook": {
       "main": [
         [
           {

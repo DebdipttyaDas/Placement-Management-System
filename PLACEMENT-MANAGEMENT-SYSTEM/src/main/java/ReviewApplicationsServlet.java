@@ -177,6 +177,14 @@ public class ReviewApplicationsServlet extends HttpServlet {
     }
     
     private void triggerRejectionEmailWorkflow(String email, String fullName, String jobTitle, String companyName) {
+        System.out.println("----------------------------------------");
+        System.out.println("REJECTION NOTIFICATION GENERATED:");
+        System.out.println("Student Email: " + email);
+        System.out.println("Student Name:  " + fullName);
+        System.out.println("Job Title:     " + jobTitle);
+        System.out.println("Company:       " + companyName);
+        System.out.println("----------------------------------------");
+        
         String jsonPayload = String.format(
             "{\"email\":\"%s\",\"fullName\":\"%s\",\"jobTitle\":\"%s\",\"companyName\":\"%s\"}",
             escapeJson(email), escapeJson(fullName), escapeJson(jobTitle), escapeJson(companyName)

@@ -5,22 +5,22 @@ public class WebhookUtil {
                 "{\"email\": \"%s\", \"companyName\": \"%s\", \"companyCode\": \"%s\"}",
                 companyEmail, companyName, companyCode);
 
-        WebhookService.WebhookResult result = WebhookService.sendPost("/webhook-test/approve-company", jsonInputString);
+        WebhookService.WebhookResult result = WebhookService.sendPost("/webhook/approve-company", jsonInputString);
         return result.success;
     }
 
     public static boolean triggerRejectionWorkflow(String email, String fullName, String jobTitle, String companyName) {
         // Escape any double quotes in parameters
-        String escapedEmail = email.replace("\"", "\\\"");
-        String escapedFullName = fullName.replace("\"", "\\\"");
-        String escapedJobTitle = jobTitle.replace("\"", "\\\"");
-        String escapedCompanyName = companyName.replace("\"", "\\\"");
+        String escapedEmail = email != null ? email.replace("\"", "\\\"") : "";
+        String escapedFullName = fullName != null ? fullName.replace("\"", "\\\"") : "";
+        String escapedJobTitle = jobTitle != null ? jobTitle.replace("\"", "\\\"") : "";
+        String escapedCompanyName = companyName != null ? companyName.replace("\"", "\\\"") : "";
 
         String jsonInputString = String.format(
                 "{\"email\": \"%s\", \"fullName\": \"%s\", \"jobTitle\": \"%s\", \"companyName\": \"%s\"}",
                 escapedEmail, escapedFullName, escapedJobTitle, escapedCompanyName);
 
-        WebhookService.WebhookResult result = WebhookService.sendPost("/webhook-test/reject-student", jsonInputString);
+        WebhookService.WebhookResult result = WebhookService.sendPost("/webhook/reject-student", jsonInputString);
         return result.success;
     }
 }
