@@ -30,10 +30,17 @@ public class FetchInterviewsServlet extends HttpServlet {
 
         try {
             try (Connection conn = DBUtil.getConnection()) {
-                if (fetchAll) {
+                if ("company".equals(role)) {
+                    String companyName = getCompanyName(conn, session);
+                    if (companyName == null || companyName.isEmpty()) {
+                        json.append("]");
+                        response.getWriter().print(json.toString());
+                        return;
+                    }
                     appendInterviews(conn, json,
-                            "SELECT * FROM INTERVIEW WHERE INTERVIEW_DATE >= CURDATE() ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC",
-                            null, null, null);
+                            "SELECT * FROM INTERVIEW WHERE LOWER(TRIM(COMPANY_NAME)) = LOWER(TRIM(?)) AND INTERVIEW_DATE >= CURDATE() "
+                                    + "ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC",
+                            null, null, companyName);
                 } else if ("student".equals(role)) {
                     String studentEmail = getStudentEmail(session);
                     String studentFullName = getStudentFullName(conn, session, studentEmail);
@@ -46,17 +53,10 @@ public class FetchInterviewsServlet extends HttpServlet {
                             "SELECT * FROM INTERVIEW WHERE LOWER(TRIM(STUDENT_NAME)) = LOWER(TRIM(?)) "
                                     + "AND INTERVIEW_DATE >= CURDATE() ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC LIMIT " + STUDENT_LIMIT,
                             null, studentFullName, null);
-                } else if ("company".equals(role)) {
-                    String companyName = getCompanyName(conn, session);
-                    if (companyName == null || companyName.isEmpty()) {
-                        json.append("]");
-                        response.getWriter().print(json.toString());
-                        return;
-                    }
+                } else if (fetchAll || "admin".equals(role)) {
                     appendInterviews(conn, json,
-                            "SELECT * FROM INTERVIEW WHERE COMPANY_NAME = ? AND INTERVIEW_DATE >= CURDATE() "
-                                    + "ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC",
-                            null, null, companyName);
+                            "SELECT * FROM INTERVIEW WHERE INTERVIEW_DATE >= CURDATE() ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC",
+                            null, null, null);
                 } else {
                     json.append("]");
                     response.getWriter().print(json.toString());
