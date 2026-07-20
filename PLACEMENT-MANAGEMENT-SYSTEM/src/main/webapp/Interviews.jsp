@@ -174,7 +174,7 @@
 
                         </div>
 
-                        <button class="view-btn">
+                        <button class="view-btn" onclick="location.href='StudentMonitoring.jsp'">
                             View All Shortlisted
                         </button>
 
@@ -273,6 +273,8 @@
                             id="studentName"
                             placeholder="Search by name or ID"
                             required>
+
+                        <small id="studentAppStatusMsg" style="display:none; margin-top:4px; font-size:12px; font-weight:600;"></small>
 
                     </div>
 

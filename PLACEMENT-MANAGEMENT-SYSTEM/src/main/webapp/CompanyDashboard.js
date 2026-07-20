@@ -77,7 +77,7 @@ function loadCompanyInterviews() {
     var panel = document.getElementById("companyInterviewsPanel");
     if (!panel) return;
 
-    fetch("FetchInterviewsServlet?all=true")
+    fetch("FetchInterviewsServlet")
         .then(function(r) {
             if (!r.ok) throw new Error("Failed");
             return r.json();

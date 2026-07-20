@@ -172,6 +172,15 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     }
 
+    function escapeHtml(text) {
+        if (!text) return "";
+        return String(text)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
+    }
+
     /* =========================================================
        LOAD INTERVIEWS
     ========================================================= */
@@ -184,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        fetch("FetchInterviewsServlet?all=true")
+        fetch("FetchInterviewsServlet")
 
             .then(function (response) {
 
@@ -202,6 +211,51 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (totalRoundsCount) {
                     totalRoundsCount.innerText = interviews.length;
+                }
+
+                // Populate Dynamic Scheduled Students List
+                var studentsContainer = document.getElementById("dynamicStudentsList");
+                if (studentsContainer) {
+                    if (!Array.isArray(interviews) || interviews.length === 0) {
+                        studentsContainer.innerHTML = '<div style="color:#64748b;font-size:14px;margin-top:10px;">No scheduled students yet.</div>';
+                    } else {
+                        var studentHtml = "";
+                        var seenStudents = {};
+                        interviews.forEach(function(inv) {
+                            var sName = inv.student_name || "Unknown";
+                            if (!seenStudents[sName]) {
+                                seenStudents[sName] = true;
+                                studentHtml += '<div style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">' +
+                                    '<div><strong style="color: #1e293b; font-size: 14px;">' + escapeHtml(sName) + '</strong><br><small style="color: #64748b;">' + escapeHtml(inv.interview_round || "Interview") + '</small></div>' +
+                                    '<span style="background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">Scheduled</span>' +
+                                '</div>';
+                            }
+                        });
+                        studentsContainer.innerHTML = studentHtml;
+                    }
+                }
+
+                // Populate Dynamic Panelist Load List
+                var panelistContainer = document.getElementById("dynamicPanelistList");
+                if (panelistContainer) {
+                    if (!Array.isArray(interviews) || interviews.length === 0) {
+                        panelistContainer.innerHTML = '<div style="color:#64748b;font-size:14px;margin-top:10px;">No panelists assigned yet.</div>';
+                    } else {
+                        var panelistCounts = {};
+                        interviews.forEach(function(inv) {
+                            var pName = inv.interviewer_name || "Unassigned";
+                            panelistCounts[pName] = (panelistCounts[pName] || 0) + 1;
+                        });
+
+                        var panelistHtml = "";
+                        for (var pName in panelistCounts) {
+                            panelistHtml += '<div style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">' +
+                                '<span style="color: #1e293b; font-size: 14px; font-weight: 500;">' + escapeHtml(pName) + '</span>' +
+                                '<span style="background: #f1f5f9; color: #475569; padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: 600;">' + panelistCounts[pName] + ' Round(s)</span>' +
+                            '</div>';
+                        }
+                        panelistContainer.innerHTML = panelistHtml;
+                    }
                 }
 
                 if (!Array.isArray(interviews) || interviews.length === 0) {
@@ -244,6 +298,49 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     loadAdminInterviews();
+
+    /* =========================================================
+       REAL-TIME STUDENT APPLICATION CHECK
+    ========================================================= */
+
+    var companyInput = document.getElementById("companyName");
+    var studentInput = document.getElementById("studentName");
+    var appStatusMsg = document.getElementById("studentAppStatusMsg");
+
+    function checkCandidateApplication() {
+        if (!companyInput || !studentInput || !appStatusMsg) return;
+        var compVal = companyInput.value.trim();
+        var studVal = studentInput.value.trim();
+
+        if (!compVal || !studVal) {
+            appStatusMsg.style.display = "none";
+            return;
+        }
+
+        fetch("ScheduleInterviewServlet?action=checkApplication&companyName=" + encodeURIComponent(compVal) + "&studentName=" + encodeURIComponent(studVal))
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                appStatusMsg.style.display = "block";
+                if (data.applied) {
+                    appStatusMsg.style.color = "#16a34a";
+                    appStatusMsg.innerText = "✓ Student has applied to this company";
+                } else {
+                    appStatusMsg.style.color = "#dc2626";
+                    appStatusMsg.innerText = "✕ Student has not applied to this company";
+                }
+            })
+            .catch(function(err) {
+                console.error("Check application error:", err);
+            });
+    }
+
+    if (studentInput) {
+        studentInput.addEventListener("blur", checkCandidateApplication);
+        studentInput.addEventListener("change", checkCandidateApplication);
+    }
+    if (companyInput) {
+        companyInput.addEventListener("blur", checkCandidateApplication);
+    }
 
     /* =========================================================
        FORM SUBMIT
@@ -303,11 +400,6 @@ document.addEventListener("DOMContentLoaded", function () {
             })
 
             .then(function (response) {
-
-                if (!response.ok) {
-                    throw new Error("Server response error");
-                }
-
                 return response.json();
             })
 
@@ -338,7 +430,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error(error);
 
                 showToast(
-                    "Server error occurred",
+                    (error && error.message) ? error.message : "Failed to schedule interview",
                     true
                 );
             })

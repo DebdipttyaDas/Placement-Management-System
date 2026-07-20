@@ -17,6 +17,39 @@ public class ScheduleInterviewServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        String action = request.getParameter("action");
+        if ("checkApplication".equalsIgnoreCase(action)) {
+            String companyName = request.getParameter("companyName");
+            String studentName = request.getParameter("studentName");
+
+            if (companyName == null || studentName == null || companyName.trim().isEmpty() || studentName.trim().isEmpty()) {
+                response.getWriter().write("{\"applied\": false, \"message\": \"Missing parameters\"}");
+                return;
+            }
+
+            try (Connection conn = DBUtil.getConnection()) {
+                boolean applied = verifyStudentHasApplied(conn, studentName.trim(), companyName.trim());
+                String email = lookupStudentEmailByName(conn, studentName.trim());
+                if (applied) {
+                    response.getWriter().write("{\"applied\": true, \"email\": \"" + escapeJson(email) + "\", \"message\": \"Matching application found\"}");
+                } else {
+                    response.getWriter().write("{\"applied\": false, \"email\": \"" + escapeJson(email) + "\", \"message\": \"Student has not applied to this company previously\"}");
+                }
+            } catch (Exception e) {
+                response.getWriter().write("{\"applied\": false, \"message\": \"Error: " + escapeJson(e.getMessage()) + "\"}");
+            }
+            return;
+        }
+
+        response.getWriter().write("{\"status\": \"active\"}");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
@@ -26,7 +59,6 @@ public class ScheduleInterviewServlet extends HttpServlet {
             String requestBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 
             if (requestBody == null || requestBody.trim().isEmpty() || !requestBody.contains("company_name")) {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 response.getWriter().write("{\"success\": false, \"message\": \"Missing required fields\"}");
                 return;
             }
@@ -48,6 +80,13 @@ public class ScheduleInterviewServlet extends HttpServlet {
             }
 
             try (Connection conn = DBUtil.getConnection()) {
+                // Check whether student has applied to company previously
+                boolean hasApplied = verifyStudentHasApplied(conn, studentName, companyName);
+                if (!hasApplied) {
+                    response.getWriter().write("{\"success\": false, \"message\": \"Validation Failed: Student '" + escapeJson(studentName) + "' has not applied to company '" + escapeJson(companyName) + "' previously.\"}");
+                    return;
+                }
+
                 if (studentEmail == null || studentEmail.trim().isEmpty()) {
                     studentEmail = lookupStudentEmailByName(conn, studentName);
                 }
@@ -124,6 +163,29 @@ public class ScheduleInterviewServlet extends HttpServlet {
         } catch (Exception e) {
             System.err.println("Error notifying calendar schedule workflow: " + e.getMessage());
         }
+    }
+
+    private boolean verifyStudentHasApplied(Connection conn, String studentName, String companyName) {
+        if (studentName == null || companyName == null || studentName.trim().isEmpty() || companyName.trim().isEmpty()) {
+            return false;
+        }
+        String sql = "SELECT COUNT(*) FROM APPLICATION a "
+                   + "JOIN STUDENT s ON a.STUDENT_ID = s.STUDENT_ID "
+                   + "WHERE (LOWER(TRIM(a.companyName)) = LOWER(TRIM(?)) OR LOWER(TRIM(a.companyName)) LIKE CONCAT('%', LOWER(TRIM(?)), '%')) "
+                   + "AND LOWER(TRIM(s.fullName)) = LOWER(TRIM(?))";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, companyName.trim());
+            ps.setString(2, companyName.trim());
+            ps.setString(3, studentName.trim());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error verifying student application: " + e.getMessage());
+        }
+        return false;
     }
 
     private String lookupStudentEmailByName(Connection conn, String studentName) {
