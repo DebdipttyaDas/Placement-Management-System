@@ -104,7 +104,26 @@ public class ScheduleInterviewServlet extends HttpServlet {
     }
 
     private void notifyN8n(String requestBody) {
+        // Trigger Interview Slot Scheduling Workflow
         WebhookService.sendPost("/webhook/schedule-interview", requestBody);
+        
+        // Trigger Google Calendar Interview Scheduler Workflow
+        try {
+            String name = getJsonField(requestBody, "student_name");
+            String email = getJsonField(requestBody, "student_email");
+            String department = getJsonField(requestBody, "interview_round");
+            if (email == null || email.trim().isEmpty()) {
+                email = getJsonField(requestBody, "email");
+            }
+            
+            String calendarPayload = String.format(
+                "{\"email\":\"%s\",\"name\":\"%s\",\"department\":\"%s\"}",
+                escapeJson(email), escapeJson(name), escapeJson(department)
+            );
+            WebhookService.sendPost("/webhook/calendar-schedule-interview", calendarPayload);
+        } catch (Exception e) {
+            System.err.println("Error notifying calendar schedule workflow: " + e.getMessage());
+        }
     }
 
     private String lookupStudentEmailByName(Connection conn, String studentName) {

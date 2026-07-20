@@ -23,4 +23,17 @@ public class WebhookUtil {
         WebhookService.WebhookResult result = WebhookService.sendPost("/webhook/reject-student", jsonInputString);
         return result.success;
     }
+
+    public static boolean triggerCalendarSchedulerWorkflow(String email, String name, String department) {
+        String escapedEmail = email != null ? email.replace("\"", "\\\"") : "";
+        String escapedName = name != null ? name.replace("\"", "\\\"") : "";
+        String escapedDept = department != null ? department.replace("\"", "\\\"") : "";
+
+        String jsonInputString = String.format(
+                "{\"email\": \"%s\", \"name\": \"%s\", \"department\": \"%s\"}",
+                escapedEmail, escapedName, escapedDept);
+
+        WebhookService.WebhookResult result = WebhookService.sendPost("/webhook/calendar-schedule-interview", jsonInputString);
+        return result.success;
+    }
 }
