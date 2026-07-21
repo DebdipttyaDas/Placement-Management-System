@@ -466,6 +466,25 @@ html, body {
     box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
 }
 
+.input-with-icon {
+    position: relative;
+    width: 100%;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    font-size: 16px;
+    pointer-events: none;
+}
+
+.input-with-icon input {
+    padding-left: 48px !important;
+}
+
 .modern-grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;

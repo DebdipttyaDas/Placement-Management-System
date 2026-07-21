@@ -357,6 +357,8 @@
 
       // Call it on load and set auto-refresh interval for simultaneous updates
       loadInterviews();
+      // Auto-refresh interviews every 5 seconds for real-time synchronization
+      setInterval(loadInterviews, 5000);
 
       if ("BroadcastChannel" in window) {
         const bc = new BroadcastChannel("interview-schedule-channel");
