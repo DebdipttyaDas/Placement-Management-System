@@ -144,7 +144,7 @@
                         <div class="box"
                             style="width:100%;">
 
-                            <p>Total Rounds</p>
+                            <p>Total Interviews</p>
 
                             <h2 id="totalRoundsCount"
                                 style="color:#1e293b;">
@@ -256,7 +256,7 @@
 
                     <div class="modern-form-group">
 
-                        <label>Select Company</label>
+                        <label>Company</label>
 
                         <input type="text"
                         id="companyName"
