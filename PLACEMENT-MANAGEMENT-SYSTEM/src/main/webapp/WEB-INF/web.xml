@@ -182,6 +182,7 @@
     <servlet-mapping>
         <servlet-name>Verifycodeservlet</servlet-name>
         <url-pattern>/VerifyCodeServlet</url-pattern>
+        <url-pattern>/Verifycodeservlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -191,6 +192,7 @@
     <servlet-mapping>
         <servlet-name>Resetpasswordservlet</servlet-name>
         <url-pattern>/ResetPasswordServlet</url-pattern>
+        <url-pattern>/Resetpasswordservlet</url-pattern>
     </servlet-mapping>
 
     <!-- Placement analysis servlet -->
@@ -248,11 +250,15 @@
 
     <session-config>
         <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+        </cookie-config>
     </session-config>
 
     <!-- Welcome File List -->
     <welcome-file-list>
         <welcome-file>Login.jsp</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>
