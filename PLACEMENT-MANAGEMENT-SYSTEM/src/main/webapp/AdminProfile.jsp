@@ -1,9 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.sql.*" %>
+<%!
+    private Connection getJspConnection() throws Exception {
+        Class<?> dbUtilClass = Class.forName("DBUtil");
+        return (Connection) dbUtilClass.getMethod("getConnection").invoke(null);
+    }
+%>
+<%
+    HttpSession sess = request.getSession(false);
+    String sessionUser = (sess != null) ? (String) sess.getAttribute("user") : null;
+    if (sessionUser == null) {
+        response.sendRedirect("Login.jsp?role=admin");
+        return;
+    }
+
+    String dbAdminName = "";
+    String dbUserName = sessionUser;
+    String dbEmail = "";
+    String dbPhone = "";
+
+    try (Connection conn = getJspConnection()) {
+        String sql = "SELECT adminName, userName, email, phone FROM ADMIN_PROFILE WHERE userName = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, sessionUser);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    dbAdminName = rs.getString("adminName");
+                    dbUserName = rs.getString("userName");
+                    dbEmail = rs.getString("email");
+                    dbPhone = rs.getString("phone");
+                }
+            }
+        }
+    } catch (Exception e) {
+        System.err.println("Error loading admin profile: " + e.getMessage());
+    }
+%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Profile</title>
 
 <link rel="stylesheet" href="AdminProfile.css">
@@ -31,20 +69,20 @@
 
         <form id="adminProfileForm" action="AdminProfileServlet" method="post">
 
-            <label>Admin ID</label>
-            <input type="text" name="adminId" placeholder="Enter Admin ID" required>
+            <label>Admin Name</label>
+            <input type="text" name="adminName" placeholder="Enter Admin Name" value="<%= dbAdminName %>" required>
 
             <label>Username</label>
-            <input type="text" name="username" placeholder="Enter Username" required>
+            <input type="text" name="userName" placeholder="Enter Username" value="<%= dbUserName %>" required>
 
             <label>Email</label>
-            <input type="email" name="email" placeholder="Enter Email" required>
+            <input type="email" name="email" placeholder="Enter Email" value="<%= dbEmail %>" required>
 
             <label>Password</label>
             <input type="password" name="password" placeholder="Enter Password">
 
             <label>Phone Number</label>
-            <input type="number" name="phone" placeholder="Enter Phone Number">
+            <input type="text" name="phone" placeholder="Enter Phone Number" value="<%= dbPhone %>">
 
         </form>
         <!-- FORM END -->
@@ -64,31 +102,6 @@
 </div>
 
 <script src="AdminProfile.js"></script>
-
-<!-- Chatbot -->
-<link rel="stylesheet" href="chatbot.css">
-
-<div id="chatbot-toggle">
-    <i class="fas fa-robot"></i>
-</div>
-
-<div id="chatbot-container">
-    <div class="chatbot-header">
-        <h3>AI Assistant</h3>
-        <button class="chatbot-close">&times;</button>
-    </div>
-    <div class="chatbot-messages">
-        <!-- Messages will be added here -->
-    </div>
-    <div class="chatbot-input-area">
-        <input type="text" class="chatbot-input" placeholder="Type your message...">
-        <button class="chatbot-send">
-            <i class="fas fa-paper-plane"></i>
-        </button>
-    </div>
-</div>
-
-<script src="chatbot.js"></script>
 
 </body>
 </html>

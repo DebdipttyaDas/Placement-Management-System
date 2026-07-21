@@ -1,9 +1,19 @@
 /* RESET */
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 body {
     margin: 0;
     padding: 0;
+    height: 100%;
     font-family: Arial, sans-serif;
-    overflow-x: hidden;
+}
+
+.dashboard-container {
+    position: relative;
 }
 
 /* SIDEBAR */
@@ -50,11 +60,11 @@ body {
     color: white;
     position: fixed;
     top: 0;
-    left: 220px; /* starts after sidebar */
+    left: 220px;
     width: calc(100% - 220px);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end; 
     padding: 0 20px;
     box-sizing: border-box;
     z-index: 1000;
@@ -62,14 +72,27 @@ body {
 
 /* MAIN CONTENT */
 .main {
-    margin-left: 220px;
-    margin-top: 50px; /* space for topbar */
+    position: absolute;
+
+    top: 50px;
+    left: 220px;
+
     width: calc(100% - 220px);
+    height: calc(100vh - 50px);
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
     padding: 20px;
     box-sizing: border-box;
-    min-height: 100vh;
-    background: #ffffff;
-    color: #333333;
+
+    background: white;
+}
+
+.top-search-section {
+    max-height: none;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /* SEARCH BOX */
@@ -127,46 +150,66 @@ body {
     backdrop-filter: blur(5px);
 }
 
-.job-filters button:first-child {
+.job-filters button.active-filter {
     background-color: #0df;
     color: #000;
-    border: none;
+    border: 1px solid #0df;
 }
 
-.job-filters button:hover:not(:first-child) {
+.job-filters button:hover:not(.active-filter) {
     background-color: rgba(0,0,0,0.1);
 }
 
 /* JOB CARDS CONTAINER */
-.job-cards {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px;
-    margin-top: 50px;
+.job-card{
+    width:300px;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:14px;
+    margin:15px;
+    transition:transform .3s ease, box-shadow .3s ease;
 }
 
-/* SINGLE JOB CARD - GLASSMORPHISM */
-.job-card {
-    width: 300px;
-    padding: 30px;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: #333;
-    border-radius: 16px;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
+.extra-details{
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    transition:max-height .4s ease, opacity .4s ease;
 }
 
-.job-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.2);
-    border: 1px solid rgba(0, 0, 0, 0.15);
+.job-card.active .extra-details{
+    max-height:500px;
+    opacity:1;
+    margin-top:15px;
 }
+
+.job-card.active{
+    transform:translateY(-5px);
+}
+
+.view-btn,
+.close-btn{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.view-btn{
+    background:#0d5bd7;
+    color:white;
+}
+
+.close-btn{
+    background:#777;
+    color:white;
+}
+
+
+
 
 /* CARD TEXT */
 .job-card h3 {
@@ -204,21 +247,187 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* APPLY BUTTON */
-.job-card button {
-    margin-top: auto;
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(135deg, #0df, #0056b3);
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
+
+/* =========================
+   RESPONSIVE FIXES - JOB FIELDS FULLY VISIBLE (Sidebar unchanged)
+========================= */
+
+/* Tablets and Smaller Desktops (Max width: 1024px) */
+@media screen and (max-width: 1024px) {
+    .sidebar {
+        width: 180px;
+        padding: 15px;
+    }
+
+    .topbar, .main {
+        left: 180px;
+        width: calc(100% - 180px);
+    }
+
+    .search-box input {
+        width: 70%;
+    }
+
+    .job-card {
+        width: 280px;
+    }
+    
+    /* Ensure job filters visible */
+    .job-filters {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow: visible;
+    }
+    
+    .job-filters button {
+        display: inline-block;
+    }
 }
 
-.job-card button:hover {
-    background: linear-gradient(135deg, #0ce, #004494);
-    transform: scale(1.02);
+/* Mobile/Tablet Devices (Max width: 768px) */
+.sidebar-toggle-btn {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .sidebar-toggle-btn {
+        display: block;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -220px;
+        width: 220px;
+        height: 100vh;
+        padding: 20px;
+        transition: left 0.3s ease;
+        z-index: 1001;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        padding: 0 15px;
+        z-index: 1000;
+    }
+
+    .main {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        height: auto;
+        min-height: calc(100vh - 50px);
+        padding: 15px;
+        overflow-x: visible;
+        overflow-y: auto;
+    }
+
+    .card-container {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .job-card {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .search-box {
+        padding: 15px 0;
+    }
+
+    .search-box input,
+    .job-search input {
+        width: 100%;
+    }
+
+    .job-filters {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        margin: 20px 0 !important;
+        overflow: visible !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .job-filters button {
+        display: inline-block !important;
+        width: auto !important;
+        min-width: 70px;
+        padding: 8px 15px;
+        flex-shrink: 0;
+    }
+    
+    .job-section {
+        overflow: visible;
+        display: block;
+        padding: 10px;
+    }
+}
+
+/* Small Mobile Devices (Max width: 480px) */
+@media screen and (max-width: 480px) {
+    .topbar {
+        height: 45px;
+    }
+    
+    .main {
+        top: 45px;
+        padding: 10px;
+    }
+    
+    .job-filters button {
+        min-width: 60px;
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+    
+    .job-card h3 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Very Small Phones (Max width: 360px) */
+@media screen and (max-width: 360px) {
+    .job-filters button {
+        min-width: 55px;
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+}
+
+
+/* Large Desktops (Min width: 1440px) */
+@media screen and (min-width: 1440px) {
+    .job-cards {
+         display: grid;
+		grid-template-columns: repeat(3, 1fr);
+	    gap: 15px;
+		padding: 20px;
+    }
+
+    .job-card {
+        width: 350px;
+    }
+
+    .search-box input {
+        width: 40%;
+    }
 }

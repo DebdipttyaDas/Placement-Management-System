@@ -1,0 +1,135 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    min-height: 100vh;
+    overflow-y: scroll;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    padding: 20px;
+}
+
+/* SCROLLBAR */
+html::-webkit-scrollbar {
+    width: 6px;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: #0d5bd7;
+    border-radius: 10px;
+}
+
+html::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+/* CARDS CONTAINER */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+/* JOB CARD */
+.job-card {
+    width: 300px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    transition: all 0.4s ease;
+}
+
+/* CARD INTERNAL SPACING */
+.job-card h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #000;
+}
+
+.job-card > p {
+    margin-bottom: 6px;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.tags {
+    margin-top: 6px;
+    margin-bottom: 10px;
+}
+
+.tags span {
+    margin-right: 6px;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+/* EXTRA DETAILS */
+.extra-details {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.job-card.active .extra-details {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 15px;
+}
+
+.extra-details p {
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.job-card.active {
+    transform: translateY(-5px);
+}
+
+/* BUTTONS */
+.view-btn,
+.apply-btn,
+.close-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.view-btn,
+.apply-btn {
+    background: #0d5bd7;
+    color: white;
+}
+
+.close-btn {
+    background: #777;
+    color: white;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    .cards-container {
+        padding: 5px;
+        gap: 15px;
+    }
+    .job-card {
+        width: 100%;
+    }
+}

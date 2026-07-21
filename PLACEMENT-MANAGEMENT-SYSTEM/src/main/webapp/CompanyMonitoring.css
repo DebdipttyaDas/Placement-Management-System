@@ -1,0 +1,322 @@
+/* ===========================
+   RESET
+=========================== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+    display:flex;
+    color:#222;
+}
+
+/* ===========================
+   SIDEBAR
+=========================== */
+.sidebar{
+    width:230px;
+    min-height:100vh;
+    background:#06473e;
+    color:#fff;
+    position:fixed;
+    left:0;
+    top:0;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+}
+
+.logo{
+    margin-bottom:25px;
+}
+
+.nav-menu{
+    list-style:none;
+}
+
+.nav-menu li{
+    margin:10px 0;
+    padding:12px;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.nav-menu li:hover,
+.nav-menu li.active{
+    background:#1d6b61;
+}
+
+.nav-menu li a{
+    color:#fff;
+    text-decoration:none;
+    display:block;
+}
+
+.sidebar form{
+    margin-top:auto;
+}
+
+.logout-btn{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#1d6b61;
+    color:#fff;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.logout-btn:hover{
+    background:#2d8478;
+}
+
+/* ===========================
+   MAIN AREA
+=========================== */
+.main-area{
+    margin-left:230px;
+    width:calc(100% - 230px);
+    min-height:100vh;
+    padding:40px;
+}
+
+.company-wrapper{
+    max-width:1400px;
+    margin:auto;
+}
+
+.company-heading{
+    text-align:center;
+    font-size:36px;
+    color:#06473e;
+    margin-bottom:25px;
+}
+
+.company-box{
+    background:#06473e;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+/* ===========================
+   SEARCH
+=========================== */
+.search-bar{
+    display:flex;
+    align-items:center;
+    background:#fff;
+    border-radius:12px;
+    padding:12px 18px;
+    margin:0 auto 30px;
+    max-width:520px;
+}
+
+.search-icon{
+    color:#06473e;
+    margin-right:10px;
+}
+
+.search-bar input{
+    width:100%;
+    border:none;
+    outline:none;
+    background:transparent;
+    font-size:15px;
+}
+
+/* ===========================
+   CARD GRID
+=========================== */
+.card-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:22px;
+}
+
+.job-card{
+    background:#fff;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.job-card:hover{
+    transform:translateY(-5px);
+}
+
+.company-name{
+    color:#06473e;
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.tags p{
+    margin:6px 0;
+    line-height:1.5;
+}
+
+/* ===========================
+   DETAILS
+=========================== */
+.extra-details{
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    transition:max-height .4s ease,opacity .4s ease,margin-top .4s ease;
+}
+
+.job-card.active .extra-details{
+    max-height:500px;
+    opacity:1;
+    margin-top:15px;
+}
+
+.extra-details p{
+    margin:10px 0;
+    line-height:1.5;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+.view-btn,
+.close-btn{
+    width:100%;
+    margin-top:15px;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    color:#fff;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+}
+
+.view-btn{
+    background:#0d6efd;
+}
+
+.view-btn:hover{
+    background:#0b5ed7;
+}
+
+.close-btn{
+    background:#6c757d;
+}
+
+.close-btn:hover{
+    background:#5a6268;
+}
+
+/* ===========================
+   TABLET
+=========================== */
+@media (max-width:1024px){
+
+.sidebar{
+    width:200px;
+}
+
+.main-area{
+    margin-left:200px;
+    width:calc(100% - 200px);
+    padding:30px;
+}
+
+.company-heading{
+    font-size:30px;
+}
+
+.card-container{
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+}
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+@media (max-width:768px){
+
+body{
+    display:block;
+}
+
+.sidebar{
+    position:relative;
+    width:100%;
+    min-height:auto;
+}
+
+.nav-menu{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.nav-menu li{
+    margin:0;
+}
+
+.main-area{
+    margin-left:0;
+    width:100%;
+    padding:20px;
+}
+
+.company-box{
+    padding:20px;
+}
+
+.company-heading{
+    font-size:28px;
+}
+
+.search-bar{
+    max-width:100%;
+}
+
+.card-container{
+    grid-template-columns:1fr;
+}
+
+}
+
+/* ===========================
+   SMALL MOBILE
+=========================== */
+@media (max-width:480px){
+
+.sidebar{
+    padding:15px;
+}
+
+.nav-menu{
+    flex-direction:column;
+}
+
+.company-heading{
+    font-size:24px;
+}
+
+.company-box{
+    padding:15px;
+}
+
+.search-bar{
+    padding:10px 15px;
+}
+
+.view-btn,
+.close-btn{
+    font-size:14px;
+}
+
+}

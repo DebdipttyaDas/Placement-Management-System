@@ -1,0 +1,73 @@
+{
+  "name": "Company Registration Email Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "approve-company",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        400,
+        -128
+      ],
+      "id": "572051e0-8fb2-47b1-89d9-eeb3e982fc68",
+      "webhookId": "e404e8a9-6750-4811-8f2e-b3e415e73ec2"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{$json.body.email}}",
+        "subject": "Your Company Registration is Successful!",
+        "message": "={{'Hello ' + $json.body.companyName + ',<br><br>Your company registration is successful. Your Company Code is: <b>' + $json.body.companyCode + '</b><br><br>Please use this code to login once your account is approved by the admin.'}}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "name": "Gmail",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [
+        656,
+        -128
+      ],
+      "id": "b86a310f-edae-40fc-82c0-895c018f57e7",
+      "webhookId": "c5efe598-6833-4f6b-b099-224ed710465d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "yTS4NIQeNJphvSuk",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "09190505-5bca-41f3-9057-d49f73556d74",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e4e2f7975557a5ddd11af4d3b47dd7e1e612dcf7d60795a71c1a5221c0d15057"
+  },
+  "id": "S3tb2ydQyhApg3bl",
+  "tags": []
+}

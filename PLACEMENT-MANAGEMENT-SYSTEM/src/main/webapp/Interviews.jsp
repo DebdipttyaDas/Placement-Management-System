@@ -1,404 +1,392 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
+<head>
 
-        <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Interview Scheduling</title>
+    <title>Interview Scheduling</title>
 
-        <link rel="stylesheet" href="Interviews.css">
+    <link rel="stylesheet" href="Interviews.css">
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    </head>
+</head>
 
-    <body>
+<body>
 
-        <div class="container">
+    <div class="container">
 
-            <!-- SIDEBAR -->
-            <aside class="sidebar">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
 
-                <br><br><br>
+            <button class="close-sidebar-btn" id="closeSidebarBtn" aria-label="Close Sidebar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
 
-                <ul class="menu">
+            <br><br><br>
 
-                    <li>
-                        <a href="CompanyDashboard.jsp" style="text-decoration:none;color:white;">
-                            Dashboard
-                        </a>
-                    </li>
+            <ul class="menu">
 
-                    <li>
-                        <a href="JobPost.jsp" style="text-decoration:none;color:white;">
-                            Job Post
-                        </a>
-                    </li>
+                <li>
+                    <a href="CompanyDashboard.jsp"
+                        style="text-decoration:none;color:white;">
+                        Dashboard
+                    </a>
+                </li>
 
-                    <li class="active">
-                        Interviews
-                    </li>
+                <li>
+                    <a href="JobPost.jsp"
+                        style="text-decoration:none;color:white;">
+                        Job Post
+                    </a>
+                </li>
 
-                    <li>
-                        <a href="PlacementAnalysis.jsp" style="text-decoration:none;color:white;">
-                            Placement Analysis
-                        </a>
-                    </li>
+                <li class="active">
+                    Interviews
+                </li>
 
-                </ul>
-                
-                <!-- LOGOUT -->
-    <div class="logout">
+                <li>
+                    <a href="PlacementAnalysis.jsp"
+                        style="text-decoration:none;color:white;">
+                        Placement Analysis
+                    </a>
+                </li>
 
-        <button>
-            Logout
-        </button>
+            </ul>
 
-    </div>
-                
+            <!-- LOGOUT -->
+            <div class="logout">
+                <form action="LogoutServlet" method="post" style="width: 100%;">
+                    <button type="submit" style="width: 100%;">
+                        Logout
+                    </button>
+                </form>
+            </div>
 
-            </aside>
+        </aside>
 
-            <!-- MAIN CONTENT -->
-            <main class="main-content">
+        <!-- MAIN -->
+        <main class="main-content">
 
-                <!-- TOPBAR -->
-                <div class="topbar">
+            <!-- TOPBAR -->
+            <div class="topbar">
 
-                    <h2>Interviews</h2>
+                <button class="sidebar-toggle" id="sidebarToggleBtn" aria-label="Toggle Sidebar">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
 
-                    <div class="top-links">
+                <h2>Interviews</h2>
 
-                        <a href="#">
+            </div>
 
-                            <i class="fa fa-user-circle" style="font-size:25px;color:white;"></i>
+            <!-- PAGE HEADER -->
+            <div class="page-header">
 
-                        </a>
+                <h1>Interview Scheduling</h1>
 
-                    </div>
+                <p>
+                    Coordinate upcoming placement rounds by mapping panel
+                    availability to shortlisted candidates.
+                </p>
 
-                </div>
+            </div>
 
-                <!-- PAGE HEADER -->
-                <div class="page-header">
+            <!-- TOOLBAR -->
+            <div class="toolbar">
 
-                    <h1>Interview Scheduling</h1>
+                <div class="left-group">
 
-                    <p>
-                        Coordinate upcoming placement rounds by mapping panel
-                        availability to shortlisted candidates.
-                    </p>
-
-                </div>
-
-                <!-- TOOLBAR -->
-                <div class="toolbar">
-
-                    <div class="left-group">
-                        <h2 style="margin: 0; color: #1e293b;">Upcoming Interviews</h2>
-                    </div>
-
-                    <div class="right-actions">
-
-                        <button class="create-btn" id="openSlotModalBtn">
-
-                            Create New Slot
-
-                        </button>
-
-                    </div>
+                    <h2 style="margin:0;color:#1e293b;">
+                        Upcoming Interviews
+                    </h2>
 
                 </div>
 
-                <!-- CONTENT -->
-                <div class="content">
+                <div class="right-actions">
 
-                    <!-- LEFT -->
-                    <div class="schedule" id="adminScheduleContainer">
 
-                        <div class="loading-text">
-                            Loading scheduled interviews...
-                        </div>
 
-                    </div>
+                    <button class="create-btn"
+                        id="openSlotModalBtn">
 
-                    <!-- RIGHT -->
-                    <div class="sidebar-right">
-
-                        <!-- STATS -->
-                        <div class="stats">
-
-                            <div class="box" style="width: 100%;">
-                                <p>Total Rounds</p>
-                                <h2 id="totalRoundsCount" style="color: #1e293b;">0</h2>
-                            </div>
-
-                        </div>
-
-                        <!-- PENDING -->
-                        <div class="pending">
-
-                            <h3>Scheduled Students</h3>
-
-                            <div id="dynamicStudentsList">
-                                <div style="color: #64748b; font-size: 14px; margin-top: 10px;">Loading...</div>
-                            </div>
-
-                            <button class="view-btn">
-                                View All Shortlisted
-                            </button>
-
-                        </div>
-
-                        <!-- PANEL -->
-                        <div class="panel-load">
-
-                            <h3>Panelist Load</h3>
-
-                            <div id="dynamicPanelistList">
-                                <div style="color: #64748b; font-size: 14px; margin-top: 10px;">Loading...</div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </main>
-
-        </div>
-
-        <!-- =========================================================
-     MODAL
-========================================================= -->
-
-        <div class="interview-modal-overlay" id="slotModal">
-
-            <div class="interview-modal">
-
-                <!-- HEADER -->
-                <div class="interview-modal-header">
-
-                    <div>
-
-                        <h2>Schedule Interview</h2>
-
-                        <p>
-                            Set up a new interaction between company and candidate.
-                        </p>
-
-                    </div>
-
-                    <button class="close-modal-btn" id="closeSlotModalBtn">
-
-                        <i class="fa-solid fa-xmark"></i>
+                        Create New Slot
 
                     </button>
 
                 </div>
 
-                <!-- FORM -->
-                <form id="scheduleInterviewForm">
+            </div>
 
-                    <!-- TITLE -->
-                    <div class="modern-form-group">
+            <!-- CONTENT -->
+            <div class="content">
 
-                        <label>Interview Title</label>
+                <!-- LEFT -->
+                <div class="schedule"
+                    id="adminScheduleContainer">
 
-                        <input type="text" id="interviewRound" placeholder="e.g. Technical Round 1" required>
-
+                    <div class="loading-text">
+                        Loading scheduled interviews...
                     </div>
 
-                    <!-- COMPANY + STUDENT -->
-                    <div class="modern-grid-2">
+                </div>
 
-                        <div class="modern-form-group">
+                <!-- RIGHT -->
+                <div class="sidebar-right">
 
-                            <label>Select Company</label>
+                    <!-- STATS -->
+                    <div class="stats">
 
-                            <select id="companyName" required>
+                        <div class="box"
+                            style="width:100%;">
 
-                                <option value="">
-                                    Choose Company
-                                </option>
+                            <p>Total Rounds</p>
 
-                                <option value="CloudScale Solutions">
-                                    CloudScale Solutions
-                                </option>
+                            <h2 id="totalRoundsCount"
+                                style="color:#1e293b;">
 
-                                <option value="Infosys">
-                                    Infosys
-                                </option>
+                                0
 
-                                <option value="TCS">
-                                    TCS
-                                </option>
-
-                                <option value="Wipro">
-                                    Wipro
-                                </option>
-
-                            </select>
+                            </h2>
 
                         </div>
 
-                        <div class="modern-form-group">
+                    </div>
 
-                            <label>Select Student</label>
+                    <!-- PENDING -->
+                    <div class="pending">
+
+                        <h3>Scheduled Students</h3>
+
+                        <div id="dynamicStudentsList">
+
+                            <div style="color:#64748b;
+                                        font-size:14px;
+                                        margin-top:10px;">
+
+                                Loading...
+
+                            </div>
+
+                        </div>
+
+                        <button class="view-btn" onclick="location.href='StudentMonitoring.jsp'">
+                            View All Shortlisted
+                        </button>
+
+                    </div>
+
+                    <!-- PANEL -->
+                    <div class="panel-load">
+
+                        <h3>Panelist Load</h3>
+
+                        <div id="dynamicPanelistList">
+
+                            <div style="color:#64748b;
+                                        font-size:14px;
+                                        margin-top:10px;">
+
+                                Loading...
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- ================= MODAL ================= -->
+
+    <div class="interview-modal-overlay"
+        id="slotModal">
+
+        <div class="interview-modal">
+
+            <!-- HEADER -->
+            <div class="interview-modal-header">
+
+                <div>
+
+                    <h2>Schedule Interview</h2>
+
+                    <p>
+                        Set up a new interaction between company and candidate.
+                    </p>
+
+                </div>
+
+                <button class="close-modal-btn"
+                    id="closeSlotModalBtn">
 
                             <div class="input-with-icon">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                                 <input type="text" id="studentName" placeholder="Search by name or ID" list="studentList" required>
                             </div>
                             <datalist id="studentList"></datalist>
+                    <i class="fa-solid fa-xmark"></i>
 
-                        </div>
+                </button>
 
-                    </div>
+            </div>
 
-                    <!-- DATE + TIME -->
-                    <div class="modern-grid-2">
+            <!-- FORM -->
+            <form id="scheduleInterviewForm">
 
-                        <div class="modern-form-group">
+                <!-- TITLE -->
+                <div class="modern-form-group">
 
-                            <label>Date</label>
+                    <label>Interview Title</label>
 
-                            <input type="date" id="interviewDate" required>
+                    <input type="text"
+                        id="interviewRound"
+                        placeholder="e.g. Technical Round 1"
+                        required>
 
-                        </div>
+                </div>
 
-                        <div class="modern-form-group">
+                <!-- COMPANY + STUDENT -->
+                <div class="modern-grid-2">
 
-                            <label>Time</label>
-
-                            <input type="time" id="interviewTime" required>
-
-                        </div>
-
-                    </div>
-
-                    <!-- PANEL + TYPE -->
-                    <div class="modern-grid-2">
-
-                        <div class="modern-form-group">
-
-                            <label>Interviewer / Panelist</label>
-
-                            <input type="text" id="interviewerName" placeholder="Full Name" required>
-
-                        </div>
-
-                        <div class="modern-form-group">
-
-                            <label>Interview Type</label>
-
-                            <div class="interview-type-selector">
-
-                                <button type="button" class="type-btn active" data-type="Virtual">
-
-                                    Virtual
-
-                                </button>
-
-                                <button type="button" class="type-btn" data-type="In-person">
-
-                                    In-person
-
-                                </button>
-
-                                <button type="button" class="type-btn" data-type="Phone">
-
-                                    Phone
-
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- LINK -->
                     <div class="modern-form-group">
 
-                        <label>Meeting Link / Location</label>
+                        <label>Select Company</label>
+
+                        <input type="text"
+                        id="companyName"
+                        placeholder="Enter company name"
+                        required>
+
+                    </div>
+
+                    <div class="modern-form-group">
+
+                        <label>Select Student</label>
+
+                        <input type="text"
+                            id="studentName"
+                            placeholder="Search by name or ID"
+                            required>
+
+                        <small id="studentAppStatusMsg" style="display:none; margin-top:4px; font-size:12px; font-weight:600;"></small>
+
+                    </div>
+
+                </div>
+
+                <!-- DATE + TIME -->
+                <div class="modern-grid-2">
+
+                    <div class="modern-form-group">
+
+                        <label>Date</label>
+
+                        <input type="date"
+                            id="interviewDate"
+                            required>
+
+                    </div>
+
+                    <div class="modern-form-group">
+
+                        <label>Time</label>
+
+                        <input type="time"
+                            id="interviewTime"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- PANEL + TYPE -->
+                <div class="modern-grid-2">
+
+                    <div class="modern-form-group">
+
+                        <label>Interviewer / Panelist</label>
 
                         <div class="input-with-icon">
                             <i class="fa-solid fa-link"></i>
                             <input type="text" id="meetLink" placeholder="https://meet.google.com/abc-defg-hij">
                         </div>
+                        <input type="text"
+                            id="interviewerName"
+                            placeholder="Full Name"
+                            required>
 
                     </div>
 
-                    <small class="virtual-note">
-                        AUTO-GENERATED FOR VIRTUAL INTERVIEWS
-                    </small>
+                </div>
 
-                    <!-- FOOTER -->
-                    <div class="modal-footer">
+                <!-- LINK -->
+                <div class="modern-form-group">
 
-                        <button type="button" class="cancel-btn" id="cancelModalBtn">
+                    <label>Meeting Link / Location</label>
 
-                            Cancel
+                    <input type="text"
+                        id="meetLink"
+                        placeholder="https://meet.google.com/abc-defg-hij">
 
-                        </button>
+                </div>
 
-                        <button type="submit" class="create-slot-btn">
+                <small class="virtual-note">
+                    AUTO-GENERATED FOR VIRTUAL INTERVIEWS
+                </small>
 
-                            <span id="btnText">
-                                Create Slot
-                            </span>
+                <!-- FOOTER -->
+                <div class="modal-footer">
 
-                            <div class="loader" id="slotLoader"></div>
+                    <button type="button"
+                        class="cancel-btn"
+                        id="cancelModalBtn">
 
-                        </button>
+                        Cancel
 
-                    </div>
+                    </button>
 
-                </form>
+                    <button type="submit"
+                        class="create-slot-btn">
 
-            </div>
+                        <span id="btnText">
+                            Create Slot
+                        </span>
 
-        </div>
+                        <div class="loader"
+                            id="slotLoader"></div>
 
-        <!-- TOAST -->
-        <div class="toast" id="toast"></div>
-
-        <!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
+                    </button>
 
         <script src="interviews.js?v=1.2"></script>
+                </div>
 
-        <!-- Chatbot -->
-        <link rel="stylesheet" href="chatbot.css">
+            </form>
 
-        <div id="chatbot-toggle">
-            <i class="fas fa-robot"></i>
         </div>
 
-        <div id="chatbot-container">
-            <div class="chatbot-header">
-                <h3>AI Assistant</h3>
-                <button class="chatbot-close">&times;</button>
-            </div>
-            <div class="chatbot-messages">
-                <!-- Messages will be added here -->
-            </div>
-            <div class="chatbot-input-area">
-                <input type="text" class="chatbot-input" placeholder="Type your message...">
-                <button class="chatbot-send">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </div>
+    </div>
 
-        <script src="chatbot.js"></script>
+    <!-- TOAST -->
+    <div class="toast"
+        id="toast"></div>
 
-    </body>
+    <!-- JS -->
+    <script src="Interviews.js"></script>
+    
+    
 
-    </html>
+
+</body>
+
+</html>

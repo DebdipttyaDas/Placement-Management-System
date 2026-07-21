@@ -1,5 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.sql.*" %>
+<%!
+    private Connection getJspConnection() throws Exception {
+        Class<?> dbUtilClass = Class.forName("DBUtil");
+        return (Connection) dbUtilClass.getMethod("getConnection").invoke(null);
+    }
+%>
+<%
+    HttpSession sess = request.getSession(false);
+    String userEmail = (sess != null) ? (String) sess.getAttribute("studentEmail") : null;
+    if (userEmail == null && sess != null) {
+        userEmail = (String) sess.getAttribute("user");
+    }
 
+    if (userEmail == null) {
+        response.sendRedirect("Login.jsp?role=student");
+        return;
+    }
+
+    String dbName = "";
+    String dbEmail = userEmail;
+    String dbPhone = "";
+    String dbDob = "";
+    String dbCollege = "";
+    String dbDepartment = "";
+    String dbDgpa = "";
+    String dbLanguages = "";
+    String dbSkillsJson = "[]";
+    byte[] dbPhoto = null;
+
+    try (Connection conn = getJspConnection()) {
+        String sql = "SELECT s.fullName, s.dob, s.email, s.phone, s.photo, "
+                   + "a.collegeName, a.department, a.dgpa, "
+                   + "k.languages, k.skills "
+                   + "FROM STUDENT s "
+                   + "LEFT JOIN ACCADEMIC_DETAILS a ON s.STUDENT_ID = a.STUDENT_ID "
+                   + "LEFT JOIN STUDENT_SKILLS k ON s.STUDENT_ID = k.STUDENT_ID "
+                   + "WHERE s.email = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, userEmail);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    dbName = rs.getString("fullName");
+                    dbDob = rs.getString("dob");
+                    dbEmail = rs.getString("email");
+                    dbPhone = rs.getString("phone");
+                    dbPhoto = rs.getBytes("photo");
+                    
+                    dbCollege = rs.getString("collegeName");
+                    dbDepartment = rs.getString("department");
+                    double dgpaVal = rs.getDouble("dgpa");
+                    dbDgpa = dgpaVal > 0 ? String.valueOf(dgpaVal) : "";
+                    
+                    dbLanguages = rs.getString("languages");
+                    dbSkillsJson = rs.getString("skills");
+                    if (dbSkillsJson == null || dbSkillsJson.trim().isEmpty()) {
+                        dbSkillsJson = "[]";
+                    }
+                }
+            }
+        }
+    } catch (Exception e) {
+        System.err.println("Error loading profile: " + e.getMessage());
+    }
+
+    String photoBase64 = null;
+    if (dbPhoto != null && dbPhoto.length > 0) {
+        photoBase64 = java.util.Base64.getEncoder().encodeToString(dbPhoto);
+    }
+%>
   <!DOCTYPE html>
   <html lang="en">
 
@@ -32,9 +101,36 @@
       <!-- Main Content -->
       <div class="main-content">
 
+        <!-- Error Message display -->
+        <%
+            String errorMsg = request.getParameter("error");
+            if (errorMsg != null) {
+                String displayMsg = "";
+                if ("invalid_photo".equals(errorMsg)) {
+                    displayMsg = "Please upload a valid image (JPG only).";
+                } else if ("password_too_long".equals(errorMsg)) {
+                    displayMsg = "Password must be at most 10 characters.";
+                } else if ("student_not_found".equals(errorMsg)) {
+                    displayMsg = "Student profile not found.";
+                } else if ("missing_session".equals(errorMsg)) {
+                    displayMsg = "Session expired. Please log in again.";
+                } else {
+                    displayMsg = errorMsg;
+                }
+        %>
+            <div style="color: #ef4444; background-color: #fef2f2; padding: 12px 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #fee2e2; font-family: sans-serif; font-weight: 500;">
+                <%= displayMsg %>
+            </div>
+        <%
+            }
+        %>
+
         <!-- HEADER CARD -->
-        <div class="header-card">
-          <div class="header-left">
+        <div class="header-card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
+          <div class="header-left" style="display:flex; align-items:center; gap:15px;">
+            <button class="sidebar-toggle-btn" id="sidebar-toggle" style="background:none; border:none; color:black; font-size:24px; cursor:pointer;" aria-label="Toggle Sidebar">
+                &#9776;
+            </button>
             <h1>Profile Settings</h1>
           </div>
 
@@ -48,17 +144,18 @@
         </div>
 
         <!-- FORM START -->
-        <form id="profileForm" action="UpdateProfileServlet" method="post" enctype="multipart/form-data">
+        <form id="profileForm" action="UpdateStudentProfileServlet" method="post" enctype="multipart/form-data">
 
           <!-- AVATAR CARD -->
           <div class="card avatar-card">
             <h2>Profile Picture</h2>
-            <p>JPG or PNG. Max size 2MB</p>
+            <p>Only JPG . Max size 500KB</p>
 
             <div class="avatar-box">
               <img id="profilePreview"
-                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ccc'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>"
-                alt="Profile Preview">
+                src="<%= photoBase64 != null ? "data:image/jpeg;base64," + photoBase64 : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ccc'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>" %>"
+                alt="Profile Preview"
+                style="<%= photoBase64 != null ? "width:100%; height:100%; border-radius:50%; object-fit:cover;" : "" %>">
             </div>
 
             <input type="file" name="photo" id="photoInput" class="upload-btn" accept="image/png, image/jpeg">
@@ -67,26 +164,30 @@
           <!-- PERSONAL INFO -->
           <div class="card">
             <h2>Personal Information</h2>
-
-            <input type="text" name="name" placeholder="Your name">
-            <input type="email" name="email" placeholder="Your email">
-            <input type="password" name="password" placeholder="Your password">
-            <input type="password" name="confirmPassword" placeholder="Confirm password">
+            <div class="form-grid">
+              <input type="text" name="name" placeholder="Your name" value="<%= dbName != null ? dbName : "" %>">
+              <input type="email" name="email" placeholder="Your email" value="<%= dbEmail != null ? dbEmail : "" %>">
+              <input type="password" name="password" placeholder="Your password">
+              <input type="tel" name="phone" placeholder="Phone number" value="<%= dbPhone != null ? dbPhone : "" %>">
+              <input class="full-width" type="date" name="dob" placeholder="Date of birth" value="<%= dbDob != null ? dbDob : "" %>">
+            </div>
           </div>
 
           <!-- ACADEMIC -->
           <div class="card">
-            <h2>Academic Records</h2>
-
-            <input type="text" name="department" placeholder="Department">
-            <input type="text" name="cgpa" placeholder="CGPA">
+            <h2>Academic Details</h2>
+            <div class="form-grid">
+              <input type="text" name="college" placeholder="College name" value="<%= dbCollege != null ? dbCollege : "" %>">
+              <input type="text" name="department" placeholder="Department" value="<%= dbDepartment != null ? dbDepartment : "" %>">
+              <input type="text" name="dgpa" placeholder="DGPA" value="<%= dbDgpa != null ? dbDgpa : "" %>">
+            </div>
           </div>
 
           <!-- LANGUAGES -->
           <div class="card">
             <h2>Languages Known</h2>
 
-            <input type="text" name="languages" placeholder="English, Bengali, Hindi">
+            <input type="text" name="languages" placeholder="English, Bengali, Hindi" value="<%= dbLanguages != null ? dbLanguages : "" %>">
           </div>
 
           <!-- SKILLS -->
@@ -147,6 +248,26 @@
 
     <script>
       let skillsArray = [];
+
+      try {
+          const loadedSkills = <%= dbSkillsJson %>;
+          if (Array.isArray(loadedSkills)) {
+              loadedSkills.forEach(skillStr => {
+                  if (skillStr.includes(':')) {
+                      const parts = skillStr.split(':');
+                      skillsArray.push({ name: parts[0], level: parts[1] });
+                  } else {
+                      skillsArray.push({ name: skillStr, level: 'Beginner' });
+                  }
+              });
+          }
+      } catch (e) {
+          console.error("Error parsing pre-loaded skills:", e);
+      }
+
+      document.addEventListener("DOMContentLoaded", function() {
+          updateSkillsUI();
+      });
 
       function openSkillModal() {
         document.getElementById('skillModal').classList.add('show');
@@ -210,30 +331,25 @@
     </script>
     <script src="StudentProfile.js"></script>
 
-    <!-- Chatbot -->
-    <link rel="stylesheet" href="chatbot.css">
 
-    <div id="chatbot-toggle">
-        <i class="fas fa-robot"></i>
-    </div>
 
-    <div id="chatbot-container">
-        <div class="chatbot-header">
-            <h3>AI Assistant</h3>
-            <button class="chatbot-close">&times;</button>
-        </div>
-        <div class="chatbot-messages">
-            <!-- Messages will be added here -->
-        </div>
-        <div class="chatbot-input-area">
-            <input type="text" class="chatbot-input" placeholder="Type your message...">
-            <button class="chatbot-send">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </div>
-    </div>
-
-    <script src="chatbot.js"></script>
+    <script>
+      (function() {
+        const toggleBtn = document.getElementById('sidebar-toggle');
+        const sidebar = document.querySelector('.sidebar-card');
+        if (toggleBtn && sidebar) {
+          toggleBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            sidebar.classList.toggle('active');
+          });
+          document.addEventListener('click', function(e) {
+            if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+              sidebar.classList.remove('active');
+            }
+          });
+        }
+      })();
+    </script>
 
   </body>
 

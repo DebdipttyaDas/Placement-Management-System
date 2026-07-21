@@ -1,80 +1,108 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Company Register</title>
-        <link rel="stylesheet" href="CompanyRegister.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Register</title>
+    <link rel="stylesheet" href="CompanyRegister.css">
+</head>
 
-    <body>
+<body>
 
-        <!-- Navbar -->
-        <header>
-      <h2 class="logo">CampusConnect</h2>
- 			 
-             <nav>
-                <p>Already have an account?
-                    <a href="Login.jsp" style="color: white;">Login</a>
-                </p>
-            </nav>
-        </header>
+    <!-- Navbar -->
+    <header>
+        <h2 class="logo">CampusConnect</h2>
+        <nav>
+            <p>Already have an account?
+                <a href="Login.jsp" style="color: white;">Login</a>
+            </p>
+        </nav>
+    </header>
 
-        <!-- Register Section -->
-        <center>
+    <!-- Register Section -->
+    <center>
 
-            <h1>Create Your Company Account</h1>
-            <h4>Register your company to access placement services</h4>
+        <h1>Create Your Company Account</h1>
+        <h4>Register your company to access our placement services</h4>
 
-            <!-- FORM -->
-            <form action="CompanyRegisterServlet" method="post">
+        <!-- FORM -->
+        <form action="CompanyRegisterServlet" method="post" class="company-form">
 
-                <!-- Company Name (matches request.getParameter("companyName")) -->
-                <label>Company Name</label><br>
-                <input type="text" name="companyName" placeholder="Enter company name" required><br><br>
+            <div class="form-grid">
 
-                <!-- Industry (matches request.getParameter("industry")) -->
-                <label>Industry</label><br>
-                <input type="text" name="industry" placeholder="Enter industry" required><br><br>
-
-                <!-- Company Type (matches request.getParameter("companyType")) -->
-                <label>Company Type</label><br>
-                <input type="text" name="companyType" placeholder="e.g. IT, Startup, MNC" required><br><br>
-
-                <!-- Company Email (matches request.getParameter("email")) -->
-                <label>Company Email</label><br>
-                <input type="email" name="email" placeholder="Enter company email" required><br><br>
-
-                <!-- Phone Number (matches request.getParameter("phone")) -->
-                <label>Phone Number</label><br>
-                <input type="text" name="phone" placeholder="Enter phone number" required><br><br>
-
-                <!-- Password (matches request.getParameter("password")) -->
-                <label>Password</label><br>
-                <input type="password" name="password" placeholder="Create a password" required><br><br>
-
-                <!-- Button -->
-                <button type="submit">Request for Registration</button>
-
-                <!-- Terms -->
-                <div class="terms">
-                    <a href="Terms.jsp">Terms & Conditions and Privacy Policy</a>
+                <!-- Row 1: Company Name + Industry -->
+                <div class="input-group">
+                    <label>Company Name</label>
+                    <input type="text" name="companyName" placeholder="Enter company name" required>
                 </div>
 
-                <!-- ERROR MESSAGE -->
-                <% String errorMessage=(String) request.getAttribute("errorMessage"); if(errorMessage !=null){ %>
-                    <p style="color: red; margin-top: 10px;">
-                        <%= errorMessage %>
-                    </p>
-                    <% } %>
+                <div class="input-group">
+                    <label>Industry</label>
+                    <input type="text" name="industry" placeholder="Enter industry" required>
+                </div>
 
-            </form>
+                <!-- Row 2: Company Type + Company Website -->
+                <div class="input-group">
+                    <label>Company Type</label>
+                    <input type="text" name="companyType" placeholder="e.g. IT, Startup, MNC" required>
+                </div>
 
+                <div class="input-group">
+                    <label>Company Website</label>
+                    <input type="url" name="website" placeholder="https://www.example.com" required>
+                </div>
 
-        </center>
+                <!-- Row 3: Registration Number + License Number -->
+                <div class="input-group">
+                    <label>Registration Number</label>
+                    <input type="text" name="registrationNumber" placeholder="Enter registration number" required>
+                </div>
 
-        <script src="CompanyRegister.js"></script>
-    </body>
+                <div class="input-group">
+                    <label>CIN</label>
+                    <input type="text" name="cin" placeholder="Enter CIN" required>
+                </div>
 
-    </html>
+                <!-- Row 4: Email + Password -->
+                <div class="input-group">
+                    <label>Company Email</label>
+                    <input type="email" name="email" placeholder="Enter company email" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Create a password" required>
+                </div>
+
+                <!-- Address: centered below spanning both columns -->
+                <div class="input-group address-group">
+                    <label>Company Address</label>
+                    <textarea name="address" placeholder="Enter company address" rows="3" required></textarea>
+                </div>
+
+            </div>
+
+            <button type="submit">Request for Registration</button>
+
+            <div class="terms">
+                <a href="Terms.jsp">Terms & Conditions and Privacy Policy</a>
+            </div>
+
+            <!-- ERROR MESSAGE -->
+            <% String errorMessage = (String) request.getAttribute("errorMessage");
+            if (errorMessage != null) { %>
+                <p style="color:red; margin-top:10px;">
+                    <%= errorMessage %>
+                </p>
+            <% } %>
+
+        </form>
+
+    </center>
+
+    <script src="CompanyRegister.js"></script>
+</body>
+
+</html>

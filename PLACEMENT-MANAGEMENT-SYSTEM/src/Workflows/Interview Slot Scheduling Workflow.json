@@ -1,0 +1,177 @@
+{
+  "name": "Interview Slot Scheduling Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "schedule-interview",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "302c074f-23e5-4e9d-8493-e8cc809a300b",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "schedule-interview-webhook"
+    },
+    {
+      "parameters": {
+        "calendar": "primary",
+        "start": "={{$json.body.interview_date}}T{{$json.body.interview_time}}",
+        "end": "={{new Date(new Date($json.body.interview_date + 'T' + $json.body.interview_time).getTime() + $json.body.duration * 60000).toISOString()}}",
+        "additionalFields": {}
+      },
+      "id": "5f1b633a-cca7-4ebd-b15d-fd99e970f059",
+      "name": "Google Calendar",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1,
+      "position": [
+        208,
+        0
+      ],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "j9DNp5Wt1d8ECwqQ",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "table": {
+          "__rl": true,
+          "value": "INTERVIEW",
+          "mode": ""
+        },
+        "columns": "INTERVIEW_TITLE,COMPANY_NAME,STUDENT_NAME,INTERVIEW_DATE,INTERVIEW_TIME,INTERVIEWER_NAME,MEETING_LINK",
+        "options": {}
+      },
+      "id": "81494612-94bb-4bc9-aa79-1753e312ed72",
+      "name": "MySQL",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        400,
+        0
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "gAGQh98KG1hvb8Ao",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{$node[\"Webhook\"].json[\"body\"][\"student_email\"]}}",
+        "subject": "=Interview Scheduled - {{$node[\"Webhook\"].json[\"body\"][\"company_name\"]}}",
+        "message": "=Hello {{$node[\"Webhook\"].json[\"body\"][\"student_name\"]}},\n\nYour interview has been scheduled successfully.\n\nCompany: {{$node[\"Webhook\"].json[\"body\"][\"company_name\"]}}\nRound: {{$node[\"Webhook\"].json[\"body\"][\"interview_round\"]}}\nDate: {{$node[\"Webhook\"].json[\"body\"][\"interview_date\"]}}\nTime: {{$node[\"Webhook\"].json[\"body\"][\"interview_time\"]}}\n\nJoin Meeting: {{$node[\"Webhook\"].json[\"body\"][\"meet_link\"]}}\n\nBest of luck.\nPlacement Cell",
+        "options": {}
+      },
+      "id": "08320e17-a9d8-403a-9fcb-900d7a803018",
+      "name": "Gmail",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [
+        608,
+        0
+      ],
+      "webhookId": "743dfcc5-43aa-4953-bcdb-23424ae97f05",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "yTS4NIQeNJphvSuk",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "success",
+              "value": "true"
+            },
+            {
+              "name": "message",
+              "value": "Interview slot created successfully"
+            },
+            {
+              "name": "meetLink",
+              "value": "={{$node[\"Webhook\"].json[\"body\"][\"meet_link\"]}}"
+            },
+            {
+              "name": "eventId",
+              "value": "={{$node[\"Google Calendar\"].json[\"id\"]}}"
+            },
+            {
+              "name": "studentEmailSent",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2ed09926-dc25-4c6e-9143-90b143f98785",
+      "name": "Set Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        800,
+        0
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Google Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "main": [
+        [
+          {
+            "node": "Set Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "746b38f7-e0dc-4946-acb4-64b6a638cc6c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e4e2f7975557a5ddd11af4d3b47dd7e1e612dcf7d60795a71c1a5221c0d15057"
+  },
+  "id": "kgeMLDmE4VUf9LCA",
+  "tags": []
+}

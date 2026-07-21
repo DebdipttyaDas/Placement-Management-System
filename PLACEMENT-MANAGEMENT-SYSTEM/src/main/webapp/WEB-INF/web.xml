@@ -7,10 +7,258 @@
     <display-name>Placement Management System</display-name>
     <description>Placement Management System - Final Year Project</description>
 
+    <!-- Admin profile management -->
+    <servlet>
+        <servlet-name>AdminProfileServlet</servlet-name>
+        <servlet-class>AdminProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminProfileServlet</servlet-name>
+        <url-pattern>/AdminProfileServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Admin dashboard servlet -->
+    <servlet>
+        <servlet-name>AdminDashboardServlet</servlet-name>
+        <servlet-class>AdminDashboardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminDashboardServlet</servlet-name>
+        <url-pattern>/AdminDashboardServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Approve company servlet -->
+    <servlet>
+        <servlet-name>ApproveCompanyServlet</servlet-name>
+        <servlet-class>ApproveCompanyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ApproveCompanyServlet</servlet-name>
+        <url-pattern>/ApproveCompanyServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Review Applications servlet -->
+    <servlet>
+        <servlet-name>ReviewApplicationsServlet</servlet-name>
+        <servlet-class>ReviewApplicationsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReviewApplicationsServlet</servlet-name>
+        <url-pattern>/ReviewApplicationsServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Company profile servlets -->
+    <servlet>
+        <servlet-name>CompanyProfileServlet</servlet-name>
+        <servlet-class>CompanyProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CompanyProfileServlet</servlet-name>
+        <url-pattern>/CompanyProfileServlet</url-pattern>
+    </servlet-mapping>
+
+
+
+    <!-- Company registration -->
+    <servlet>
+        <servlet-name>CompanyRegisterServlet</servlet-name>
+        <servlet-class>CompanyRegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CompanyRegisterServlet</servlet-name>
+        <url-pattern>/CompanyRegisterServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Apply Job servlet -->
+    <servlet>
+        <servlet-name>ApplyJobServlet</servlet-name>
+        <servlet-class>ApplyJobServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ApplyJobServlet</servlet-name>
+        <url-pattern>/ApplyJobServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Contact servlet -->
+    <servlet>
+        <servlet-name>ContactServlet</servlet-name>
+        <servlet-class>ContactServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ContactServlet</servlet-name>
+        <url-pattern>/ContactServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- AI Mock Interview Feature Servlets -->
+    <servlet>
+        <servlet-name>StartMockInterviewServlet</servlet-name>
+        <servlet-class>StartMockInterviewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StartMockInterviewServlet</servlet-name>
+        <url-pattern>/StartMockInterviewServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EvaluateMockInterviewServlet</servlet-name>
+        <servlet-class>EvaluateMockInterviewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EvaluateMockInterviewServlet</servlet-name>
+        <url-pattern>/EvaluateMockInterviewServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FetchMockInterviewsServlet</servlet-name>
+        <servlet-class>FetchMockInterviewsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FetchMockInterviewsServlet</servlet-name>
+        <url-pattern>/FetchMockInterviewsServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Fetch interviews & jobs -->
+    <servlet>
+        <servlet-name>FetchInterviewsServlet</servlet-name>
+        <servlet-class>FetchInterviewsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FetchInterviewsServlet</servlet-name>
+        <url-pattern>/FetchInterviewsServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FetchJobsServlet</servlet-name>
+        <servlet-class>FetchJobsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FetchJobsServlet</servlet-name>
+        <url-pattern>/FetchJobsServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Job post servlet -->
+    <servlet>
+        <servlet-name>JobPostServlet</servlet-name>
+        <servlet-class>JobPostServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JobPostServlet</servlet-name>
+        <url-pattern>/JobPostServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Authentication servlets -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Forgot Password servlets -->
+    <servlet>
+        <servlet-name>Forgetpasswordservlet</servlet-name>
+        <servlet-class>Forgetpasswordservlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Forgetpasswordservlet</servlet-name>
+        <url-pattern>/Forgetpasswordservlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Verifycodeservlet</servlet-name>
+        <servlet-class>Verifycodeservlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Verifycodeservlet</servlet-name>
+        <url-pattern>/VerifyCodeServlet</url-pattern>
+        <url-pattern>/Verifycodeservlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Resetpasswordservlet</servlet-name>
+        <servlet-class>Resetpasswordservlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Resetpasswordservlet</servlet-name>
+        <url-pattern>/ResetPasswordServlet</url-pattern>
+        <url-pattern>/Resetpasswordservlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Placement analysis servlet -->
+    <servlet>
+        <servlet-name>PlacementAnalysisServlet</servlet-name>
+        <servlet-class>PlacementAnalysisServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PlacementAnalysisServlet</servlet-name>
+        <url-pattern>/PlacementAnalysisServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Schedule Interview -->
+    <servlet>
+        <servlet-name>ScheduleInterviewServlet</servlet-name>
+        <servlet-class>ScheduleInterviewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ScheduleInterviewServlet</servlet-name>
+        <url-pattern>/ScheduleInterviewServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Student registration and profile servlets (with multipart configuration) -->
+    <servlet>
+        <servlet-name>StudentRegisterServlet</servlet-name>
+        <servlet-class>StudentRegisterServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>10485760</max-file-size>             <!-- 10MB -->
+            <max-request-size>52428800</max-request-size>       <!-- 50MB -->
+            <file-size-threshold>2097152</file-size-threshold> <!-- 2MB -->
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentRegisterServlet</servlet-name>
+        <url-pattern>/StudentRegisterServlet</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>UpdateStudentProfileServlet</servlet-name>
+        <servlet-class>UpdateStudentProfileServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>512000</max-file-size>              <!-- 500KB -->
+            <max-request-size>1048576</max-request-size>       <!-- 1MB -->
+            <file-size-threshold>1048576</file-size-threshold> <!-- 1MB -->
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateStudentProfileServlet</servlet-name>
+        <url-pattern>/UpdateStudentProfileServlet</url-pattern>
+    </servlet-mapping>
+
+
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+        </cookie-config>
+    </session-config>
 
     <!-- Welcome File List -->
     <welcome-file-list>
         <welcome-file>Login.jsp</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>

@@ -1,0 +1,228 @@
+{
+  "name": "Google Calendar Interview Scheduler",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "calendar-schedule-interview",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "52adb453-8cb6-4122-8191-ae2cc5b7469a",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "calendar-schedule-interview-webhook"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": "user@example.com",
+          "cachedResultName": "user@example.com"
+        },
+        "start": "={{ $json.nextSlot }}",
+        "end": "={{ $json.endSlot }}",
+        "additionalFields": {}
+      },
+      "id": "eaf235c1-657e-4f0e-a90f-263c4db24f6a",
+      "name": "Google Calendar",
+      "type": "n8n-nodes-base.googleCalendar",
+      "position": [
+        448,
+        0
+      ],
+      "typeVersion": 1.3,
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "j9DNp5Wt1d8ECwqQ",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Webhook').item.json.body.email }}",
+        "subject": "Interview Details",
+        "emailType": "text",
+        "message": "={{ $json.output.body }}",
+        "options": {}
+      },
+      "id": "18bd5fda-2062-4e4a-b657-35e0a3a5e97f",
+      "name": "Gmail",
+      "type": "n8n-nodes-base.gmail",
+      "position": [
+        1040,
+        0
+      ],
+      "webhookId": "040572a6-f9d0-4169-8ab9-ff47cf17fde7",
+      "typeVersion": 2.1,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "yTS4NIQeNJphvSuk",
+          "name": "Gmail account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Webhook').item.json.body.name || $('Webhook').item.json.body.fullName }}\n\n{{ $('Webhook').item.json.body.educational || $('Webhook').item.json.body.department }}\n\nLink for calendar: {{ $json.htmlLink }}\n\nBest regards,\nPlacement Cell",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "You are a helpful email writing assistant. You take the information I provide you with and write a personalised email to the candidate we are calling in for an interview. The goal is to send an email with Google Calendar Link. Be straight to the point. The email should start with a 15-20 word opening statement, then details to the link and then signature"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "id": "87250252-c174-4fad-acea-9dd2096171ac",
+      "name": "Basic LLM Chain",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "position": [
+        672,
+        0
+      ],
+      "typeVersion": 1.7
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"body\": \"\"\n}"
+      },
+      "id": "bf662824-1113-4e58-ae1e-edbf45b134d4",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "position": [
+        816,
+        224
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n expects an array of objects as output\n\nconst now = new Date();\n\n// Define the free slots: Monday, Wednesday, Friday at 3:00 PM\n// JavaScript Date: 0=Sunday, 1=Monday, ..., 5=Friday, 6=Saturday\nconst slots = [\n  { day: 1, hour: 15 }, // Monday 3 PM\n  { day: 3, hour: 15 }, // Wednesday 3 PM\n  { day: 5, hour: 15 }, // Friday 3 PM\n];\n\n// Helper to get the next slot after 'now', always in the future (never today)\nfunction getNextSlot(now, slots) {\n  let minDiff = Infinity;\n  let nextSlotDate = null;\n\n  for (const slot of slots) {\n    let daysUntil = (slot.day - now.getDay() + 7) % 7;\n    // Always skip today, even if the slot time hasn't passed\n    if (daysUntil === 0) {\n      daysUntil = 7;\n    }\n\n    const slotDate = new Date(\n      now.getFullYear(),\n      now.getMonth(),\n      now.getDate() + daysUntil,\n      slot.hour,\n      0,\n      0,\n      0\n    );\n\n    if (slotDate - now < minDiff) {\n      minDiff = slotDate - now;\n      nextSlotDate = slotDate;\n    }\n  }\n\n  return nextSlotDate;\n}\n\n// Format as \"YYYY-MM-DD HH:MM:SS\"\nfunction formatDate(date) {\n  const pad = (n) => n.toString().padStart(2, '0');\n  return (\n    date.getFullYear() +\n    '-' +\n    pad(date.getMonth() + 1) +\n    '-' +\n    pad(date.getDate()) +\n    ' ' +\n    pad(date.getHours()) +\n    ':00:00'\n  );\n}\n\nconst nextSlot = getNextSlot(now, slots);\n\n// Create the end time (1 hour after start)\nconst endSlot = new Date(nextSlot.getTime() + 60 * 60 * 1000);\n\nreturn [\n  {\n    json: {\n      nextSlot: formatDate(nextSlot),\n      endSlot: formatDate(endSlot)\n    }\n  }\n];\n"
+      },
+      "id": "54a6b570-a297-4b84-9761-dd8d4e01f507",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        224,
+        0
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        656,
+        224
+      ],
+      "id": "39aa6016-d4c2-4a8b-8cb6-e906e1cec972",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "eG9Yy2LGEMSlSakY",
+          "name": "OpenAI account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Google Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "db39eea3-a5fd-4c89-b19f-189393916e54",
+  "meta": {
+    "instanceId": "e4e2f7975557a5ddd11af4d3b47dd7e1e612dcf7d60795a71c1a5221c0d15057"
+  },
+  "id": "VsgRljQ7QFeUAaOX",
+  "tags": []
+}

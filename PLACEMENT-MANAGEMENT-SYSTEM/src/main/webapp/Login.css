@@ -1,18 +1,204 @@
-/* ===== Perspective (important for 3D) ===== */
-.page {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  perspective: 1200px;
+/* ===========================
+   Page
+=========================== */
+
+body{
+    margin:0;
+    padding:0;
+    font-family:Arial, Helvetica, sans-serif;
+    min-height:100vh;
 }
 
-.glass-card {
-    background: rgba(3, 51, 56, 0.765); 
-    backdrop-filter: blur(10px);            
-    -webkit-backdrop-filter: blur(10px);    
-    
-    border-radius: 16px;
-    border: 5px solid rgba(0, 0, 0, 0);
-    
-    box-shadow: 0 15px 20px rgba(0, 0, 0, 0);
+.page-bg{
+    min-height:100vh;
+    background-image:url("images/bg.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    position:relative;
+}
+
+.page-bg::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.25);
+    backdrop-filter:blur(15px);
+}
+
+.page-content{
+    position:relative;
+    z-index:2;
+}
+
+@font-face {
+    font-family: 'ComicRelief-Bold';
+    src: url('fonts/ComicRelief-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ===========================
+   Glass Card
+=========================== */
+
+.glass-card{
+
+    background:rgba(3,51,56,.78);
+
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+
+    border-radius:16px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
+
+    min-height:430px;
+
+    transition:all .35s ease;
+}
+
+/* ===========================
+   Tabs
+=========================== */
+
+.tab-btn{
+
+    padding:8px 24px;
+
+    border-radius:10px;
+
+    transition:.3s;
+
+    cursor:pointer;
+}
+
+.tab-active{
+
+    background:#ffffff;
+
+    color:#063831 !important;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+.tab-inactive{
+
+    color:rgba(255,255,255,.55) !important;
+
+    background:transparent;
+}
+
+.tab-btn:hover{
+
+    transform:translateY(-2px);
+}
+
+.tab-inactive:hover{
+
+    color:white !important;
+}
+
+/* ===========================
+   Form Sections
+=========================== */
+
+.form-section{
+    display:block;
+}
+
+.hidden-section{
+    display:none;
+}
+
+.visible-section{
+    display:block;
+}
+
+/* ===========================
+   Inputs
+=========================== */
+
+input{
+
+    transition:.25s;
+}
+
+input:focus{
+
+    transform:scale(1.02);
+}
+
+/* ===========================
+   Button
+=========================== */
+
+button[type="submit"]{
+
+    transition:.25s;
+}
+
+button[type="submit"]:hover{
+
+    transform:translateY(-2px);
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media(max-width:768px){
+
+    header{
+
+        padding:15px;
+    }
+
+    .glass-card{
+
+        width:92% !important;
+
+        min-height:430px;
+
+        padding:22px;
+    }
+
+    h1{
+
+        font-size:28px;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .glass-card{
+
+        width:95% !important;
+
+        padding:18px;
+    }
+
+    h1{
+
+        font-size:24px;
+    }
+
+    p{
+
+        font-size:14px;
+    }
+
+    input{
+
+        font-size:14px;
+    }
+
+    nav a{
+
+        font-size:13px;
+    }
+
 }

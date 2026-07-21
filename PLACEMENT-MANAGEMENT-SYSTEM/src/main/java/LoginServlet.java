@@ -1,9 +1,7 @@
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,15 +14,13 @@ import jakarta.servlet.http.HttpSession;
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    // Database configuration
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/placement_management";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String email = request.getParameter("email");
+        if (email == null || email.trim().isEmpty()) {
+            email = request.getParameter("userName");
+        }
         String password = request.getParameter("password");
         String role = request.getParameter("role");
 
@@ -32,10 +28,8 @@ public class LoginServlet extends HttpServlet {
         String companyCode = request.getParameter("companyCode");
 
         if ("company".equals(role)) {
-            // Use company specific fields if provided
             if (companyCode != null && !companyCode.trim().isEmpty()) {
                 email = companyCode;
-                // password is already fetched correctly via request.getParameter("password")
             }
         }
 
@@ -43,14 +37,34 @@ public class LoginServlet extends HttpServlet {
         // ADMIN LOGIN
         // ----------------------------------------------------------------
         if ("admin".equals(role)) {
-            if (isValidUser("admin", email, password)) {
+            boolean isValid = false;
+
+            try (Connection conn = DBUtil.getConnection();
+                 PreparedStatement ps = conn.prepareStatement(
+                         "SELECT 1 FROM ADMIN_PROFILE WHERE userName = ? AND password = ?")) {
+                ps.setString(1, email);
+                ps.setString(2, password);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        isValid = true;
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("Error during admin login: " + e.getMessage());
+            }
+
+            if (!isValid && "admin".equals(email) && "admin".equals(password)) {
+                isValid = true;
+            }
+
+            if (isValid) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", email);
                 session.setAttribute("role", role);
                 response.sendRedirect("AdminDashboard.jsp");
             } else {
                 request.setAttribute("error", "Invalid admin credentials");
-                request.getRequestDispatcher("Login.jsp?role=admin").forward(request, response);
+                request.getRequestDispatcher("Login.jsp?role=admin").forward(request, response); 
             }
         }
 
@@ -58,35 +72,37 @@ public class LoginServlet extends HttpServlet {
         // STUDENT LOGIN
         // ----------------------------------------------------------------
         else if ("student".equals(role)) {
-            if (isValidUser("student", email, password)) {
+            String studentName = "Student";
+            String studentFullName = "";
+            boolean isValid = false;
+
+            try (Connection conn = DBUtil.getConnection();
+                 PreparedStatement ps = conn.prepareStatement(
+                         "SELECT fullName FROM STUDENT WHERE email = ? AND password = ?")) {
+                ps.setString(1, email);
+                ps.setString(2, password);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        isValid = true;
+                        String fullName = rs.getString("fullName");
+                        if (fullName != null && !fullName.trim().isEmpty()) {
+                            studentFullName = fullName.trim();
+                            studentName = studentFullName.split("\\s+")[0];
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("Error during student login: " + e.getMessage());
+            }
+
+            if (isValid) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", email);
                 session.setAttribute("role", role);
-                
-                // Fetch student name from database
-                String studentName = "Student"; // Fallback name
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-                         PreparedStatement ps = conn.prepareStatement("SELECT full_name FROM students WHERE email = ?")) {
-                        ps.setString(1, email);
-                        try (ResultSet rs = ps.executeQuery()) {
-                            if (rs.next()) {
-                                String fullName = rs.getString("full_name");
-                                if (fullName != null && !fullName.trim().isEmpty()) {
-                                    studentName = fullName.trim().split("\\s+")[0]; // Get first name
-                                }
-                            }
-                        }
-                    }
-                } catch (Exception e) {
-                    System.err.println("Error fetching student name: " + e.getMessage());
-                }
+                session.setAttribute("studentEmail", email);
                 session.setAttribute("studentName", studentName);
-                
-                // Set mock profile completeness (Can be fetched from DB later)
+                session.setAttribute("studentFullName", studentFullName);
                 session.setAttribute("profileComplete", 80);
-                
                 response.sendRedirect("Student_dashboard.jsp");
             } else {
                 request.setAttribute("error", "Invalid student credentials");
@@ -98,71 +114,43 @@ public class LoginServlet extends HttpServlet {
         // COMPANY LOGIN
         // ----------------------------------------------------------------
         else if ("company".equals(role)) {
-            if (isValidUser("company", email, password)) {
+            String companyName = "";
+            boolean isValid = false;
+
+            try (Connection conn = DBUtil.getConnection();
+                 PreparedStatement ps = conn.prepareStatement(
+                         "SELECT companyName FROM BASIC_DETAILS WHERE companyCode = ? AND password = ? AND STATUS = 'APPROVED'")) {
+                ps.setString(1, email);
+                ps.setString(2, password);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        isValid = true;
+                        String name = rs.getString("companyName");
+                        if (name != null) {
+                            companyName = name.trim();
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("Error during company login: " + e.getMessage());
+            }
+
+            if (isValid) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", email);
                 session.setAttribute("role", role);
+                session.setAttribute("companyCode", email);
+                session.setAttribute("companyName", companyName);
                 response.sendRedirect("CompanyDashboard.jsp");
             } else {
                 request.setAttribute("error", "Invalid company credentials");
                 request.getRequestDispatcher("Login.jsp?role=company").forward(request, response);
             }
-        } else {
-            // Default fallback
+        }
+
+        else {
             request.setAttribute("error", "Invalid role specified");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
-    }
-
-    // ----------------------------------------------------------------
-    // Database Validation Method
-    // ----------------------------------------------------------------
-    private boolean isValidUser(String role, String identifier, String password) {
-        boolean isValid = false;
-        String query = "";
-
-        // Determine the query based on the role
-        switch (role) {
-            case "admin":
-                query = "SELECT * FROM admin WHERE username = ? AND password = ?";
-                break;
-            case "student":
-                query = "SELECT * FROM students WHERE email = ? AND password = ?";
-                break;
-            case "company":
-                query = "SELECT * FROM companies WHERE company_code = ? AND password = ?";
-                break;
-            default:
-                return false;
-        }
-
-        try {
-            // Load MySQL JDBC Driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-                    PreparedStatement ps = conn.prepareStatement(query)) {
-
-                ps.setString(1, identifier);
-                ps.setString(2, password);
-
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        isValid = true;
-                    }
-                }
-            }
-        } catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC Driver not found: " + e.getMessage());
-        } catch (SQLException e) {
-            System.err.println("Database connection error: " + e.getMessage());
-        }
-
-        // Fallback for hardcoded admin if DB fails or is not setup yet
-        if (!isValid && "admin".equals(role) && "admin".equals(identifier) && "admin".equals(password)) {
-            return true;
-        }
-
-        return isValid;
     }
 }

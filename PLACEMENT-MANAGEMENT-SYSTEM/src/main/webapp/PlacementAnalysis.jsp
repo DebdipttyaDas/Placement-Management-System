@@ -53,11 +53,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     </ul>
 <!-- LOGOUT -->
     <div class="logout">
-
-        <button>
-            Logout
-        </button>
-
+        <form action="LogoutServlet" method="post" style="width: 100%;">
+            <button type="submit" style="width: 100%;">
+                Logout
+            </button>
+        </form>
     </div>
     
 </div>
@@ -68,17 +68,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <!-- HEADER -->
 
     
-    <div class="topbar">
-
-
-           
-
-            <div class="top-icons">
-                <i class="fa fa-user-circle profile"></i>
-                <i class="fa fa-bell bell"></i>
-            </div>
-
-        </div>
+    <div class="topbar" style="display:flex; align-items:center; padding-left:15px;">
+        <button class="sidebar-toggle-btn" id="sidebar-toggle" style="background:none; border:none; color:white; font-size:24px; cursor:pointer;" aria-label="Toggle Sidebar">
+            &#9776;
+        </button>
+    </div>
     
 <div class="page-content">
     <!-- PERFORMANCE -->
@@ -86,7 +80,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <h2>Analytics Dashboard</h2>
         <p>GLOBAL PERFORMANCE</p>
 
-        <h2>98.4%</h2>
+        <h2 id="global-success-rate">98.4%</h2>
 
         <span>
             Placement success rate across all vertical disciplines for 2026.
@@ -104,61 +98,50 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                 Department Performance
             </h3>
 
-            <!-- ITEM -->
-            <div class="progress-item">
-
-                <p>
-                    Computer Science & IT
-                    <span>96%</span>
-                </p>
-
-                <div class="bar">
-                    <div style="width:96%"></div>
+            <div id="department-list">
+                <!-- ITEM -->
+                <div class="progress-item">
+                    <p>
+                        Computer Science & IT
+                        <span>96%</span>
+                    </p>
+                    <div class="bar">
+                        <div style="width:96%"></div>
+                    </div>
                 </div>
 
-            </div>
-
-            <!-- ITEM -->
-            <div class="progress-item">
-
-                <p>
-                    Business Management
-                    <span>88%</span>
-                </p>
-
-                <div class="bar">
-                    <div style="width:88%"></div>
+                <!-- ITEM -->
+                <div class="progress-item">
+                    <p>
+                        Business Management
+                        <span>88%</span>
+                    </p>
+                    <div class="bar">
+                        <div style="width:88%"></div>
+                    </div>
                 </div>
 
-            </div>
-
-            <!-- ITEM -->
-            <div class="progress-item">
-
-                <p>
-                    Architecture & Design
-                    
-                    <span>92%</span>
-                </p>
-
-                <div class="bar">
-                    <div style="width:92%"></div>
+                <!-- ITEM -->
+                <div class="progress-item">
+                    <p>
+                        Architecture & Design
+                        <span>92%</span>
+                    </p>
+                    <div class="bar">
+                        <div style="width:92%"></div>
+                    </div>
                 </div>
 
-            </div>
-
-            <!-- ITEM -->
-            <div class="progress-item">
-
-                <p>
-                    Social Sciences
-                    <span>74%</span>
-                </p>
-
-                <div class="bar">
-                    <div style="width:74%"></div>
+                <!-- ITEM -->
+                <div class="progress-item">
+                    <p>
+                        Social Sciences
+                        <span>74%</span>
+                    </p>
+                    <div class="bar">
+                        <div style="width:74%"></div>
+                    </div>
                 </div>
-
             </div>
 
         </div>
@@ -172,19 +155,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             <div class="pie-wrapper">
 
-                <canvas id="pieChart"></canvas>
+                   <canvas id="pieChart"></canvas>
 
-                <div class="center-text">
+                   <div class="center-text">
 
-                    <h2>1.2k</h2>
+                       <h2 id="placed-count">1.2k</h2>
 
-                    <p>Placed</p>
+                       <p>Placed</p>
 
-                </div>
+                   </div>
 
             </div>
 
-            <p class="sector-text">
+            <p class="sector-text" id="sector-text">
                 TECH 45% • FIN 30% • EDU 15% • OTHER 10%
             </p>
 
@@ -209,7 +192,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             </div>
 
-            <span class="growth">
+            <span class="growth" id="salary-growth">
                 +12.4% Annual Growth
             </span>
 
@@ -230,7 +213,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             <p class="text-sm text-gray-500">Highest CTC</p>
 
-            <h2 class="text-4xl font-bold mt-2">$194k</h2>
+            <h2 class="text-4xl font-bold mt-2" id="highest-ctc">$194k</h2>
 
         </div>
 
@@ -238,7 +221,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             <p class="text-sm text-gray-500">Pending Offers</p>
 
-            <h2 class="text-4xl font-bold mt-2">142</h2>
+            <h2 class="text-4xl font-bold mt-2" id="pending-offers">142</h2>
 
         </div>
 
@@ -246,7 +229,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             <p class="text-sm text-gray-500">New Companies</p>
 
-            <h2 class="text-4xl font-bold mt-2">+48</h2>
+            <h2 class="text-4xl font-bold mt-2" id="new-companies">+48</h2>
 
         </div>
 
@@ -254,7 +237,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             <p class="text-sm text-gray-500">Recruiter Rating</p>
 
-            <h2 class="text-4xl font-bold mt-2">4.9</h2>
+            <h2 class="text-4xl font-bold mt-2" id="recruiter-rating">4.9</h2>
 
         </div>
 
@@ -265,161 +248,28 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 </div>
 
 <!-- CHART SCRIPT -->
+
+<script src="PlacementAnalysis.js"></script>
+         
+
+
 <script>
-
-// PIE CHART
-new Chart(document.getElementById("pieChart"), {
-
-    type: "doughnut",
-
-    data: {
-
-        labels: ["Tech","Finance","Edu","Other"],
-
-        datasets: [{
-
-            data: [45,30,15,10],
-
-            backgroundColor: [
-                "#123D8D",
-                "#E16B6B",
-                "#D48A3B",
-                "#E5E7EB"
-            ],
-
-            borderWidth: 0
-
-        }]
-    },
-
-    options: {
-
-        responsive: true,
-
-        maintainAspectRatio: false,
-
-        cutout: "72%",
-
-        plugins: {
-
-            legend: {
-                display: false
-            }
-
+  (function() {
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        sidebar.classList.toggle('active');
+      });
+      document.addEventListener('click', function(e) {
+        if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+          sidebar.classList.remove('active');
         }
+      });
     }
-});
-
-
-// LINE CHART
-new Chart(document.getElementById("lineChart"), {
-
-    type: "line",
-
-    data: {
-
-        labels: ["Q1\n23","Q2\n23","Q3\n23","Q4\n23","Q1\n24"],
-
-        datasets: [{
-
-            data: [25, 48, 40, 84, 70],
-
-            borderColor: "#8AA0C8",
-
-            backgroundColor: "rgba(138,160,200,0.08)",
-
-            fill: true,
-
-            tension: 0.5,
-
-            pointRadius: 0,
-
-            borderWidth: 3
-
-        }]
-    },
-
-    options: {
-
-        responsive: false,
-
-        maintainAspectRatio: false,
-
-        plugins: {
-
-            legend: {
-                display: false
-            }
-
-        },
-
-        scales: {
-
-            x: {
-
-                grid: {
-
-                    color: "#EAEAEA",
-
-                    drawBorder: false
-                },
-
-                ticks: {
-
-                    color: "#666",
-
-                    font: {
-                        size: 11
-                    }
-                },
-
-                border: {
-                    display: false
-                }
-            },
-
-            y: {
-
-                display: false,
-
-                grid: {
-                    display: false
-                },
-
-                border: {
-                    display: false
-                }
-            }
-        }
-    }
-});
-
+  })();
 </script>
-
-<!-- Chatbot -->
-<link rel="stylesheet" href="chatbot.css">
-
-<div id="chatbot-toggle">
-    <i class="fas fa-robot"></i>
-</div>
-
-<div id="chatbot-container">
-    <div class="chatbot-header">
-        <h3>AI Assistant</h3>
-        <button class="chatbot-close">&times;</button>
-    </div>
-    <div class="chatbot-messages">
-        <!-- Messages will be added here -->
-    </div>
-    <div class="chatbot-input-area">
-        <input type="text" class="chatbot-input" placeholder="Type your message...">
-        <button class="chatbot-send">
-            <i class="fas fa-paper-plane"></i>
-        </button>
-    </div>
-</div>
-
-<script src="chatbot.js"></script>
 
 </body>
 </html>

@@ -1,100 +1,145 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    const form = document.querySelector("form");
+    var form = document.querySelector('form[action="StudentRegisterServlet"]');
+    if (!form) {
+        return;
+    }
+
+    var INVALID_CLASS = "field-invalid";
+
+    function clearFieldErrors() {
+        form.querySelectorAll("." + INVALID_CLASS).forEach(function (el) {
+            el.classList.remove(INVALID_CLASS);
+        });
+    }
+
+    function markInvalid(input) {
+        if (input) {
+            input.classList.add(INVALID_CLASS);
+        }
+    }
+
+    function getCgpaInput() {
+        return form.querySelector('input[name="cgpa"], input[name="dgpa"]');
+    }
+
+    function ensureCgpaHiddenField() {
+        var dgpaInput = form.querySelector('input[name="dgpa"]');
+        var cgpaHidden = form.querySelector('input[name="cgpa"]');
+        if (dgpaInput && !cgpaHidden) {
+            cgpaHidden = document.createElement("input");
+            cgpaHidden.type = "hidden";
+            cgpaHidden.name = "cgpa";
+            form.appendChild(cgpaHidden);
+        }
+        if (dgpaInput && cgpaHidden) {
+            cgpaHidden.value = dgpaInput.value.trim();
+        }
+    }
+
+    form.querySelectorAll("input, select").forEach(function (field) {
+        field.addEventListener("input", function () {
+            field.classList.remove(INVALID_CLASS);
+        });
+        field.addEventListener("change", function () {
+            field.classList.remove(INVALID_CLASS);
+        });
+    });
 
     form.addEventListener("submit", function (event) {
+        clearFieldErrors();
 
-        // Get field values
-        const cgpa = document.querySelector('input[name="cgpa"]').value.trim();
-        const email = document.querySelector('input[name="email"]').value.trim();
-        const password = document.querySelector('input[name="password"]').value.trim();
+        var isValid = true;
+        var cgpaInput = getCgpaInput();
+        var emailInput = form.querySelector('input[name="email"]');
+        var passwordInput = form.querySelector('input[name="password"]');
+        var fullNameInput = form.querySelector('input[name="fullName"]');
+        var collegeInput = form.querySelector('input[name="collegeName"]');
+        var departmentInput = form.querySelector('select[name="department"]');
+        var dobInput = form.querySelector('input[name="dob"]');
+        var resumeInput = form.querySelector('input[name="resume"]');
+        var photoInput = form.querySelector('input[name="photo"]');
 
-        const resume = document.querySelector('input[name="resume"]').files[0];
-        const photo = document.querySelector('input[name="photo"]').files[0];
+        var cgpa = cgpaInput ? cgpaInput.value.trim() : "";
+        var email = emailInput ? emailInput.value.trim() : "";
+        var password = passwordInput ? passwordInput.value.trim() : "";
 
-        // 1. Validate CGPA/Percentage
-        if (isNaN(cgpa) || Number(cgpa) < 0 || Number(cgpa) > 100) {
+        ensureCgpaHiddenField();
 
+        if (!fullNameInput || fullNameInput.value.trim() === "") {
+            alert("Please enter your full name.");
+            markInvalid(fullNameInput);
+            isValid = false;
+        }
+
+        if (!collegeInput || collegeInput.value.trim() === "") {
+            alert("Please enter your college name.");
+            markInvalid(collegeInput);
+            isValid = false;
+        }
+
+        if (!departmentInput || departmentInput.value === "") {
+            alert("Please select your department.");
+            markInvalid(departmentInput);
+            isValid = false;
+        }
+
+        if (!dobInput || dobInput.value === "") {
+            alert("Please enter your date of birth.");
+            markInvalid(dobInput);
+            isValid = false;
+        }
+
+        if (cgpa === "" || isNaN(cgpa) || Number(cgpa) < 0 || Number(cgpa) > 100) {
             alert("Please enter a valid CGPA or Percentage (0 - 100).");
-            event.preventDefault();
-            return;
-
+            markInvalid(cgpaInput);
+            isValid = false;
         }
 
-        // 2. Validate Email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-
             alert("Please enter a valid email address.");
-            event.preventDefault();
-            return;
-
+            markInvalid(emailInput);
+            isValid = false;
         }
 
-        // 3. Validate Password
         if (password.length < 6) {
-
             alert("Password must be at least 6 characters long.");
-            event.preventDefault();
-            return;
-
+            markInvalid(passwordInput);
+            isValid = false;
         }
 
-        // 4. Validate Resume File
+        var resume = resumeInput && resumeInput.files[0] ? resumeInput.files[0] : null;
         if (resume) {
-
-            const allowedResumeExtensions = ["pdf"];
-            const fileExtension = resume.name.split('.').pop().toLowerCase();
-
-            // File Type Check
-            if (!allowedResumeExtensions.includes(fileExtension)) {
-
+            var resumeExt = resume.name.split(".").pop().toLowerCase();
+            if (resumeExt !== "pdf") {
                 alert("Resume must be a PDF file.");
-                event.preventDefault();
-                return;
-
+                markInvalid(resumeInput);
+                isValid = false;
+            } else if (resume.size > 65 * 1024) {
+                alert("Resume size must be less than 65KB.");
+                markInvalid(resumeInput);
+                isValid = false;
             }
-
-            // File Size Check (800KB)
-            if (resume.size > 800 * 1024) {
-
-                alert("Resume size must be less than 800KB.");
-                event.preventDefault();
-                return;
-
-            }
-
         }
 
-        // 5. Validate Photo File
+        var photo = photoInput && photoInput.files[0] ? photoInput.files[0] : null;
         if (photo) {
-
-            const allowedPhotoExtensions = ["jpg"];
-            const fileExtension = photo.name.split('.').pop().toLowerCase();
-
-            // File Type Check
-            if (!allowedPhotoExtensions.includes(fileExtension)) {
-
+            var photoExt = photo.name.split(".").pop().toLowerCase();
+            if (photoExt !== "jpg") {
                 alert("Photo must be a JPG file.");
-                event.preventDefault();
-                return;
-
+                markInvalid(photoInput);
+                isValid = false;
+            } else if (photo.size > 65 * 1024) {
+                alert("Photo size must be less than 65KB.");
+                markInvalid(photoInput);
+                isValid = false;
             }
-
-            // File Size Check (500KB)
-            if (photo.size > 500 * 1024) {
-
-                alert("Photo size must be less than 500KB.");
-                event.preventDefault();
-                return;
-
-            }
-
         }
 
-        // If all validations pass, form submits normally
-
+        if (!isValid) {
+            event.preventDefault();
+        }
     });
 
 });

@@ -6,6 +6,7 @@
 
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Login</title>
 
 <link rel="stylesheet" href="AdminLogin.css">
@@ -22,10 +23,10 @@
     <!-- Navbar -->
     <header class="navbar">
 
-        <h1 class="logo">CampusConnect</h1>
+        <h1 class="logo" style="font-family: 'ComicRelief-Bold', sans-serif;">CampusConnect</h1>
 
         <div class="nav-link">
-            <a href="Login.jsp">Back to home page</a>
+            <a href="Login.jsp">Back to home</a>
         </div>
 
     </header>
@@ -53,12 +54,12 @@
                     <!-- Admin ID -->
                     <div class="input-group">
 
-                        <label>ADMIN ID</label>
+                        <label>USERNAME</label>
 
                         <input 
                             type="text"
-                            name="adminId"
-                            placeholder="Enter Admin ID"
+                            name="userName"
+                            placeholder="Enter Username"
                             required
                             style="color: white;"
                         >
@@ -72,7 +73,7 @@
 
                             <label>PASSWORD</label>
 
-                            <a href="#">Forgot?</a>
+                            <a href="Forgetpassword.jsp">Forgot?</a>
 
                         </div>
 

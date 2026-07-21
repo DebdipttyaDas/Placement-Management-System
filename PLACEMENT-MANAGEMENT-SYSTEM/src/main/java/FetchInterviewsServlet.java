@@ -1,7 +1,5 @@
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,6 +29,9 @@ public class FetchInterviewsServlet extends HttpServlet {
         }
     }
 
+    private static final int STUDENT_LIMIT = 10;
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
@@ -45,8 +46,9 @@ public class FetchInterviewsServlet extends HttpServlet {
         // Fallback to example if not logged in for testing
         String studentEmail = se != null ? se : "student@example.com";
 
-        String fetchAllParam = request.getParameter("all");
-        boolean fetchAll = "true".equals(fetchAllParam);
+        HttpSession session = request.getSession(false);
+        String role = session != null ? (String) session.getAttribute("role") : null;
+        boolean fetchAll = "true".equals(request.getParameter("all"));
 
         StringBuilder json = new StringBuilder();
         json.append("[");
@@ -77,46 +79,172 @@ public class FetchInterviewsServlet extends HttpServlet {
             } else {
                 sql = "SELECT * FROM interview_slots WHERE student_email=? ORDER BY interview_date ASC, interview_time ASC LIMIT 3";
                 ps = conn.prepareStatement(sql);
-                ps.setString(1, studentEmail);
+        try {
+            try (Connection conn = DBUtil.getConnection()) {
+                if ("company".equals(role)) {
+                    String companyName = getCompanyName(conn, session);
+                    if (companyName == null || companyName.isEmpty()) {
+                        json.append("]");
+                        response.getWriter().print(json.toString());
+                        return;
+                    }
+                    appendInterviews(conn, json,
+                            "SELECT * FROM INTERVIEW WHERE LOWER(TRIM(COMPANY_NAME)) = LOWER(TRIM(?)) AND INTERVIEW_DATE >= CURDATE() "
+                                    + "ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC",
+                            null, null, companyName);
+                } else if ("student".equals(role)) {
+                    String studentEmail = getStudentEmail(session);
+                    String studentFullName = getStudentFullName(conn, session, studentEmail);
+                    if (studentFullName == null || studentFullName.isEmpty()) {
+                        json.append("]");
+                        response.getWriter().print(json.toString());
+                        return;
+                    }
+                    appendInterviews(conn, json,
+                            "SELECT * FROM INTERVIEW WHERE LOWER(TRIM(STUDENT_NAME)) = LOWER(TRIM(?)) "
+                                    + "AND INTERVIEW_DATE >= CURDATE() ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC LIMIT " + STUDENT_LIMIT,
+                            null, studentFullName, null);
+                } else if (fetchAll || "admin".equals(role)) {
+                    appendInterviews(conn, json,
+                            "SELECT * FROM INTERVIEW WHERE INTERVIEW_DATE >= CURDATE() ORDER BY INTERVIEW_DATE ASC, INTERVIEW_TIME ASC",
+                            null, null, null);
+                } else {
+                    json.append("]");
+                    response.getWriter().print(json.toString());
+                    return;
+                }
+            }
+            json.append("]");
+            response.getWriter().print(json.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().print("[]");
+        }
+    }
+
+    private void appendInterviews(Connection conn, StringBuilder json, String sql, String studentEmail,
+            String studentFullName, String companyName) throws Exception {
+        boolean first = true;
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            if (studentFullName != null) {
+                ps.setString(1, studentFullName);
+            } else if (companyName != null) {
+                ps.setString(1, companyName);
             }
 
-            ResultSet rs = ps.executeQuery();
-
-            boolean first = true;
-            while (rs.next()) {
-                if (!first) {
-                    json.append(",");
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    if (!first) {
+                        json.append(",");
+                    }
+                    first = false;
+                    appendInterviewObject(json, rs);
                 }
-                first = false;
+            }
+        }
+    }
 
-                String cName = rs.getString("company_name").replace("\"", "\\\"");
-                String iDate = rs.getString("interview_date");
-                String iTime = rs.getString("interview_time");
-                String round = rs.getString("interview_round").replace("\"", "\\\"");
-                String meetLink = rs.getString("meet_link") != null ? rs.getString("meet_link").replace("\"", "\\\"")
-                        : "#";
-                String interviewer = rs.getString("interviewer_name").replace("\"", "\\\"");
-                String sName = rs.getString("student_name").replace("\"", "\\\"");
+    private void appendInterviewObject(StringBuilder json, ResultSet rs) throws Exception {
+        json.append("{")
+                .append("\"company_name\":\"").append(escapeJson(rs.getString("COMPANY_NAME"))).append("\",")
+                .append("\"interview_date\":\"").append(escapeJson(rs.getString("INTERVIEW_DATE"))).append("\",")
+                .append("\"interview_time\":\"").append(escapeJson(rs.getString("INTERVIEW_TIME"))).append("\",")
+                .append("\"interview_round\":\"").append(escapeJson(rs.getString("INTERVIEW_TITLE"))).append("\",")
+                .append("\"meet_link\":\"").append(escapeJson(
+                        rs.getString("MEETING_LINK") != null ? rs.getString("MEETING_LINK") : "#")).append("\",")
+                .append("\"student_name\":\"").append(escapeJson(rs.getString("STUDENT_NAME"))).append("\",")
+                .append("\"student_email\":\"").append("").append("\",")
+                .append("\"interviewer_name\":\"").append(escapeJson(rs.getString("INTERVIEWER_NAME"))).append("\"")
+                .append("}");
+    }
 
-                json.append("{")
-                        .append("\"company_name\":\"").append(cName).append("\",")
-                        .append("\"interview_date\":\"").append(iDate).append("\",")
-                        .append("\"interview_time\":\"").append(iTime).append("\",")
-                        .append("\"interview_round\":\"").append(round).append("\",")
-                        .append("\"meet_link\":\"").append(meetLink).append("\",")
-                        .append("\"student_name\":\"").append(sName).append("\",")
-                        .append("\"interviewer_name\":\"").append(interviewer).append("\"")
-                        .append("}");
+    private String getStudentEmail(HttpSession session) {
+        if (session == null) {
+            return null;
+        }
+        String email = (String) session.getAttribute("studentEmail");
+        if (email == null || email.isEmpty()) {
+            email = (String) session.getAttribute("user");
+        }
+        return email;
+    }
+
+    private String getStudentFullName(Connection conn, HttpSession session, String studentEmail) {
+        if (session == null) {
+            return "";
+        }
+        String fullName = (String) session.getAttribute("studentFullName");
+        if (fullName != null && !fullName.trim().isEmpty()) {
+            return fullName.trim();
+        }
+        if (studentEmail == null || studentEmail.isEmpty()) {
+            return "";
+        }
+        try {
+            
+            try (PreparedStatement ps = conn.prepareStatement(
+                            "SELECT fullName FROM STUDENT WHERE email = ?")) {
+                ps.setString(1, studentEmail);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next() && rs.getString("fullName") != null) {
+                        return rs.getString("fullName").trim();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error resolving student full name: " + e.getMessage());
+        }
+        return "";
+    }
+
+    private String getCompanyName(Connection conn, HttpSession session) {
+        if (session == null) {
+            return null;
+        }
+        String companyName = (String) session.getAttribute("companyName");
+        if (companyName != null && !companyName.trim().isEmpty()) {
+            return companyName.trim();
+        }
+        String companyCode = (String) session.getAttribute("user");
+        if (companyCode == null || companyCode.isEmpty()) {
+            return null;
+        }
+        try {
+
+            try (PreparedStatement ps = conn.prepareStatement(
+                            "SELECT companyName FROM BASIC_DETAILS WHERE companyCode = ?")) {
+                ps.setString(1, companyCode);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next() && rs.getString("companyName") != null) {
+                        return rs.getString("companyName").trim();
+                    }
+                }
             }
             rs.close();
             ps.close();
             json.append("]");
             out.print(json.toString());
         } catch (Exception e) {
-            e.printStackTrace();
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.print("[]");
+            System.err.println("Error resolving company name: " + e.getMessage());
         }
+        return null;
+    }
+
+    private String escapeJson(String data) {
+        if (data == null) {
+            return "";
+        }
+        return data.replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\b", "\\b")
+                .replace("\f", "\\f")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r")
+                .replace("\t", "\\t");
     }
 }
 
+}

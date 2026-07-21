@@ -5,9 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", function (event) {
 
         // Get Values
-        const adminId = document.querySelector('input[name="adminId"]').value.trim();
+        const adminName = document.querySelector('input[name="adminName"]').value.trim();
 
-        const username = document.querySelector('input[name="username"]').value.trim();
+        const username = document.querySelector('input[name="userName"]').value.trim();
 
         const email = document.querySelector('input[name="email"]').value.trim();
 
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         // ===== Empty Validation =====
-        if(adminId === "" || username === "" || email === ""){
+        if( adminName === "" || username === "" || email === "" || password === ""){
 
             alert("Please fill all required fields");
 

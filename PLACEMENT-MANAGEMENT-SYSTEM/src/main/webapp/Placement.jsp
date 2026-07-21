@@ -1,10 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+               pageEncoding="UTF-8" import="java.sql.*"  %>
+<%!
+    private Connection getJspConnection() throws Exception {
+        Class<?> dbUtilClass = Class.forName("DBUtil");
+        return (Connection) dbUtilClass.getMethod("getConnection").invoke(null);
+    }
+%>
 
     <!DOCTYPE html>
     <html lang="en">
 
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Placements</title>
         <link rel="stylesheet" href="Placement.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -15,20 +23,27 @@
         <div class="dashboard-container">
 
             <!-- LEFT SIDEBAR -->
-            <div class="sidebar">
-                <h2>Placements</h2>
-
-                <ul>
-                    <li><a href="Student_dashboard.jsp" style="text-decoration:none; color:white">Dashboard</a></li>
-                    <li><a href="Placement.jsp" style="text-decoration:none; color:white">Placements</a></li>
-                    <li><a href="MyApplication.jsp" style="text-decoration:none; color:white">My Applications</a></li>
-                </ul>
+            <div class="sidebar" style="display:flex; flex-direction:column; justify-content:space-between; height:100vh; box-sizing:border-box; padding-bottom:20px; position:fixed; left:0; top:0;">
+                <div>
+                    <h2>Placements</h2>
+                    <ul>
+                        <li><a href="Student_dashboard.jsp" style="text-decoration:none; color:white">Dashboard</a></li>
+                        <li><a href="Placement.jsp" style="text-decoration:none; color:white">Placements</a></li>
+                        <li><a href="MyApplication.jsp" style="text-decoration:none; color:white">My Applications</a></li>
+                    </ul>
+                </div>
+                <!-- Logout -->
+                <form action="LogoutServlet" method="post" style="width:100%;">
+                    <button type="submit" style="width:100%; padding:10px; background:#1d6b61; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:16px; transition: 0.3s ease;">Logout</button>
+                </form>
             </div>
 
             <!-- TOP BAR -->
-            <div
-                style="display:flex; justify-content:flex-end; padding:15px;width:98%; background:#06352f; color:white;">
-                <div style="display:flex; align-items:center; gap:30px;">
+           <div class="topbar" style="display:flex; justify-content:space-between; align-items:center;">
+                <button class="sidebar-toggle-btn" id="sidebar-toggle" style="background:none; border:none; color:white; font-size:24px; cursor:pointer;" aria-label="Toggle Sidebar">
+                    &#9776;
+                </button>
+                <div style="display:flex; align-items:center; gap:25px; margin-left: auto;">
                     <i class="fa fa-user-circle" style="font-size:25px;"></i>
                     <i class="fa fa-bell" style="font-size:25px;"></i>
                 </div>
@@ -36,7 +51,9 @@
 
             <!-- MAIN CONTENT -->
             <div class="main">
-
+            
+            <div class="top-search-section">
+            
                 <!-- SEARCH BAR -->
                 <div class="search-box">
                     <input type="text" placeholder="Search for job titles or companies...">
@@ -49,90 +66,155 @@
                     <button>Engineering</button>
                     <button>Marketing</button>
                     <button>Medical</button>
-                    <button>HR</button>
+                    <button>Finance</button>
                 </div>
 
                 <!-- JOB CARDS -->
                 <div class="job-cards" id="job-cards-container">
-                    <!-- Jobs will be loaded here dynamically -->
-                    <div style="color: #333; text-align: center; width: 100%;">Loading jobs...</div>
+                 
+                    <%
+
+Connection conn = null;
+Statement st = null;
+ResultSet rs = null;
+
+try{
+
+	conn = getJspConnection();
+
+    st = conn.createStatement();
+
+    rs = st.executeQuery(
+        "SELECT * FROM JOB_DETAILS ORDER BY JOB_ID DESC"
+    );
+
+    while(rs.next()){
+
+%>
+
+                    <div class="job-card">
+
+                        <div class="tags">
+
+                            <h2 class="company-name">
+                                <%= rs.getString("companyName") %>
+                            </h2>
+
+                            <p>
+                                <strong>
+                                    <%= rs.getString("jobTitle") %>
+                                </strong>
+                            </p>
+
+                            <p>
+                                <%= rs.getString("employmentType") %>
+                            </p>
+
+                        </div>
+
+                        <button class="view-btn"
+                                onclick="toggleCard(this)">
+                            View Details
+                        </button>
+
+                        <div class="extra-details">
+
+                            <p>
+                                <strong>Department:</strong>
+                                <%= rs.getString("department") %>
+                            </p>
+
+                            <p>
+                                <strong>Location Type:</strong>
+                                <%= rs.getString("LocationType") %>
+                            </p>
+
+                            <p>
+                                <strong>Location:</strong>
+                                <%= rs.getString("Location") %>
+                            </p>
+
+                            <p>
+                                <strong>Salary:</strong>
+                                <%= rs.getString("salary") %>
+                            </p>
+
+                            <p>
+                                <strong>Deadline:</strong>
+                                <%= rs.getString("applicationDeadline") %>
+                            </p>
+
+                            <form action="ApplyJobServlet" method="post" style="margin-top: 10px; display: inline-block;">
+                                <input type="hidden" name="companyName" value="<%= rs.getString("companyName") %>">
+                                <input type="hidden" name="jobTitle" value="<%= rs.getString("jobTitle") %>">
+                                <input type="hidden" name="department" value="<%= rs.getString("department") %>">
+                                <input type="hidden" name="employmentType" value="<%= rs.getString("employmentType") %>">
+                                <input type="hidden" name="locationType" value="<%= rs.getString("LocationType") %>">
+                                <input type="hidden" name="location" value="<%= rs.getString("Location") %>">
+                                <input type="hidden" name="salary" value="<%= rs.getString("salary") %>">
+                                <button type="submit" style="padding: 8px 15px; background-color: #06473e; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 14px; transition: 0.3s; margin-right: 10px;">Apply Now</button>
+                            </form>
+
+                            <button class="close-btn"
+                                    onclick="toggleCard(this)">
+                                Close Details
+                            </button>
+
+                        </div>
+
+                    </div>
+
+<%
+    }
+}
+catch(Exception e){
+    out.println("<p style='color:red'>Error : " + e.getMessage() + "</p>");
+}
+finally{
+
+    try{
+        if(rs != null) rs.close();
+    }catch(Exception e){}
+
+    try{
+        if(st != null) st.close();
+    }catch(Exception e){}
+
+    try{
+        if(conn != null) conn.close();
+    }catch(Exception e){}
+}
+%>
+                    
                 </div>
+                
+             </div>   
 
             </div>
 
         </div>
 
-        <!-- Chatbot -->
-        <link rel="stylesheet" href="chatbot.css">
 
-        <div id="chatbot-toggle">
-            <i class="fas fa-robot"></i>
-        </div>
 
-        <div id="chatbot-container">
-            <div class="chatbot-header">
-                <h3>AI Assistant</h3>
-                <button class="chatbot-close">&times;</button>
-            </div>
-            <div class="chatbot-messages">
-                <!-- Messages will be added here -->
-            </div>
-            <div class="chatbot-input-area">
-                <input type="text" class="chatbot-input" placeholder="Type your message...">
-                <button class="chatbot-send">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </div>
-
-        <script src="chatbot.js"></script>
+        <script src="Placement.js"></script>
 
         <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                fetchJobs();
-            });
-
-            function fetchJobs() {
-                fetch('FetchJobsServlet')
-                    .then(response => response.json())
-                    .then(data => {
-                        const container = document.getElementById('job-cards-container');
-                        container.innerHTML = ''; // Clear loading text
-
-                        if (data.length === 0) {
-                            container.innerHTML = '<div style="color: #333; text-align: center; width: 100%;">No jobs posted yet.</div>';
-                            return;
-                        }
-
-                        data.forEach(job => {
-                            const card = document.createElement('div');
-                            card.className = 'job-card';
-
-                            // Using safe rendering for fields
-                            card.innerHTML = `
-                        <h3>${job.job_title}</h3>
-                        <p class="department">${job.department}</p>
-                        <div class="tags">
-                            <span><i class="fa-solid fa-location-dot"></i> ${job.location_type}</span>
-                            <span><i class="fa-solid fa-briefcase"></i> ${job.employment_type}</span>
-                            <span><i class="fa-solid fa-money-bill-wave"></i> ${job.salary_range}</span>
-                        </div>
-                        <button onclick="viewJobDetails('${job.job_title}')">Apply Now</button>
-                    `;
-                            container.appendChild(card);
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Error fetching jobs:', error);
-                        document.getElementById('job-cards-container').innerHTML = '<div style="color: red; text-align: center; width: 100%;">Error loading jobs. Please try again later.</div>';
-                    });
+          (function() {
+            const toggleBtn = document.getElementById('sidebar-toggle');
+            const sidebar = document.querySelector('.sidebar');
+            if (toggleBtn && sidebar) {
+              toggleBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sidebar.classList.toggle('active');
+              });
+              document.addEventListener('click', function(e) {
+                if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+                  sidebar.classList.remove('active');
+                }
+              });
             }
-
-            function viewJobDetails(title) {
-                alert("Applying for: " + title + "\n\nIn a real scenario, this would open a modal or navigate to a details page.");
-            }
+          })();
         </script>
 
     </body>
-
     </html>

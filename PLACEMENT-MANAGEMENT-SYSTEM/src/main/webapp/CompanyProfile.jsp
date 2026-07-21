@@ -5,541 +5,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Profile | Google</title>
-
-    <!-- CSS -->
+    <title>Company Profile | ${not empty companyName ? companyName : 'Google'}</title>
     <link rel="stylesheet" href="CompanyProfile.css">
-
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="CompanyProfile.js"></script>
 </head>
 
 <body>
 
     <!-- HERO SECTION -->
     <div class="hero-container">
-
-        <!-- Background Animated Images -->
         <div class="hero-split">
-
             <img src="https://img.freepik.com/premium-photo/teamwork-group-colleagues-using-laptop-together-collaboration-new-project-modern-office-diversity-idea-businesspeople-meeting-having-conversation-work_590464-206570.jpg"
-                 alt="Team Conversation"
-                 class="hero-img">
-
+                 alt="Team Conversation" class="hero-img">
             <img src="https://cms.k2space.co.uk/app/uploads/2023/06/K2-Criteo-Office-Curator-LARGE-102-scaled.jpg"
-                 alt="Modern Workspace"
-                 class="hero-img">
-
+                 alt="Modern Workspace" class="hero-img">
         </div>
-
         <div class="overlay"></div>
-
-        <!-- COMPANY INFO BAR -->
         <div class="company-info-bar">
-
             <div class="left-info">
-
                 <div class="logo-box">
-
-                    <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png"
-                         alt="Google Logo">
-
+                    <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google Logo">
                 </div>
-
                 <div class="company-text">
-
-                    <h1>Google</h1>
-                    <p>Technology & Innovation • Mountain View, CA</p>
-
+                    <h1>${not empty companyName ? companyName : 'Google'}</h1>
                 </div>
-
             </div>
-
             <div class="header-actions">
-
-                <button class="back-btn"
-                        onclick="window.location.href='CompanyDashboard.jsp'">
+                <button class="back-btn" onclick="window.location.href='CompanyDashboard.jsp'">
                     Back to Dashboard
                 </button>
-
-                <button class="follow-btn">
-                    + Follow Company
+                <button class="add-company-btn" onclick="openModal()">
+                    <i class="fa-solid fa-plus"></i> Update Profile
                 </button>
-
             </div>
-
         </div>
-
     </div>
 
     <!-- MAIN CONTENT -->
     <main class="content-wrapper">
 
+        <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
+        <% String successMessage = (String) request.getAttribute("successMessage"); %>
+        <% if (errorMessage != null) { %>
+            <div class="alert alert-error" style="color: #ef4444; background-color: #fef2f2; padding: 12px 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #fee2e2; font-family: 'Poppins', sans-serif; font-weight: 500; display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-triangle-exclamation"></i> <%= errorMessage %>
+            </div>
+        <% } %>
+        <% if (successMessage != null) { %>
+            <div class="alert alert-success" style="color: #10b981; background-color: #ecfdf5; padding: 12px 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #d1fae5; font-family: 'Poppins', sans-serif; font-weight: 500; display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-circle-check"></i> <%= successMessage %>
+            </div>
+        <% } %>
+
         <!-- OVERVIEW -->
         <section class="overview-section">
-
             <div class="section-header">
-
                 <h2>Company Overview</h2>
                 <div class="underline"></div>
-
             </div>
-
             <p class="description">
-
-                Google's mission is to organize the world's information and make it universally accessible and useful.
-                Since our founding in 1998, we've grown to offer products and services that help billions of people
-                around the world live better lives. From Search to YouTube, Android to Cloud, our teams work at the
-                intersection of technology and creativity to build for everyone.
-
+                <% if (request.getAttribute("companyName") != null && !request.getAttribute("companyName").equals("Google")) { %>
+                    Welcome to <%= request.getAttribute("companyName") %>! We are a leading enterprise operating in the <%= request.getAttribute("industry") != null ? request.getAttribute("industry") : "industry" %> sector as a <%= request.getAttribute("companyType") != null ? request.getAttribute("companyType") : "company" %>. Our teams work continuously at the intersection of quality and innovation to deliver exceptional products and services.
+                <% } else { %>
+                    Google's mission is to organize the world's information and make it universally accessible and useful.
+                    Since our founding in 1998, we've grown to offer products and services that help billions of people
+                    around the world live better lives. From Search to YouTube, Android to Cloud, our teams work at the
+                    intersection of technology and creativity to build for everyone.
+                <% } %>
             </p>
-
-            <div class="info-cards">
-
-                <div class="card">
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-                    <h4>HEADQUARTERS</h4>
-
-                    <p>Mountain View, CA, USA</p>
-
-                </div>
-
-                <div class="card">
-
-                    <i class="fa-solid fa-building"></i>
-
-                    <h4>INDUSTRY</h4>
-
-                    <p>Technology & Innovation</p>
-                    <p>AI, Cloud Computing, IT Services</p>
-
-                </div>
-
-                <div class="card">
-
-                    <i class="fa-solid fa-users"></i>
-
-                    <h4>OUR COMPANY</h4>
-
-                    <p>10,000+ Employees</p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- CULTURE -->
-        <section class="culture-section">
-
-            <div class="section-header">
-
-                <h2>Culture & Life</h2>
-                <div class="underline"></div>
-
-            </div>
-
-            <div class="culture-grid">
-
-                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1200&auto=format&fit=crop"
-                     alt="Office Culture">
-
-                <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1200&auto=format&fit=crop"
-                     alt="Workspace Design">
-
-            </div>
-
-            <div class="culture-text">
-
-                <p>
-                    We believe that being at our best starts with being ourselves.
-                    Our culture is built on <strong>“Googleness”</strong>—a combination of humility,
-                    curiosity, and a drive to do big things.We foster a work-hard, 
-                    play-hard environment where innovation happens in micro-kitchens and high-tech labs alike.
-                </p>
-
-                <p>
-                    Our employees are encouraged to spend 20% of their time on passion
-                    projects, leading to breakthroughs that change the world.
-                </p>
-
-            </div>
-
         </section>
 
         <!-- BENEFITS -->
         <section class="benefits-section">
-
             <div class="section-header">
-
                 <h2>Benefits & Perks</h2>
                 <div class="underline"></div>
-
             </div>
-
             <div class="benefits-grid">
-
                 <div class="benefit-card">
-
-                    <div class="icon-circle blue">
-                        <i class="fa-solid fa-heart-pulse"></i>
-                    </div>
-
+                    <div class="icon-circle blue"><i class="fa-solid fa-heart-pulse"></i></div>
                     <h3>Health & Wellness</h3>
-
-                    <p>
-                        Comprehensive medical, dental, and vision insurance for you and your family.
-                    </p>
-
+                    <p>Comprehensive medical, dental, and vision insurance for you and your family.</p>
                 </div>
-
                 <div class="benefit-card">
-
-                    <div class="icon-circle red">
-                        <i class="fa-solid fa-utensils"></i>
-                    </div>
-
+                    <div class="icon-circle red"><i class="fa-solid fa-utensils"></i></div>
                     <h3>Gourmet Meals</h3>
-
-                    <p>
-                        Fuel your day with free, healthy, and delicious meals prepared by onsite chefs.
-                    </p>
-
+                    <p>Fuel your day with free, healthy, and delicious meals prepared by onsite chefs.</p>
                 </div>
-
                 <div class="benefit-card">
-
-                    <div class="icon-circle yellow">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                    </div>
-
+                    <div class="icon-circle yellow"><i class="fa-solid fa-graduation-cap"></i></div>
                     <h3>Learning & Growth</h3>
-
-                    <p>
-                        Tuition reimbursement and internal programs to help you master new skills.
-                    </p>
-
+                    <p>Tuition reimbursement and internal programs to help you master new skills.</p>
                 </div>
-
                 <div class="benefit-card">
-
-                    <div class="icon-circle green">
-                        <i class="fa-solid fa-couch"></i>
-                    </div>
-
+                    <div class="icon-circle green"><i class="fa-solid fa-couch"></i></div>
                     <h3>Flexible Work</h3>
-
-                    <p>
-                        Hybrid work models and generous time off to ensure a healthy work-life balance.
-                    </p>
-
+                    <p>Hybrid work models and generous time off to ensure a healthy work-life balance.</p>
                 </div>
-
             </div>
-            
-            <br>
-            <br>
-            
-            <p>Investing in our people is the most important investment we make. We offer a holistic suite of benefits designed to support your physical, emotional, and financial wellbeing. From top-tier healthcare and mental health support to onsite wellness centers and gourmet micro-kitchens, we ensure you have everything you need to perform at your peak. Beyond the office, our generous leave policies and family-support programs mean that your life outside of work is just as prioritized as your life within it.</p>
-
+            <br><br>
         </section>
 
-        <!-- NEWS SECTION -->
-        <section class="news-section">
-
-            <div class="section-title">
-
-                <h2>Latest News & Events</h2>
-
-                <p>
-                    Stay updated with our newest innovations,company events,
-                    internship programs, and technology breakthroughs.
-                </p>
-
-            </div>
-
-            <div class="news-container">
-
-                <!-- CARD 1 -->
-                <div class="news-card">
-
-                    <div class="news-image">
-
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop"
-                             alt="AI Event">
-
-                    </div>
-
-                    <div class="news-content">
-
-                        <span class="news-date">May 2026</span>
-
-                        <h3>AI Innovation Summit 2026</h3>
-
-                        <p>
-                        Our annual AI summit brought together engineers,
-                    <br>
-                    researchers, and innovators to discuss the future
-                    <br>
-                    of artificial intelligence.
-                </p>
-
-                        <a href="#">Apply Now</a>
-
-                    </div>
-
-                </div>
-
-                <!-- CARD 2 -->
-                <div class="news-card">
-
-                    <div class="news-image">
-
-                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop"
-                             alt="Internship Program">
-
-                    </div>
-
-                    <div class="news-content">
-
-                        <span class="news-date">April 2026</span>
-
-                        <h3>Summer Internship Program Open</h3>
-
-                        <p>
-                            Applications are now open for students passionate
-                            <br>
-                            about software engineering and AI,cloud computing.
-                            <br>
-                            and UI/UX design.
-                        </p>
-
-                        <a href="#">Apply Now</a>
-
-                    </div>
-
-                </div>
-<!-- CARD 3 -->
-<div class="news-card">
-
-    <div class="news-image">
-        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200&auto=format&fit=crop" alt="Tech Conference">
-    </div>
-
-    <div class="news-content">
-
-        <span class="news-date">February 2026</span>
-
-        <h3>
-            Global Tech Conference & Hackathon
-        </h3>
-
-        <p>
-            Developers, designers, and innovators from around the world
-            joined our 48-hour hackathon to create impactful solutions
-            powered by AI and cloud technologies.
-        </p>
-
-        <a href="#">
-            View Highlights
-        </a>
-
-    </div>
-
-</div>
-
-<!-- CARD 4 -->
-        <div class="news-card">
-
-            <div class="news-image">
-                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop" alt="Cloud Computing">
-            </div>
-
-            <div class="news-content">
-
-                <span class="news-date">March 2026</span>
-
-                <h3>
-                    Next-Gen Cloud Infrastructure
-                </h3>
-
-                <p>
-                    We are excited to announce the launch of our sustainable 
-                    data centers, reducing carbon footprints while increasing 
-                    processing speeds for global enterprises.
-                </p>
-
-                <a href="#">
-                    Explore Tech
-                </a>
-
-            </div>
-
-        </div>
-
-</section>
-
-        <!-- IMPACT SECTION -->
-        <section class="impact-section">
-
-            <div class="impact-container">
-
-                <div class="stat-item">
-
-                    <h2 class="stat-number">2030</h2>
-                    <p class="stat-label">Goal for 24/7 Carbon-Free Energy</p>
-
-                </div>
-
-                <div class="stat-item">
-
-                    <h2 class="stat-number">150+</h2>
-                    <p class="stat-label">Countries served globally</p>
-
-                </div>
-
-                <div class="stat-item">
-
-                    <h2 class="stat-number">2B+</h2>
-                    <p class="stat-label">Active Users on Android</p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- FOOTER -->
-        <footer class="main-footer">
-
-            <div class="footer-grid">
-
-                <div class="footer-col">
-
-                    <h3>Resources</h3>
-
-                    <ul>
-
-                        <li><a href="#">Blog</a></li>
-                <li><a href="#">Brand Resource Center</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Contact us</a></li>
-                <li><a href="#">Help Center</a></li>
-                <li><a href="#">Investor Relations</a></li>
-                <li><a href="#">Locations</a></li>
-                <li><a href="#">Press resources</a></li>
-                    </ul>
-
-                </div>
-
-                <div class="footer-col">
-                <h3>Outreach & Initiatives</h3>
-            <ul>
-                <li><a href="#">Accessibility</a></li>
-                <li><a href="#">Crisis Response</a></li>
-                <li><a href="#">Google.org</a></li>
-                <li><a href="#">Google for Health</a></li>
-                <li><a href="#">Grow with Google</a></li>
-                <li><a href="#">Learning</a></li>
-                <li><a href="#">Public Policy</a></li>
-                <li><a href="#">Sustainability</a></li>
-            </ul>
-            </div>
-            
-<!-- COLUMN 3: TECH -->
-        <div class="footer-col">
-            <h3>Research & Technology</h3>
-            <ul>
-                <li><a href="#">Google AI</a></li>
-                <li><a href="#">Google Cloud</a></li>
-                <li><a href="#">Google DeepMind</a></li>
-                <li><a href="#">Google for Developers</a></li>
-                <li><a href="#">Google Labs</a></li>
-                <li><a href="#">Google Research</a></li>
-            </ul>
-        </div>
-        
-    <!-- COLUMN 4: ABOUT -->
-        <div class="footer-col">
-            <h3>More About Us</h3>
-            <ul>
-                <li><a href="#">Around the globe</a></li>
-                <li><a href="#">Human rights</a></li>
-                <li><a href="#">Safety Center</a></li>
-                <li><a href="#">Supplier responsibility</a></li>
-                <li><a href="#">Transparency Center</a></li>
-                <li><a href="#">Transparency Report</a></li>
-            </ul>
-        </div>
-    </div>            
-
-     <!-- BOTTOM BAR -->
-    <div class="footer-bottom">
-        <div class="footer-brand-side">
-            <div class="footer-logo">Google</div>
-            <div class="social-icons">
-                <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-        </div>
-                    
-                <div class="bottom-links">
-
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">About Google</a>
-
-                </div>
-
-            </div>
-
-            <!-- BACK TO TOP -->
-            <button id="backToTop" title="Go to top">
-
-                <i class="fa-solid fa-arrow-up"></i>
-
-            </button>
-
-        </footer>
+        <!-- BACK TO TOP -->
+        <button id="backToTop" title="Go to top">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
 
     </main>
 
-    <!-- JAVASCRIPT -->
 
-    <script>
-    const btn = document.getElementById('backToTop');
-    btn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-</script>
+    <!-- ====================================================
+         MODAL OVERLAY — Company Details Form
+    ===================================================== -->
+    <div class="modal-overlay" id="companyModal" onclick="handleOverlayClick(event)">
+        <div class="modal-box">
+            <form action="CompanyProfileServlet" method="post">
+                <div class="modal-header">
+                    <h2><i class="fa-solid fa-building"></i> Add Company Details</h2>
+                    <button type="button" class="modal-close-btn" onclick="closeModal()" title="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
 
-<script>
-    const backBtn = document.getElementById('backToTop');
+                <div class="modal-body">
 
-    // Monitor scroll to show/hide button
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 400) { // Shows button after 400px of scrolling
-            backBtn.style.display = 'flex';
-        } else {
-            backBtn.style.display = 'none';
-        }
-    });
+                    <!-- Basic Details -->
+                    <div class="modal-section-title">Basic Details</div>
+                    <div class="modal-grid">
+                        <div class="input-box">
+                            <label>Company Name <span class="required">*</span></label>
+                            <input type="text" name="companyName" value="${companyName}" placeholder="Enter company name">
+                        </div>
+                        <div class="input-box">
+                            <label>Industry <span class="required">*</span></label>
+                            <input type="text" name="industry" value="${industry}" placeholder="Enter industry">
+                        </div>
+                        <div class="input-box">
+                            <label>Company Type <span class="required">*</span></label>
+                            <input type="text" name="companyType" value="${companyType}" placeholder="e.g. IT, Startup, MNC">
+                        </div>
+                        <div class="input-box">
+                            <label>Company Code</label>
+                            <input type="text" name="companyCode" value="${companyCode}" placeholder="Enter company code" readonly>
+                        </div>
+                        <div class="input-box">
+                            <label>Password <span class="required">*</span></label>
+                            <input type="password" name="password" placeholder="Enter password to update">
+                        </div>
+                    </div>
 
-    // Smooth scroll execution
-    backBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-</script>
-    
+                    <!-- Contact Details -->
+                    <div class="modal-section-title">Contact Details</div>
+                    <div class="modal-grid">
+                        <div class="input-box">
+                            <label>Phone Number <span class="required">*</span></label>
+                            <input type="text" name="companyPhone" value="${companyPhone}" placeholder="Enter phone number">
+                        </div>
+                        <div class="input-box">
+                            <label>Company Email <span class="required">*</span></label>
+                            <input type="email" name="companyEmail" value="${companyEmail}" placeholder="Enter company email" required>
+                        </div>
+                        <div class="input-box">
+                            <label>Website Link <span class="required">*</span></label>
+                            <input type="text" name="companyWebsite" value="${companyWebsite}" placeholder="https://www.example.com">
+                        </div>
+                        <div class="input-box">
+                            <label>LinkedIn URL <span class="optional">(Optional)</span></label>
+                            <input type="text" name="companyLinkedin" value="${companyLinkedin}" placeholder="https://linkedin.com/company/...">
+                        </div>
+                    </div>
+
+                    <!-- Address Details -->
+                    <div class="modal-section-title">Address Details</div>
+                    <div class="modal-grid">
+                        <div class="input-box">
+                            <label>Company Address <span class="required">*</span></label>
+                            <input type="text" name="companyAddress" value="${companyAddress}" placeholder="Enter company address">
+                        </div>
+                        <div class="input-box">
+                            <label>City <span class="required">*</span></label>
+                            <input type="text" name="city" value="${city}" placeholder="Enter city">
+                        </div>
+                        <div class="input-box">
+                            <label>State <span class="required">*</span></label>
+                            <input type="text" name="state" value="${state}" placeholder="Enter state">
+                        </div>
+                        <div class="input-box">
+                            <label>Country <span class="required">*</span></label>
+                            <input type="text" name="country" value="${country}" placeholder="Enter country">
+                        </div>
+                        <div class="input-box">
+                            <label>Pincode <span class="required">*</span></label>
+                            <input type="text" name="pincode" value="${pincode}" placeholder="Enter pincode">
+                        </div>
+                    </div>
+
+                    <!-- Legal Information -->
+                    <div class="modal-section-title">Legal Information</div>
+                    <div class="modal-grid">
+                        <div class="input-box">
+                            <label>CIN <span class="required">*</span></label>
+                            <input type="text" name="cin" value="${cin}" placeholder="Enter CIN">
+                        </div>
+                        <div class="input-box">
+                            <label>Registration Number <span class="required">*</span></label>
+                            <input type="text" name="registrationNum" value="${registrationNum}" placeholder="Enter registration number">
+                        </div>
+                        <div class="input-box">
+                            <label>License Number <span class="required">*</span></label>
+                            <input type="text" name="licenseNum" value="${licenseNum}" placeholder="Enter license number">
+                        </div>
+                        <div class="input-box">
+                            <label>GST Number <span class="required">*</span></label>
+                            <input type="text" name="gstNum" value="${gstNum}" placeholder="Enter GST number">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="modal-cancel-btn" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="modal-submit-btn">Submit</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
 </body>
 </html>

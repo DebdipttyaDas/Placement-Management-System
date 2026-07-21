@@ -112,18 +112,6 @@ body{
     color:#fff;
 }
 
-.profile-icons{
-    display:flex;
-    align-items:center;
-    gap:20px;
-}
-
-.profile-icons i{
-    font-size:22px;
-    color:#fff;
-    cursor:pointer;
-}
-
 /* FORM CONTAINER */
 .form-container{
     margin-top: 50px;
@@ -155,11 +143,29 @@ body{
 .section-title{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:20px;
     font-weight:600;
     color:#1e2a35;
     margin-bottom:25px;
+    font-size: 25px;
 }
+
+.section-title .form-control{
+    flex: 1;
+    max-width: 800px;
+}
+
+.form-control{
+    width:500px;
+    padding:14px;
+    border:1.5px solid #b8c2cc;
+    border-radius:8px;
+    background:#f1f3f8;
+    font-size:14px;
+    outline:none;
+    transition:0.3s;
+}
+
 
 /* FORM */
 .form-group{
@@ -195,6 +201,15 @@ body{
     gap:20px;
 }
 
+.apply-before-group{
+    width: 280px;
+    margin: 20px auto;
+}
+
+.apply-before-group label,
+.apply-before-group .form-control{
+    width: 110%;
+}
 /* TEXTAREA */
 textarea{
     resize:none;
@@ -256,34 +271,81 @@ textarea{
 }
 
 /* RESPONSIVE */
-@media(max-width:900px){
+.sidebar-toggle-btn {
+    display: none;
+}
 
-    .sidebar{
+@media(max-width:1024px){
+    .sidebar {
         width:220px;
     }
-
-    .main-content{
-        margin-left:220px;
+    .topbar {
+        left: 220px;
     }
-
-    .form-row{
+    .main-content {
+        margin-left: 220px;
+    }
+    .form-row {
         grid-template-columns:1fr;
     }
 }
 
 @media(max-width:768px){
-
-    body{
+    body {
         flex-direction:column;
     }
-
-    .sidebar{
-        position:relative;
-        width:100%;
-        min-height:auto;
+    .sidebar-toggle-btn {
+        display: block;
     }
-
-    .main-content{
-        margin-left:0;
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        width: 250px;
+        height: 100vh;
+        transition: left 0.3s ease;
+        z-index: 1001;
+    }
+    .sidebar.active {
+        left: 0;
+    }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 80px 15px 15px;
+    }
+    .topbar {
+        left: 0;
+        width: 100%;
+        padding: 15px;
+    }
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .apply-before-group {
+        width: 100%;
+    }
+    .form-control {
+        width: 100%;
+    }
+    textarea {
+        height: 160px;
     }
 }
+
+@media(max-width:480px) {
+    .topbar h2 {
+        font-size: 18px;
+    }
+    .section-title {
+        font-size: 20px;
+        flex-wrap: wrap;
+    }
+    .form-container {
+        padding: 20px;
+    }
+    .submit-btn {
+        width: 100%;
+    }
+}

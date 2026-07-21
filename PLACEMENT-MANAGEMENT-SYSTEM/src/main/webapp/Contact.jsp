@@ -5,6 +5,7 @@
 
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <link rel="stylesheet" href="Contact.css">
   </head>
@@ -13,36 +14,25 @@
     <!-- HEADER -->
     <header>
       <h1>Contact us - CampusConnect</h1>
+       <center>
+                <a href="Login.jsp" style="color: white; text-decoration: none;">Back to Home</a>
+            </center>
     </header>
 
     <p style="text-align:center;">We are here to help you, feel free to reach out !</p>
 
     <hr>
 
-    <!-- FORM -->
-    <h2>Send a Message</h2>
-
-    <div class="container">
-      <form action="ContactServlet" method="post">
-
-        <label>Name:</label><br>
-        <input type="text" name="name"><br><br>
-
-        <label>Email:</label><br>
-        <input type="email" name="email"><br><br>
-
-        <label>Subject:</label><br>
-        <input type="text" name="subject"><br><br>
-
-        <label>Message:</label><br>
-        <textarea name="message" rows="5" cols="30"></textarea><br><br>
-
-        <button type="submit">Send</button>
-
-      </form>
-    </div>
-
-    <hr>
+    <!-- SUCCESS/ERROR MESSAGE -->
+    <%
+      String msg = (String) request.getAttribute("message");
+      if (msg != null) {
+          String color = msg.contains("successfully") ? "green" : "red";
+    %>
+      <p style="color: <%= color %>; text-align: center; font-weight: bold; margin-top: 10px;"><%= msg %></p>
+    <%
+      }
+    %>
 
     <!-- CONTACT INFO -->
     <h2>Contact Information</h2>
@@ -68,30 +58,7 @@
     </footer>
     <script src="Contact.js"></script>
 
-    <!-- Chatbot -->
-    <link rel="stylesheet" href="chatbot.css">
 
-    <div id="chatbot-toggle">
-        <i class="fas fa-robot"></i>
-    </div>
-
-    <div id="chatbot-container">
-        <div class="chatbot-header">
-            <h3>AI Assistant</h3>
-            <button class="chatbot-close">&times;</button>
-        </div>
-        <div class="chatbot-messages">
-            <!-- Messages will be added here -->
-        </div>
-        <div class="chatbot-input-area">
-            <input type="text" class="chatbot-input" placeholder="Type your message...">
-            <button class="chatbot-send">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </div>
-    </div>
-
-    <script src="chatbot.js"></script>
 
   </body>
 

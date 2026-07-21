@@ -1,0 +1,133 @@
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+@WebServlet({"/ResetPasswordServlet", "/Resetpasswordservlet"})
+public class Resetpasswordservlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+
+        Boolean verified = (Boolean) session.getAttribute("resetVerified");
+        String email = (String) session.getAttribute("resetEmail");
+        String role = (String) session.getAttribute("resetRole");
+
+        // Guard: someone trying to hit this servlet directly without going
+        // through the email + code steps first.
+        if (verified == null || !verified || email == null || role == null) {
+            response.sendRedirect("Forgetpassword.jsp");
+            return;
+        }
+
+        String newPassword = request.getParameter("newPassword");
+        String confirmPassword = request.getParameter("confirmPassword");
+
+        if (newPassword == null || newPassword.length() < 6) {
+            request.setAttribute("error", "Password must be at least 6 characters.");
+            request.getRequestDispatcher("Resetpassword.jsp").forward(request, response);
+            return;
+        }
+
+        if (!newPassword.equals(confirmPassword)) {
+            request.setAttribute("error", "Passwords do not match.");
+            request.getRequestDispatcher("Resetpassword.jsp").forward(request, response);
+            return;
+        }
+
+        if (newPassword.length() > 10) {
+            request.setAttribute("error", "Password must be at most 10 characters.");
+            request.getRequestDispatcher("Resetpassword.jsp").forward(request, response);
+            return;
+        }
+
+        boolean updated = updatePassword(role, email, newPassword);
+
+        if (!updated) {
+            request.setAttribute("error", "Failed to update password. Please try again.");
+            request.setAttribute("showAlert", true);
+            request.getRequestDispatcher("Resetpassword.jsp").forward(request, response);
+            return;
+        }
+
+        // Clear the reset-related session data - the flow is complete
+        session.removeAttribute("resetEmail");
+        session.removeAttribute("resetRole");
+        session.removeAttribute("resetVerified");
+
+        // Forward back to ResetPassword.jsp with a success flag. The page's
+        // own JS will show the popup and then redirect to Login.jsp itself.
+        request.setAttribute("showSuccess", true);
+        request.getRequestDispatcher("Resetpassword.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.sendRedirect("Forgetpassword.jsp");
+    }
+
+    /**
+     * Updates the password column for the given role's table, matched by email.
+     *
+     * NOTE (matches the assumption in ForgotPasswordServlet): this updates by
+     * `email`. Confirm with your DB teammate that `admin` and `companies`
+     * tables have an `email` column - if not, this UPDATE will affect 0 rows
+     * even though the role lookup succeeded, which would need a fix here.
+     *
+     * IMPORTANT: this stores the password as plain text, matching how
+     * LoginServlet currently checks passwords. If your team switches to
+     * hashed passwords (recommended), this line needs to hash newPassword
+     * the same way before storing it.
+     */
+    private boolean updatePassword(String role, String email, String newPassword) {
+        boolean dbUpdated = false;
+        String query = "";
+
+        if ("student".equalsIgnoreCase(role)) {
+            query = "UPDATE STUDENT SET password = ? WHERE email = ?";
+        } else if ("company".equalsIgnoreCase(role)) {
+            query = "UPDATE BASIC_DETAILS SET password = ? WHERE COMPANY_ID = (SELECT COMPANY_ID FROM COMPANY_CONTACT_DETAILS WHERE companyEmail = ?)";
+        } else if ("admin".equalsIgnoreCase(role)) {
+            query = "UPDATE ADMIN_PROFILE SET password = ? WHERE email = ?";
+        }
+
+        if (!query.isEmpty()) {
+            try (Connection conn = DBUtil.getConnection();
+                 PreparedStatement ps = conn.prepareStatement(query)) {
+                ps.setString(1, newPassword);
+                ps.setString(2, email);
+                int rows = ps.executeUpdate();
+                if (rows > 0) {
+                    dbUpdated = true;
+                }
+            } catch (Exception e) {
+                System.err.println("Direct database password update failed: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+
+        // Trigger the webhook as well, but do not fail the request if the webhook fails/is offline
+        String jsonPayload = String.format("{\"email\":\"%s\",\"role\":\"%s\",\"newPassword\":\"%s\"}", email, role, newPassword);
+        try {
+            WebhookService.WebhookResult result = WebhookService.sendPost("/webhook/update-password", jsonPayload);
+            return dbUpdated || result.success;
+        } catch (Exception e) {
+            System.err.println("Webhook update-password failed: " + e.getMessage());
+            return dbUpdated;
+        }
+    }
+}

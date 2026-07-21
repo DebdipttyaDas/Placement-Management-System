@@ -6,14 +6,19 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Post</title>
 
     <!-- CSS -->
+    <!-- JobPost -->
     <link rel="stylesheet" href="JobPost.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+
+   
 </head>
 
 <body>
@@ -55,11 +60,11 @@
 
     <!-- LOGOUT -->
     <div class="logout">
-
-        <button>
-            Logout
-        </button>
-
+        <form action="LogoutServlet" method="post" style="width: 100%;">
+            <button type="submit" style="width: 100%;">
+                Logout
+            </button>
+        </form>
     </div>
 
 </div>
@@ -68,20 +73,16 @@
 <div class="main-content">
 
     <!-- TOPBAR -->
-    <div class="topbar">
+    <div class="topbar" style="display:flex; justify-content:space-between; align-items:center;">
 
-        <h2>
+        <button class="sidebar-toggle-btn" id="sidebar-toggle" style="background:none; border:none; color:white; font-size:24px; cursor:pointer;" aria-label="Toggle Sidebar">
+            &#9776;
+        </button>
+
+        <h2 style="margin-left: auto;">
             Post, Hire and Grow !
         </h2>
-
-        <div class="profile-icons">
-
-            <i class="fa-solid fa-user-circle"></i>
-
-            <i class="fa-solid fa-bell"></i>
-
-        </div>
-
+        
     </div>
 
     <!-- FORM CONTAINER -->
@@ -101,120 +102,100 @@
         <div class="section">
 
             <div class="section-title">
-
-                <i class="fa-solid fa-circle-info"></i>
-
-                Basic Information
-
+                <h2> <%= session.getAttribute("companyName") != null ? session.getAttribute("companyName") : "Recruiting Partner" %></h2>
             </div>
 
-            <!-- JOB TITLE -->
-            <div class="form-group">
+<div class="form-row">
 
-                <label>
-                    Job Title *
-                </label>
+    <div class="form-group">
+        <label>Job Title *</label>
 
-                <input type="text"
-                name="jobTitle" required
-                class="form-control"
-                placeholder="e.g. Senior Software Engineer">
+        <input type="text"
+        id="jobTitle"
+        name="jobTitle"
+        class="form-control"
+        placeholder="e.g. Senior Software Engineer"
+        required>
+    </div>
 
-            </div>
+   <div class="form-group">
 
-            <!-- ROW -->
-            <div class="form-row">
+                    <label>Employment Type</label>
 
-                <!-- DEPARTMENT -->
-                <div class="form-group">
-
-                    <label>
-                        Department
-                    </label>
-
-                    <select name="department" class="form-control">
-
-                        <option>Select Department</option>
-
-                        <option>CSE</option>
-
-                        <option>ECE</option>
-
-                        <option>EEE</option>
-
-                        <option>IT</option>
-
-                        <option>BCA</option>
-
-                        <option>MCA</option>
-
-                        <option>BBA</option>
-
-                        <option>MBA</option>
-
-                    </select>
-
-                </div>
-
-                <!-- EMPLOYMENT TYPE -->
-                <div class="form-group">
-
-                    <label>
-                        Employment Type
-                    </label>
-
-                    <select name="employmentType" class="form-control">
-
+                    <select id="employmentType" name="employmentType" class="form-control">
                         <option>Full-time</option>
-
                         <option>Part-time</option>
-
                         <option>Internship</option>
-
                     </select>
 
                 </div>
 
-            </div>
+</div>
 
-            <!-- ROW -->
             <div class="form-row">
 
-                <!-- LOCATION -->
                 <div class="form-group">
 
-                    <label>
-                        Location Type
-                    </label>
+                    <label>Department</label>
 
-                    <select name="locationType" class="form-control">
-
-                        <option>Remote</option>
-
-                        <option>On-site</option>
-
-                        <option>Hybrid</option>
-
+                    <select id="department" name="department" class="form-control">
+                        <option>Select Department</option>
+                        <option>IT</option>
+                        <option>Engineering</option>
+                        <option>Marketing</option>
+                        <option>Finance</option>
+                        <option>Medical</option>
                     </select>
 
                 </div>
 
-                <!-- SALARY -->
+                <div class="form-group">
+			        <label>Salary</label>
+			
+			        <input type="text"
+			        class="form-control"
+			        name="salary"
+			        placeholder="e.g. INR 30k-50k">
+               </div>
+            </div>
+
+            <div class="form-row">
+
                 <div class="form-group">
 
-                    <label>
-                        Salary Range
-                    </label>
+                    <label>Location Type</label>
+
+                    <select id="locationType" name="locationType" class="form-control">
+                        <option>Remote</option>
+                        <option>On-site</option>
+                        <option>Hybrid</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Location</label>
 
                     <input type="text"
-                    name="salaryRange"
+                    id="location"
+                    name="location"
                     class="form-control"
-                    placeholder="e.g. INR 50K-100K">
+                    placeholder="e.g. Bangalore,Pune">
 
                 </div>
-
             </div>
-
+            
+				<div class="form-group apply-before-group">
+                    <label>Application Deadline *</label>
+                    <input type="date" 
+                    id="applicationDeadline" 
+                    name="applicationDeadline" 
+                    class="form-control"
+                    onchange="validateDeadline()"
+                    required>
+                    <small id="deadlineMessage" style="color: red; display: none; margin-top: 5px;"></small>
+                </div>
         </div>
 
         <!-- JOB DETAILS -->
@@ -231,7 +212,7 @@
             <div class="form-group">
 
                 <label>
-                    Job Description *
+                    Job Description
                 </label>
 
                 <!-- TOOLBAR -->
@@ -286,11 +267,12 @@
         </div>
 
         <!-- BUTTON -->
-        <button type="submit" class="submit-btn">
+        <button type="submit" id="publishBtn" class="submit-btn" onclick="return validateForm()">
 
             Publish Job
 
         </button>
+        <small id="buttonMessage" style="color: red; display: none; margin-top: 10px; display: block;"></small>
 
         </form>
 
@@ -299,55 +281,27 @@
 </div>
 
 <!-- SCRIPT -->
+<script src="Jobpost.js"></script>
+
+
+
 <script>
-
-function prepareSubmit() {
-    document.getElementById("hiddenJobDesc").value = document.querySelector(".editor").innerHTML;
-}
-
-function formatText(command){
-
-    document.execCommand(command, false, null);
-
-}
-
-function addLink(){
-
-    let url = prompt("Enter URL:");
-
-    if(url){
-
-        document.execCommand("createLink", false, url);
-
+  (function() {
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        sidebar.classList.toggle('active');
+      });
+      document.addEventListener('click', function(e) {
+        if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+          sidebar.classList.remove('active');
+        }
+      });
     }
-}
-
+  })();
 </script>
-
-<!-- Chatbot -->
-<link rel="stylesheet" href="chatbot.css">
-
-<div id="chatbot-toggle">
-    <i class="fas fa-robot"></i>
-</div>
-
-<div id="chatbot-container">
-    <div class="chatbot-header">
-        <h3>AI Assistant</h3>
-        <button class="chatbot-close">&times;</button>
-    </div>
-    <div class="chatbot-messages">
-        <!-- Messages will be added here -->
-    </div>
-    <div class="chatbot-input-area">
-        <input type="text" class="chatbot-input" placeholder="Type your message...">
-        <button class="chatbot-send">
-            <i class="fas fa-paper-plane"></i>
-        </button>
-    </div>
-</div>
-
-<script src="chatbot.js"></script>
 
 </body>
 </html>
