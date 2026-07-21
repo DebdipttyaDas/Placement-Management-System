@@ -24,7 +24,16 @@ public class JobPostServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
+        jakarta.servlet.http.HttpSession session = request.getSession(false);
+        String companyCode = session != null ? (String) session.getAttribute("companyCode") : null;
+
         String companyName = request.getParameter("companyName");
+        if (companyName == null || companyName.trim().isEmpty()) {
+            if (session != null) {
+                companyName = (String) session.getAttribute("companyName");
+            }
+        }
+
         String jobTitle = request.getParameter("jobTitle");
         String department = request.getParameter("department");
         String employmentType = request.getParameter("employmentType");
@@ -40,19 +49,23 @@ public class JobPostServlet extends HttpServlet {
 
         boolean isSuccess = false;
 
-        jakarta.servlet.http.HttpSession session = request.getSession();
-        String companyCode = (String) session.getAttribute("companyCode");
-
         try (Connection conn = getConnection()) {
             if (conn != null) {
                 Integer companyId = fetchCompanyId(conn, companyCode);
 
                 if (companyId != null) {
+                    if (companyName == null || companyName.trim().isEmpty()) {
+                        companyName = fetchCompanyName(conn, companyId);
+                    }
+                    if (companyName == null || companyName.trim().isEmpty()) {
+                        companyName = "Demo Company";
+                    }
+
                     String insertQuery = "INSERT INTO JOB_DETAILS (COMPANY_ID, companyName, jobTitle, department, employmentType, LocationType, Location, salary, applicationDeadline, jobDescription) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                     try (PreparedStatement ps = conn.prepareStatement(insertQuery)) {
                         ps.setInt(1, companyId);
-                        ps.setString(2, companyName != null && !companyName.trim().isEmpty() ? companyName : "Demo Company");
+                        ps.setString(2, companyName.trim());
                         ps.setString(3, jobTitle);
                         ps.setString(4, department);
                         ps.setString(5, employmentType);
@@ -99,6 +112,22 @@ public class JobPostServlet extends HttpServlet {
             }
         } catch (Exception e) {
             System.err.println("JobPostServlet: Error fetching COMPANY_ID: " + e.getMessage());
+        }
+        return null;
+    }
+
+    private String fetchCompanyName(Connection conn, Integer companyId) {
+        if (companyId == null) return null;
+        String sql = "SELECT companyName FROM BASIC_DETAILS WHERE COMPANY_ID = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, companyId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next() && rs.getString("companyName") != null) {
+                    return rs.getString("companyName");
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("JobPostServlet: Error fetching companyName: " + e.getMessage());
         }
         return null;
     }
