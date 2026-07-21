@@ -250,7 +250,11 @@
 
                             <label>Select Student</label>
 
-                            <input type="text" id="studentName" placeholder="Search by name or ID" required>
+                            <div class="input-with-icon">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="studentName" placeholder="Search by name or ID" list="studentList" required>
+                            </div>
+                            <datalist id="studentList"></datalist>
 
                         </div>
 
@@ -323,7 +327,10 @@
 
                         <label>Meeting Link / Location</label>
 
-                        <input type="text" id="meetLink" placeholder="https://meet.google.com/abc-defg-hij">
+                        <div class="input-with-icon">
+                            <i class="fa-solid fa-link"></i>
+                            <input type="text" id="meetLink" placeholder="https://meet.google.com/abc-defg-hij">
+                        </div>
 
                     </div>
 
@@ -365,7 +372,7 @@
      JAVASCRIPT
 ========================================================= -->
 
-        <script src="interviews.js"></script>
+        <script src="interviews.js?v=1.2"></script>
 
         <!-- Chatbot -->
         <link rel="stylesheet" href="chatbot.css">

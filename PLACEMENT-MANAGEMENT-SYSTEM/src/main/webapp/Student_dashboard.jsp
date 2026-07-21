@@ -269,6 +269,8 @@
 
       // Call it on load
       loadInterviews();
+      // Auto-refresh interviews every 5 seconds for real-time synchronization
+      setInterval(loadInterviews, 5000);
 
       // Example auto-disable logic for join buttons based on time
       function checkMeetingExpiry() {

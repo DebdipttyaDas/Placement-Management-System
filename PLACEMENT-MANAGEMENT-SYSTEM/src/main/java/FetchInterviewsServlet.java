@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,6 +16,21 @@ import jakarta.servlet.http.HttpSession;
 public class FetchInterviewsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    private Connection getConnection() throws SQLException {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        
+        String url = "jdbc:mysql://localhost:3306/placement_management";
+        try {
+            return DriverManager.getConnection(url, "root", "root");
+        } catch (SQLException e) {
+            return DriverManager.getConnection(url, "root", "password");
+        }
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
@@ -23,6 +39,9 @@ public class FetchInterviewsServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         String se = (String) session.getAttribute("studentEmail");
+        if (se == null) {
+            se = (String) session.getAttribute("user");
+        }
         // Fallback to example if not logged in for testing
         String studentEmail = se != null ? se : "student@example.com";
 
@@ -32,10 +51,22 @@ public class FetchInterviewsServlet extends HttpServlet {
         StringBuilder json = new StringBuilder();
         json.append("[");
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/placement_management";
-            Connection conn = DriverManager.getConnection(url, "root", "password");
+        try (Connection conn = getConnection()) {
+            // Ensure table exists
+            String createTableSql = "CREATE TABLE IF NOT EXISTS interview_slots ("
+                    + "id INT AUTO_INCREMENT PRIMARY KEY,"
+                    + "company_name VARCHAR(255) NOT NULL,"
+                    + "interview_date DATE NOT NULL,"
+                    + "interview_time TIME NOT NULL,"
+                    + "interview_round VARCHAR(255) NOT NULL,"
+                    + "meet_link VARCHAR(255),"
+                    + "student_name VARCHAR(255) NOT NULL,"
+                    + "student_email VARCHAR(255) NOT NULL,"
+                    + "interviewer_name VARCHAR(255) NOT NULL"
+                    + ")";
+            try (PreparedStatement psTable = conn.prepareStatement(createTableSql)) {
+                psTable.executeUpdate();
+            }
 
             String sql;
             PreparedStatement ps;
@@ -77,7 +108,8 @@ public class FetchInterviewsServlet extends HttpServlet {
                         .append("\"interviewer_name\":\"").append(interviewer).append("\"")
                         .append("}");
             }
-            conn.close();
+            rs.close();
+            ps.close();
             json.append("]");
             out.print(json.toString());
         } catch (Exception e) {
@@ -87,3 +119,4 @@ public class FetchInterviewsServlet extends HttpServlet {
         }
     }
 }
+
