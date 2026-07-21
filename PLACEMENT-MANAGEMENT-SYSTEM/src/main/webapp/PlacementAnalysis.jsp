@@ -175,7 +175,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
     </div>
 
-    <!-- LINE GRAPH -->
+    <!-- RECRUITER ACTIVITY BAR CHART -->
     <div class="card mt-6">
 
         <div class="flex justify-between items-center w-full">
@@ -183,61 +183,61 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
             <div>
 
                 <h3 class="text-2xl font-semibold">
-                    Salary Package Trends
+                    Recruiter Engagement & Interest
                 </h3>
 
-                <p class="text-gray-500 text-sm mt-1">
-                    Growth in median CTC (Cost to Company) over 5 quarters
+                <p class="text-gray-500 text-sm mt-1" id="recruiter-desc">
+                    Application volumes received by top recruiting companies
                 </p>
 
             </div>
 
-            <span class="growth" id="salary-growth">
-                +12.4% Annual Growth
+            <span class="growth" id="recruiter-growth" style="color:#06473e; font-weight:600;">
+                Active Placements
             </span>
 
         </div>
 
         <div class="line-wrapper">
 
-            <canvas id="lineChart"></canvas>
+            <canvas id="recruiterBarChart"></canvas>
 
         </div>
 
     </div>
 
-    <!-- SMALL STATS -->
+    <!-- PLACEMENT STATISTICS METRICS -->
     <div class="grid grid-cols-4 gap-4 mt-6">
 
         <div class="small-card">
 
-            <p class="text-sm text-gray-500">Highest CTC</p>
+            <p class="text-sm text-gray-500">Registered Students</p>
 
-            <h2 class="text-4xl font-bold mt-2" id="highest-ctc">$194k</h2>
+            <h2 class="text-4xl font-bold mt-2" id="stat-students">0</h2>
 
         </div>
 
         <div class="small-card orange">
 
-            <p class="text-sm text-gray-500">Pending Offers</p>
+            <p class="text-sm text-gray-500">Selected Candidates</p>
 
-            <h2 class="text-4xl font-bold mt-2" id="pending-offers">142</h2>
+            <h2 class="text-4xl font-bold mt-2" id="stat-placed">0</h2>
 
         </div>
 
         <div class="small-card blue">
 
-            <p class="text-sm text-gray-500">New Companies</p>
+            <p class="text-sm text-gray-500">Active Job Drives</p>
 
-            <h2 class="text-4xl font-bold mt-2" id="new-companies">+48</h2>
+            <h2 class="text-4xl font-bold mt-2" id="stat-jobs">0</h2>
 
         </div>
 
         <div class="small-card">
 
-            <p class="text-sm text-gray-500">Recruiter Rating</p>
+            <p class="text-sm text-gray-500">AI Prep Sessions</p>
 
-            <h2 class="text-4xl font-bold mt-2" id="recruiter-rating">4.9</h2>
+            <h2 class="text-4xl font-bold mt-2" id="stat-mock">0</h2>
 
         </div>
 

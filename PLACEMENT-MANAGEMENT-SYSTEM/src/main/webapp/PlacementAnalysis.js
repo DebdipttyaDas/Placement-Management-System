@@ -23,7 +23,7 @@ function fetchAnalyticsData() {
       console.error("Error fetching placement analysis data:", error);
       // Fallback defaults if servlet fails
       initPieChart([45, 30, 15, 10]);
-      initLineChart([25, 48, 40, 84, 70]);
+      initRecruiterChart([9, 9, 6, 2, 1], ["TCS", "Capgemini", "INFOSYS", "ZOHO", "WIPRO"]);
     });
 }
 
@@ -71,29 +71,29 @@ function updateDashboardData(data) {
     initPieChart([45, 30, 15, 10]);
   }
 
-  // 4. Salary Package Trends
-  if (data.salaryPackageTrends) {
-    var growthEl = document.getElementById("salary-growth");
-    if (growthEl) growthEl.textContent = data.salaryPackageTrends.growthRate;
+  // 4. Recruiter Engagement & Activity (Bar Chart)
+  if (data.recruiterActivity) {
+    var descEl = document.getElementById("recruiter-desc");
+    if (descEl) descEl.textContent = data.recruiterActivity.description;
 
-    initLineChart(data.salaryPackageTrends.data, data.salaryPackageTrends.labels);
+    initRecruiterChart(data.recruiterActivity.data, data.recruiterActivity.labels);
   } else {
-    initLineChart([25, 48, 40, 84, 70]);
+    initRecruiterChart([9, 9, 6, 2, 1], ["TCS", "Capgemini", "INFOSYS", "ZOHO", "WIPRO"]);
   }
 
-  // 5. Small Stats
+  // 5. Live Placement KPI Statistics
   if (data.smallStats) {
-    var highestCtcEl = document.getElementById("highest-ctc");
-    if (highestCtcEl) highestCtcEl.textContent = data.smallStats.highestCtc;
+    var studEl = document.getElementById("stat-students");
+    if (studEl) studEl.textContent = data.smallStats.totalStudents;
 
-    var pendingOffersEl = document.getElementById("pending-offers");
-    if (pendingOffersEl) pendingOffersEl.textContent = data.smallStats.pendingOffers;
+    var placedCandidatesEl = document.getElementById("stat-placed");
+    if (placedCandidatesEl) placedCandidatesEl.textContent = data.smallStats.placedStudents;
 
-    var newCompaniesEl = document.getElementById("new-companies");
-    if (newCompaniesEl) newCompaniesEl.textContent = data.smallStats.newCompanies;
+    var jobsEl = document.getElementById("stat-jobs");
+    if (jobsEl) jobsEl.textContent = data.smallStats.activeJobs;
 
-    var recruiterRatingEl = document.getElementById("recruiter-rating");
-    if (recruiterRatingEl) recruiterRatingEl.textContent = data.smallStats.recruiterRating;
+    var mockEl = document.getElementById("stat-mock");
+    if (mockEl) mockEl.textContent = data.smallStats.mockInterviews;
   }
 }
 
@@ -132,49 +132,45 @@ function initPieChart(dataValues, labels) {
   }
 }
 
-// ── 2. Line Chart ──────────────────────────────────────────────
-var lineChartInstance = null;
-function initLineChart(dataValues, labels) {
-  var ctx = document.getElementById("lineChart");
+// ── 2. Recruiter Bar Chart ──────────────────────────────────────
+var recruiterChartInstance = null;
+function initRecruiterChart(dataValues, labels) {
+  var ctx = document.getElementById("recruiterBarChart");
   if (!ctx) return;
 
-  labels = labels || ["Q1\n23", "Q2\n23", "Q3\n23", "Q4\n23", "Q1\n24"];
+  labels = labels || ["TCS", "Capgemini", "INFOSYS", "ZOHO", "WIPRO"];
 
-  if (lineChartInstance) {
-    lineChartInstance.data.labels = labels;
-    lineChartInstance.data.datasets[0].data = dataValues;
-    lineChartInstance.update();
+  if (recruiterChartInstance) {
+    recruiterChartInstance.data.labels = labels;
+    recruiterChartInstance.data.datasets[0].data = dataValues;
+    recruiterChartInstance.update();
   } else {
-    lineChartInstance = new Chart(ctx, {
-      type: "line",
+    recruiterChartInstance = new Chart(ctx, {
+      type: "bar",
       data: {
         labels: labels,
         datasets: [{
+          label: "Applications Received",
           data: dataValues,
-          borderColor: "#8AA0C8",
-          backgroundColor: "rgba(138,160,200,0.08)",
-          fill: true,
-          tension: 0.5,
-          pointRadius: 0,
-          borderWidth: 3
+          backgroundColor: ["#0284c7", "#0d9488", "#4f46e5", "#ea580c", "#2563eb"],
+          borderRadius: 6,
+          borderWidth: 0
         }]
       },
       options: {
-        responsive: false,
+        responsive: true,
         maintainAspectRatio: false,
         plugins: {
           legend: { display: false }
         },
         scales: {
           x: {
-            grid: { color: "#EAEAEA", drawBorder: false },
-            ticks: { color: "#666", font: { size: 11 } },
-            border: { display: false }
+            grid: { display: false },
+            ticks: { color: "#475569", font: { family: "Poppins", size: 12, weight: "500" } }
           },
           y: {
-            display: false,
-            grid: { display: false },
-            border: { display: false }
+            grid: { color: "#f1f5f9" },
+            ticks: { color: "#64748b", stepSize: 2 }
           }
         }
       }
