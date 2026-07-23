@@ -135,7 +135,7 @@ public class FetchInterviewsServlet extends HttpServlet {
         try {
             
             try (PreparedStatement ps = conn.prepareStatement(
-                            "SELECT fullName FROM STUDENT WHERE email = ?")) {
+                            "SELECT fullName FROM STUDENT WHERE LOWER(TRIM(email)) = LOWER(TRIM(?))")) {
                 ps.setString(1, studentEmail);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next() && rs.getString("fullName") != null) {
@@ -164,7 +164,7 @@ public class FetchInterviewsServlet extends HttpServlet {
         try {
 
             try (PreparedStatement ps = conn.prepareStatement(
-                            "SELECT companyName FROM BASIC_DETAILS WHERE companyCode = ?")) {
+                            "SELECT companyName FROM BASIC_DETAILS WHERE LOWER(TRIM(companyCode)) = LOWER(TRIM(?))")) {
                 ps.setString(1, companyCode);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next() && rs.getString("companyName") != null) {

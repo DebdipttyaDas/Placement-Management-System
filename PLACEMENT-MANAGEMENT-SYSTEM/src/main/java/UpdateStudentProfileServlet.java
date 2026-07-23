@@ -96,7 +96,7 @@ public class UpdateStudentProfileServlet extends HttpServlet {
                        + "FROM STUDENT s "
                        + "LEFT JOIN ACCADEMIC_DETAILS a ON s.STUDENT_ID = a.STUDENT_ID "
                        + "LEFT JOIN STUDENT_SKILLS k ON s.STUDENT_ID = k.STUDENT_ID "
-                       + "WHERE s.email = ?";
+                       + "WHERE LOWER(TRIM(s.email)) = LOWER(TRIM(?))";
 
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, currentEmail);

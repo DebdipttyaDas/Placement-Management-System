@@ -32,11 +32,11 @@ public class FetchJobsServlet extends HttpServlet {
         String sql;
         if (companyName != null) {
             sql = "SELECT j.*, "
-                + "(SELECT COUNT(*) FROM APPLICATION a WHERE a.companyName = j.companyName AND a.jobTitle = j.jobTitle) AS total_applicants "
-                + "FROM JOB_DETAILS j WHERE j.companyName = ?";
+                + "(SELECT COUNT(*) FROM APPLICATION a WHERE LOWER(TRIM(a.companyName)) = LOWER(TRIM(j.companyName)) AND LOWER(TRIM(a.jobTitle)) = LOWER(TRIM(j.jobTitle))) AS total_applicants "
+                + "FROM JOB_DETAILS j WHERE LOWER(TRIM(j.companyName)) = LOWER(TRIM(?))";
         } else {
             sql = "SELECT j.*, "
-                + "(SELECT COUNT(*) FROM APPLICATION a WHERE a.companyName = j.companyName AND a.jobTitle = j.jobTitle) AS total_applicants "
+                + "(SELECT COUNT(*) FROM APPLICATION a WHERE LOWER(TRIM(a.companyName)) = LOWER(TRIM(j.companyName)) AND LOWER(TRIM(a.jobTitle)) = LOWER(TRIM(j.jobTitle))) AS total_applicants "
                 + "FROM JOB_DETAILS j";
         }
 
