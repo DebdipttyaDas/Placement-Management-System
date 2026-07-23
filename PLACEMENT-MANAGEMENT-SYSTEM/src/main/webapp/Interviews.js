@@ -417,17 +417,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             .then(function (data) {
 
-                if (data.success) {
+                 if (data.success) {
 
-                    showToast(
-                        "Interview slot scheduled successfully!"
-                    );
+                     showToast(
+                         "Interview slot scheduled successfully!"
+                     );
 
-                    closeModal();
+                     closeModal();
 
-                    loadAdminInterviews();
+                     loadAdminInterviews();
 
-                } else {
+                     if ("BroadcastChannel" in window) {
+                         var bc = new BroadcastChannel("interview-schedule-channel");
+                         bc.postMessage({ event: "interviewScheduled" });
+                     }
+                     localStorage.setItem("interviewScheduledAt", Date.now().toString());
+
+                 } else {
 
                     showToast(
                         data.message ||

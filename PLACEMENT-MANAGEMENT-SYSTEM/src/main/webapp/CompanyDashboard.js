@@ -131,7 +131,7 @@ function loadActiveDrives() {
                     '</div>' +
                     '<div class="drive-meta">' + escapeHtml(job.location) + ' • ' + escapeHtml(job.location_type) + ' • ' + escapeHtml(job.employment_type) + '</div>' +
                     '<div class="pipeline-header">' +
-                        '<span class="pipeline-label">Pipeline Progress</span>' +
+                        '<span class="pipeline-label">Selection Pipeline</span>' +
                         '<span class="pipeline-total">' + totalApplicants + ' Total Applicants</span>' +
                     '</div>' +
                     '<div class="pipeline-bar">' +
@@ -140,7 +140,6 @@ function loadActiveDrives() {
                         '<div class="seg-hr" style="width:' + hrPct + '%" title="HR Round"></div>' +
                         '<div class="seg-offers" style="width:' + offersPct + '%" title="Offers"></div>' +
                     '</div>' +
-                    '<div class="drive-footer"><a class="manage-link" href="#">Manage Drive</a></div>' +
                 '</div>';
             });
             container.innerHTML = html;

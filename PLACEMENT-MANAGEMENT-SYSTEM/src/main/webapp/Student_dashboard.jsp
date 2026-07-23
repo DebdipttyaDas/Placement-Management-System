@@ -357,7 +357,7 @@
           const interviews = await response.json();
 
           if (interviews.length === 0) {
-            container.innerHTML = `<div style="padding: 20px; text-align: center; color: #666; font-size: 14px;">No scheduled interviews at this time.</div>`;
+            container.innerHTML = '<div style="padding: 20px; text-align: center; color: #666; font-size: 14px;">No scheduled interviews at this time.</div>';
             return;
           }
 
@@ -368,29 +368,28 @@
 
             const isVirtual = inv.meet_link.startsWith("http");
             const detailsHtml = isVirtual 
-              ? `<span><i class="fa-solid fa-video"></i> Google Meet</span>`
-              : `<span><i class="fa-solid fa-location-dot"></i> ${inv.meet_link}</span>`;
+              ? '<span><i class="fa-solid fa-video"></i> Google Meet</span>'
+              : '<span><i class="fa-solid fa-location-dot"></i> ' + inv.meet_link + '</span>';
             const buttonHtml = isVirtual
-              ? `<button class="btn-join" data-time="${dateTimeStr}" onclick="window.open('${inv.meet_link}', '_blank')">Join Call</button>`
-              : `<button class="btn-join" style="background: #64748b; cursor: default;" onclick="alert('This interview is in-person or via phone at: ${inv.meet_link}')">Details</button>`;
+              ? '<button class="btn-join" data-time="' + dateTimeStr + '" onclick="window.open(\'' + inv.meet_link + '\', \'_blank\')">Join Call</button>'
+              : '<button class="btn-join" style="background: #64748b; cursor: default;" onclick="alert(\'This interview is in-person or via phone at: ' + inv.meet_link + '\')">Details</button>';
 
-            const cardHtml = `
-                    <div class="interview-card ${cardClass}">
-                      <div class="ic-header">
-                        <span class="ic-time">${inv.interview_date} @ ${inv.interview_time}</span>
-                        <span class="ic-badge">${inv.interview_round}</span>
-                      </div>
-                      <h2 class="ic-company">${inv.company_name}</h2>
-                      <div class="ic-details">
-                        ${detailsHtml}
-                        <span><i class="fa-regular fa-user"></i> ${inv.interviewer_name}</span>
-                      </div>
-                      <div class="ic-actions">
-                        ${buttonHtml}
-                        <button class="btn-more">...</button>
-                      </div>
-                    </div>
-                  `;
+            const cardHtml = 
+                    '<div class="interview-card ' + cardClass + '">' +
+                      '<div class="ic-header">' +
+                        '<span class="ic-time">' + inv.interview_date + ' @ ' + inv.interview_time + '</span>' +
+                        '<span class="ic-badge">' + inv.interview_round + '</span>' +
+                      '</div>' +
+                      '<h2 class="ic-company">' + inv.company_name + '</h2>' +
+                      '<div class="ic-details">' +
+                        detailsHtml +
+                        '<span><i class="fa-regular fa-user"></i> ' + inv.interviewer_name + '</span>' +
+                      '</div>' +
+                      '<div class="ic-actions">' +
+                        buttonHtml +
+                        '<button class="btn-more">...</button>' +
+                      '</div>' +
+                    '</div>';
             container.innerHTML += cardHtml;
           });
 
@@ -398,7 +397,7 @@
           checkMeetingExpiry();
         } catch (err) {
           console.error(err);
-          container.innerHTML = `<div style="padding: 20px; text-align: center; color: red; font-size: 14px;">Unable to load interviews</div>`;
+          container.innerHTML = '<div style="padding: 20px; text-align: center; color: red; font-size: 14px;">Unable to load interviews</div>';
         }
       }
 
