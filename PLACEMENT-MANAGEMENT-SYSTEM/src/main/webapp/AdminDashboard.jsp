@@ -171,7 +171,7 @@
     <!-- Drives -->
     <section class="drives-container">
         <div class="section-header">
-            <h3>Upcoming Drives</h3>
+            <h3>Upcoming Interviews</h3>
         </div>
 
         <table>
