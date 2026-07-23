@@ -80,8 +80,55 @@
               </div>
             </div>
 
-            <% Object profileObj=session.getAttribute("profileComplete"); String profileComplete="0" ; if(profileObj
-              !=null){ profileComplete=profileObj.toString(); } int progressValue=Integer.parseInt(profileComplete); %>
+            <%
+              String studentEmailForProgress = (String) session.getAttribute("studentEmail");
+              if (studentEmailForProgress == null) {
+                  studentEmailForProgress = (String) session.getAttribute("user");
+              }
+              
+              int progressValue = 0;
+              if (studentEmailForProgress != null) {
+                  try (Connection connForProgress = getJspConnection()) {
+                      String progressSql = "SELECT s.fullName, s.dob, s.email, s.phone, s.photo, "
+                                         + "a.collegeName, a.department, a.dgpa, "
+                                         + "k.languages, k.skills "
+                                         + "FROM STUDENT s "
+                                         + "LEFT JOIN ACCADEMIC_DETAILS a ON s.STUDENT_ID = a.STUDENT_ID "
+                                         + "LEFT JOIN STUDENT_SKILLS k ON s.STUDENT_ID = k.STUDENT_ID "
+                                         + "WHERE LOWER(TRIM(s.email)) = LOWER(TRIM(?))";
+                      try (PreparedStatement psProgress = connForProgress.prepareStatement(progressSql)) {
+                          psProgress.setString(1, studentEmailForProgress);
+                          try (ResultSet rsProgress = psProgress.executeQuery()) {
+                              if (rsProgress.next()) {
+                                  int fieldsCount = 10;
+                                  int filledCount = 0;
+                                  
+                                  if (rsProgress.getString("fullName") != null && !rsProgress.getString("fullName").trim().isEmpty()) filledCount++;
+                                  if (rsProgress.getString("dob") != null && !rsProgress.getString("dob").trim().isEmpty()) filledCount++;
+                                  if (rsProgress.getString("email") != null && !rsProgress.getString("email").trim().isEmpty()) filledCount++;
+                                  if (rsProgress.getString("phone") != null && !rsProgress.getString("phone").trim().isEmpty()) filledCount++;
+                                  if (rsProgress.getBytes("photo") != null && rsProgress.getBytes("photo").length > 0) filledCount++;
+                                  
+                                  if (rsProgress.getString("collegeName") != null && !rsProgress.getString("collegeName").trim().isEmpty()) filledCount++;
+                                  if (rsProgress.getString("department") != null && !rsProgress.getString("department").trim().isEmpty() && !rsProgress.getString("department").equalsIgnoreCase("Select Department")) filledCount++;
+                                  if (rsProgress.getDouble("dgpa") > 0.0) filledCount++;
+                                  
+                                  if (rsProgress.getString("languages") != null && !rsProgress.getString("languages").trim().isEmpty()) filledCount++;
+                                  
+                                  String skillsJson = rsProgress.getString("skills");
+                                  if (skillsJson != null && !skillsJson.trim().isEmpty() && !skillsJson.equals("[]")) filledCount++;
+                                  
+                                  progressValue = (filledCount * 100) / fieldsCount;
+                              }
+                          }
+                      }
+                  } catch (Exception e) {
+                      e.printStackTrace();
+                  }
+              }
+              String profileComplete = String.valueOf(progressValue);
+              session.setAttribute("profileComplete", progressValue);
+            %>
 
               <div class="readiness-box">
 
@@ -286,7 +333,7 @@
     try {
       try (Connection conn = getJspConnection();
            PreparedStatement ps = conn.prepareStatement(
-              "SELECT fullName FROM STUDENT WHERE email = ?")) {
+              "SELECT fullName FROM STUDENT WHERE LOWER(TRIM(email)) = LOWER(TRIM(?))")) {
         ps.setString(1, dashboardStudentEmail);
         try (ResultSet rs = ps.executeQuery()) {
           if (rs.next() && rs.getString("fullName") != null) {

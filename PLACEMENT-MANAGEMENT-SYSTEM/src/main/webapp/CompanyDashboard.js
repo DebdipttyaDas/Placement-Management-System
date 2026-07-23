@@ -160,7 +160,10 @@ loadCompanyInterviews();
 loadActiveDrives();
 
 // Auto-refresh every 5 seconds
-setInterval(loadCompanyInterviews, 5000);
+setInterval(function() {
+    loadCompanyInterviews();
+    loadActiveDrives();
+}, 5000);
 
 
 // Listen for new interview scheduled from other tabs

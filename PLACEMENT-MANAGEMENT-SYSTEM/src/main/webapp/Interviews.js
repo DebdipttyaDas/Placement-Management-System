@@ -299,6 +299,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     loadAdminInterviews();
 
+    // Auto-refresh interviews every 5 seconds
+    setInterval(loadAdminInterviews, 5000);
+
+    // Listen for new interview scheduled from other tabs/panels
+    if ("BroadcastChannel" in window) {
+        new BroadcastChannel("interview-schedule-channel").onmessage = function(e) {
+            if (e.data && e.data.event === "interviewScheduled") {
+                loadAdminInterviews();
+            }
+        };
+    }
+
     /* =========================================================
        REAL-TIME STUDENT APPLICATION CHECK
     ========================================================= */

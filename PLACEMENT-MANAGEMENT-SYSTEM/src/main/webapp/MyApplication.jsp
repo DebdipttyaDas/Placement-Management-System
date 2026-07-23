@@ -25,7 +25,7 @@
     
     try (Connection conn = getJspConnection()) {
         Integer studentId = null;
-        try (PreparedStatement ps = conn.prepareStatement("SELECT STUDENT_ID FROM STUDENT WHERE email = ?")) {
+        try (PreparedStatement ps = conn.prepareStatement("SELECT STUDENT_ID FROM STUDENT WHERE LOWER(TRIM(email)) = LOWER(TRIM(?))")) {
             ps.setString(1, userEmail);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
