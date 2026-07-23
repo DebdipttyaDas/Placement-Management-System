@@ -349,56 +349,86 @@
 
     <script>
       // Fetch interviews via AJAX
+      let allInterviews = [];
+      let isExpanded = false;
+
       async function loadInterviews() {
-        const container = document.getElementById('interviewsContainer');
         try {
           const response = await fetch('FetchInterviewsServlet');
           if (!response.ok) throw new Error("Failed to fetch");
-          const interviews = await response.json();
-
-          if (interviews.length === 0) {
-            container.innerHTML = '<div style="padding: 20px; text-align: center; color: #666; font-size: 14px;">No scheduled interviews at this time.</div>';
-            return;
-          }
-
-          container.innerHTML = ""; // clear loading text
-          interviews.forEach((inv, index) => {
-            const dateTimeStr = inv.interview_date + "T" + inv.interview_time;
-            const cardClass = index === 0 ? 'active-card' : 'upcoming-card'; // Highlight the first one
-
-            const isVirtual = inv.meet_link.startsWith("http");
-            const detailsHtml = isVirtual 
-              ? '<span><i class="fa-solid fa-video"></i> Google Meet</span>'
-              : '<span><i class="fa-solid fa-location-dot"></i> ' + inv.meet_link + '</span>';
-            const buttonHtml = isVirtual
-              ? '<button class="btn-join" data-time="' + dateTimeStr + '" onclick="window.open(\'' + inv.meet_link + '\', \'_blank\')">Join Call</button>'
-              : '<button class="btn-join" style="background: #64748b; cursor: default;" onclick="alert(\'This interview is in-person or via phone at: ' + inv.meet_link + '\')">Details</button>';
-
-            const cardHtml = 
-                    '<div class="interview-card ' + cardClass + '">' +
-                      '<div class="ic-header">' +
-                        '<span class="ic-time">' + inv.interview_date + ' @ ' + inv.interview_time + '</span>' +
-                        '<span class="ic-badge">' + inv.interview_round + '</span>' +
-                      '</div>' +
-                      '<h2 class="ic-company">' + inv.company_name + '</h2>' +
-                      '<div class="ic-details">' +
-                        detailsHtml +
-                        '<span><i class="fa-regular fa-user"></i> ' + inv.interviewer_name + '</span>' +
-                      '</div>' +
-                      '<div class="ic-actions">' +
-                        buttonHtml +
-                        '<button class="btn-more">...</button>' +
-                      '</div>' +
-                    '</div>';
-            container.innerHTML += cardHtml;
-          });
-
-          // Re-check expiry after rendering
-          checkMeetingExpiry();
+          allInterviews = await response.json();
+          renderInterviews();
         } catch (err) {
           console.error(err);
-          container.innerHTML = '<div style="padding: 20px; text-align: center; color: red; font-size: 14px;">Unable to load interviews</div>';
+          const container = document.getElementById('interviewsContainer');
+          if (container) {
+            container.innerHTML = '<div style="padding: 20px; text-align: center; color: red; font-size: 14px;">Unable to load interviews</div>';
+          }
         }
+      }
+
+      function renderInterviews() {
+        const container = document.getElementById('interviewsContainer');
+        if (!container) return;
+
+        if (allInterviews.length === 0) {
+          container.innerHTML = '<div style="padding: 20px; text-align: center; color: #666; font-size: 14px;">No scheduled interviews at this time.</div>';
+          return;
+        }
+
+        container.innerHTML = ""; // clear loading text
+        const limit = isExpanded ? allInterviews.length : 2;
+        const visibleInterviews = allInterviews.slice(0, limit);
+
+        visibleInterviews.forEach((inv, index) => {
+          const dateTimeStr = inv.interview_date + "T" + inv.interview_time;
+          const cardClass = index === 0 ? 'active-card' : 'upcoming-card'; // Highlight the first one
+
+          const isVirtual = inv.meet_link.startsWith("http");
+          const detailsHtml = isVirtual 
+            ? '<span><i class="fa-solid fa-video"></i> Google Meet</span>'
+            : '<span><i class="fa-solid fa-location-dot"></i> ' + inv.meet_link + '</span>';
+          const buttonHtml = isVirtual
+            ? '<button class="btn-join" data-time="' + dateTimeStr + '" onclick="window.open(\'' + inv.meet_link + '\', \'_blank\')">Join Call</button>'
+            : '<button class="btn-join" style="background: #64748b; cursor: default;" onclick="alert(\'This interview is in-person or via phone at: ' + inv.meet_link + '\')">Details</button>';
+
+          const cardHtml = 
+                  '<div class="interview-card ' + cardClass + '">' +
+                    '<div class="ic-header">' +
+                      '<span class="ic-time">' + inv.interview_date + ' @ ' + inv.interview_time + '</span>' +
+                      '<span class="ic-badge">' + inv.interview_round + '</span>' +
+                    '</div>' +
+                    '<h2 class="ic-company">' + inv.company_name + '</h2>' +
+                    '<div class="ic-details">' +
+                      detailsHtml +
+                      '<span><i class="fa-regular fa-user"></i> ' + inv.interviewer_name + '</span>' +
+                    '</div>' +
+                    '<div class="ic-actions">' +
+                      buttonHtml +
+                      '<button class="btn-more">...</button>' +
+                    '</div>' +
+                  '</div>';
+          container.innerHTML += cardHtml;
+        });
+
+        // Add View All / Hide All button if more than 2 interviews exist
+        if (allInterviews.length > 2) {
+          const toggleBtnHtml = 
+            '<div style="text-align: right; margin-top: 10px;">' +
+              '<button id="toggleInterviewsBtn" class="view-all" style="background: none; border: none; cursor: pointer; font-size: 13px; color: #0056b3; font-weight: 600;" onclick="toggleInterviewView()">' +
+                (isExpanded ? 'Hide All' : 'View All (' + allInterviews.length + ')') +
+              '</button>' +
+            '</div>';
+          container.innerHTML += toggleBtnHtml;
+        }
+
+        // Re-check expiry after rendering
+        checkMeetingExpiry();
+      }
+
+      function toggleInterviewView() {
+        isExpanded = !isExpanded;
+        renderInterviews();
       }
 
       // Call it on load and set auto-refresh interval for simultaneous updates
