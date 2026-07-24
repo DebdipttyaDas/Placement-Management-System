@@ -38,6 +38,7 @@
         <li class="active">Dashboard</li>
         <li><a href="CompanyMonitoring.jsp">Company Monitoring</a></li>
         <li><a href="StudentMonitoring.jsp">Student Monitoring</a></li>
+        <li><a href="PlacementAnalysis.jsp">Placement Analysis</a></li>
     </ul>
 
     <!-- Logout -->

@@ -50,13 +50,6 @@
                     Interviews
                 </li>
 
-                <li>
-                    <a href="PlacementAnalysis.jsp"
-                        style="text-decoration:none;color:white;">
-                        Placement Analysis
-                    </a>
-                </li>
-
             </ul>
 
             <!-- LOGOUT -->

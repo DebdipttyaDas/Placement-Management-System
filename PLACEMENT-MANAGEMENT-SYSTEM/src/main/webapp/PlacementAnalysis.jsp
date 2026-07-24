@@ -31,25 +31,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <div class="sidebar">
 <h2>Placement  Analysis </h2>
     <ul class="menu">
-        <li>
-            <a href="CompanyDashboard.jsp"
-            style="text-decoration: none; color:white;">Dashboard</a>
-        </li>
-
-        <li >
-            <a href="JobPost.jsp"
-            style="text-decoration: none; color: white;"> Job Post</a>
-        </li>
-
-        <li>
-            <a href="Interviews.jsp"
-            style="text-decoration: none; color: white;">Interviews</a>
-        </li>
         
-        <li class="active" >
-                        Placement Analysis 
-           
-        </li>
+        <li><a href="AdminDashboard.jsp">Dashboard</a></li>
+        <li><a href="CompanyMonitoring.jsp">Company Monitoring</a></li>
+        <li><a href="StudentMonitoring.jsp">Student Monitoring</a></li> 
+        <li class="active">Placement Analysis</li>
+        
     </ul>
 <!-- LOGOUT -->
     <div class="logout">

@@ -37,6 +37,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
             <li><a href="AdminDashboard.jsp">Dashboard</a></li>
             <li class="active">Company Monitoring</li>
             <li><a href="StudentMonitoring.jsp">Student Monitoring</a></li>
+            <li><a href="PlacementAnalysis.jsp">Placement Analysis</a></li>
         </ul>
 
         <form action="LogoutServlet" method="post">

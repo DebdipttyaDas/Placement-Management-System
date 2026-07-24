@@ -24,7 +24,6 @@
             <li class="active">Dashboard</li>
             <li><a href="JobPost.jsp" style="text-decoration:none;color:white;">Job Post</a></li>
             <li><a href="Interviews.jsp" style="text-decoration:none;color:white;">Interviews</a></li>
-            <li><a href="PlacementAnalysis.jsp" style="text-decoration:none;color:white;">Placement Analysis</a></li>
         </ul>
         <div class="logout">
             <form action="LogoutServlet" method="post" style="width: 100%;">
